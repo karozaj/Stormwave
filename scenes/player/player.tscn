@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ype4ks6wd5x"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r4lc0"]
+[ext_resource type="PackedScene" uid="uid://vq2ju3qo2hr3" path="res://scenes/player/movement_manager.tscn" id="2_pu5br"]
+[ext_resource type="PackedScene" uid="uid://cb2rwntd2s065" path="res://scenes/player/weapon_manager.tscn" id="3_tefss"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qkccr"]
+radius = 0.35
+height = 1.75
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n32ka"]
+radius = 0.35
+height = 1.75
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_r4lc0")
+
+[node name="MovementManager" parent="." instance=ExtResource("2_pu5br")]
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="MainCamera" type="Camera3D" parent="Pivot"]
+cull_mask = 524287
+current = true
+
+[node name="WeaponCamera" type="Camera3D" parent="Pivot"]
+cull_mask = 524288
+
+[node name="WeaponManager" parent="Pivot/WeaponCamera" instance=ExtResource("3_tefss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_qkccr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_n32ka")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
