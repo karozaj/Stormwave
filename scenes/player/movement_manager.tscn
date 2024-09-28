@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://vq2ju3qo2hr3"]
+[gd_scene load_steps=2 format=3 uid="uid://vq2ju3qo2hr3"]
+
+[ext_resource type="Script" path="res://scripts/movement_manager.gd" id="1_657pr"]
 
 [node name="MovementManager" type="Node3D"]
+script = ExtResource("1_657pr")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="BufferTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="BufferTimer" to="." method="_on_buffer_timer_timeout"]
