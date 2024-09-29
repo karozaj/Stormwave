@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://sjytiuvopdi3"]
+
+[ext_resource type="PackedScene" uid="uid://boskapx73ubko" path="res://3d/shotgun.glb" id="1_thjip"]
+
+[node name="shotgun" instance=ExtResource("1_thjip")]
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+layers = 524288

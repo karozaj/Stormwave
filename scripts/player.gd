@@ -4,9 +4,17 @@ const SENSITIVITY=0.004
 
 @onready var movement_manager=$MovementManager
 @onready var weapon_manager=$Pivot/WeaponCamera/WeaponManager
+#camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
 @onready var weapon_camera:Camera3D=$Pivot/WeaponCamera
+#audio players
+@onready var footstep_audio_player=$FootstepAudioPlayer
+@export_category("Audio")
+@export var footstep_default_pitch:float=1.0
+@export var footstep_pitch_variance:float=.15
+var has_played_footstep_sound:bool=false
+var was_on_floor:bool=true
 
 #head bob variables
 @export_category("Headbob")
@@ -19,8 +27,11 @@ var headbob_positon:float=0.0
 @export var base_fov:float=90.0
 @export var fov_increase:float=2.5
 
+var rng=RandomNumberGenerator.new()
+
 func _ready() -> void:
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
+	rng.randomize()
 
 
 func _physics_process(delta: float) -> void:
@@ -37,10 +48,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.y-= movement_manager.fall_gravity * delta
 	else:
-		if Input.is_action_pressed("sprint"):
-			movement_manager.set_sprint_speed(delta)
-		else:
-			movement_manager.set_walk_speed(delta)
 		movement_manager.jump_available=true
 		movement_manager.coyote_timer.stop()
 		if movement_manager.jump_buffer:
@@ -53,6 +60,11 @@ func _physics_process(delta: float) -> void:
 			movement_manager.jump_buffer=true
 			movement_manager.jump_buffer_timer.start()
 		
+	if Input.is_action_pressed("sprint"):
+		movement_manager.set_sprint_speed(delta)
+	else:
+		movement_manager.set_walk_speed(delta)
+	
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	#direction=direction.rotated(Vector3.UP, pivot.rotation.y)
@@ -68,8 +80,14 @@ func _physics_process(delta: float) -> void:
 		
 	increase_fov_when_moving(delta,lerp_val)
 	headbob(delta)
+	if is_on_floor() and was_on_floor==false:
+		play_footstep_sound()
+	was_on_floor=is_on_floor()
 	
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("shoot"):
+		weapon_manager.shoot()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -91,10 +109,24 @@ func jump()->void:
 func headbob(delta:float)->void:
 	headbob_positon+=delta*Vector2(velocity.x,velocity.z).length()*float(is_on_floor())
 	var camera_position:Vector3=Vector3.ZERO
-	camera_position.y=sin(headbob_positon*headbob_frequency)*headbob_amplitude
+	var headbob_sin:float=sin(headbob_positon*headbob_frequency)
+	camera_position.y=headbob_sin*headbob_amplitude
 	camera_position.x=cos(headbob_positon*headbob_frequency/2.0)*headbob_amplitude
 	main_camera.transform.origin=camera_position
 	weapon_camera.transform.origin=camera_position
+	#check if footstep sound needs to be played
+	if headbob_sin<=-0.9:
+		if has_played_footstep_sound==false:
+			play_footstep_sound()
+			has_played_footstep_sound=true
+	else:
+		has_played_footstep_sound=false
+
+
+func play_footstep_sound()->void:
+	footstep_audio_player.pitch_scale=footstep_default_pitch+rng.randf_range(-footstep_pitch_variance,footstep_pitch_variance)
+	footstep_audio_player.play()
+
 
 func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 	var velocity_clamped:float=clamp(Vector2(velocity.x,velocity.z).length(),0.0,movement_manager.sprint_speed)

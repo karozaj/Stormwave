@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=14 format=3 uid="uid://crywrnny46cu8"]
 
-[ext_resource type="Script" path="res://scripts/test_level.gd" id="1_5blvt"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="1_o7qv8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5o5rn"]
@@ -44,7 +43,6 @@ albedo_color = Color(1, 0.305882, 0.423529, 1)
 
 [node name="TestLevel" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.168672, -0.0775967, -0.152004)
-script = ExtResource("1_5blvt")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_waopr")
@@ -78,7 +76,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_prpbr")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(0.999951, 0, -0.00991331, 0, 1, 0, 0.00991331, 0, 0.999951, -0.024395, -0.0250595, 0.0111767)
+transform = Transform3D(0.999951, 0, -0.00991331, 0, 1, 0, 0.00991331, 0, 0.999951, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_ic2n3")
 
 [node name="Player" parent="." instance=ExtResource("1_o7qv8")]

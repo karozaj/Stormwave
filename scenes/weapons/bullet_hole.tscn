@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://du52okuk2qyo0"]
+
+[ext_resource type="Texture2D" uid="uid://csgem02rbd6t1" path="res://img/eye_texture.png" id="1_0mexs"]
+[ext_resource type="Script" path="res://scripts/bullet_hole.gd" id="2_mf26r"]
+
+[node name="BulletHole" type="Decal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002491, -5.96046e-08, -0.000604987)
+top_level = true
+size = Vector3(0.15, 0.15, 0.15)
+texture_albedo = ExtResource("1_0mexs")
+script = ExtResource("2_mf26r")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
