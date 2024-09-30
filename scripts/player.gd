@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		weapon_manager.shoot()
 
 

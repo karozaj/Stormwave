@@ -118,7 +118,7 @@ _data = {
 "shoot": SubResource("Animation_v05fn")
 }
 
-[node name="pistol" instance=ExtResource("1_85tub")]
+[node name="Pistol" instance=ExtResource("1_85tub")]
 script = ExtResource("2_j2di2")
 
 [node name="Cube_001" parent="." index="0"]
