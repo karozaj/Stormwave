@@ -12,10 +12,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.1)
 
 [node name="pistol" parent="RightPosition" instance=ExtResource("1_qsn5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488067, -0.00371122, 0.000459611)
-visible = false
 
 [node name="shotgun" parent="RightPosition" instance=ExtResource("2_frp63")]
-visible = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 

@@ -13,7 +13,7 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 var weapons:Array
 var current_weapon
 var weapon_index:int=0
-var ammo:Array=["inf",int(5),int(5),int(0),int(0)]
+var ammo:Array=["infinite",int(5),int(5),int(5),int(5)]
 
 var can_shoot:bool=true
 var is_pulling_out_weapon:bool=false
@@ -27,6 +27,7 @@ func _ready() -> void:
 	weapon_index=2
 	#current_weapon=pistol
 	#weapon_index=1
+	current_weapon.animation_player.play("pullout")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,3 +53,12 @@ func shoot()->void:
 
 func _on_cooldown_timer_timeout() -> void:
 	can_shoot=true
+
+
+func select_weapon(index:int)->void:
+	audio_player.stream=sound_weapon_select
+	audio_player.play()
+	current_weapon.visible=false
+	weapon_index=index
+	current_weapon=weapons[weapon_index]
+	current_weapon.animation_player.play("pullout")

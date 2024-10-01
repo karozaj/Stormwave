@@ -10,6 +10,8 @@ var bullet_hole=preload("res://scenes/weapons/bullet_hole.tscn")
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 @export var base_damage:float=20.0
 var cooldown:float=.25
+@export var is_being_pulled_out:bool=false
+
 
 func _ready() -> void:
 	rng.randomize()

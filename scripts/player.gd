@@ -88,6 +88,24 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot"):
 		weapon_manager.shoot()
+		
+	#weapon selection
+	if Input.is_action_just_pressed("next_weapon"):
+		var next_weapon_index:int=(weapon_manager.weapon_index+1)%weapon_manager.weapons.size()
+		weapon_manager.select_weapon(next_weapon_index)
+	elif Input.is_action_just_pressed("previous_weapon"):
+		var next_weapon_index:int=(weapon_manager.weapon_index-1)%weapon_manager.weapons.size()
+		weapon_manager.select_weapon(next_weapon_index)
+	elif Input.is_action_just_pressed("select_weapon_1"):
+		weapon_manager.select_weapon(0)
+	elif Input.is_action_just_pressed("select_weapon_2"):
+		weapon_manager.select_weapon(1)
+	elif Input.is_action_just_pressed("select_weapon_3"):
+		weapon_manager.select_weapon(2)
+	elif Input.is_action_just_pressed("select_weapon_4"):
+		weapon_manager.select_weapon(3)
+	elif Input.is_action_just_pressed("select_weapon_5"):
+		weapon_manager.select_weapon(4)
 
 
 func _unhandled_input(event: InputEvent) -> void:
