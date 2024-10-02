@@ -30,6 +30,7 @@ var headbob_positon:float=0.0
 var rng=RandomNumberGenerator.new()
 
 func _ready() -> void:
+	Global.player=self
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	rng.randomize()
 

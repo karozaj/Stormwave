@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://mp638iq6vrn4"]
+
+[ext_resource type="Texture2D" uid="uid://bu57a7rtetpj7" path="res://img/projectile_orange.png" id="1_80vbo"]
+[ext_resource type="Script" path="res://scripts/rocket_projectile.gd" id="1_wsjop"]
+[ext_resource type="Texture2D" uid="uid://b3drwdus5br6n" path="res://img/explosion.png" id="3_yp3t0"]
+[ext_resource type="AudioStream" uid="uid://m55e883vew8l" path="res://audio/sfx/explosion.ogg" id="4_6vwes"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sb223"]
+radius = 0.25
+
+[node name="RocketProjectile" type="Area3D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_wsjop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sb223")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_80vbo")
+
+[node name="ExplosionSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+visible = false
+pixel_size = 0.07
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_yp3t0")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_6vwes")
+bus = &"SFX"
+
+[node name="ProjectileLifetimeTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_destroy_projectile"]
+[connection signal="timeout" from="ProjectileLifetimeTimer" to="." method="_destroy_projectile"]

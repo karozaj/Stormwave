@@ -9,7 +9,7 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var pistol=$RightPosition/pistol
 @onready var shotgun=$RightPosition/shotgun
 @onready var chaingun=$CenterPosition/Chaingun
-@onready var rocket_launcher
+@onready var rocket_launcher=$CenterPosition/RocketLauncher
 var weapons:Array
 var current_weapon
 var weapon_index:int=0

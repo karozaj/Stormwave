@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csgem02rbd6t1"
-path.s3tc="res://.godot/imported/eye_texture.png-da95555d368e60caf84b8dd7f3320abd.s3tc.ctex"
+uid="uid://b3drwdus5br6n"
+path="res://.godot/imported/explosion.png-1ce031a1b1096a105adf01ddf335b115.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/eye_texture.png"
-dest_files=["res://.godot/imported/eye_texture.png-da95555d368e60caf84b8dd7f3320abd.s3tc.ctex"]
+source_file="res://img/explosion.png"
+dest_files=["res://.godot/imported/explosion.png-1ce031a1b1096a105adf01ddf335b115.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -125,6 +125,7 @@ select_weapon_5={
 3d_physics/layer_1="player"
 3d_physics/layer_2="ground"
 3d_physics/layer_3="enemies"
+3d_physics/layer_4="projectiles"
 
 [rendering]
 
