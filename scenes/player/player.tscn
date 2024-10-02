@@ -29,6 +29,8 @@ fov = 90.0
 
 [node name="WeaponCamera" type="Camera3D" parent="Pivot"]
 cull_mask = 524288
+fov = 60.0
+size = 1.906
 
 [node name="WeaponManager" parent="Pivot/WeaponCamera" instance=ExtResource("3_tefss")]
 

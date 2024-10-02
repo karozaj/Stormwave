@@ -10,7 +10,7 @@ var bullet_hole=preload("res://scenes/weapons/bullet_hole.tscn")
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 @export var base_damage:float=20.0
 var rays_array:Array
-var bullet_spread:float=20.0
+@export var bullet_spread:float=20.0
 var cooldown:float=0.75
 @export var is_being_pulled_out:bool=false
 

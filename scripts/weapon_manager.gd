@@ -8,12 +8,12 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var axe
 @onready var pistol=$RightPosition/pistol
 @onready var shotgun=$RightPosition/shotgun
-@onready var chaingun
+@onready var chaingun=$CenterPosition/Chaingun
 @onready var rocket_launcher
 var weapons:Array
 var current_weapon
 var weapon_index:int=0
-var ammo:Array=["infinite",int(5),int(5),int(5),int(5)]
+var ammo:Array=["infinite",int(5),int(5),int(50),int(5)]
 
 var can_shoot:bool=true
 var is_pulling_out_weapon:bool=false
@@ -21,8 +21,11 @@ var is_pulling_out_weapon:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
-	pistol.set_ray_position(global_position)
-	shotgun.set_ray_position(global_position)
+	for weapon in weapons:
+		if weapon!=null and weapon.has_method("set_ray_position"):
+			weapon.set_ray_position(global_position)
+	#pistol.set_ray_position(global_position)
+	#shotgun.set_ray_position(global_position)
 	current_weapon=shotgun
 	weapon_index=2
 	#current_weapon=pistol
