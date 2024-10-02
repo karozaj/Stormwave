@@ -30,6 +30,9 @@ func shoot():
 	projectile.transform.basis=rocket_direction_ray.global_transform.basis
 	if Global.current_level!=null:
 		Global.current_level.add_child(projectile)
+	rocket_direction_ray.force_raycast_update()
+	if rocket_direction_ray.is_colliding():
+		projectile.explode()
 
 
 func play_shooting_sound():

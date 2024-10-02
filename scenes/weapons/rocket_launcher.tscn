@@ -153,7 +153,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 layers = 524288
 
 [node name="Marker3D" type="Marker3D" parent="Cylinder" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.20791e-07, 0.17618, 1.38168)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373328, 0.17618, 1.38695)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
@@ -161,11 +161,12 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00154686, 0.00470537, 0.00116968)
 stream = ExtResource("3_51qeq")
 bus = &"SFX"
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17357, -1.37978)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174928, 0)
 enabled = false
-target_position = Vector3(0, 0, -1)
-collision_mask = 0
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 6

@@ -11,7 +11,7 @@ const SPRINT_SPEED:float=10.0
 @export var jump_fall_time:float=.5
 @export var jump_height:float=2.5
 @export var jump_distance:float=10.0
-@export var movement_lerp_val:float=0.01
+@export var movement_lerp_val:float=0.0075
 @export var sprint_lerp_val:float=0.01
 #parameters to calculate
 var jump_gravity:float=ProjectSettings.get_setting("physics/2d/default_gravity")

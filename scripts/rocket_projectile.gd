@@ -21,15 +21,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	set_deferred("monitoring",false)
-	audio_player.play()
-	projectile_sprite.visible=false
-	is_flying=false
-	explosion_sprite.visible=true
-	var tween=get_tree().create_tween()
-	tween.tween_property(explosion_sprite,"modulate",Color.TRANSPARENT,0.3)
-	var tween_scale=get_tree().create_tween()
-	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.25,1.25,1.25),0.3)
+	explode()
 	#var targets:Array=explosion_area.get_overlapping_bodies()
 	#for target in targets:
 		#if target.has_method("damage"):
@@ -37,6 +29,17 @@ func _on_body_entered(body: Node3D) -> void:
 			#var damage_modifier:float=abs(explosion_radius-distance)/explosion_radius
 			#var calculated_damage:int=int(max_explosion_damage*damage_modifier)
 			#target.damage(calculated_damage, global_position)
+
+func explode()->void:
+	set_deferred("monitoring",false)
+	audio_player.play()
+	projectile_sprite.visible=false
+	is_flying=false
+	explosion_sprite.visible=true
+	var tween=get_tree().create_tween()
+	tween.tween_property(explosion_sprite,"modulate",Color.TRANSPARENT,0.25)
+	var tween_scale=get_tree().create_tween()
+	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.25,1.25,1.25),0.25)
 
 func _destroy_projectile():
 	queue_free()
