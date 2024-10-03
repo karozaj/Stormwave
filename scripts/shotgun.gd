@@ -8,7 +8,7 @@ extends Node3D
 @export var pitch_variance:float=0.15
 var bullet_hole=preload("res://scenes/weapons/bullet_hole.tscn")
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
-@export var base_damage:float=20.0
+@export var base_damage:int=25
 var rays_array:Array
 @export var bullet_spread:float=20.0
 var cooldown:float=0.75

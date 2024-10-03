@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://mp638iq6vrn4"]
+[gd_scene load_steps=7 format=3 uid="uid://mp638iq6vrn4"]
 
 [ext_resource type="Texture2D" uid="uid://bu57a7rtetpj7" path="res://img/projectile_orange.png" id="1_80vbo"]
 [ext_resource type="Script" path="res://scripts/rocket_projectile.gd" id="1_wsjop"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sb223"]
 radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a503m"]
+radius = 0.375
 
 [node name="RocketProjectile" type="Area3D"]
 collision_layer = 8
@@ -36,6 +39,15 @@ bus = &"SFX"
 [node name="ProjectileLifetimeTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="ExplosionArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 5
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]
+shape = SubResource("SphereShape3D_a503m")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="_destroy_projectile"]
 [connection signal="timeout" from="ProjectileLifetimeTimer" to="." method="_destroy_projectile"]
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]

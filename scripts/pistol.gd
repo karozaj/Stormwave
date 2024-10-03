@@ -8,7 +8,7 @@ extends Node3D
 @export var pitch_variance:float=0.05
 var bullet_hole=preload("res://scenes/weapons/bullet_hole.tscn")
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
-@export var base_damage:float=20.0
+@export var base_damage:int=20
 var cooldown:float=.25
 @export var is_being_pulled_out:bool=false
 
@@ -26,7 +26,7 @@ func shoot():
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
-		print(ray.get_collider().name)
+		#print(ray.get_collider().name)
 		if ray.get_collider().has_method("damage"):
 			ray.get_collider().damage(base_damage)
 

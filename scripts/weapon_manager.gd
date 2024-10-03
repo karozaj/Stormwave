@@ -5,7 +5,7 @@ var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
 var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var cooldown_timer:Timer=$CooldownTimer
 
-@onready var axe
+@onready var axe=$RightPosition/Axe
 @onready var pistol=$RightPosition/pistol
 @onready var shotgun=$RightPosition/shotgun
 @onready var chaingun=$CenterPosition/Chaingun
@@ -41,7 +41,6 @@ func _process(delta: float) -> void:
 func shoot()->void:
 	if current_weapon.is_being_pulled_out==false:
 		if can_shoot:
-			print("Shoot")
 			can_shoot=false
 			cooldown_timer.wait_time=current_weapon.cooldown
 			cooldown_timer.start()

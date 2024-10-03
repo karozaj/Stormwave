@@ -9,7 +9,7 @@ extends Node3D
 @export var bullet_spread:float=10.0
 var rng=RandomNumberGenerator.new()
 var bullet_hole=preload("res://scenes/weapons/bullet_hole.tscn")
-var base_damage:float=15.0
+var base_damage:int=15
 var cooldown:float=0.1
 @export var is_being_pulled_out:bool=false
 
