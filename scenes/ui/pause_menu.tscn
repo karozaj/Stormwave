@@ -1,0 +1,115 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq0c66dgqf0fw"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_skbq4"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_skbq4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -53.0
+offset_right = 61.5
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FullscreenButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TOGGLE FULLSCREEN"
+
+[node name="HeadbobButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Headbob enabled"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "FOV"
+
+[node name="FOVSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 45.0
+max_value = 140.0
+step = 5.0
+value = 45.0
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Mouse sensitivity"
+
+[node name="SensitivitySlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 0.01
+max_value = 3.0
+step = 0.01
+value = 1.0
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "RESUME"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "QUIT"
+
+[connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/HeadbobButton" to="." method="_on_headbob_button_toggled"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer3/FOVSlider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer4/SensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/QuitButton" to="." method="_on_quit_button_pressed"]

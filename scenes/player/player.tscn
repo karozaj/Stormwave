@@ -62,3 +62,4 @@ render_target_update_mode = 4
 
 [node name="FootstepAudioPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_2h2ys")
+bus = &"SFX"

@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const SENSITIVITY=0.004
+var mouse_sensitivity:float=1.0
 
 @onready var movement_manager=$MovementManager
 @onready var weapon_manager=$Pivot/WeaponCamera/WeaponManager
@@ -21,10 +22,11 @@ var was_on_floor:bool=true
 @export var headbob_frequency:float=1.75
 @export var headbob_amplitude:float=0.075
 var headbob_positon:float=0.0
+var headbob_enabled:bool=true
 
 #fov
 @export_category("FOV")
-@export var base_fov:float=90.0
+var base_fov:float=90.0
 @export var fov_increase:float=2.5
 
 var knockback_modifier:float=20.0
@@ -35,8 +37,35 @@ var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
 	Global.player=self
+	base_fov=Global.player_fov
+	mouse_sensitivity=Global.player_sensitivity
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	rng.randomize()
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
+		$CanvasLayer.add_child(pause_menu)
+	
+	#weapon selection
+	if Input.is_action_just_pressed("next_weapon"):
+		var next_weapon_index:int=(weapon_manager.weapon_index+1)%weapon_manager.weapons.size()
+		weapon_manager.select_weapon(next_weapon_index)
+	elif Input.is_action_just_pressed("previous_weapon"):
+		var next_weapon_index:int=(weapon_manager.weapon_index-1)%weapon_manager.weapons.size()
+		weapon_manager.select_weapon(next_weapon_index)
+	elif Input.is_action_just_pressed("select_weapon_1"):
+		weapon_manager.select_weapon(0)
+	elif Input.is_action_just_pressed("select_weapon_2"):
+		weapon_manager.select_weapon(1)
+	elif Input.is_action_just_pressed("select_weapon_3"):
+		weapon_manager.select_weapon(2)
+	elif Input.is_action_just_pressed("select_weapon_4"):
+		weapon_manager.select_weapon(3)
+	elif Input.is_action_just_pressed("select_weapon_5"):
+		weapon_manager.select_weapon(4)
+
 
 
 func _physics_process(delta: float) -> void:
@@ -90,37 +119,17 @@ func _physics_process(delta: float) -> void:
 	was_on_floor=is_on_floor()
 	
 	move_and_slide()
-	
+
 	if Input.is_action_pressed("shoot"):
 		weapon_manager.shoot()
-		
-	#weapon selection
-	if Input.is_action_just_pressed("next_weapon"):
-		var next_weapon_index:int=(weapon_manager.weapon_index+1)%weapon_manager.weapons.size()
-		weapon_manager.select_weapon(next_weapon_index)
-	elif Input.is_action_just_pressed("previous_weapon"):
-		var next_weapon_index:int=(weapon_manager.weapon_index-1)%weapon_manager.weapons.size()
-		weapon_manager.select_weapon(next_weapon_index)
-	elif Input.is_action_just_pressed("select_weapon_1"):
-		weapon_manager.select_weapon(0)
-	elif Input.is_action_just_pressed("select_weapon_2"):
-		weapon_manager.select_weapon(1)
-	elif Input.is_action_just_pressed("select_weapon_3"):
-		weapon_manager.select_weapon(2)
-	elif Input.is_action_just_pressed("select_weapon_4"):
-		weapon_manager.select_weapon(3)
-	elif Input.is_action_just_pressed("select_weapon_5"):
-		weapon_manager.select_weapon(4)
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	#mouselook
 	if event is InputEventMouseMotion:
-		#pivot.rotate_y(-event.relative.x * SENSITIVITY)
-		rotate_y(-event.relative.x * SENSITIVITY)
-		main_camera.rotate_x(-event.relative.y * SENSITIVITY)
+		rotate_y(-event.relative.x * SENSITIVITY*mouse_sensitivity)
+		main_camera.rotate_x(-event.relative.y * SENSITIVITY*mouse_sensitivity)
 		main_camera.rotation.x = clamp(main_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-		weapon_camera.rotate_x(-event.relative.y * SENSITIVITY)
+		weapon_camera.rotate_x(-event.relative.y * SENSITIVITY*mouse_sensitivity)
 		weapon_camera.rotation.x = clamp(weapon_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
@@ -135,8 +144,9 @@ func headbob(delta:float)->void:
 	var headbob_sin:float=sin(headbob_positon*headbob_frequency)
 	camera_position.y=headbob_sin*headbob_amplitude
 	camera_position.x=cos(headbob_positon*headbob_frequency/2.0)*headbob_amplitude
-	main_camera.transform.origin=camera_position
-	weapon_camera.transform.origin=camera_position
+	if headbob_enabled:
+		main_camera.transform.origin=camera_position
+		weapon_camera.transform.origin=camera_position
 	#check if footstep sound needs to be played
 	if headbob_sin<=-0.9:
 		if has_played_footstep_sound==false:

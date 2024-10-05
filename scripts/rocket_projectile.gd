@@ -7,14 +7,12 @@ extends Area3D
 @onready var explosion_area:Area3D=$ExplosionArea
 @onready var explosion_shape:Shape3D=$ExplosionArea/CollisionShape3D.shape
 @onready var explosion_ray:RayCast3D=$RayCast3D
-
 @export var direct_damage:int=150
 @export var explosion_max_damage:int=100
 @export var projectile_speed:float=15.0
 @export var explosion_radius:float=2.5
 var is_flying:bool=true
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	explosion_shape.radius=0.25*explosion_radius
 	timer.start()
@@ -29,13 +27,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
 		body.damage(direct_damage, global_position)
 	explode()
-	#var targets:Array=explosion_area.get_overlapping_bodies()
-	#for target in targets:
-		#if target.has_method("damage"):
-			#var distance:float=global_position.distance_to(target.global_position)
-			#var damage_modifier:float=abs(explosion_radius-distance)/explosion_radius
-			#var calculated_damage:int=int(max_explosion_damage*damage_modifier)
-			#target.damage(calculated_damage, global_position)
+
 
 func explode()->void:
 	set_deferred("monitoring",false)
@@ -56,7 +48,6 @@ func _destroy_projectile():
 
 
 func _on_explosion_area_body_entered(body: Node3D) -> void:
-	#if body.has_method("damage"):
 	explosion_ray.target_position=to_local(body.global_position)
 	explosion_ray.force_raycast_update()
 	if explosion_ray.is_colliding() and explosion_ray.get_collider()==body:
