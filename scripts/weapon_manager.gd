@@ -14,9 +14,7 @@ var weapons:Array
 var current_weapon
 var weapon_index:int=0
 var ammo:Array=["infinite",int(5),int(5),int(50),int(5)]
-
 var can_shoot:bool=true
-var is_pulling_out_weapon:bool=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,11 +29,6 @@ func _ready() -> void:
 	#current_weapon=pistol
 	#weapon_index=1
 	current_weapon.animation_player.play("pullout")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func shoot()->void:
@@ -58,9 +51,10 @@ func _on_cooldown_timer_timeout() -> void:
 
 
 func select_weapon(index:int)->void:
-	audio_player.stream=sound_weapon_select
-	audio_player.play()
-	current_weapon.visible=false
-	weapon_index=index
-	current_weapon=weapons[weapon_index]
-	current_weapon.animation_player.play("pullout")
+	if can_shoot and current_weapon.is_being_pulled_out==false:
+		audio_player.stream=sound_weapon_select
+		audio_player.play()
+		current_weapon.visible=false
+		weapon_index=index
+		current_weapon=weapons[weapon_index]
+		current_weapon.animation_player.play("pullout")

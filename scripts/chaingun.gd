@@ -33,7 +33,7 @@ func shoot():
 		spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
 		print(ray.get_collider().name)
 		if ray.get_collider().has_method("damage"):
-			ray.get_collider().damage(base_damage)
+			ray.get_collider().damage(base_damage, global_position)
 	
 	
 func muzzle_flash_flip():

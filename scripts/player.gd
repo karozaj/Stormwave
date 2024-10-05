@@ -27,7 +27,11 @@ var headbob_positon:float=0.0
 @export var base_fov:float=90.0
 @export var fov_increase:float=2.5
 
-var rng=RandomNumberGenerator.new()
+var knockback_modifier:float=20.0
+var health:int=100
+var is_dead:bool=false
+
+var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
 	Global.player=self
@@ -151,3 +155,19 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 	var velocity_clamped:float=clamp(Vector2(velocity.x,velocity.z).length(),0.0,movement_manager.sprint_speed)
 	var target_fov:float=base_fov+fov_increase*velocity_clamped
 	main_camera.fov=lerp(main_camera.fov,target_fov,1-pow(lerp_val,delta))
+
+
+func damage(damage_points:int, origin:Vector3)->void:
+	if is_dead==false:
+		health-=damage_points
+		var knockback_direction:Vector3=global_position-origin
+		knockback_direction=knockback_direction.normalized()
+		velocity+=knockback_direction*damage_points/100*knockback_modifier
+		print("player health:",health)
+		if health<=0:
+			die()
+
+	#
+func die()->void:
+	if is_dead==false:
+		is_dead=true

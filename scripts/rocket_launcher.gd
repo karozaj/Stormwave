@@ -11,25 +11,16 @@ var projectile_scene=preload("res://scenes/weapons/rocket_projectile.tscn")
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 var cooldown:float=0.8
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func shoot():
 	animation_player.play("shoot")
 	var projectile=projectile_scene.instantiate()
 	#this is so that the rocket doesnt collide with the player when they shoot downward
 	projectile.set_collision_mask_value(1,false)
-	projectile.position=projectile_spawn_marker.global_position
 	projectile.transform.basis=rocket_direction_ray.global_transform.basis
 	if Global.current_level!=null:
 		Global.current_level.add_child(projectile)
+	projectile.global_position=projectile_spawn_marker.global_position
 	rocket_direction_ray.force_raycast_update()
 	if rocket_direction_ray.is_colliding():
 		projectile.explode()

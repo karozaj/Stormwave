@@ -28,14 +28,12 @@ func shoot():
 	for ray in rays_array:
 		var x_rot:float=deg_to_rad(rng.randf_range(-bullet_spread,bullet_spread))/2
 		var y_rot:float=deg_to_rad(rng.randf_range(-bullet_spread,bullet_spread))
-		#var z_rot:float=deg_to_rad(rng.randf_range(-bullet_spread,bullet_spread))
 		ray.rotation=Vector3(x_rot,y_rot,0.0)
 		ray.force_raycast_update()
 		if ray.is_colliding():
 			spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
-			#print(ray.get_collider().name)
 			if ray.get_collider().has_method("damage"):
-				ray.get_collider().damage(base_damage)
+				ray.get_collider().damage(base_damage, global_position)
 
 
 func spawn_bullet_hole(pos:Vector3, normal:Vector3):

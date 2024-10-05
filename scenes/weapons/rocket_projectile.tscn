@@ -9,7 +9,7 @@
 radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a503m"]
-radius = 0.375
+radius = 0.001
 
 [node name="RocketProjectile" type="Area3D"]
 collision_layer = 8
@@ -46,6 +46,12 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]
 shape = SubResource("SphereShape3D_a503m")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, -2.5, 0)
+collision_mask = 7
+hit_from_inside = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="_destroy_projectile"]

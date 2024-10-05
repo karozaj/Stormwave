@@ -26,9 +26,8 @@ func shoot():
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
-		#print(ray.get_collider().name)
 		if ray.get_collider().has_method("damage"):
-			ray.get_collider().damage(base_damage)
+			ray.get_collider().damage(base_damage, global_position)
 
 
 func spawn_bullet_hole(pos:Vector3, normal:Vector3):

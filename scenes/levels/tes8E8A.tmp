@@ -115,13 +115,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7032, 0.460458, -4.99341)
 shape = SubResource("ConcavePolygonShape3D_lvode")
 
 [node name="enemy_test" parent="." instance=ExtResource("3_1kdnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51933, -5.261)
-
-[node name="enemy_test4" parent="." instance=ExtResource("3_1kdnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19472, 1, -5.261)
-
-[node name="enemy_test2" parent="." instance=ExtResource("3_1kdnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95083, 1, -5.261)
-
-[node name="enemy_test3" parent="." instance=ExtResource("3_1kdnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22348, 1, -5.261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.261)
