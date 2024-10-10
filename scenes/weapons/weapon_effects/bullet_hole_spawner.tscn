@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ekw6gsijdvqe"]
+
+[ext_resource type="Script" path="res://scripts/bullet_hole_spawner.gd" id="1_sn3qr"]
+
+[node name="BulletHoleSpawner" type="Node3D"]
+script = ExtResource("1_sn3qr")

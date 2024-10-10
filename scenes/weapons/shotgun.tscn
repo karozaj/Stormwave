@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://sjytiuvopdi3"]
+[gd_scene load_steps=10 format=3 uid="uid://sjytiuvopdi3"]
 
 [ext_resource type="PackedScene" uid="uid://boskapx73ubko" path="res://3d/shotgun.glb" id="1_thjip"]
-[ext_resource type="Texture2D" uid="uid://38yfvlxu3y27" path="res://img/muzzle_flash.png" id="2_c0dys"]
 [ext_resource type="Script" path="res://scripts/shotgun.gd" id="2_fgjlh"]
+[ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_0qii5"]
+[ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="4_akkgf"]
 [ext_resource type="AudioStream" uid="uid://uiis2klf7t5h" path="res://audio/sfx/shotgun.ogg" id="4_y1po6"]
 
 [sub_resource type="Animation" id="Animation_2qrny"]
@@ -10,43 +11,43 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder/Sprite3D:visible")
+tracks/0/path = NodePath("Cylinder:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Cylinder:position")
+tracks/1/path = NodePath("Cylinder:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, -3.14159, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Cylinder:rotation")
+tracks/2/path = NodePath(".:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath(".:is_being_pulled_out")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -58,7 +59,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:is_being_pulled_out")
+tracks/4/path = NodePath("Cylinder/MuzzleFlash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -114,46 +115,34 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder/Sprite3D:visible")
+tracks/0/path = NodePath("Cylinder:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"times": PackedFloat32Array(0.0333333, 0.1, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.25), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Cylinder:position")
+tracks/1/path = NodePath("Cylinder:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.0333333, 0.1, 0.466667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.25), Vector3(0, 0, 0)]
+"values": [Vector3(0, -3.14159, 0), Vector3(-0.610865, -3.14159, 0), Vector3(0, -3.14159, 0)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Cylinder:rotation")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0333333, 0.1, 0.466667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0), Vector3(-0.610865, -3.14159, 0), Vector3(0, -3.14159, 0)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -161,14 +150,26 @@ tracks/3/keys = {
 "method": &"play_shooting_sound"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder/MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("Cylinder/MuzzleFlash")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.433333),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -186,18 +187,18 @@ _data = {
 [node name="Shotgun" instance=ExtResource("1_thjip")]
 visible = false
 script = ExtResource("2_fgjlh")
+is_being_pulled_out = false
+pitch_variance = 0.15
+cooldown = 0.75
+base_damage = 25
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 layers = 524288
 
-[node name="Sprite3D" type="Sprite3D" parent="Cylinder" index="0"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00157354, 0.0654399, 0.806757)
+[node name="MuzzleFlash" parent="Cylinder" index="0" instance=ExtResource("4_akkgf")]
+transform = Transform3D(-1, 0, 8.74229e-08, 0, 1, 0, -8.74229e-08, 0, -1, -2.03849e-06, 0.0630129, 0.804079)
 visible = false
-layers = 524288
-pixel_size = 0.0035
-texture_filter = 0
-texture = ExtResource("2_c0dys")
 
 [node name="Rays" type="Node3D" parent="." index="1"]
 
@@ -236,12 +237,14 @@ enabled = false
 target_position = Vector3(0, 0, -100)
 collision_mask = 6
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+[node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_0qii5")]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
 stream = ExtResource("4_y1po6")
 volume_db = -30.0
 bus = &"SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_n28o1")
 }

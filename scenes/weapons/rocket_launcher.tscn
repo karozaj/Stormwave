@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://demh0215o684x"]
+[gd_scene load_steps=7 format=3 uid="uid://demh0215o684x"]
 
 [ext_resource type="PackedScene" uid="uid://duqdgxltdqad1" path="res://3d/rocket_launcher.glb" id="1_h0ptx"]
 [ext_resource type="Script" path="res://scripts/rocket_launcher.gd" id="2_osnhl"]
-[ext_resource type="AudioStream" uid="uid://dqu34qo10d5fl" path="res://audio/sfx/rocket_launcher.ogg" id="3_51qeq"]
 
 [sub_resource type="Animation" id="Animation_wj2u5"]
 length = 0.001
@@ -147,6 +146,7 @@ _data = {
 [node name="RocketLauncher" instance=ExtResource("1_h0ptx")]
 visible = false
 script = ExtResource("2_osnhl")
+is_being_pulled_out = false
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
@@ -155,18 +155,15 @@ layers = 524288
 [node name="Marker3D" type="Marker3D" parent="Cylinder" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373328, 0.17618, 1.38695)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-libraries = {
-"": SubResource("AnimationLibrary_riaxv")
-}
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00154686, 0.00470537, 0.00116968)
-stream = ExtResource("3_51qeq")
-bus = &"SFX"
-
-[node name="RayCast3D" type="RayCast3D" parent="." index="3"]
+[node name="RayCast3D" type="RayCast3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174928, 0)
 enabled = false
 target_position = Vector3(0, 0, -1.5)
 collision_mask = 6
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_riaxv")
+}

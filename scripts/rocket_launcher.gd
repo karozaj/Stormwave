@@ -1,16 +1,13 @@
-extends Node3D
+extends WeaponBase
 
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var projectile_spawn_marker:Marker3D=$Cylinder/Marker3D
 @onready var rocket_direction_ray:RayCast3D=$RayCast3D
-@export var is_being_pulled_out:bool=false
-@export var default_pitch:float=1.0
-@export var pitch_variance:float=0.1
-var projectile_scene=preload("res://scenes/weapons/rocket_projectile.tscn")
-var rng:RandomNumberGenerator=RandomNumberGenerator.new()
-var cooldown:float=0.8
+var projectile_scene=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
+var shooting_sound:AudioStream=preload("res://audio/sfx/rocket_launcher.ogg")
 
+func _ready() -> void:
+	audio_player.stream=shooting_sound
 
 func shoot():
 	animation_player.play("shoot")
@@ -24,8 +21,3 @@ func shoot():
 	rocket_direction_ray.force_raycast_update()
 	if rocket_direction_ray.is_colliding():
 		projectile.explode()
-
-
-func play_shooting_sound():
-	audio_player.pitch_scale=default_pitch+rng.randf_range(-pitch_variance,pitch_variance)
-	audio_player.play()

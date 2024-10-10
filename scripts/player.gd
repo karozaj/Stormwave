@@ -43,7 +43,7 @@ func _ready() -> void:
 	rng.randomize()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
 		$CanvasLayer.add_child(pause_menu)
@@ -101,7 +101,6 @@ func _physics_process(delta: float) -> void:
 	
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#direction=direction.rotated(Vector3.UP, pivot.rotation.y)
 	var lerp_val:float=movement_manager.movement_lerp_val
 	if is_on_floor()==false:
 		lerp_val=lerp_val*2
@@ -177,7 +176,6 @@ func damage(damage_points:int, origin:Vector3)->void:
 		if health<=0:
 			die()
 
-	#
 func die()->void:
 	if is_dead==false:
 		is_dead=true

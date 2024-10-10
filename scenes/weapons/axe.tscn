@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bf0ewty2ftyya" path="res://audio/sfx/swing.ogg" id="3_57nbd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqy3d"]
-size = Vector3(0.25, 1.25, 0.4)
+size = Vector3(0.5, 1.25, 0.4)
 
 [sub_resource type="Animation" id="Animation_qnvrj"]
 length = 0.001
@@ -120,11 +120,11 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.0001),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"play_attack_sound"
+"method": &"play_shooting_sound"
 }]
 }
 tracks/1/type = "value"
@@ -174,6 +174,10 @@ _data = {
 [node name="Axe" instance=ExtResource("1_xe2hc")]
 visible = false
 script = ExtResource("2_p3gx8")
+is_being_pulled_out = false
+pitch_variance = 0.05
+cooldown = 0.6
+base_damage = 35
 
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)

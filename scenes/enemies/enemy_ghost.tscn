@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://dwrcdhdwb121l"]
+
+[ext_resource type="Script" path="res://scripts/enemy_ghost.gd" id="1_ehkxs"]
+[ext_resource type="Texture2D" uid="uid://cgx0iqiqli2n7" path="res://img/enemy_ghost_spritesheet.png" id="2_s8hgf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5wux"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42fps"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv8ix"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br2h4"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl8t1"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhhbw"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgjt0"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nygk5"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm8po"]
+atlas = ExtResource("2_s8hgf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdmnn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5wux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42fps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv8ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br2h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl8t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhhbw")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgjt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nygk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm8po")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5uuuw"]
+radius = 0.35
+height = 0.9
+
+[node name="EnemyGhost" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_ehkxs")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0694781, 0)
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_mdmnn")
+animation = &"idle"
+frame_progress = 0.491856
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5uuuw")

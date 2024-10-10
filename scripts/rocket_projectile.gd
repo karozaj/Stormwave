@@ -30,6 +30,8 @@ func _on_body_entered(body: Node3D) -> void:
 
 
 func explode()->void:
+	timer.stop()
+	timer.start(1.0)
 	set_deferred("monitoring",false)
 	audio_player.play()
 	projectile_sprite.visible=false
@@ -41,11 +43,14 @@ func explode()->void:
 	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.5,1.5,1.5),0.25)
 	explosion_area.monitoring=true
 	var tween_explosion=get_tree().create_tween()
+	tween.connect("finished",disable_explosion_area)
 	tween_explosion.tween_property(explosion_shape,"radius",explosion_radius,0.25)
 
-func _destroy_projectile():
+func _destroy_projectile()->void:
 	queue_free()
 
+func disable_explosion_area()->void:
+	explosion_area.set_deferred("monitoring",false)
 
 func _on_explosion_area_body_entered(body: Node3D) -> void:
 	explosion_ray.target_position=to_local(body.global_position)

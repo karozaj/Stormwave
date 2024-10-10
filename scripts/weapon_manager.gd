@@ -20,14 +20,10 @@ var can_shoot:bool=true
 func _ready() -> void:
 	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
 	for weapon in weapons:
-		if weapon!=null and weapon.has_method("set_ray_position"):
+		if weapon.has_method("set_ray_position"):
 			weapon.set_ray_position(global_position)
-	#pistol.set_ray_position(global_position)
-	#shotgun.set_ray_position(global_position)
-	current_weapon=shotgun
-	weapon_index=2
-	#current_weapon=pistol
-	#weapon_index=1
+	current_weapon=pistol
+	weapon_index=1
 	current_weapon.animation_player.play("pullout")
 
 

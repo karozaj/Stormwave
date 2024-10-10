@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://j0p8llsbpo0o"]
+[gd_scene load_steps=10 format=3 uid="uid://j0p8llsbpo0o"]
 
 [ext_resource type="PackedScene" uid="uid://dftre7dj77ksj" path="res://3d/chaingun.glb" id="1_wfdnx"]
 [ext_resource type="Script" path="res://scripts/chaingun.gd" id="2_db75v"]
-[ext_resource type="Texture2D" uid="uid://38yfvlxu3y27" path="res://img/muzzle_flash.png" id="2_oplb1"]
+[ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="3_i7oun"]
+[ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_4nkua"]
 [ext_resource type="AudioStream" uid="uid://bgoo3kph628b5" path="res://audio/sfx/pistol.ogg" id="4_y0pnv"]
 
 [sub_resource type="Animation" id="Animation_oiiej"]
@@ -22,31 +23,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("chaingun/Sprite3D:visible")
+tracks/1/path = NodePath("chaingun:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("chaingun:position")
+tracks/2/path = NodePath(".:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath(".:is_being_pulled_out")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -58,7 +59,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:is_being_pulled_out")
+tracks/4/path = NodePath("chaingun/MuzzleFlash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -128,34 +129,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("chaingun/Sprite3D:visible")
+tracks/1/path = NodePath("chaingun:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("chaingun:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.075),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.02)]
 }
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -163,10 +152,22 @@ tracks/3/keys = {
 "method": &"play_shooting_sound"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("chaingun/MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.025, 0.075),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("chaingun/MuzzleFlash")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -188,6 +189,10 @@ _data = {
 [node name="Chaingun" instance=ExtResource("1_wfdnx")]
 visible = false
 script = ExtResource("2_db75v")
+is_being_pulled_out = false
+default_pitch = 0.9
+cooldown = 0.1
+base_damage = 15
 
 [node name="chaingun" parent="." index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -197,24 +202,22 @@ layers = 524288
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.119642, 0.311655)
 layers = 524288
 
-[node name="Sprite3D" type="Sprite3D" parent="chaingun" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182, 1.115)
+[node name="MuzzleFlash" parent="chaingun" index="1" instance=ExtResource("3_i7oun")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -9.76599e-08, 0.169885, 1.1171)
 visible = false
-layers = 524288
-pixel_size = 0.003
-texture_filter = 0
-texture = ExtResource("2_oplb1")
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="1"]
 enabled = false
 target_position = Vector3(0, 0, -100)
 collision_mask = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_nmgn2")
-}
+[node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_4nkua")]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
 stream = ExtResource("4_y0pnv")
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_nmgn2")
+}

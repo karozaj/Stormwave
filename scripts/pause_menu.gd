@@ -44,7 +44,7 @@ func _on_music_slider_value_changed(value: float) -> void:
 	Global.update_bus_volume("Music",value)
 
 
-func _on_fov_slider_value_changed(value: float) -> void:
+func _on_fov_slider_value_changed(value: int) -> void:
 	Global.player_fov=value
 
 
