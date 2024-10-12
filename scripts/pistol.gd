@@ -1,4 +1,4 @@
-extends WeaponBase
+extends WeaponBaseClass
 
 @onready var ray:RayCast3D=$RayCast3D
 @onready var animation_player=$AnimationPlayer

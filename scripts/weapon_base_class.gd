@@ -1,5 +1,5 @@
 extends Node3D
-class_name WeaponBase
+class_name WeaponBaseClass
 
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 

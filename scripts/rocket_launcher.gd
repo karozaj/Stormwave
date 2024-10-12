@@ -1,4 +1,4 @@
-extends WeaponBase
+extends WeaponBaseClass
 
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
 @onready var projectile_spawn_marker:Marker3D=$Cylinder/Marker3D

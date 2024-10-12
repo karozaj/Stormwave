@@ -1,4 +1,4 @@
-extends WeaponBase
+extends WeaponBaseClass
 
 @onready var animation_player=$AnimationPlayer
 @onready var hitbox:Area3D=$Cube/Hitbox

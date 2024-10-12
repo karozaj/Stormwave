@@ -69,7 +69,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	#print(Vector2(velocity.x,velocity.z).length())
 	if not is_on_floor():
 	# Add the gravity.
 		if movement_manager.jump_available:
