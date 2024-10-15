@@ -14,7 +14,7 @@ var is_attacking:bool=false
 func _ready() -> void:
 	target=Global.player
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if target!=null and !is_attacking:
 		var current_location=global_transform.origin
 		var next_location=target.global_position+Vector3(0,0.75,0)

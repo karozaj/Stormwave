@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://ldsvjji42wx1"]
+
+[ext_resource type="Script" path="res://scripts/enemy_cloud.gd" id="1_suw4d"]
+[ext_resource type="Texture2D" uid="uid://kijt70rhxioi" path="res://img/cloud_texture.png" id="2_3dpv8"]
+[ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
+[ext_resource type="Texture2D" uid="uid://cstg2lgnskrun" path="res://img/eye_texture.png" id="3_lhol1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_atoy3"]
+radius = 1.0
+
+[node name="EnemyCloud" type="CharacterBody3D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 15
+motion_mode = 1
+script = ExtResource("1_suw4d")
+base_damage = 50
+move_speed = 8.0
+attack_range = 3.0
+attack_cooldown = 3.0
+knockback_modifier = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_atoy3")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_3dpv8")
+
+[node name="Eye" type="Sprite3D" parent="Sprite3D"]
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_lhol1")
+
+[node name="Lightning" type="Node3D" parent="."]
+visible = false
+
+[node name="LightningSprite" type="Sprite3D" parent="Lightning"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.804565, 0)
+pixel_size = 0.025
+texture_filter = 0
+texture = ExtResource("2_clo1p")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(0, 0, -50)
+collision_mask = 3
+hit_from_inside = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LightningTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="LightningTimer" to="." method="_on_lightning_timer_timeout"]

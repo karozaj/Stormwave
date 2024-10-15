@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Stormwave"
-run/main_scene="res://scenes/levels/test_level.tscn"
+run/main_scene="res://scenes/test_level.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
@@ -22,7 +22,12 @@ MusicPlayer="*res://scenes/music_player.tscn"
 
 [editor]
 
-movie_writer/movie_file="D:/Godot/Godot_v4.3-stable_win64.exe/MOVIES/movie.avi"
+movie_writer/movie_file="D:\\Godot\\Godot_v4.3\\movies\\movie2.avi"
+movie_writer/fps=30
+
+[global_group]
+
+enemies=""
 
 [importer_defaults]
 
