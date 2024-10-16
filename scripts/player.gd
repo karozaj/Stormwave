@@ -10,7 +10,9 @@ var mouse_sensitivity:float=1.0
 @onready var main_camera:Camera3D=$Pivot/MainCamera
 @onready var weapon_camera:Camera3D=$Pivot/WeaponCamera
 #audio players
-@onready var footstep_audio_player=$FootstepAudioPlayer
+@onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioPlayer
+#ui
+@onready var hud=$CanvasLayer/Hud
 @export_category("Audio")
 @export var footstep_default_pitch:float=1.0
 @export var footstep_pitch_variance:float=.15
@@ -30,7 +32,10 @@ var base_fov:float=90.0
 @export var fov_increase:float=2.5
 
 var knockback_modifier:float=20.0
-var health:int=100
+var health:int=100:
+	set(value):
+		health=value
+		hud.update_health(health)
 var is_dead:bool=false
 
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
@@ -41,6 +46,9 @@ func _ready() -> void:
 	mouse_sensitivity=Global.player_sensitivity
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	rng.randomize()
+	hud.update_health(health)
+	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
+	weapon_manager.ammo_count_changed.connect(update_hud_ammo)
 
 
 func _process(_delta: float) -> void:
@@ -50,10 +58,10 @@ func _process(_delta: float) -> void:
 	
 	#weapon selection
 	if Input.is_action_just_pressed("next_weapon"):
-		var next_weapon_index:int=(weapon_manager.weapon_index+1)%weapon_manager.weapons.size()
+		var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
 		weapon_manager.select_weapon(next_weapon_index)
 	elif Input.is_action_just_pressed("previous_weapon"):
-		var next_weapon_index:int=(weapon_manager.weapon_index-1)%weapon_manager.weapons.size()
+		var next_weapon_index:int=(weapon_manager.current_weapon_index-1)%weapon_manager.weapons.size()
 		weapon_manager.select_weapon(next_weapon_index)
 	elif Input.is_action_just_pressed("select_weapon_1"):
 		weapon_manager.select_weapon(0)
@@ -178,3 +186,7 @@ func damage(damage_points:int, origin:Vector3)->void:
 func die()->void:
 	if is_dead==false:
 		is_dead=true
+
+
+func update_hud_ammo()->void:
+	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])

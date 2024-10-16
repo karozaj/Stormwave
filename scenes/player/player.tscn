@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2ype4ks6wd5x"]
+[gd_scene load_steps=7 format=3 uid="uid://b2ype4ks6wd5x"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4lc0"]
 [ext_resource type="PackedScene" uid="uid://vq2ju3qo2hr3" path="res://scenes/player/movement_manager.tscn" id="2_pu5br"]
 [ext_resource type="PackedScene" uid="uid://cb2rwntd2s065" path="res://scenes/player/weapon_manager.tscn" id="3_tefss"]
 [ext_resource type="AudioStream" uid="uid://cm5ggv3fiaybt" path="res://audio/sfx/footstep1.ogg" id="4_2h2ys"]
+[ext_resource type="PackedScene" uid="uid://c3us3eqr73duv" path="res://scenes/ui/hud.tscn" id="4_24bxq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n32ka"]
 radius = 0.35
@@ -50,6 +51,8 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("4_24bxq")]
 
 [node name="FootstepAudioPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_2h2ys")
