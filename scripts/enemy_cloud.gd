@@ -22,6 +22,8 @@ func _process(delta: float) -> void:
 	else:
 		var current_location=global_transform.origin
 		var next_location=target.global_position+Vector3(0,height_over_target,0)
+		if Vector2(current_location.x,current_location.z).distance_to(Vector2(next_location.x,next_location.z)):
+			$eye.look_at(target.global_position)
 		if Vector2(current_location.x,current_location.z).distance_to(Vector2(next_location.x,next_location.z))>attack_range:
 			var new_velocity=(next_location-current_location).normalized()*move_speed
 			velocity=velocity.move_toward(new_velocity,7.5*delta)
@@ -60,8 +62,8 @@ func die()->void:
 		audio_player.pitch_scale=0.5
 		audio_player.stream=death_sound
 		audio_player.play()
-		var tween=get_tree().create_tween()
-		tween.tween_property($Sprite3D,"modulate",Color.TRANSPARENT,3)
+		#var tween=get_tree().create_tween()
+		#tween.tween_property($Sprite3D,"modulate",Color.TRANSPARENT,3)
 		timer.start(4)
 
 

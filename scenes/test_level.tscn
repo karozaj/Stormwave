@@ -135,16 +135,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95083, 1, -5.261)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22348, 1, -5.261)
 
 [node name="EnemyGhost89" parent="." instance=ExtResource("4_uek37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3434, 5.75629, -5.37486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79935, 5.75629, -5.37486)
 
 [node name="EnemyGhost90" parent="." instance=ExtResource("4_uek37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.0164, 5.75629, -5.37486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.47235, 5.75629, -5.37486)
 
 [node name="EnemyGhost91" parent="." instance=ExtResource("4_uek37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8224, 5.75629, -5.37486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.27835, 5.75629, -5.37486)
 
 [node name="EnemyGhost92" parent="." instance=ExtResource("4_uek37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9414, 5.75629, -5.37486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.39735, 5.75629, -5.37486)
 
 [node name="EnemyCloud" parent="." instance=ExtResource("5_kgyve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7353, 3.5288, 0)

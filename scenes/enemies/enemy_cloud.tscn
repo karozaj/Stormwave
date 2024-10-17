@@ -1,12 +1,83 @@
-[gd_scene load_steps=6 format=3 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=14 format=4 uid="uid://ldsvjji42wx1"]
 
 [ext_resource type="Script" path="res://scripts/enemy_cloud.gd" id="1_suw4d"]
-[ext_resource type="Texture2D" uid="uid://kijt70rhxioi" path="res://img/cloud_texture.png" id="2_3dpv8"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
-[ext_resource type="Texture2D" uid="uid://cstg2lgnskrun" path="res://img/eye_texture.png" id="3_lhol1"]
+[ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="2_uh8ia"]
+[ext_resource type="Texture2D" uid="uid://5n3s7nl13o4n" path="res://3d/cloud_enemy_eye_eye.png" id="2_xhr3t"]
+
+[sub_resource type="Curve" id="Curve_kwunk"]
+max_value = 0.8
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.202899, 0.835165), 0.0, 0.0, 0, 0, Vector2(0.833333, 0.824176), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_uvv04"]
+width = 64
+curve = SubResource("Curve_kwunk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62pa0"]
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(1, 0.25, 1)
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = SubResource("CurveTexture_uvv04")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1gjh"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.91664, 0.91664, 0.91664, 0.737255)
+albedo_texture = ExtResource("2_uh8ia")
+texture_filter = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_y807p"]
+material = SubResource("StandardMaterial3D_v1gjh")
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixbfe"]
+resource_name = "Material.002"
+shading_mode = 0
+albedo_texture = ExtResource("2_xhr3t")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o6xkx"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("DAADAAUADAAGAAMABAAGAAwABAACAAYAAgANAAYAAgAHAA0ABgAIAAMABgANAAgADQABAAgADQAJAAEABwAJAA0ABwAAAAkAAAAOAAkAAAAKAA4ACQALAAEACQAOAAsABAAHAAIABAAPAAcADwAAAAcADwAKAAAAAwAQAAUAAwAIABAACAALABAACAABAAsADAAUABUADAAFABQABAAVABMABAAMABUAEwAZABYAEwAVABkAFQAXABkAFQAUABcAGQASABgAGQAXABIAFgAYABEAFgAZABgAEQAOAAoAEQAYAA4AGAALAA4AGAASAAsABAAWAA8ABAATABYADwARAAoADwAWABEAFAAQABcAFAAFABAAFwALABIAFwAQAAsA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("O8zDMzvMAAA7zDvMO8wAADvMwzPDMwAAO8w7zMMzAAD/fw4jDiMAAP9/8NwOIwAA8Nz/fw4jAADw3A4j/38AAPDc8Nz/fwAA8Nz/f/DcAAD/fw4j8NwAAP9/8Nzw3AAA/3//fwAAAAD///9//38AAP9//3///wAA/38AAP9/AAD/f////38AAMMzwzM7zAAAwzM7zDvMAADDM8MzwzMAAMMzO8zDMwAADiP/fw4jAAAOIw4j/38AAA4j8Nz/fwAADiP/f/DcAAAAAP9//38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eqfvy"]
+resource_name = "cloud_enemy_eye_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("4zl3yd5LerhYSXrH4zl3yd5LerhYSXrHysfQyby2DrYvuJ3GysfQyby2DrYvuJ3Gfv8ivZ7CiYF+/yK9nsKJgX7/Ir2ewomBfv8ivZ7CiYHUwHb/1MB2/9TB9v3Uwfb9sYDVvbGA1b2xgNW9sYDVvbGA1b2xgNW9sYDVvbGA1b2RQPj+kUD4/pFA+P6RQPj+uQGCvJ89jIS5AYK8nz2MhLkBgryfPYyEuQGCvJ89jIR+/3b/fv92/37/dv9+/3b/MoF3/jKBd/4ygXf+MoF3/rkB+P65Afj+uQH4/rkB+P6xgAuDsYALg7GAC4OxgAuDsYALg7GAC4OxgAuDsYALg+M5d8neS3q4WEl6x+M5d8neS3q4WEl6x8rH0Mm8tg62L7idxsrH0Mm8tg62L7idxtTAdv/UwHb/1MH2/dTB9v2xgNW9sYDVvbGA1b2xgNW9sYDVvbGA1b2xgNW9sYDVvZFA+P6RQPj+kUD4/pFA+P4ygXf+MoF3/jKBd/4ygXf+"),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("LAAJABAALAAUAAkADAAVAC0ADAAGABUACAAzABcACAAbADMAFgAfAAsAFgAxAB8AMAAFAB4AMAAiAAUAGgAjADIAGgACACMAAAA1ACEAAAAkADUAIAAoAAMAIAA0ACgADQAZAAcADQA5ABkAOAABABgAOAAlAAEACgA9ABEACgAdAD0AHAApADwAHAAEACkALgBJAEwALgASAEkADgBNAEYADgAvAE0ASABfAFMASABPAF8ATgBXAF0ATgBLAFcAXABFAFoAXABWAEUAUgBbAEIAUgBeAFsAQAA3ACYAQABZADcAWAAqADYAWABDACoADwBRADsADwBHAFEAOgBBACcAOgBQAEEASgA/AFUASgATAD8AVAArAEQAVAA+ACsA"),
+"material": SubResource("StandardMaterial3D_ixbfe"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("O8zDMzvMl207zMMzO8x2OTvMwzM7zIhLO8w7zDvMZZI7zDvMO8zLxDvMO8w7zB20O8zDM8MzLw07zMMzwzPmKDvMwzPDMyUyO8w7zMMzx/I7zDvMwzP81TvMO8zDM5XN/38OIw4jNw3/fw4jDiMIKv9/DiMOI4nz/38OIw4jSeX/f/DcDiPM8v9/8NwOIznV/3/w3A4jegz/f/DcDiOlGfDc/38OI8Hy8Nz/fw4jNw3w3P9/DiPYzfDc/38OI/Ax8NwOI/9/2Trw3A4j/38IKvDcDiP/f+BL8NwOI/9/VjLw3PDc/3+VxvDc8Nz/f8bW8Nzw3P9/WbTw3PDc/3/YzfDc/3/w3GeS8Nz/f/Dclm3w3P9/8Nzps/Dc/3/w3OBL/38OI/DcmG3/fw4j8NwMOP9/DiPw3Jv9/38OI/DcVNX/f/Dc8Nxnkv9/8Nzw3JXG/3/w3PDcbAL/f/Dc8NwYKf9//38AAMfy/3//fwAAPQ3/f/9/AAB1DP9//38AAI/z////f/9/HbT///9//38Nzv///3//fxVM////f/9/JTL/f/9///9okv9//3///5dt/3//f///dgL/f/9///+R/f9/AAD/f3Y5/38AAP9/zir/fwAA/3/11v9/AAD/f2bm/3////9/4sf/f////3/81f9/////f5cq/3////9/vhrDM8MzO8yR/cMzwzM7zPXWwzPDMzvMi/bDMzvMO8xdAsMzO8w7zPcmwzM7zDvM3wfDM8MzwzOA88MzwzPDM77jwzPDM8MzcfbDMzvMwzN1DMMzO8zDM74awzM7zMMzaQgOI/9/DiNvDA4j/38OI4nzDiP/fw4jiwkOI/9/DiOj9Q4jDiP/f5nYDiMOI/9/SeUOIw4j/38c+A4jDiP/f0D3DiPw3P9/GCkOI/Dc/3/UGw4j8Nz/f/QIDiPw3P9/iwkOI/9/8NxsAg4j/3/w3Ij9DiP/f/DcyQYOI/9/8Nwc+AAA/3//f98HAAD/f/9/WAoAAP9//385+QAA/3//f3H2VEfCQyFfUFDWbp4jrMPUONHQ8yIdo5ITG33WE5ZWBkcfc4gbCZQrAxnIxysgnD4P13wHFClUIEjgFN18AU7HWOmT/wLgyIAtBP1Ga9DXrDAplFgD13wHFIib4wzQdBsbe123UClUIEhybB4jcHH0G0zQziBTxxMqdaPpEYib4wzAw604bkfPQ8OiQhVybB4jO0e1Q8Bg60/xb+FwZFSoY8DDrThM0M4g4vAPEN7iWSoJlCsDp3wqFNn8GmsQFa58HaOSExybNQu2asIiH3OIG8/DkDhUR8JD5PAREO9v43AhX1BQalLqSLFV12JjT8RX789RHxnIxyue44srztgJMu9v43CxVddiIU68dt/wDRDW4bUoovUtMZ4UIH0GTDlavzofd9n8GmvO2AkymPUiRK7872rgFN18HPc9RfA5O3j3VgtiAU7HWNBOpHWLOwl23uJZKtHZazNi9qYxHPc9ReLwDxDtb+Vw4/S2MNBOpHWi9S0xNvgLRktP4XS/Oh93")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o6xkx")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_atoy3"]
-radius = 1.0
+radius = 0.6
 
 [node name="EnemyCloud" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
@@ -19,21 +90,23 @@ attack_range = 3.0
 attack_cooldown = 3.0
 knockback_modifier = 5.0
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0798005, 0)
+amount = 24
+lifetime = 15.0
+preprocess = 15.0
+explosiveness = 0.5
+randomness = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_62pa0")
+draw_pass_1 = SubResource("QuadMesh_y807p")
+
+[node name="eye" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_eqfvy")
+skeleton = NodePath("")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_atoy3")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-pixel_size = 0.04
-billboard = 1
-texture_filter = 0
-texture = ExtResource("2_3dpv8")
-
-[node name="Eye" type="Sprite3D" parent="Sprite3D"]
-pixel_size = 0.04
-billboard = 1
-texture_filter = 0
-render_priority = 1
-texture = ExtResource("3_lhol1")
 
 [node name="Lightning" type="Node3D" parent="."]
 visible = false
