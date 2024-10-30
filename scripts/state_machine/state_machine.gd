@@ -15,8 +15,6 @@ func _ready() -> void:
 			child.finished.connect(transition_to_next_state)
 	initial_state.enter()
 	current_state=initial_state
-	print(states)
-
 
 
 #func _unhandled_input(event: InputEvent) -> void:

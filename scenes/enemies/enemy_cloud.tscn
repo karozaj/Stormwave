@@ -21,6 +21,7 @@ width = 64
 curve = SubResource("Curve_kwunk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62pa0"]
+resource_local_to_scene = true
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(1, 0.25, 1)
 emission_shape = 1
@@ -141,9 +142,9 @@ tracks/4/keys = {
 "values": [Vector3(2, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_eejlw"]
-resource_name = "pain"
-length = 0.25
+[sub_resource type="Animation" id="Animation_f880t"]
+resource_name = "attack"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -151,34 +152,22 @@ tracks/0/path = NodePath("eye:instance_shader_parameters/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.5, 0.5, 0.0]
+"values": [0.0, 1.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("eye:position")
+tracks/1/path = NodePath("eye:instance_shader_parameters/color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.15), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("eye:instance_shader_parameters/color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(2, 0, 0)]
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ne44q"]
@@ -232,9 +221,9 @@ tracks/3/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_f880t"]
-resource_name = "attack"
-length = 1.5
+[sub_resource type="Animation" id="Animation_eejlw"]
+resource_name = "pain"
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -242,22 +231,34 @@ tracks/0/path = NodePath("eye:instance_shader_parameters/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 1.0]
+"values": [0.0, 0.5, 0.5, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("eye:instance_shader_parameters/color")
+tracks/1/path = NodePath("eye:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.15), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("eye:instance_shader_parameters/color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [Vector3(2, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2tf13"]
@@ -275,7 +276,7 @@ motion_mode = 1
 script = ExtResource("1_suw4d")
 base_damage = 50
 attack_range = 3.0
-attack_cooldown = 3.0
+attack_cooldown = 2.0
 knockback_modifier = 5.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
