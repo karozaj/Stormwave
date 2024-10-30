@@ -11,19 +11,35 @@ config_version=5
 [application]
 
 config/name="Stormwave"
-run/main_scene="res://scenes/test_level.tscn"
+run/main_scene="res://scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://resources/default_bus_layout.tres"
+
 [autoload]
 
-Global="*res://scripts/global.gd"
-MusicPlayer="*res://scenes/music_player.tscn"
+Global="*res://scripts/globals/global.gd"
+MusicPlayer="*res://scenes/ui/music_player.tscn"
 
 [editor]
 
 movie_writer/movie_file="D:\\Godot\\Godot_v4.3\\movies\\movie2.avi"
 movie_writer/fps=30
+
+[file_customization]
+
+folder_colors={
+"res://3d/": "red",
+"res://audio/": "orange",
+"res://img/": "yellow",
+"res://resources/": "green",
+"res://scenes/": "teal",
+"res://scenes/weapons/": "teal",
+"res://scripts/": "blue"
+}
 
 [global_group]
 

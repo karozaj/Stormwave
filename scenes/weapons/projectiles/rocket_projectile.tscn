@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://mp638iq6vrn4"]
 
-[ext_resource type="Script" path="res://scripts/rocket_projectile.gd" id="1_mi6pk"]
+[ext_resource type="Script" path="res://scripts/weapons/projectiles/rocket_projectile.gd" id="1_mi6pk"]
 [ext_resource type="Texture2D" uid="uid://bu57a7rtetpj7" path="res://img/projectile_orange.png" id="2_6jhiv"]
 [ext_resource type="Texture2D" uid="uid://b3drwdus5br6n" path="res://img/explosion.png" id="3_q0bfa"]
 [ext_resource type="AudioStream" uid="uid://m55e883vew8l" path="res://audio/sfx/explosion.ogg" id="4_6yb42"]

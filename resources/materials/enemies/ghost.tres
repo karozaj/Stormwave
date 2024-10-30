@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://jgkbd46cfaao"]
+
+[ext_resource type="Texture2D" uid="uid://cihi03nocpy57" path="res://3d/ghost_enemy_ghost_enemy_texture.png" id="1_wgo8v"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Material.001"
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.705882)
+albedo_texture = ExtResource("1_wgo8v")
+texture_filter = 2

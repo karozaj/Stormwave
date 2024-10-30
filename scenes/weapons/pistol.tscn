@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://lyyc6u3slkca"]
 
 [ext_resource type="PackedScene" uid="uid://cgdcnnhbd435r" path="res://3d/pistol.glb" id="1_85tub"]
-[ext_resource type="Script" path="res://scripts/pistol.gd" id="2_j2di2"]
+[ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="2_j2di2"]
 [ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="3_occg2"]
 [ext_resource type="AudioStream" uid="uid://bgoo3kph628b5" path="res://audio/sfx/pistol.ogg" id="3_wuwc0"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_faakg"]

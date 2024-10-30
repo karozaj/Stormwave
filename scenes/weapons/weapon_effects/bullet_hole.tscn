@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://du52okuk2qyo0"]
 
 [ext_resource type="Texture2D" uid="uid://dg15ov53x78r4" path="res://img/bullet_hole.png" id="1_qynsd"]
-[ext_resource type="Script" path="res://scripts/bullet_hole.gd" id="2_mf26r"]
+[ext_resource type="Script" path="res://scripts/weapons/weapon_effects/bullet_hole.gd" id="2_mf26r"]
 
 [node name="BulletHole" type="Decal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002491, -5.96046e-08, -0.000604987)

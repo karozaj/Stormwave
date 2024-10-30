@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://j0p8llsbpo0o"]
 
 [ext_resource type="PackedScene" uid="uid://dftre7dj77ksj" path="res://3d/chaingun.glb" id="1_wfdnx"]
-[ext_resource type="Script" path="res://scripts/chaingun.gd" id="2_db75v"]
+[ext_resource type="Script" path="res://scripts/weapons/chaingun.gd" id="2_db75v"]
 [ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="3_i7oun"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_4nkua"]
 [ext_resource type="AudioStream" uid="uid://bgoo3kph628b5" path="res://audio/sfx/pistol.ogg" id="4_y0pnv"]

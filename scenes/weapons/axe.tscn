@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://beui6n2v6ebbo"]
 
 [ext_resource type="PackedScene" uid="uid://v86qd1kxjmk4" path="res://3d/axe.glb" id="1_xe2hc"]
-[ext_resource type="Script" path="res://scripts/axe.gd" id="2_p3gx8"]
+[ext_resource type="Script" path="res://scripts/weapons/axe.gd" id="2_p3gx8"]
 [ext_resource type="AudioStream" uid="uid://bf0ewty2ftyya" path="res://audio/sfx/swing.ogg" id="3_57nbd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqy3d"]

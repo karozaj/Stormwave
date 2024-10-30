@@ -180,8 +180,8 @@ func damage(damage_points:int, origin:Vector3)->void:
 		knockback_direction=knockback_direction.normalized()
 		velocity+=knockback_direction*damage_points/100*knockback_modifier
 		print("player health:",health)
-		if health<=0:
-			die()
+		#if health<=0:
+			#die()
 
 func die()->void:
 	if is_dead==false:

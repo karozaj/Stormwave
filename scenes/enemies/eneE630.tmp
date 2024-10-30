@@ -1,6 +1,5 @@
 [gd_scene load_steps=28 format=4 uid="uid://dm3r1hv0l3q6h"]
 
-[ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="3_lmk5i"]
 [ext_resource type="AudioStream" uid="uid://bj8rxdhil5kqy" path="res://audio/sfx/enemy_ghost.ogg" id="4_0ifen"]
@@ -10,6 +9,66 @@
 [ext_resource type="Script" path="res://scripts/enemies/ghost/attack.gd" id="7_rd25v"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/die.gd" id="8_mvxav"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/pain.gd" id="9_pcets"]
+
+[sub_resource type="GDScript" id="GDScript_dqwh6"]
+script/source = "class_name EnemyGhostClass extends EnemyBaseClass
+
+@onready var state_machine:StateMachine=$StateMachine
+@onready var attack_area:Area3D=$AttackArea
+@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var animation_player:AnimationPlayer=$AnimationPlayer
+@onready var collision_shape:CollisionShape3D=$CollisionShape3D
+@onready var cooldown_timer:Timer=$CooldownTimer
+var death_sound:AudioStream=preload(\"res://audio/sfx/enemy_ghost_death.ogg\")
+var attack_sound:AudioStream=preload(\"res://audio/sfx/enemy_ghost_attack.ogg\")
+var pain_sound:AudioStream=preload(\"res://audio/sfx/enemy_ghost_pain.ogg\")
+##Determines surface material transparency. Intended to be used in animations.
+@export var material_alpha:float=0.7:
+	set(value):
+		material_alpha=value
+		$skull.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
+		$skull/jaw.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
+##How quickly the enemy moves when beginning the attack
+@export var dash_speed:float=20.0
+##Attack state duration
+@export var attack_time:float=1.0
+##Determines how quickly the enemy can reorient itself
+@export var agility:float=15.0
+
+
+func _ready() -> void:
+	target=Global.player
+	cooldown_timer.wait_time=attack_cooldown
+#
+
+func attack()->void:
+	attack_area.monitoring=true
+	animation_player.play(\"attack\")
+	var current_location=global_transform.origin
+	var next_location=target.global_position+Vector3(0,0.75,0)
+	var new_velocity=(next_location-current_location).normalized()*dash_speed
+	velocity=new_velocity
+	
+
+func damage(damage_points:int, origin:Vector3)->void:
+	state_machine.current_state.damage(damage_points,origin)
+
+func take_damage(damage_points:int, origin:Vector3)->void:
+	health-=damage_points
+	var knockback_direction:Vector3=global_position-origin
+	knockback_direction=knockback_direction.normalized()
+	velocity=knockback_direction*damage_points/100*knockback_modifier
+
+func play_sound_effect(sound:AudioStream, pitch_from:float=0.0,pitch_to:float=0.0, pitch_base:float=1.0)->void:
+	audio_player.stream=sound
+	audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
+	audio_player.play()
+
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if body.has_method(\"damage\"):
+		target.damage(base_damage, global_position)
+"
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_buvxq"]
 _surfaces = [{
@@ -213,33 +272,10 @@ tracks/7/keys = {
 "update": 0,
 "values": [0.7]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("skull:instance_shader_parameters/color")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2, 0, 0)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("skull/jaw:instance_shader_parameters/color")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2, 0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_3k7f3"]
 resource_name = "attack"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -275,54 +311,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("skull:instance_shader_parameters/alpha")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.266667, 0.8, 0.966667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.25, 0.25, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("skull:instance_shader_parameters/color")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("skull/jaw:instance_shader_parameters/alpha")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.266667, 0.8, 0.966667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.25, 0.25, 0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("skull/jaw:instance_shader_parameters/color")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_bil2g"]
@@ -492,30 +480,6 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.785398, -0.523599, 0), Vector3(0, 0, 0)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("skull:instance_shader_parameters/color")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2, 0, 0)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("skull/jaw:instance_shader_parameters/color")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2, 0, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_goypl"]
 _data = {
@@ -528,21 +492,22 @@ _data = {
 
 [node name="EnemyGhost" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 14
+collision_mask = 15
 motion_mode = 1
-script = ExtResource("1_0m7cj")
-health = 30
+script = SubResource("GDScript_dqwh6")
+health = 150
+base_damage = 10
 move_speed = 8.0
 attack_range = 8.0
-attack_cooldown = 1.0
+attack_cooldown = 1.5
 knockback_modifier = 25.0
+pain_time = 1.0
 
 [node name="skull" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.25, 0, -3.16898e-06, 0, 1.25, 0, 3.16898e-06, 0, -1.25, 0, 0.124965, 0)
 material_overlay = ExtResource("2_ob1le")
 cast_shadow = 0
 instance_shader_parameters/alpha = 0.0
-instance_shader_parameters/color = Vector3(2, 0, 0)
 mesh = SubResource("ArrayMesh_xlhb0")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_5y0kq")
@@ -552,7 +517,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.108287, 0)
 material_overlay = ExtResource("2_ob1le")
 cast_shadow = 0
 instance_shader_parameters/alpha = 0.0
-instance_shader_parameters/color = Vector3(2, 0, 0)
 mesh = SubResource("ArrayMesh_67xic")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_5y0kq")

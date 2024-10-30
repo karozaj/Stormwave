@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dp38ui8f2nol6"]
 
 [ext_resource type="Texture2D" uid="uid://38yfvlxu3y27" path="res://img/muzzle_flash.png" id="1_0w58j"]
-[ext_resource type="Script" path="res://scripts/muzzle_flash.gd" id="2_jy124"]
+[ext_resource type="Script" path="res://scripts/weapons/weapon_effects/muzzle_flash.gd" id="2_jy124"]
 
 [node name="MuzzleFlash" type="Sprite3D"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
