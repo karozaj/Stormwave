@@ -1,10 +1,11 @@
 extends CharacterBody3D
+class_name Player
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
 
-@onready var movement_manager=$MovementManager
-@onready var weapon_manager=$Pivot/WeaponCamera/WeaponManager
+@onready var movement_manager:MovementManager=$MovementManager
+@onready var weapon_manager:WeaponManager=$Pivot/WeaponCamera/WeaponManager
 #camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
@@ -14,29 +15,44 @@ var mouse_sensitivity:float=1.0
 #ui
 @onready var hud=$CanvasLayer/Hud
 @export_category("Audio")
+## Default pitch for footstep sound
 @export var footstep_default_pitch:float=1.0
+## How much footstep pitch can change
 @export var footstep_pitch_variance:float=.15
+
 var has_played_footstep_sound:bool=false
 var was_on_floor:bool=true
 
 #head bob variables
 @export_category("Headbob")
+## Head bob frequency
 @export var headbob_frequency:float=1.75
+## Head bob amplitude
 @export var headbob_amplitude:float=0.075
+
 var headbob_positon:float=0.0
 var headbob_enabled:bool=true
 
 #fov
 @export_category("FOV")
-var base_fov:float=90.0
+## Base FOV
+@export var base_fov:float=90.0
+## How much FOV is increased when moving
 @export var fov_increase:float=2.5
 
-var knockback_modifier:float=20.0
+@export_category("Player")
+## Determines how far the player is knocked back when damaged
+@export var knockback_modifier:float=20.0
+## Player health points on start
+@export var starting_health:int=100
+## How long the player is invincible after being hit
+@export var invincibility_time:float=0.25
 var health:int=100:
 	set(value):
 		health=value
 		hud.update_health(health)
 var is_dead:bool=false
+var is_invincible:bool=false
 
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
@@ -45,8 +61,8 @@ func _ready() -> void:
 	base_fov=Global.player_fov
 	mouse_sensitivity=Global.player_sensitivity
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
+	health=starting_health
 	rng.randomize()
-	hud.update_health(health)
 	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
 	weapon_manager.ammo_count_changed.connect(update_hud_ammo)
 
@@ -175,13 +191,22 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 
 func damage(damage_points:int, origin:Vector3)->void:
 	if is_dead==false:
-		health-=damage_points
-		var knockback_direction:Vector3=global_position-origin
-		knockback_direction=knockback_direction.normalized()
-		velocity+=knockback_direction*damage_points/100*knockback_modifier
-		print("player health:",health)
-		#if health<=0:
-			#die()
+		if is_invincible==false:
+			health-=damage_points
+			var knockback_direction:Vector3=global_position-origin
+			knockback_direction=knockback_direction.normalized()
+			velocity+=knockback_direction*damage_points/100*knockback_modifier
+			is_invincible=true
+			var invincibility_timer=get_tree().create_timer(invincibility_time)
+			invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
+			hud.show_pain_overlay(damage_points)
+			print("player health:",health)
+			#if health<=0:
+				#die()
+
+func _on_invincibility_timer_timeout():
+	is_invincible=false
+	print("invinciblity stop")
 
 func die()->void:
 	if is_dead==false:

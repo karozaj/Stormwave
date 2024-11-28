@@ -1,4 +1,5 @@
 extends Node3D
+class_name MovementManager
 
 @onready var coyote_timer:Timer=$CoyoteTimer
 @onready var jump_buffer_timer:Timer=$BufferTimer
