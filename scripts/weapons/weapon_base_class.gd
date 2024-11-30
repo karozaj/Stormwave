@@ -1,5 +1,6 @@
 extends Node3D
 class_name WeaponBaseClass
+#All player weapons should inherit from this class
 
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 

@@ -1,12 +1,12 @@
 extends Node
 class_name StateMachine
 
-##Determines which state the object will be in after spawning.
+## Determines which state the object will be in after spawning.
 @export var initial_state: State = null
 var current_state:State=null
 var states:Dictionary={}
 
-
+## states should be children of StateMachine node
 func _ready() -> void:
 	await owner.ready
 	for child in get_children():

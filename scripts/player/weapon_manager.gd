@@ -1,7 +1,7 @@
 extends Node3D
 class_name WeaponManager
 
-signal ammo_count_changed
+signal ammo_count_changed #signal used to notify hud about ammo change
 
 @onready var audio_player=$AudioStreamPlayer3D
 var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
@@ -19,7 +19,6 @@ var current_weapon_index:int=0
 var ammo:Array=["∞",int(5),int(5),int(50),int(5)]
 var can_shoot:bool=true
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
 	for weapon in weapons:
@@ -29,7 +28,7 @@ func _ready() -> void:
 	current_weapon_index=1
 	current_weapon.animation_player.play("pullout")
 
-
+## shoot current weapon if possible, play no ammo sound if no ammo
 func shoot()->void:
 	if current_weapon.is_being_pulled_out==false:
 		if can_shoot:

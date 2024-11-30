@@ -1,5 +1,6 @@
 extends CharacterBody3D
 class_name EnemyBaseClass
+#All enemies should inherit from this class
 
 ## Enemy health
 @export var health:int=100
@@ -18,11 +19,10 @@ class_name EnemyBaseClass
 var can_attack:bool=true
 var is_dead:bool=false
 var is_in_pain:bool=false
-var target
+var target #enemy will chase and attack its target (usually the player)
 
-func attack()->void:
-	pass
-
+#damage function should be overwritten to call damage function for current state
+#enemy should also enter 'pain' state upon receiving damage
 func damage(damage_points:int, origin:Vector3)->void:
 	if is_dead==false:
 		health-=damage_points
@@ -31,6 +31,7 @@ func damage(damage_points:int, origin:Vector3)->void:
 		velocity+=knockback_direction*damage_points/100*knockback_modifier
 		if health<=0:
 			die()
-
+#enemies should have a 'die' state instead of using this function
 func die():
+	is_dead=true
 	queue_free()

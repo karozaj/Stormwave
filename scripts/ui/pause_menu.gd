@@ -1,7 +1,7 @@
 extends Control
 
 
-# Called when the node enters the scene tree for the first time.
+## Load settings values
 func _ready() -> void:
 	$VBoxContainer/GridContainer/VBoxContainer/SFXSlider.value=Global.get_volume("SFX")
 	$VBoxContainer/GridContainer/VBoxContainer2/MusicSlider.value=Global.get_volume("Music")
@@ -13,8 +13,7 @@ func _ready() -> void:
 	show()
 	Input.mouse_mode=Input.MOUSE_MODE_CONFINED
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+## resume game if pause button is pressed again
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		_on_resume_button_pressed()
@@ -23,7 +22,7 @@ func _on_resume_button_pressed():
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	get_tree().paused=false
 	queue_free()
-
+## TODO: change scene to main menu when pressing quit
 func _on_quit_button_pressed():
 	get_tree().paused=false
 	#get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

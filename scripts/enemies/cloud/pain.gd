@@ -1,5 +1,5 @@
 extends State
-
+#this state occurs after owner is damaged
 @onready var state_owner:EnemyCloud=get_owner()
 var timer:Timer
 
@@ -12,7 +12,7 @@ func enter(transition_data:Dictionary={})->void:
 	state_owner.animation_player.play("pain")
 	state_owner.play_sound_effect(state_owner.pain_sound,0,0.3, state_owner.base_pitch)
 
-
+#when in pain state, owner will stop moving and performing any actions/attacks
 func update(delta:float)->void:
 	if state_owner.health<=0:
 		finished.emit(self, "Die")

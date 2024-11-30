@@ -200,13 +200,11 @@ func damage(damage_points:int, origin:Vector3)->void:
 			var invincibility_timer=get_tree().create_timer(invincibility_time)
 			invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
 			hud.show_pain_overlay(damage_points)
-			print("player health:",health)
 			#if health<=0:
 				#die()
 
 func _on_invincibility_timer_timeout():
 	is_invincible=false
-	print("invinciblity stop")
 
 func die()->void:
 	if is_dead==false:

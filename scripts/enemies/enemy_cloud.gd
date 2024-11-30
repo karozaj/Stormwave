@@ -42,11 +42,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	state_machine.current_state.update(delta)
 	
-
+## calls current state 'damage' method
 func damage(damage_points:int, origin:Vector3)->void:
 	state_machine.current_state.damage(damage_points,origin)
 
-
+## damage and knock back this enemy, usually called from state 'damage' method
 func take_damage(damage_points:int, origin:Vector3)->void:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin
@@ -61,9 +61,7 @@ func calculate_lightning_size(target_position:Vector3):
 	lightning.scale.y=distance/lightning_height
 	var distance_v=abs(lightning.global_position.y-target_position.y)
 	var lightning_rotation=acos(distance_v/distance)
-	print(rad_to_deg(lightning_rotation))
 	lightning.global_rotation.x=lightning_rotation
-	print(lightning.global_rotation.x)
 
 
 func shoot_lightning()->void:
