@@ -15,12 +15,12 @@ var charging_sound:AudioStream=preload("res://audio/sfx/charge.ogg")
 var death_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_death.ogg")
 var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 ## Determines surface material transparency. Intended to be used in animations.
-@export var material_alpha:float=1.0:
+@export_range(0.0,1.0) var material_alpha:float=1.0:
 	set(value):
 		material_alpha=value
 		$eye.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
 ## Determines particle material transparency. Intended to be used in animations.
-@export var particle_alpha:float=1.0:
+@export_range(0.0,1.0) var particle_alpha:float=1.0:
 	set(value):
 		particle_alpha=value
 		$GPUParticles3D.process_material.color=Color(1,1,1,particle_alpha)

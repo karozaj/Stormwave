@@ -14,6 +14,7 @@ var mouse_sensitivity:float=1.0
 @onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioPlayer
 #ui
 @onready var hud=$CanvasLayer/Hud
+
 @export_category("Audio")
 ## Default pitch for footstep sound
 @export var footstep_default_pitch:float=1.0

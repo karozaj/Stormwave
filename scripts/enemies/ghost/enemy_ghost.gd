@@ -11,7 +11,7 @@ var death_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_death.ogg")
 var attack_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_attack.ogg")
 var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 ## Determines surface material transparency. Intended to be used in animations.
-@export var material_alpha:float=0.7:
+@export_range(0.0,1.0) var material_alpha:float=0.7:
 	set(value):
 		material_alpha=value
 		$skull.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
