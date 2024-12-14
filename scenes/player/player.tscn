@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2ype4ks6wd5x"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_r4lc0"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_r4lc0"]
 [ext_resource type="PackedScene" uid="uid://vq2ju3qo2hr3" path="res://scenes/player/movement_manager.tscn" id="2_pu5br"]
 [ext_resource type="PackedScene" uid="uid://cb2rwntd2s065" path="res://scenes/player/weapon_manager.tscn" id="3_tefss"]
 [ext_resource type="AudioStream" uid="uid://cm5ggv3fiaybt" path="res://audio/sfx/footstep1.ogg" id="4_2h2ys"]
@@ -11,7 +11,7 @@ radius = 0.35
 height = 1.75
 
 [node name="Player" type="CharacterBody3D"]
-collision_mask = 6
+collision_mask = 2
 script = ExtResource("1_r4lc0")
 
 [node name="MovementManager" parent="." instance=ExtResource("2_pu5br")]

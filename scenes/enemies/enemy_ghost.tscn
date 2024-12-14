@@ -1,19 +1,17 @@
-[gd_scene load_steps=21 format=4 uid="uid://dwrcdhdwb121l"]
+[gd_scene load_steps=28 format=4 uid="uid://dm3r1hv0l3q6h"]
 
-[ext_resource type="Script" path="res://scripts/enemy_ghost.gd" id="1_ehkxs"]
-[ext_resource type="Texture2D" uid="uid://cihi03nocpy57" path="res://3d/ghost_enemy_ghost_enemy_texture.png" id="2_4v2gr"]
-[ext_resource type="AudioStream" uid="uid://bj8rxdhil5kqy" path="res://audio/sfx/enemy_ghost.ogg" id="3_7w7n6"]
-[ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="3_ob36k"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
+[ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
+[ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="3_lmk5i"]
+[ext_resource type="AudioStream" uid="uid://bj8rxdhil5kqy" path="res://audio/sfx/enemy_ghost.ogg" id="4_0ifen"]
+[ext_resource type="Material" uid="uid://jgkbd46cfaao" path="res://resources/materials/enemies/ghost.tres" id="4_5y0kq"]
+[ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_ya6yt"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/chase.gd" id="6_akg5s"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/attack.gd" id="7_rd25v"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/die.gd" id="8_mvxav"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/pain.gd" id="9_pcets"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_671pn"]
-resource_name = "Material.001"
-transparency = 1
-shading_mode = 0
-albedo_color = Color(1, 1, 1, 0.705882)
-albedo_texture = ExtResource("2_4v2gr")
-texture_filter = 2
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_bb5lc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_buvxq"]
 _surfaces = [{
 "aabb": AABB(-0.178714, -0.213895, -0.292018, 0.357428, 0.4478, 0.509778),
 "format": 34896613377,
@@ -27,7 +25,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1v4kr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xlhb0"]
 resource_name = "ghost_enemy_Cube_004"
 _surfaces = [{
 "aabb": AABB(-0.178714, -0.213895, -0.292018, 0.357428, 0.4478, 0.509778),
@@ -35,7 +33,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 192,
 "index_data": PackedByteArray("IgAKABEAIgAWAAoADgAVACEADgAIABUACQAlABcACQA6ACUAGAAcAAwAGAAoABwANAAGADIANAAfAAYALgAgADUALgADACAAAAAqAB4AAABCACoAHQBGAAQAHQApAEYADQA5AAcADQBMADkACwBOABIACwAZAE4AMABHAD4AMAAFAEcAGgA/AE8AGgAxAD8AOwA2ACYAOwAvADYAJwAzABsAJwA3ADMAAQA8AEMAAQBKADwALQBLAAIALQA4AEsAJABcAGAAJAATAFwAEABfAFoAEAAjAF8AWwBrAHwAWwBhAGsAYgBmAG4AYgBeAGYAdgBYAGkAdgB0AFgAcABqAFUAcAB3AGoAUgAsAEQAUgBoACwAZwBIACsAZwBWAEgADwB7AE0ADwBZAHsAXQBQAGMAXQAUAFAAcgBJAFcAcgBAAEkAZABBAHMAZABRAEEAfQB4AHEAfQBsAHgAbQB1AHkAbQBlAHUAUwA9AH4AUwBFAD0AbwB/AHoAbwBUAH8A"),
-"material": SubResource("StandardMaterial3D_671pn"),
 "name": "Material.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -43,9 +40,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_bb5lc")
+shadow_mesh = SubResource("ArrayMesh_buvxq")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_2da2n"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uhmkq"]
 _surfaces = [{
 "aabb": AABB(-0.149464, -0.22522, -0.0195384, 0.298928, 0.200345, 0.230096),
 "format": 34896613377,
@@ -59,7 +56,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_vqlrk"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_67xic"]
 resource_name = "ghost_enemy_Cube_005"
 _surfaces = [{
 "aabb": AABB(-0.149464, -0.22522, -0.0195384, 0.298928, 0.200345, 0.230096),
@@ -67,7 +64,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("AQAFAAkAAQADAAUACgACAAAACgAGAAIACAANAAwACAAEAA0ADwATABEADwAVABMACwAQAAcACwAOABAAFAAXABIAFAAWABcA"),
-"material": SubResource("StandardMaterial3D_671pn"),
 "name": "Material.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -75,13 +71,13 @@ _surfaces = [{
 "vertex_data": PackedByteArray("BtlRO92225UG2VE73bb/vwbZoJ3CrRqWBtmgncKtAsAH2Y+anWJduQfZj5qdYgHA/3+2hprvcpb/f7aGmu/4BgXZBWa/JYS5BdkFZr8lCMD/fwAA//82lv9/AAD//zUG9//v7AAAvbn/////dEudufgmUTvdttoE+CZRO922LgD4JqCdwq3RBfgmoJ3CrQYB9yaPmp1ibAf3Jo+anWLcAPkmBWa/JTUI+SYFZr8lwQEHAO/sAABACQAA//90S64IHKSsDjJ/ZgBCpjMNMoJlBJVlhSdGfNwBraiLC4n8LBrRZponpXisAxenoQxK/BMacGi2J45npyfb++gZy/8YwCr8BxqQQCCBmk3zcAv/ecAyTYZxE/71wKdMTHLzTOBx")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_2da2n")
+shadow_mesh = SubResource("ArrayMesh_uhmkq")
 
 [sub_resource type="Curve" id="Curve_ari81"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.731884, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_sjjkb"]
+[sub_resource type="CurveTexture" id="CurveTexture_fhws7"]
 curve = SubResource("Curve_ari81")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alck1"]
@@ -96,20 +92,20 @@ initial_velocity_max = -0.1
 gravity = Vector3(0, 0, 0.25)
 scale_min = 0.75
 scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_sjjkb")
+alpha_curve = SubResource("CurveTexture_fhws7")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ierxa"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng63p"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 1, 1, 0.501961)
-albedo_texture = ExtResource("3_ob36k")
+albedo_texture = ExtResource("3_lmk5i")
 texture_filter = 0
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_57ta5"]
-material = SubResource("StandardMaterial3D_ierxa")
+material = SubResource("StandardMaterial3D_ng63p")
 size = Vector2(0.75, 1.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5uuuw"]
@@ -119,19 +115,142 @@ height = 0.9
 [sub_resource type="SphereShape3D" id="SphereShape3D_fmqw2"]
 radius = 0.4
 
+[sub_resource type="Animation" id="Animation_g2g1w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skull:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.124965, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skull:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skull/jaw:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.108287, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skull/jaw:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skull:instance_shader_parameters/alpha")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skull/jaw:instance_shader_parameters/alpha")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GPUParticles3D:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:material_alpha")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("skull:instance_shader_parameters/color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("skull/jaw:instance_shader_parameters/color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_3k7f3"]
 resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("skull/jaw:rotation")
+tracks/0/path = NodePath("skull:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.00833333, 0.266667),
+"times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
+"values": [Vector3(0, -3.14159, 0), Vector3(-0.349066, -3.14159, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -148,65 +267,125 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("skull:rotation")
+tracks/2/path = NodePath("skull/jaw:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.266667),
+"times": PackedFloat32Array(-0.00833333, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, -3.14159, 0), Vector3(-0.349066, -3.14159, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_g2g1w"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("skull/jaw:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("skull/jaw:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.108287, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("skull:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("skull:position")
+tracks/3/path = NodePath("skull:instance_shader_parameters/alpha")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.8, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.25, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skull:instance_shader_parameters/color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0.124965, 0)]
+"values": [Vector3(1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skull/jaw:instance_shader_parameters/alpha")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.8, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.25, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("skull/jaw:instance_shader_parameters/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bil2g"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skull:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(-0.785398, -3.49066, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skull:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.124965, 0), Vector3(0, 0.125, 0.25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skull/jaw:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.785398, -0.523599, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material_alpha")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles3D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ya2i5"]
@@ -216,14 +395,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("skull:position")
+tracks/0/path = NodePath("skull/jaw:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.0333333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(-0.0333333, 0.333333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.124965, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -240,45 +419,143 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("skull/jaw:rotation")
+tracks/2/path = NodePath("skull:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(-0.0333333, 0.333333, 0.7),
+"times": PackedFloat32Array(-0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.124965, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yg4e3"]
+resource_name = "pain"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skull:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skull/jaw:instance_shader_parameters/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skull:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.174533, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -3.14159, 0), Vector3(-0.785398, -3.49066, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skull:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.124965, 0), Vector3(0, 0.125, 0.25), Vector3(0, 0.124965, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skull/jaw:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.785398, -0.523599, 0), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skull:instance_shader_parameters/color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("skull/jaw:instance_shader_parameters/color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_goypl"]
 _data = {
 "RESET": SubResource("Animation_g2g1w"),
 "attack": SubResource("Animation_3k7f3"),
-"idle": SubResource("Animation_ya2i5")
+"die": SubResource("Animation_bil2g"),
+"idle": SubResource("Animation_ya2i5"),
+"pain": SubResource("Animation_yg4e3")
 }
 
 [node name="EnemyGhost" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 14
 motion_mode = 1
-script = ExtResource("1_ehkxs")
-health = 15
-base_damage = 10
+script = ExtResource("1_0m7cj")
+health = 30
 move_speed = 8.0
-attack_range = 7.5
-attack_cooldown = 3.0
+attack_range = 8.0
+attack_cooldown = 1.0
+knockback_modifier = 25.0
 
 [node name="skull" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.25, 0, -1.88745e-07, 0, 1.25, 0, 1.88745e-07, 0, -1.25, 0, 0.124965, 0)
+transform = Transform3D(-1.25, 0, -3.16898e-06, 0, 1.25, 0, 3.16898e-06, 0, -1.25, 0, 0.124965, 0)
+material_overlay = ExtResource("2_ob1le")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_1v4kr")
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/color = Vector3(2, 0, 0)
+mesh = SubResource("ArrayMesh_xlhb0")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_5y0kq")
 
 [node name="jaw" type="MeshInstance3D" parent="skull"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.108287, 0)
+material_overlay = ExtResource("2_ob1le")
 cast_shadow = 0
-mesh = SubResource("ArrayMesh_vqlrk")
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/color = Vector3(2, 0, 0)
+mesh = SubResource("ArrayMesh_67xic")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_5y0kq")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0417011, 0.0549905)
@@ -300,19 +577,18 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 shape = SubResource("SphereShape3D_fmqw2")
 
-[node name="Timer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 bus = &"SFX"
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_7w7n6")
-volume_db = -30.0
+stream = ExtResource("4_0ifen")
+volume_db = -25.0
 pitch_scale = 0.3
 autoplay = true
 bus = &"SFX"
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -320,5 +596,19 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ya6yt")]
+initial_state = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("6_akg5s")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("7_rd25v")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("8_mvxav")
+
+[node name="Pain" type="Node" parent="StateMachine"]
+script = ExtResource("9_pcets")
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ncln3pm11vom"]
+
+[ext_resource type="Texture2D" uid="uid://5n3s7nl13o4n" path="res://3d/cloud_enemy_eye_eye.png" id="1_7kc52"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Material.002"
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_7kc52")
+texture_filter = 0

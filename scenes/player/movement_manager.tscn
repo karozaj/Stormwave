@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vq2ju3qo2hr3"]
 
-[ext_resource type="Script" path="res://scripts/movement_manager.gd" id="1_657pr"]
+[ext_resource type="Script" path="res://scripts/player/movement_manager.gd" id="1_657pr"]
 
 [node name="MovementManager" type="Node3D"]
 script = ExtResource("1_657pr")

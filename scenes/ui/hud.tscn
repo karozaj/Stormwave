@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3us3eqr73duv"]
+[gd_scene load_steps=6 format=3 uid="uid://c3us3eqr73duv"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_c2c8c"]
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_c2c8c"]
 [ext_resource type="Texture2D" uid="uid://bmftd6cw0u2a8" path="res://img/reticle.png" id="1_yx5u3"]
 [ext_resource type="Texture2D" uid="uid://bcjijtp2s8xcp" path="res://img/health_symbol.png" id="2_vofai"]
 [ext_resource type="Texture2D" uid="uid://cjnakwfpa2ary" path="res://img/bullet_symbol.png" id="3_q63sq"]
+[ext_resource type="Texture2D" uid="uid://ltm0di3sa8ci" path="res://img/pain_overlay.png" id="3_vtokc"]
 
 [node name="Hud" type="Control"]
 process_mode = 3
@@ -16,7 +17,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_c2c8c")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Reticle" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,7 +30,19 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_yx5u3")
+
+[node name="PainOverlay" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_vtokc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -38,12 +51,15 @@ offset_left = 15.0
 offset_top = 10.0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="HealthContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HealthContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_vofai")
 
 [node name="Label" type="Label" parent="VBoxContainer/HealthContainer"]
@@ -52,9 +68,11 @@ text = "0"
 
 [node name="AmmoContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/AmmoContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_q63sq")
 
 [node name="Label" type="Label" parent="VBoxContainer/AmmoContainer"]

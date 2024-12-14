@@ -1,9 +1,15 @@
-[gd_scene load_steps=14 format=4 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=24 format=4 uid="uid://ldsvjji42wx1"]
 
-[ext_resource type="Script" path="res://scripts/enemy_cloud.gd" id="1_suw4d"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_cloud.gd" id="1_suw4d"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="2_uh8ia"]
-[ext_resource type="Texture2D" uid="uid://5n3s7nl13o4n" path="res://3d/cloud_enemy_eye_eye.png" id="2_xhr3t"]
+[ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="3_uo1hx"]
+[ext_resource type="Material" uid="uid://ncln3pm11vom" path="res://resources/materials/enemies/cloud_eye.tres" id="4_tgjtr"]
+[ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_tqel5"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/chase.gd" id="7_05cja"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/attack.gd" id="8_fqofo"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/pain.gd" id="8_jd6px"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/die.gd" id="8_nmhom"]
 
 [sub_resource type="Curve" id="Curve_kwunk"]
 max_value = 0.8
@@ -15,6 +21,7 @@ width = 64
 curve = SubResource("Curve_kwunk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62pa0"]
+resource_local_to_scene = true
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(1, 0.25, 1)
 emission_shape = 1
@@ -38,12 +45,6 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_v1gjh")
 size = Vector2(3, 3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixbfe"]
-resource_name = "Material.002"
-shading_mode = 0
-albedo_texture = ExtResource("2_xhr3t")
-texture_filter = 2
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_o6xkx"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
@@ -66,7 +67,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 144,
 "index_data": PackedByteArray("LAAJABAALAAUAAkADAAVAC0ADAAGABUACAAzABcACAAbADMAFgAfAAsAFgAxAB8AMAAFAB4AMAAiAAUAGgAjADIAGgACACMAAAA1ACEAAAAkADUAIAAoAAMAIAA0ACgADQAZAAcADQA5ABkAOAABABgAOAAlAAEACgA9ABEACgAdAD0AHAApADwAHAAEACkALgBJAEwALgASAEkADgBNAEYADgAvAE0ASABfAFMASABPAF8ATgBXAF0ATgBLAFcAXABFAFoAXABWAEUAUgBbAEIAUgBeAFsAQAA3ACYAQABZADcAWAAqADYAWABDACoADwBRADsADwBHAFEAOgBBACcAOgBQAEEASgA/AFUASgATAD8AVAArAEQAVAA+ACsA"),
-"material": SubResource("StandardMaterial3D_ixbfe"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -79,15 +79,204 @@ shadow_mesh = SubResource("ArrayMesh_o6xkx")
 [sub_resource type="SphereShape3D" id="SphereShape3D_atoy3"]
 radius = 0.6
 
+[sub_resource type="Animation" id="Animation_npal8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:particle_alpha")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("eye:instance_shader_parameters/color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f880t"]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eye:instance_shader_parameters/color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ne44q"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.108333, 0.233333, 0.375, 0.533333, 0.658333, 0.8, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0.1), Vector3(0.1, -0.1, 0), Vector3(-0.1, 0, 0.1), Vector3(0, 0.1, 0.1), Vector3(0.1, -0.1, 0), Vector3(-0.1, 0, 0.1), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:particle_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("eye:instance_shader_parameters/alpha")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eejlw"]
+resource_name = "pain"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.5, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("eye:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.15), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("eye:instance_shader_parameters/color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2tf13"]
+_data = {
+"RESET": SubResource("Animation_npal8"),
+"attack": SubResource("Animation_f880t"),
+"die": SubResource("Animation_ne44q"),
+"pain": SubResource("Animation_eejlw")
+}
+
 [node name="EnemyCloud" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_suw4d")
 base_damage = 50
-move_speed = 8.0
 attack_range = 3.0
-attack_cooldown = 3.0
+attack_cooldown = 2.0
 knockback_modifier = 5.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
@@ -102,8 +291,13 @@ process_material = SubResource("ParticleProcessMaterial_62pa0")
 draw_pass_1 = SubResource("QuadMesh_y807p")
 
 [node name="eye" type="MeshInstance3D" parent="."]
+material_overlay = ExtResource("3_uo1hx")
+cast_shadow = 0
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/color = Vector3(2, 0, 0)
 mesh = SubResource("ArrayMesh_eqfvy")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_tgjtr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_atoy3")
@@ -126,6 +320,11 @@ hit_from_inside = true
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 bus = &"SFX"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2tf13")
+}
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
@@ -136,6 +335,19 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_tqel5")]
+initial_state = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("7_05cja")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("8_fqofo")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("8_nmhom")
+
+[node name="Pain" type="Node" parent="StateMachine"]
+script = ExtResource("8_jd6px")
+
 [connection signal="timeout" from="LightningTimer" to="." method="_on_lightning_timer_timeout"]
