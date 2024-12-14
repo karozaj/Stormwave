@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl52iowf1281t"]
+
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_h_slider.gd" id="1_doq3d"]
+
+[node name="SoundHSlider" type="HSlider"]
+script = ExtResource("1_doq3d")

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq0c66dgqf0fw"]
+[gd_scene load_steps=5 format=3 uid="uid://dq0c66dgqf0fw"]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_skbq4"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="2_0bkky"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_h_slider.gd" id="2_ja7lg"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="2_oqkqx"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -30,11 +33,13 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "TOGGLE FULLSCREEN"
+script = ExtResource("2_oqkqx")
 
 [node name="HeadbobButton" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Headbob enabled"
+script = ExtResource("2_oqkqx")
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -53,6 +58,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 max_value = 1.0
 step = 0.01
+script = ExtResource("2_ja7lg")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -66,6 +72,7 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 max_value = 1.0
 step = 0.01
+script = ExtResource("2_ja7lg")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -81,6 +88,7 @@ min_value = 45.0
 max_value = 140.0
 step = 5.0
 value = 45.0
+script = ExtResource("2_ja7lg")
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -96,14 +104,17 @@ min_value = 0.01
 max_value = 3.0
 step = 0.01
 value = 1.0
+script = ExtResource("2_ja7lg")
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "RESUME"
+script = ExtResource("2_0bkky")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "QUIT"
+script = ExtResource("2_0bkky")
 
 [connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="toggled" from="VBoxContainer/HeadbobButton" to="." method="_on_headbob_button_toggled"]

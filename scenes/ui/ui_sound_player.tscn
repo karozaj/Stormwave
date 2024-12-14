@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h0va6uo4jbhi"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_sound_player.gd" id="1_oiatx"]
+
+[node name="UISoundPlayer" type="AudioStreamPlayer"]
+script = ExtResource("1_oiatx")

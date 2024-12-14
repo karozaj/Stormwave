@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duvqf1wijvn8h"]
+
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="1_vctud"]
+
+[node name="SoundCheckButton" type="CheckButton"]
+script = ExtResource("1_vctud")

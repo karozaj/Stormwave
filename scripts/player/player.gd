@@ -14,6 +14,7 @@ var mouse_sensitivity:float=1.0
 @onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioPlayer
 #ui
 @onready var hud=$CanvasLayer/Hud
+@onready var canvas_layer=$CanvasLayer
 
 @export_category("Audio")
 ## Default pitch for footstep sound
@@ -201,13 +202,15 @@ func damage(damage_points:int, origin:Vector3)->void:
 			var invincibility_timer=get_tree().create_timer(invincibility_time)
 			invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
 			hud.show_pain_overlay(damage_points)
-			#if health<=0:
-				#die()
+			if health<=0:
+				die()
 
 func _on_invincibility_timer_timeout():
 	is_invincible=false
 
 func die()->void:
+	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
+	canvas_layer.add_child(death_menu)
 	if is_dead==false:
 		is_dead=true
 

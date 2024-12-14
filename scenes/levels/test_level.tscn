@@ -188,7 +188,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -5.03047)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -9.03047)
 
 [node name="projectile_enemy" parent="." instance=ExtResource("7_x8ox5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65083, -0.02506, 3.05295)
+transform = Transform3D(0.350828, 0, 0.93644, 0, 1, 0, -0.93644, 0, 0.350828, -8.968, -0.02506, 2.10917)
 
 [node name="Skeleton3D" parent="projectile_enemy/Armature" index="0"]
 bones/2/rotation = Quaternion(0.534859, 2.0145e-07, 1.2752e-07, 0.844942)
@@ -203,7 +203,7 @@ bones/7/rotation = Quaternion(0.325022, 0.0748658, 0.0285772, 0.942305)
 bones/8/rotation = Quaternion(0.0526914, -0.166661, 0.0442052, 0.983613)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/rotation = Quaternion(0.735468, -0.088847, -0.649779, 0.170234)
-bones/10/rotation = Quaternion(7.3154e-09, -5.73893e-08, -0.532396, 0.846495)
+bones/10/rotation = Quaternion(7.31541e-09, -5.73893e-08, -0.532396, 0.846495)
 bones/11/rotation = Quaternion(-1.97638e-08, 1.06263e-07, 0.395376, 0.918519)
 bones/12/rotation = Quaternion(-0.0826162, -0.170049, 0.666891, 0.720773)
 bones/13/rotation = Quaternion(0.72072, 0.0328673, 0.688821, 0.0707678)
@@ -228,7 +228,7 @@ draw_pass_1 = SubResource("QuadMesh_j0i6n")
 autoplay = "idle"
 
 [node name="laser_enemy" parent="." instance=ExtResource("8_y6t3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95918, -0.0250595, 2.77042)
+transform = Transform3D(-0.669286, 0, -0.743005, 0, 1, 0, 0.743005, 0, -0.669286, -5.39386, -0.0250595, 2.22211)
 
 [node name="Skeleton3D" parent="laser_enemy/Armature" index="0"]
 bones/0/position = Vector3(0, -0.0675477, -0.128849)

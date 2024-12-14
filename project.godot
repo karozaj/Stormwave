@@ -23,6 +23,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 Global="*res://scripts/globals/global.gd"
 MusicPlayer="*res://scenes/ui/music_player.tscn"
+UISoundPlayer="*res://scenes/ui/ui_sound_player.tscn"
 
 [editor]
 
