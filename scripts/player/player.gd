@@ -70,27 +70,29 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
-		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
-		$CanvasLayer.add_child(pause_menu)
-	
-	#weapon selection
-	if Input.is_action_just_pressed("next_weapon"):
-		var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
-		weapon_manager.select_weapon(next_weapon_index)
-	elif Input.is_action_just_pressed("previous_weapon"):
-		var next_weapon_index:int=(weapon_manager.current_weapon_index-1)%weapon_manager.weapons.size()
-		weapon_manager.select_weapon(next_weapon_index)
-	elif Input.is_action_just_pressed("select_weapon_1"):
-		weapon_manager.select_weapon(0)
-	elif Input.is_action_just_pressed("select_weapon_2"):
-		weapon_manager.select_weapon(1)
-	elif Input.is_action_just_pressed("select_weapon_3"):
-		weapon_manager.select_weapon(2)
-	elif Input.is_action_just_pressed("select_weapon_4"):
-		weapon_manager.select_weapon(3)
-	elif Input.is_action_just_pressed("select_weapon_5"):
-		weapon_manager.select_weapon(4)
+	if is_dead==false:
+		#PROCESS INPUTS
+		if Input.is_action_just_pressed("pause"):
+			var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
+			$CanvasLayer.add_child(pause_menu)
+		
+		#weapon selection
+		if Input.is_action_just_pressed("next_weapon"):
+			var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
+			weapon_manager.select_weapon(next_weapon_index)
+		elif Input.is_action_just_pressed("previous_weapon"):
+			var next_weapon_index:int=(weapon_manager.current_weapon_index-1)%weapon_manager.weapons.size()
+			weapon_manager.select_weapon(next_weapon_index)
+		elif Input.is_action_just_pressed("select_weapon_1"):
+			weapon_manager.select_weapon(0)
+		elif Input.is_action_just_pressed("select_weapon_2"):
+			weapon_manager.select_weapon(1)
+		elif Input.is_action_just_pressed("select_weapon_3"):
+			weapon_manager.select_weapon(2)
+		elif Input.is_action_just_pressed("select_weapon_4"):
+			weapon_manager.select_weapon(3)
+		elif Input.is_action_just_pressed("select_weapon_5"):
+			weapon_manager.select_weapon(4)
 
 
 
@@ -112,21 +114,29 @@ func _physics_process(delta: float) -> void:
 		if movement_manager.jump_buffer:
 			jump()
 
-	if Input.is_action_just_pressed("jump"):
-		if movement_manager.jump_available:
-			jump()
+	var direction=Vector3.ZERO
+	##PHYSPROCESS INPUTS 
+	if is_dead==false:
+		if Input.is_action_just_pressed("jump"):
+			if movement_manager.jump_available:
+				jump()
+			else:
+				movement_manager.jump_buffer=true
+				movement_manager.jump_buffer_timer.start()
+			
+		if Input.is_action_pressed("sprint"):
+			movement_manager.set_sprint_speed(delta)
 		else:
-			movement_manager.jump_buffer=true
-			movement_manager.jump_buffer_timer.start()
+			movement_manager.set_walk_speed(delta)
 		
-	if Input.is_action_pressed("sprint"):
-		movement_manager.set_sprint_speed(delta)
-	else:
-		movement_manager.set_walk_speed(delta)
-	
-	var input_dir := Input.get_vector("left", "right", "forward", "back")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var input_dir := Input.get_vector("left", "right", "forward", "back")
+		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		
+		if Input.is_action_pressed("shoot"):
+			weapon_manager.shoot()
+		
 	var lerp_val:float=movement_manager.movement_lerp_val
+	
 	if is_on_floor()==false:
 		lerp_val=lerp_val*2
 	if direction:
@@ -144,8 +154,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-	if Input.is_action_pressed("shoot"):
-		weapon_manager.shoot()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	#mouselook

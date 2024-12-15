@@ -8,13 +8,13 @@ var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
 var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var cooldown_timer:Timer=$CooldownTimer
 
-@onready var axe=$RightPosition/Axe
-@onready var pistol=$RightPosition/pistol
-@onready var shotgun=$RightPosition/shotgun
-@onready var chaingun=$CenterPosition/Chaingun
-@onready var rocket_launcher=$CenterPosition/RocketLauncher
+@onready var axe:WeaponBaseClass=$RightPosition/Axe
+@onready var pistol:WeaponBaseClass=$RightPosition/pistol
+@onready var shotgun:WeaponBaseClass=$RightPosition/shotgun
+@onready var chaingun:WeaponBaseClass=$CenterPosition/Chaingun
+@onready var rocket_launcher:WeaponBaseClass=$CenterPosition/RocketLauncher
 var weapons:Array
-var current_weapon
+var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
 var ammo:Array=["∞",int(5),int(5),int(50),int(5)]
 var can_shoot:bool=true
@@ -25,6 +25,7 @@ func _ready() -> void:
 		if weapon.has_method("set_ray_position"):
 			weapon.set_ray_position(global_position)
 	current_weapon=pistol
+	current_weapon.is_being_pulled_out=true
 	current_weapon_index=1
 	current_weapon.animation_player.play("pullout")
 
