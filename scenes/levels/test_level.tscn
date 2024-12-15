@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=29 format=3 uid="uid://crywrnny46cu8"]
 
 [ext_resource type="Script" path="res://scripts/levels/test_level.gd" id="1_vkin7"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_m6vns"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="7_6mx82"]
 [ext_resource type="PackedScene" uid="uid://bdlydv033d0t" path="res://3d/projectile_enemy.glb" id="7_x8ox5"]
 [ext_resource type="PackedScene" uid="uid://dhy3sbqn7kl5m" path="res://3d/laser_enemy.glb" id="8_y6t3a"]
+[ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="9_hmr7q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5o5rn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -265,6 +266,11 @@ draw_pass_1 = SubResource("QuadMesh_j0i6n")
 
 [node name="AnimationPlayer" parent="laser_enemy" index="1"]
 autoplay = "idle"
+
+[node name="BlockGridmap" parent="." instance=ExtResource("9_hmr7q")]
+data = {
+"cells": PackedInt32Array(65522, 10, 0, 65521, 9, 0, 65521, 8, 0, 65521, 7, 0, 65520, 7, 0, 65520, 8, 0, 65520, 9, 0, 65521, 10, 0, 65523, 10, 0, 65523, 9, 0, 65523, 8, 0, 65523, 7, 0, 65523, 6, 0, 65522, 6, 0, 65521, 6, 0, 65522, 7, 0, 65522, 8, 0, 65520, 6, 0, 65520, 5, 0, 65520, 4, 0, 65521, 4, 0, 65522, 5, 0, 65523, 5, 0, 65522, 4, 0, 65522, 3, 0, 65521, 3, 0, 65520, 2, 0, 65520, 3, 0, 65519, 3, 0, 65519, 4, 0, 65518, 4, 0, 65518, 5, 0, 65518, 6, 0, 65519, 6, 0, 65519, 7, 0)
+}
 
 [editable path="projectile_enemy"]
 [editable path="laser_enemy"]

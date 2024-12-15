@@ -13,10 +13,10 @@ script = ExtResource("1_1tytp")
 [node name="RightPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.2)
 
-[node name="pistol" parent="RightPosition" instance=ExtResource("1_qsn5i")]
+[node name="Pistol" parent="RightPosition" instance=ExtResource("1_qsn5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488067, -0.00371122, 0.000459611)
 
-[node name="shotgun" parent="RightPosition" instance=ExtResource("2_frp63")]
+[node name="Shotgun" parent="RightPosition" instance=ExtResource("2_frp63")]
 
 [node name="Axe" parent="RightPosition" instance=ExtResource("4_wc26d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.1, -0.1)

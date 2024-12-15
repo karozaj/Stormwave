@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnfrpmn2krhog"]
+[gd_scene load_steps=4 format=3 uid="uid://bnfrpmn2krhog"]
 
 [ext_resource type="FontFile" uid="uid://i75lucfthmx2" path="res://resources/fonts/Cyberphont 2.0.ttf" id="1_bk4ha"]
 [ext_resource type="Script" path="res://scripts/ui/death_menu.gd" id="1_phx3f"]
-[ext_resource type="Texture2D" uid="uid://ltm0di3sa8ci" path="res://img/pain_overlay.png" id="2_5bcll"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="4_3ik0x"]
 
 [node name="DeathMenu" type="Control"]
@@ -24,16 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_5bcll")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

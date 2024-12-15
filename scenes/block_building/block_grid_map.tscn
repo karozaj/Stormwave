@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://clhqasfv2p8op"]
+
+[ext_resource type="MeshLibrary" uid="uid://cc82rjnrhpgyt" path="res://resources/mesh_libraries/blocks.tres" id="1_7v1q0"]
+[ext_resource type="Script" path="res://scripts/block_building/block_grid_map.gd" id="2_pqmmt"]
+
+[node name="BlockGridMap" type="GridMap"]
+mesh_library = ExtResource("1_7v1q0")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("2_pqmmt")

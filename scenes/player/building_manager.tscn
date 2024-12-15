@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuh2x6gk3mlgn"]
+
+[ext_resource type="PackedScene" uid="uid://bgv3d4g0hcddm" path="res://scenes/block_building/placers/block_placer.tscn" id="1_f3c5y"]
+[ext_resource type="Script" path="res://scripts/player/building_manager.gd" id="1_gdwe6"]
+
+[node name="BuildingManager" type="Node3D"]
+script = ExtResource("1_gdwe6")
+
+[node name="RightPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.2)
+
+[node name="BlockPlacer" parent="RightPosition" instance=ExtResource("1_f3c5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="CooldownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

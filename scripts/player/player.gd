@@ -6,6 +6,8 @@ var mouse_sensitivity:float=1.0
 
 @onready var movement_manager:MovementManager=$MovementManager
 @onready var weapon_manager:WeaponManager=$Pivot/WeaponCamera/WeaponManager
+@onready var building_manager:BuildingManager=$Pivot/WeaponCamera/BuildingManager
+@onready var state_machine:StateMachine=$StateMachine
 #camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
@@ -69,30 +71,21 @@ func _ready() -> void:
 	weapon_manager.ammo_count_changed.connect(update_hud_ammo)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	#for testing
+	if Input.is_action_just_pressed("TEST_BUTTON"):
+		if state_machine.current_state.name=="Combat":
+			state_machine.transition_to_next_state(state_machine.current_state,"Build")
+		elif state_machine.current_state.name=="Build":
+			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+		
 	if is_dead==false:
 		#PROCESS INPUTS
 		if Input.is_action_just_pressed("pause"):
 			var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
 			$CanvasLayer.add_child(pause_menu)
-		
-		#weapon selection
-		if Input.is_action_just_pressed("next_weapon"):
-			var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
-			weapon_manager.select_weapon(next_weapon_index)
-		elif Input.is_action_just_pressed("previous_weapon"):
-			var next_weapon_index:int=(weapon_manager.current_weapon_index-1)%weapon_manager.weapons.size()
-			weapon_manager.select_weapon(next_weapon_index)
-		elif Input.is_action_just_pressed("select_weapon_1"):
-			weapon_manager.select_weapon(0)
-		elif Input.is_action_just_pressed("select_weapon_2"):
-			weapon_manager.select_weapon(1)
-		elif Input.is_action_just_pressed("select_weapon_3"):
-			weapon_manager.select_weapon(2)
-		elif Input.is_action_just_pressed("select_weapon_4"):
-			weapon_manager.select_weapon(3)
-		elif Input.is_action_just_pressed("select_weapon_5"):
-			weapon_manager.select_weapon(4)
+			
+	state_machine.current_state.update(delta)
 
 
 
@@ -131,10 +124,7 @@ func _physics_process(delta: float) -> void:
 		
 		var input_dir := Input.get_vector("left", "right", "forward", "back")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		
-		if Input.is_action_pressed("shoot"):
-			weapon_manager.shoot()
-		
+
 	var lerp_val:float=movement_manager.movement_lerp_val
 	
 	if is_on_floor()==false:
@@ -151,6 +141,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and was_on_floor==false:
 		play_footstep_sound()
 	was_on_floor=is_on_floor()
+	
+	state_machine.current_state.physics_update(delta)
 	
 	move_and_slide()
 

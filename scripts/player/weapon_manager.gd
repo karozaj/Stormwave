@@ -9,11 +9,11 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var cooldown_timer:Timer=$CooldownTimer
 
 @onready var axe:WeaponBaseClass=$RightPosition/Axe
-@onready var pistol:WeaponBaseClass=$RightPosition/pistol
-@onready var shotgun:WeaponBaseClass=$RightPosition/shotgun
+@onready var pistol:WeaponBaseClass=$RightPosition/Pistol
+@onready var shotgun:WeaponBaseClass=$RightPosition/Shotgun
 @onready var chaingun:WeaponBaseClass=$CenterPosition/Chaingun
 @onready var rocket_launcher:WeaponBaseClass=$CenterPosition/RocketLauncher
-var weapons:Array
+var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
 var ammo:Array=["∞",int(5),int(5),int(50),int(5)]
@@ -25,9 +25,9 @@ func _ready() -> void:
 		if weapon.has_method("set_ray_position"):
 			weapon.set_ray_position(global_position)
 	current_weapon=pistol
-	current_weapon.is_being_pulled_out=true
 	current_weapon_index=1
-	current_weapon.animation_player.play("pullout")
+	#current_weapon.is_being_pulled_out=true
+	#current_weapon.animation_player.play("pullout")
 
 ## shoot current weapon if possible, play no ammo sound if no ammo
 func shoot()->void:
@@ -52,10 +52,11 @@ func _on_cooldown_timer_timeout() -> void:
 
 func select_weapon(index:int)->void:
 	if can_shoot and current_weapon.is_being_pulled_out==false:
-		audio_player.stream=sound_weapon_select
-		audio_player.play()
 		current_weapon.visible=false
 		current_weapon_index=index
 		current_weapon=weapons[current_weapon_index]
+		current_weapon.is_being_pulled_out=true
 		current_weapon.animation_player.play("pullout")
 		ammo_count_changed.emit()
+		audio_player.stream=sound_weapon_select
+		audio_player.play()
