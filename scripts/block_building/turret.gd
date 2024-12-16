@@ -39,8 +39,9 @@ func shoot()->void:
 func remove_target(trg:EnemyBaseClass):
 	if trg in targets:
 		targets.erase(trg)
+		trg.died.disconnect(remove_target)
 
-func damage(damage_points:int, origin:Vector3)->void:
+func damage(damage_points:int, _origin:Vector3)->void:
 	health-=damage_points
 	if health<=0:
 		die()

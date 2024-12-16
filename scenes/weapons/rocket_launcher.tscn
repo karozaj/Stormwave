@@ -146,7 +146,6 @@ _data = {
 [node name="RocketLauncher" instance=ExtResource("1_h0ptx")]
 visible = false
 script = ExtResource("2_osnhl")
-is_being_pulled_out = false
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)

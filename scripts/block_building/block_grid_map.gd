@@ -3,6 +3,7 @@ class_name BlockGridMap
 
 var highlighted_block_coordinate:Vector3i
 
+
 func destroy_block(world_coordinate)->bool:
 	var map_coordinate=local_to_map(world_coordinate)
 	if get_cell_item(map_coordinate)==2 or get_cell_item(map_coordinate)==3:
