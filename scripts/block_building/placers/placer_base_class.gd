@@ -20,6 +20,9 @@ class_name PlacerBaseClass
 ## Cooldown between placing blocks
 @export var cooldown:float=0.8
 
+#used to check if block can be placed
+var player_height:float=1.75
+var player_radius:float=0.35
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -44,3 +47,6 @@ func play_destroy_sound():
 		audio_player.stream=destroy_sound
 		audio_player.pitch_scale=default_pitch+rng.randf_range(-pitch_variance,pitch_variance)
 		audio_player.play()
+
+func can_block_be_placed(_target:Vector3)->bool:
+	return false

@@ -14,13 +14,15 @@ var current_placer_index:int
 var block_count:Array[int]=[10]
 var can_use:bool=true
 var no_blocks_sound:AudioStream
-
+var player_height:float=1.75
+var player_radius:float=0.35
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	placers=[block_placer]
 	for placer in placers:
 		if placer.has_method("set_ray_position"):
 			placer.set_ray_position(global_position)
+		placer.player_height=player_height
 	current_placer=block_placer
 	current_placer_index=0
 	#current_placer.animation_player.play("pullout")

@@ -70,6 +70,8 @@ func _ready() -> void:
 	#hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
 	weapon_manager.ammo_count_changed.connect(hud.update_ammo)
 	building_manager.block_count_changed.connect(hud.update_ammo)
+	building_manager.player_height=$CollisionShape3D.shape.height
+	building_manager.player_radius=$CollisionShape3D.shape.radius
 
 
 func _process(delta: float) -> void:
