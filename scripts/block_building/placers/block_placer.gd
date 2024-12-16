@@ -6,14 +6,6 @@ extends PlacerBaseClass
 func set_ray_position(pos:Vector3)->void:
 	ray.global_position=pos
 
-#func _process(_delta: float) -> void:
-	#highlight()
-	#if Input.is_action_just_pressed("shoot"):
-		#destroy()
-		#animation_player.play("use")
-	#if Input.is_action_just_pressed("place_block"):
-		#place()
-		#animation_player.play("use")
 
 
 func destroy()->bool:
@@ -23,7 +15,6 @@ func destroy()->bool:
 				#audio_player.stream=destroy_block_sound
 				audio_player.play()
 				animation_player.play("use")
-				#animation_player.play("use")
 				return true
 	return false
 

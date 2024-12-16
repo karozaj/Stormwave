@@ -67,8 +67,9 @@ func _ready() -> void:
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	health=starting_health
 	rng.randomize()
-	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
-	weapon_manager.ammo_count_changed.connect(update_hud_ammo)
+	#hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
+	weapon_manager.ammo_count_changed.connect(hud.update_ammo)
+	building_manager.block_count_changed.connect(hud.update_ammo)
 
 
 func _process(delta: float) -> void:
@@ -216,5 +217,5 @@ func die()->void:
 		is_dead=true
 
 
-func update_hud_ammo()->void:
-	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
+#func update_hud_ammo(count:int)->void:
+	#hud.update_ammo(count)

@@ -66,7 +66,7 @@ bus = &"SFX"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_qphh4")
-initial_state = NodePath("Build")
+initial_state = NodePath("Combat")
 
 [node name="Combat" type="Node" parent="StateMachine"]
 script = ExtResource("7_3f0ng")

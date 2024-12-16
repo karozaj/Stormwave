@@ -1,7 +1,7 @@
 extends Node3D
 class_name WeaponManager
 
-signal ammo_count_changed #signal used to notify hud about ammo change
+signal ammo_count_changed(count:int) #signal used to notify hud about ammo change
 
 @onready var audio_player=$AudioStreamPlayer3D
 var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
@@ -26,8 +26,6 @@ func _ready() -> void:
 			weapon.set_ray_position(global_position)
 	current_weapon=pistol
 	current_weapon_index=1
-	#current_weapon.is_being_pulled_out=true
-	#current_weapon.animation_player.play("pullout")
 
 ## shoot current weapon if possible, play no ammo sound if no ammo
 func shoot()->void:
@@ -40,7 +38,7 @@ func shoot()->void:
 				current_weapon.shoot()
 				if ammo[current_weapon_index] is not String:
 					ammo[current_weapon_index]-=1
-					ammo_count_changed.emit()
+					ammo_count_changed.emit(ammo[current_weapon_index])
 			else:
 				audio_player.stream=sound_no_ammo
 				audio_player.play()
@@ -57,6 +55,6 @@ func select_weapon(index:int)->void:
 		current_weapon=weapons[current_weapon_index]
 		current_weapon.is_being_pulled_out=true
 		current_weapon.animation_player.play("pullout")
-		ammo_count_changed.emit()
+		ammo_count_changed.emit(ammo[current_weapon_index])
 		audio_player.stream=sound_weapon_select
 		audio_player.play()

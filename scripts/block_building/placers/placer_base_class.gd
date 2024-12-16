@@ -16,7 +16,7 @@ class_name PlacerBaseClass
 
 @export_category("Building")
 ## Is the currently selected placer being pulled out, used in animations to make sure player can't place blocks while the animation is playing
-@export var is_being_pulled_out:bool=true
+@export var is_being_pulled_out:bool=false
 ## Cooldown between placing blocks
 @export var cooldown:float=0.8
 

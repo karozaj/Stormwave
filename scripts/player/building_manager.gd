@@ -1,11 +1,12 @@
 extends Node3D
 class_name BuildingManager
 
-signal block_count_changed #signal used to notify hud about block change
+signal block_count_changed(count:int) #signal used to notify hud about block change
 
 @onready var cooldown_timer=$CooldownTimer
 #placers
 @onready var block_placer:PlacerBaseClass=$RightPosition/BlockPlacer
+
 var placers:Array[PlacerBaseClass]=[]
 var current_placer:PlacerBaseClass
 var current_placer_index:int
@@ -33,7 +34,7 @@ func place()->void:
 			if block_count[current_placer_index]>0:
 				if current_placer.place():
 					block_count[current_placer_index]-=1
-					block_count_changed.emit()
+					block_count_changed.emit(block_count[current_placer_index])
 			#else:
 				#audio_player.stream=sound_no_blocks
 				#audio_player.play()
@@ -42,13 +43,13 @@ func destroy()->void:
 	current_placer.destroy()
 
 func select_placer(index:int)->void:
-	if can_use and current_placer.is_being_pulled_out==false:
+	if can_use: #and current_placer.is_being_pulled_out==false:
 		current_placer.visible=false
 		current_placer_index=index
 		current_placer=placers[current_placer_index]
 		current_placer.is_being_pulled_out=true
 		current_placer.animation_player.play("pullout")
-		block_count_changed.emit()
+		block_count_changed.emit(block_count[current_placer_index])
 		#audio_player.stream=sound_weapon_select
 		#audio_player.play()
 

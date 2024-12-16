@@ -6,8 +6,7 @@ var building_manager:BuildingManager
 func enter(_transition_data:Dictionary={})->void:
 	building_manager=state_owner.building_manager
 	building_manager.select_placer(0)
-	building_manager.current_placer.visible=true
-	building_manager.current_placer.is_being_pulled_out=false
+
 	
 func update(_delta:float)->void:
 	#placer selection
