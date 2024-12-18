@@ -41,7 +41,7 @@ wait_time = 5.0
 
 [node name="ExplosionArea" type="Area3D" parent="."]
 collision_layer = 8
-collision_mask = 5
+collision_mask = 7
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuh2x6gk3mlgn"]
 
-[ext_resource type="PackedScene" uid="uid://bgv3d4g0hcddm" path="res://scenes/block_building/placers/block_placer.tscn" id="1_f3c5y"]
 [ext_resource type="Script" path="res://scripts/player/building_manager.gd" id="1_gdwe6"]
+[ext_resource type="PackedScene" uid="uid://dbjlp23yoipod" path="res://scenes/block_building/placers/block_placer.tscn" id="2_r8cq1"]
 
 [node name="BuildingManager" type="Node3D"]
 script = ExtResource("1_gdwe6")
@@ -9,7 +9,7 @@ script = ExtResource("1_gdwe6")
 [node name="RightPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.2)
 
-[node name="BlockPlacer" parent="RightPosition" instance=ExtResource("1_f3c5y")]
+[node name="BlockPlacer" parent="RightPosition" instance=ExtResource("2_r8cq1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

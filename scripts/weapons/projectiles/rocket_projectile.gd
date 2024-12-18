@@ -39,9 +39,10 @@ func explode()->void:
 	explosion_sprite.visible=true
 	var tween=get_tree().create_tween()
 	tween.tween_property(explosion_sprite,"modulate",Color.TRANSPARENT,0.25)
+	explosion_area.set_deferred("monitoring",true)
+	explosion_area.set_deferred("monitorable",true)
 	var tween_scale=get_tree().create_tween()
 	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.5,1.5,1.5),0.25)
-	explosion_area.monitoring=true
 	var tween_explosion=get_tree().create_tween()
 	tween.connect("finished",disable_explosion_area)
 	tween_explosion.tween_property(explosion_shape,"radius",explosion_radius,0.25)
@@ -57,6 +58,7 @@ func _on_explosion_area_body_entered(body: Node3D) -> void:
 	explosion_ray.force_raycast_update()
 	if explosion_ray.is_colliding() and explosion_ray.get_collider()==body:
 		if body.has_method("damage"):
+			print(body.name)
 			explosion_ray.add_exception(body)
 			var distance:float=global_position.distance_to(explosion_ray.get_collision_point())
 			var damage_modifier:float=(explosion_radius-distance)/explosion_radius

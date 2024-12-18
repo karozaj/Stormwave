@@ -11,7 +11,7 @@ var placers:Array[PlacerBaseClass]=[]
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[10]
+var block_count:Array[int]=[100]
 var can_use:bool=true
 var no_blocks_sound:AudioStream
 var player_height:float=1.75

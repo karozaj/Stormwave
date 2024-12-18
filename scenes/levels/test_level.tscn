@@ -275,7 +275,7 @@ data = {
 }
 
 [node name="Mine" parent="." instance=ExtResource("10_msmwg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241205, 1.0604, 2.34312)
+transform = Transform3D(0.999515, 0, 0.0311491, 0, 1, 0, -0.0311491, 0, 0.999515, -12.8825, 2.32924, 5.75821)
 
 [node name="Turret" parent="." instance=ExtResource("10_w022s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.04079, 5.02188, -2.91554)

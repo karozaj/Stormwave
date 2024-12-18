@@ -18,14 +18,14 @@ func destroy()->bool:
 
 func place()->bool:
 	if ray.is_colliding():
-		if ray.get_collider().has_method("place_block"):
+		if ray.get_collider()!=null and ray.get_collider().has_method("place_block"):
 			if can_block_be_placed(ray.get_collision_point())==true:
-				ray.get_collider().place_block(ray.get_collision_point()+ray.get_collision_normal()/2)
-				#audio_player.stream=place_block_sound
-				animation_player.play("use")
-				audio_player.play()
-				#animation_player.play("use")
-				return true
+				if ray.get_collider().place_block(ray.get_collision_point()+ray.get_collision_normal()/2):
+					#audio_player.stream=place_block_sound
+					animation_player.play("use")
+					audio_player.play()
+					#animation_player.play("use")
+					return true
 	return false
 
 func can_block_be_placed(target:Vector3)->bool:
@@ -41,5 +41,5 @@ func can_block_be_placed(target:Vector3)->bool:
 
 func highlight():
 	if ray.is_colliding():
-		if ray.get_collider().has_method("highlight"):
+		if ray.get_collider()!=null and ray.get_collider().has_method("highlight"):
 			ray.get_collider().highlight(ray.get_collision_point()-ray.get_collision_normal()/2)
