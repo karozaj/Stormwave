@@ -25,7 +25,7 @@ var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 		particle_alpha=value
 		$GPUParticles3D.process_material.color=Color(1,1,1,particle_alpha)
 ## Determines how quickly the enemy can reorient itself
-@export var agility:float=2.5
+@export var agility:float=10.0
 ## How high over the target should the enemy's target position be
 @export var height_over_target:float=5.0
 ## How long the enemy needs to charge its attack before firing
@@ -38,10 +38,6 @@ func _ready() -> void:
 	target=Global.player
 	cooldown_timer.wait_time=attack_cooldown
 
-
-func _process(delta: float) -> void:
-	state_machine.current_state.update(delta)
-	
 ## calls current state 'damage' method
 func damage(damage_points:int, origin:Vector3)->void:
 	state_machine.current_state.damage(damage_points,origin)

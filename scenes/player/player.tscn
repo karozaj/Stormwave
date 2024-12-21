@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2ype4ks6wd5x"]
+[gd_scene load_steps=12 format=3 uid="uid://b2ype4ks6wd5x"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_r4lc0"]
 [ext_resource type="PackedScene" uid="uid://vq2ju3qo2hr3" path="res://scenes/player/movement_manager.tscn" id="2_pu5br"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="6_qphh4"]
 [ext_resource type="Script" path="res://scripts/player/states/combat.gd" id="7_3f0ng"]
 [ext_resource type="Script" path="res://scripts/player/states/build.gd" id="9_j2vn2"]
+[ext_resource type="Script" path="res://scripts/player/states/dead.gd" id="10_ubdox"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n32ka"]
 radius = 0.35
@@ -73,3 +74,6 @@ script = ExtResource("7_3f0ng")
 
 [node name="Build" type="Node" parent="StateMachine"]
 script = ExtResource("9_j2vn2")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("10_ubdox")

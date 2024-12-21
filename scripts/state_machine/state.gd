@@ -12,6 +12,9 @@ func update(_delta:float)->void:
 #executes in _physics_process function when in this state
 func physics_update(_delta:float)->void:
 	pass
+#input
+func handle_input(_event: InputEvent) -> void:
+	pass
 #executes when taking damage
 func damage(_damage_points:int, _origin:Vector3)->void:
 	pass

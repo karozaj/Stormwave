@@ -276,6 +276,7 @@ collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_suw4d")
 base_damage = 50
+move_speed = 10.0
 attack_range = 3.0
 attack_cooldown = 2.0
 knockback_modifier = 5.0

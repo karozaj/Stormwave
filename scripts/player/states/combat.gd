@@ -7,7 +7,8 @@ func enter(_transition_data:Dictionary={})->void:
 	weapon_manager=state_owner.weapon_manager
 	weapon_manager.select_weapon(1)
 	
-func update(_delta:float)->void:
+func update(delta:float)->void:
+	state_owner.process_update(delta)
 	#weapon selection
 	if Input.is_action_just_pressed("next_weapon"):
 		var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
@@ -26,10 +27,18 @@ func update(_delta:float)->void:
 	elif Input.is_action_just_pressed("select_weapon_5"):
 		weapon_manager.select_weapon(4)
 		
-func physics_update(_delta:float)->void:
+func physics_update(delta:float)->void:
+	state_owner.physics_process_update(delta)
 	if Input.is_action_pressed("shoot"):
 		weapon_manager.shoot()
+	state_owner.move_and_slide()
 	
+func handle_input(event: InputEvent) -> void:
+	state_owner.mouselook(event)
+	
+func damage(damage_points:int, origin:Vector3)->void:
+	state_owner.take_damage(damage_points,origin)
+
 #executes when leaving state
 func exit()->void:
 	weapon_manager.current_weapon.visible=false

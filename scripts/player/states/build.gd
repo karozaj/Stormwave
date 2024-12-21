@@ -8,7 +8,8 @@ func enter(_transition_data:Dictionary={})->void:
 	building_manager.select_placer(0)
 
 	
-func update(_delta:float)->void:
+func update(delta:float)->void:
+	state_owner.process_update(delta)
 	#placer selection
 	building_manager.current_placer.highlight()
 	if Input.is_action_just_pressed("next_weapon"):
@@ -28,12 +29,20 @@ func update(_delta:float)->void:
 	#elif Input.is_action_just_pressed("select_weapon_5"):
 		#building_manager.select_placer(4)
 		
-func physics_update(_delta:float)->void:
+func physics_update(delta:float)->void:
+	state_owner.physics_process_update(delta)
 	if Input.is_action_pressed("place_block"):
 		building_manager.place()
 	elif Input.is_action_just_pressed("shoot"):
 		building_manager.destroy()
-		
+	state_owner.move_and_slide()
+
+func handle_input(event: InputEvent) -> void:
+	state_owner.mouselook(event)
+
+func damage(damage_points:int, origin:Vector3)->void:
+	state_owner.take_damage(damage_points,origin)
+
 #executes when leaving state
 func exit()->void:
 	building_manager.current_placer.visible=false
