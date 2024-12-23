@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://kpmy2b10gdni"]
+
+[ext_resource type="Texture2D" uid="uid://cchmmcqr8k1pq" path="res://img/reinforced_block_texture.png" id="1_v40yt"]
+
+[resource]
+albedo_texture = ExtResource("1_v40yt")
+texture_filter = 0

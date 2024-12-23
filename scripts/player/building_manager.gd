@@ -6,19 +6,20 @@ signal block_count_changed(count:int) #signal used to notify hud about block cha
 @onready var cooldown_timer=$CooldownTimer
 #placers
 @onready var block_placer:PlacerBaseClass=$RightPosition/BlockPlacer
+@onready var reinforced_block_placer:PlacerBaseClass=$RightPosition/ReinforcedBlockPlacer
 
-var placers:Array[PlacerBaseClass]=[]
+@onready var placers:Array[PlacerBaseClass]=[block_placer,reinforced_block_placer]
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[100]
+var block_count:Array[int]=[100,50]
 var can_use:bool=true
 var no_blocks_sound:AudioStream
 var player_height:float=1.75
 var player_radius:float=0.35
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	placers=[block_placer]
+	#placers=[block_placer,reinforced_block_placer]
 	for placer in placers:
 		if placer.has_method("set_ray_position"):
 			placer.set_ray_position(global_position)
@@ -45,7 +46,7 @@ func destroy()->void:
 	current_placer.destroy()
 
 func select_placer(index:int)->void:
-	if can_use: #and current_placer.is_being_pulled_out==false:
+	if can_use and current_placer.is_being_pulled_out==false:
 		current_placer.visible=false
 		current_placer_index=index
 		current_placer=placers[current_placer_index]

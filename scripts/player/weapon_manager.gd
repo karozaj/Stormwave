@@ -16,7 +16,7 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
-var ammo:Array=["∞",int(5),int(5),int(50),int(5)]
+var ammo:Array=["∞",int(50),int(5),int(50),int(5)]
 var can_shoot:bool=true
 
 func _ready() -> void:

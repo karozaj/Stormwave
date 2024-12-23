@@ -1,15 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://dbjlp23yoipod"]
+[gd_scene load_steps=10 format=4 uid="uid://d2ajujxfkdyex"]
 
-[ext_resource type="PackedScene" uid="uid://c2gwyqvxani64" path="res://scenes/block_building/blocks/block.tscn" id="2_e68n1"]
-[ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="2_fk3k0"]
-[ext_resource type="Texture2D" uid="uid://cvhe7mekkvck2" path="res://3d/buildingblock_buildableblock.png" id="2_ga5ho"]
+[ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_wcl8y"]
+[ext_resource type="PackedScene" uid="uid://cfnul5kue1i8j" path="res://scenes/block_building/blocks/reinforced_block.tscn" id="2_foi0t"]
+[ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_tx7xy"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgttm"]
-resource_name = "Material.001"
-albedo_texture = ExtResource("2_ga5ho")
-texture_filter = 2
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_cytd4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_6loks"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 34896613377,
@@ -23,7 +18,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uopsq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ec12d"]
 resource_name = "buildingblock_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
@@ -31,7 +26,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 36,
 "index_data": PackedByteArray("CwAOAAIACwAFAA4AAwAGAAwAAwAPAAYAEQAXAAgAEQAUABcAEgAAABUAEgAJAAAABAATABAABAAKABMABwABAA0ABwAWAAEA"),
-"material": SubResource("StandardMaterial3D_dgttm"),
+"material": ExtResource("3_tx7xy"),
 "name": "Material.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -39,7 +34,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_cytd4")
+shadow_mesh = SubResource("ArrayMesh_6loks")
 
 [sub_resource type="Animation" id="Animation_3owp7"]
 length = 0.001
@@ -167,15 +162,15 @@ _data = {
 "use": SubResource("Animation_y5ki6")
 }
 
-[node name="BlockPlacer" type="Node3D"]
+[node name="ReinforcedBlockPlacer" type="Node3D"]
 visible = false
-script = ExtResource("2_fk3k0")
-block = ExtResource("2_e68n1")
+script = ExtResource("1_wcl8y")
+block = ExtResource("2_foi0t")
 
 [node name="block_editable" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 layers = 524288
-mesh = SubResource("ArrayMesh_uopsq")
+mesh = SubResource("ArrayMesh_ec12d")
 skeleton = NodePath("")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]

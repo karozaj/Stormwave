@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends BlockBaseClass
 
 #PLAN JEST TAKI:
 #W gridmap ustawiamy tylko bloki których nie da sie zniszczyc
@@ -10,26 +10,10 @@ extends StaticBody3D
 #przez bloki, które będą notyfikować gridmapę o znisczeniu, a wtedy gridmapa usunie
 #informacje o istnieniu obiektu w danej komórce
 
-var gridmap:BlockGridMap
-	
-func destroy_block(world_coordinate):
-	if gridmap.destroy_block(world_coordinate)==true:
-		call_deferred("queue_free")
-		return true
-	return false
-
+#function called when a block is damaged by an enemy or by the player's weapons
+#also sets transparency of damage overlay material to match the block's condition
 func damage(dmg:int,_pos:Vector3):
-	if dmg>20:
+	durability-=dmg
+	$block.material_overlay.albedo_color=Color(1.0,1.0,1.0,1.0-float(durability)/float(max_durability))
+	if durability<0:
 		destroy_block(global_position)
-
-
-func highlight(world_coordinate)->void:
-	gridmap.highlight(world_coordinate)
-
-	
-
-func place_block(world_coordinate)->bool:
-	if gridmap.place_block(world_coordinate):
-		return true
-	else:
-		return false
