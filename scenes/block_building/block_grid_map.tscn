@@ -6,6 +6,11 @@
 [node name="BlockGridMap" type="GridMap"]
 mesh_library = ExtResource("1_tw30a")
 cell_size = Vector3(1, 1, 1)
-collision_layer = 2
+collision_layer = 16
 collision_mask = 13
 script = ExtResource("2_pqmmt")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+exclude_parent = false
+collision_mask = 16

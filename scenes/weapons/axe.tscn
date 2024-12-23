@@ -232,7 +232,7 @@ layers = 524288
 
 [node name="Hitbox" type="Area3D" parent="." index="1"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, -0.25, 0, -0.00318643)
-collision_mask = 6
+collision_mask = 36
 monitoring = false
 monitorable = false
 

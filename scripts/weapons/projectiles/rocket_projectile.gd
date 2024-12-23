@@ -58,7 +58,6 @@ func _on_explosion_area_body_entered(body: Node3D) -> void:
 	explosion_ray.force_raycast_update()
 	if explosion_ray.is_colliding() and explosion_ray.get_collider()==body:
 		if body.has_method("damage"):
-			print(body.name)
 			explosion_ray.add_exception(body)
 			var distance:float=global_position.distance_to(explosion_ray.get_collision_point())
 			var damage_modifier:float=(explosion_radius-distance)/explosion_radius

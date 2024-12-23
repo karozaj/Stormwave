@@ -85,7 +85,7 @@ script = ExtResource("1_o7yap")
 [node name="RayCast3D" type="RayCast3D" parent="Node3D"]
 enabled = false
 target_position = Vector3(0, 0, -5)
-collision_mask = 7
+collision_mask = 55
 
 [node name="chaingun" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.514515)

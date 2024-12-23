@@ -187,7 +187,6 @@ _data = {
 [node name="Shotgun" instance=ExtResource("1_thjip")]
 visible = false
 script = ExtResource("2_fgjlh")
-is_being_pulled_out = false
 pitch_variance = 0.15
 cooldown = 0.75
 base_damage = 25
@@ -205,37 +204,37 @@ visible = false
 [node name="RayCast3D" type="RayCast3D" parent="Rays" index="0"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D2" type="RayCast3D" parent="Rays" index="1"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D3" type="RayCast3D" parent="Rays" index="2"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D4" type="RayCast3D" parent="Rays" index="3"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D5" type="RayCast3D" parent="Rays" index="4"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D6" type="RayCast3D" parent="Rays" index="5"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="RayCast3D7" type="RayCast3D" parent="Rays" index="6"]
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 6
+collision_mask = 54
 
 [node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_0qii5")]
 

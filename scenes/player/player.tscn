@@ -16,7 +16,7 @@ radius = 0.35
 height = 1.75
 
 [node name="Player" type="CharacterBody3D"]
-collision_mask = 2
+collision_mask = 58
 script = ExtResource("1_r4lc0")
 
 [node name="MovementManager" parent="." instance=ExtResource("2_pu5br")]

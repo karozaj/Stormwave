@@ -175,6 +175,8 @@ TEST_BUTTON={
 3d_physics/layer_2="ground"
 3d_physics/layer_3="enemies"
 3d_physics/layer_4="projectiles"
+3d_physics/layer_5="grid_map_base"
+3d_physics/layer_6="blocks"
 
 [rendering]
 
