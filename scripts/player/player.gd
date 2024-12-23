@@ -57,7 +57,6 @@ var health:int=100:
 	set(value):
 		health=value
 		hud.update_health(health)
-#var is_dead:bool=false
 var is_invincible:bool=false
 
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
@@ -211,9 +210,3 @@ func die()->void:
 	state_machine.transition_to_next_state(state_machine.current_state,"Dead")
 	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
 	canvas_layer.add_child(death_menu)
-	#if is_dead==false:
-		#is_dead=true
-
-
-#func update_hud_ammo(count:int)->void:
-	#hud.update_ammo(count)

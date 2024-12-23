@@ -55,4 +55,4 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=0.0,pitch_to:float=0.
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		target.damage(base_damage, global_position)
+		body.damage(base_damage, global_position)
