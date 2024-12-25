@@ -24,8 +24,8 @@ func update(delta:float)->void:
 		building_manager.select_placer(1)
 	elif Input.is_action_just_pressed("select_weapon_3"):
 		building_manager.select_placer(2)
-	#elif Input.is_action_just_pressed("select_weapon_4"):
-		#building_manager.select_placer(3)
+	elif Input.is_action_just_pressed("select_weapon_4"):
+		building_manager.select_placer(3)
 	#elif Input.is_action_just_pressed("select_weapon_5"):
 		#building_manager.select_placer(4)
 		

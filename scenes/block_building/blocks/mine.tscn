@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=4 uid="uid://da11f182s0yks"]
 
-[ext_resource type="Script" path="res://scripts/block_building/mine.gd" id="1_j5djv"]
+[ext_resource type="Script" path="res://scripts/block_building/blocks/mine.gd" id="1_j5djv"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_dtwvg"]
 [ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_mpp70"]
 [ext_resource type="Shader" path="res://resources/shaders/blinking_light.gdshader" id="4_p862y"]

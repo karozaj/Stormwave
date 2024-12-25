@@ -166,6 +166,7 @@ _data = {
 visible = false
 script = ExtResource("1_wcl8y")
 block = ExtResource("2_foi0t")
+cooldown = 0.1
 
 [node name="block_editable" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)

@@ -169,6 +169,7 @@ _data = {
 [node name="MinePlacer" type="Node3D"]
 visible = false
 script = ExtResource("1_vc2ms")
+cooldown = 0.5
 
 [node name="block_editable" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
