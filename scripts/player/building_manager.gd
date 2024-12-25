@@ -7,12 +7,13 @@ signal block_count_changed(count:int) #signal used to notify hud about block cha
 #placers
 @onready var block_placer:PlacerBaseClass=$RightPosition/BlockPlacer
 @onready var reinforced_block_placer:PlacerBaseClass=$RightPosition/ReinforcedBlockPlacer
+@onready var mine_placer:PlacerBaseClass=$RightPosition/MinePlacer
 
-@onready var placers:Array[PlacerBaseClass]=[block_placer,reinforced_block_placer]
+@onready var placers:Array[PlacerBaseClass]=[block_placer,reinforced_block_placer,mine_placer]
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[100,50]
+var block_count:Array[int]=[100,50,10]
 var can_use:bool=true
 var no_blocks_sound:AudioStream
 var player_height:float=1.75

@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c16shbggsj303"
-path="res://.godot/imported/blocks_block_editable_active.png-884f08c444ce9c5cc638846640791058.ctex"
+uid="uid://nggsml3hful4"
+path="res://.godot/imported/mine_mine_texture.png-30a8e93ea01983558967a5ebf0e44653.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "8274e76174d837f0e078238cc5de0b8e"
+"md5": "98a7be10dc5c1004c6da6ebf751141c3"
 }
 
 [deps]
 
-source_file="res://3d/blocks_block_editable_active.png"
-dest_files=["res://.godot/imported/blocks_block_editable_active.png-884f08c444ce9c5cc638846640791058.ctex"]
+source_file="res://3d/mine_mine_texture.png"
+dest_files=["res://.godot/imported/mine_mine_texture.png-30a8e93ea01983558967a5ebf0e44653.ctex"]
 
 [params]
 

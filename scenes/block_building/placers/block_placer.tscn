@@ -9,7 +9,7 @@ resource_name = "Material.001"
 albedo_texture = ExtResource("2_ga5ho")
 texture_filter = 2
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_cytd4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wcphc"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 34896613377,
@@ -39,7 +39,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_cytd4")
+shadow_mesh = SubResource("ArrayMesh_wcphc")
 
 [sub_resource type="Animation" id="Animation_3owp7"]
 length = 0.001
