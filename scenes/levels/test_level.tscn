@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=31 format=3 uid="uid://crywrnny46cu8"]
 
 [ext_resource type="Script" path="res://scripts/levels/test_level.gd" id="1_vkin7"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_m6vns"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dhy3sbqn7kl5m" path="res://3d/laser_enemy.glb" id="8_y6t3a"]
 [ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="9_hmr7q"]
 [ext_resource type="PackedScene" uid="uid://cdpr1re5gmani" path="res://scenes/block_building/turret.tscn" id="10_w022s"]
+[ext_resource type="PackedScene" uid="uid://grr718l4iit5" path="res://scenes/block_building/blocks/turret.tscn" id="11_c7gl5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5o5rn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -275,6 +276,9 @@ data = {
 
 [node name="Turret" parent="." instance=ExtResource("10_w022s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.04079, 5.02188, -2.91554)
+
+[node name="Turret2" parent="." instance=ExtResource("11_c7gl5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36823, 8.07193)
 
 [editable path="projectile_enemy"]
 [editable path="laser_enemy"]

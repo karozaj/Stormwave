@@ -86,6 +86,16 @@ shadow_mesh = SubResource("ArrayMesh_um7ap")
 render_priority = 0
 shader = ExtResource("4_p862y")
 
+[sub_resource type="Animation" id="Animation_brrp1"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mine")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_ti5en"]
 resource_name = "rotate"
 length = 8.0
@@ -104,16 +114,6 @@ tracks/1/path = NodePath("mine")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 4, 1, 0, 1, 0, 0, 8, 1, 0, 0, 0, -1)
-
-[sub_resource type="Animation" id="Animation_brrp1"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("mine")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xvy8b"]
 _data = {
