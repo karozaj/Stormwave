@@ -34,7 +34,7 @@ func physics_update(delta:float)->void:
 	if Input.is_action_pressed("place_block"):
 		building_manager.place()
 	elif Input.is_action_just_pressed("shoot"):
-		building_manager.destroy()
+		building_manager.collect()
 	state_owner.move_and_slide()
 
 func handle_input(event: InputEvent) -> void:

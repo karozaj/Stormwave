@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://d2ajujxfkdyex"]
+[gd_scene load_steps=11 format=4 uid="uid://d2ajujxfkdyex"]
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_wcl8y"]
+[ext_resource type="AudioStream" uid="uid://bwgxher8mcnkr" path="res://audio/sfx/blocks/block_place1.ogg" id="2_7157a"]
 [ext_resource type="PackedScene" uid="uid://cfnul5kue1i8j" path="res://scenes/block_building/blocks/reinforced_block.tscn" id="2_foi0t"]
 [ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_tx7xy"]
 
@@ -165,6 +166,7 @@ _data = {
 [node name="ReinforcedBlockPlacer" type="Node3D"]
 visible = false
 script = ExtResource("1_wcl8y")
+place_sound = ExtResource("2_7157a")
 block = ExtResource("2_foi0t")
 cooldown = 0.1
 

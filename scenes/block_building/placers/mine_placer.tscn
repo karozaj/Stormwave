@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://b30v3x1dn2ltf"]
+[gd_scene load_steps=11 format=4 uid="uid://b30v3x1dn2ltf"]
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_vc2ms"]
+[ext_resource type="AudioStream" uid="uid://crs86jlvk8ahk" path="res://audio/sfx/blocks/mine_place.ogg" id="2_gj41l"]
 [ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_qy6lx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upaeb"]
@@ -169,6 +170,7 @@ _data = {
 [node name="MinePlacer" type="Node3D"]
 visible = false
 script = ExtResource("1_vc2ms")
+place_sound = ExtResource("2_gj41l")
 cooldown = 0.5
 
 [node name="block_editable" type="MeshInstance3D" parent="."]

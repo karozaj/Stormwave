@@ -7,11 +7,9 @@ class_name PlacerBaseClass
 @export_category("Audio")
 ## Sound to be played when placing block
 @export var place_sound:AudioStream
-## Sound to be played when destroying block
-@export var destroy_sound:AudioStream
-## Default sound pitch
-@export var default_pitch:float=1.0
-## How much the sound pitch should change
+## Place sound pitch
+@export var place_pitch:float=1.0
+## Sound to be played when collecting block
 @export var pitch_variance:float=0.1
 
 @export_category("Building")
@@ -41,22 +39,16 @@ func place()->bool:
 
 #method for destroying blocks, should return false when block could not be destroyed
 #and true when the block was succesfully destroyed
-func destroy()->bool:
-	return false
+func collect()->String:
+	return "None"
 
 #plays sound when placing a block
 func play_place_sound()->void:
 	if place_sound!=null:
 		audio_player.stream=place_sound
-		audio_player.pitch_scale=default_pitch+rng.randf_range(-pitch_variance,pitch_variance)
+		audio_player.pitch_scale=place_pitch+rng.randf_range(-pitch_variance,pitch_variance)
 		audio_player.play()
 
-#plays sound when destroying block
-func play_destroy_sound()->void:
-	if destroy_sound!=null:
-		audio_player.stream=destroy_sound
-		audio_player.pitch_scale=default_pitch+rng.randf_range(-pitch_variance,pitch_variance)
-		audio_player.play()
 
 #checks if the block can be placed
 func can_block_be_placed(_target:Vector3)->bool:

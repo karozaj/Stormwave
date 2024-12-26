@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://cfnul5kue1i8j"]
+[gd_scene load_steps=9 format=4 uid="uid://cfnul5kue1i8j"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/block.gd" id="1_hrbdq"]
+[ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_hipur"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_mre5w"]
 [ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_1raou"]
+[ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_jrqfy"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3ofvc"]
 _surfaces = [{
@@ -43,6 +45,11 @@ shadow_mesh = SubResource("ArrayMesh_3ofvc")
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_hrbdq")
+block_name = "Reinforced Block"
+damaged_sound = ExtResource("2_hipur")
+damaged_pitch = 0.7
+destroyed_sound = ExtResource("3_jrqfy")
+destroyed_pitch = 0.7
 
 [node name="block" type="MeshInstance3D" parent="."]
 material_overlay = ExtResource("2_mre5w")
@@ -51,3 +58,6 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n28mh")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"

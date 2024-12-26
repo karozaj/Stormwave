@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://bmdgopa2w8bo7"]
+[gd_scene load_steps=12 format=4 uid="uid://bmdgopa2w8bo7"]
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_gs56r"]
 [ext_resource type="Texture2D" uid="uid://vphqd52xu1jr" path="res://3d/explosive_explosive_texture.png" id="1_xxbq7"]
 [ext_resource type="PackedScene" uid="uid://cpkxoixjsugbb" path="res://scenes/block_building/blocks/explosive_block.tscn" id="2_gk12n"]
+[ext_resource type="AudioStream" uid="uid://bwgxher8mcnkr" path="res://audio/sfx/blocks/block_place1.ogg" id="2_sbbi0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jwrg"]
 resource_name = "Material"
@@ -170,6 +171,7 @@ _data = {
 [node name="ExplosiveBlockPlacer" type="Node3D"]
 visible = false
 script = ExtResource("1_gs56r")
+place_sound = ExtResource("2_sbbi0")
 block = ExtResource("2_gk12n")
 
 [node name="block_editable" type="MeshInstance3D" parent="."]

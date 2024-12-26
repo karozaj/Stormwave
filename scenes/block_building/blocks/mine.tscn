@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://da11f182s0yks"]
+[gd_scene load_steps=18 format=4 uid="uid://da11f182s0yks"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/mine.gd" id="1_j5djv"]
+[ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_1onhd"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_dtwvg"]
 [ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_mpp70"]
+[ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_2wg7x"]
 [ext_resource type="Shader" path="res://resources/shaders/blinking_light.gdshader" id="4_p862y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qacsn"]
@@ -84,11 +86,49 @@ shadow_mesh = SubResource("ArrayMesh_um7ap")
 render_priority = 0
 shader = ExtResource("4_p862y")
 
+[sub_resource type="Animation" id="Animation_ti5en"]
+resource_name = "rotate"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mine")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, -0.1, 0, 2, 1, 0, 0, 0, 3, 1, 0, 0.1, 0, 4, 1, 0, 0, 0, 5, 1, 0, -0.1, 0, 6, 1, 0, 0, 0, 7, 1, 0, 0.1, 0, 8, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 4, 1, 0, 1, 0, 0, 8, 1, 0, 0, 0, -1)
+
+[sub_resource type="Animation" id="Animation_brrp1"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mine")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvy8b"]
+_data = {
+"RESET": SubResource("Animation_brrp1"),
+"rotate": SubResource("Animation_ti5en")
+}
+
 [node name="Mine" type="StaticBody3D"]
 collision_layer = 32
 collision_mask = 8
 script = ExtResource("1_j5djv")
 durability = 25
+block_name = "Mine"
+damaged_sound = ExtResource("2_1onhd")
+destroyed_sound = ExtResource("3_2wg7x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qacsn")
@@ -101,13 +141,28 @@ collision_mask = 5
 shape = SubResource("BoxShape3D_i3v7d")
 
 [node name="mine" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.981506, 0, -0.191433, 0, 1, 0, 0.191433, 0, 0.981506, 0, 0, 0)
 material_overlay = ExtResource("2_dtwvg")
 mesh = SubResource("ArrayMesh_c7nll")
 skeleton = NodePath("")
 
-[node name="light" type="MeshInstance3D" parent="."]
+[node name="light" type="MeshInstance3D" parent="mine"]
 mesh = SubResource("ArrayMesh_kf0nx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_uiatg")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xvy8b")
+}
+autoplay = "rotate"
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://dbjlp23yoipod"]
+[gd_scene load_steps=12 format=4 uid="uid://dbjlp23yoipod"]
 
 [ext_resource type="PackedScene" uid="uid://c2gwyqvxani64" path="res://scenes/block_building/blocks/block.tscn" id="2_e68n1"]
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="2_fk3k0"]
 [ext_resource type="Texture2D" uid="uid://cvhe7mekkvck2" path="res://3d/buildingblock_buildableblock.png" id="2_ga5ho"]
+[ext_resource type="AudioStream" uid="uid://bwgxher8mcnkr" path="res://audio/sfx/blocks/block_place1.ogg" id="2_ka587"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgttm"]
 resource_name = "Material.001"
@@ -170,6 +171,7 @@ _data = {
 [node name="BlockPlacer" type="Node3D"]
 visible = false
 script = ExtResource("2_fk3k0")
+place_sound = ExtResource("2_ka587")
 block = ExtResource("2_e68n1")
 cooldown = 0.1
 
