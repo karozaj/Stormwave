@@ -14,14 +14,11 @@ script = ExtResource("1_gdwe6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.35)
 
 [node name="BlockPlacer" parent="RightPosition" instance=ExtResource("2_r8cq1")]
-cooldown = 0.8
 
 [node name="ReinforcedBlockPlacer" parent="RightPosition" instance=ExtResource("3_e20ug")]
-cooldown = 0.8
 
 [node name="MinePlacer" parent="RightPosition" instance=ExtResource("4_lhqbb")]
 block = ExtResource("5_noitv")
-cooldown = 0.8
 
 [node name="ExplosiveBlockPlacer" parent="RightPosition" instance=ExtResource("6_tj3m1")]
 

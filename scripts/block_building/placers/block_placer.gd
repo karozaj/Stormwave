@@ -10,7 +10,7 @@ func set_ray_position(pos:Vector3)->void:
 func destroy()->bool:
 	if ray.is_colliding():
 		if ray.get_collider().has_method("destroy_block"):
-			if ray.get_collider().destroy_block(ray.get_collision_point()-ray.get_collision_normal()/2)==true:
+			if ray.get_collider().destroy_block()==true:
 				#audio_player.stream=destroy_block_sound
 				audio_player.play()
 				animation_player.play("use")

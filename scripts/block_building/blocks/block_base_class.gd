@@ -17,8 +17,8 @@ func _ready() -> void:
 
 #function that destroys the block, to be used either when the player destroys it in building mode
 #or when its durability drops below 0
-func destroy_block(world_coordinate:Vector3)->bool:
-	if gridmap.destroy_block(world_coordinate)==true:
+func destroy_block()->bool:
+	if gridmap.destroy_block(global_position)==true:
 		call_deferred("queue_free")
 		return true
 	return false
@@ -28,7 +28,7 @@ func destroy_block(world_coordinate:Vector3)->bool:
 func damage(dmg:int,_pos:Vector3):
 	durability-=dmg
 	if durability<0:
-		destroy_block(global_position)
+		destroy_block()
 
 #shows an outline around the block to indicate the player is looking at it and 
 #that it's in the player's range

@@ -31,6 +31,7 @@ func place_block(world_coordinate:Vector3, block:PackedScene)->bool:
 			#print("place")
 			#print(map_coordinate)
 			set_cell_item(map_coordinate,2)
+			print(map_coordinate)
 			return true
 		else:
 			print("ray not colliding")

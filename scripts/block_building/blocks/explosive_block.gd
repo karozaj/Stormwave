@@ -24,4 +24,4 @@ func explode()->void:
 		Global.current_level.add_child(expl)
 		expl.global_position=global_position
 		expl.explode()
-		destroy_block(global_position)
+		destroy_block()
