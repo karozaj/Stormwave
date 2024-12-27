@@ -11,6 +11,8 @@ func enter(_transition_data:Dictionary={})->void:
 	timer.timeout.connect(die)
 	state_owner.animation_player.play("die")
 	state_owner.play_sound_effect(state_owner.death_sound)
+	state_owner.died.emit(state_owner)
+
 
 func update(delta:float)->void:
 	state_owner.velocity=state_owner.velocity.move_toward(Vector3.ZERO,5*state_owner.agility*delta)

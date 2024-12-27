@@ -1,4 +1,5 @@
 extends Node3D
+class_name BulletHoleSpawner
 
 var bullet_hole=preload("res://scenes/weapons/weapon_effects/bullet_hole.tscn")
 

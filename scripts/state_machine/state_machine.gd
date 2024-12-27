@@ -17,8 +17,8 @@ func _ready() -> void:
 	current_state=initial_state
 
 
-#func _unhandled_input(event: InputEvent) -> void:
-	#current_state.handle_input(event)
+func _unhandled_input(event: InputEvent) -> void:
+	current_state.handle_input(event)
 
 
 func _process(delta: float) -> void:

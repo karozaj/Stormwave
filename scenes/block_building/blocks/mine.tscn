@@ -1,0 +1,167 @@
+[gd_scene load_steps=18 format=4 uid="uid://da11f182s0yks"]
+
+[ext_resource type="Script" path="res://scripts/block_building/blocks/mine.gd" id="1_j5djv"]
+[ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_1onhd"]
+[ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_dtwvg"]
+[ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_mpp70"]
+[ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_2wg7x"]
+[ext_resource type="Shader" path="res://resources/shaders/blinking_light.gdshader" id="4_p862y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qacsn"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3v7d"]
+size = Vector3(0.75, 0.85, 0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upaeb"]
+resource_name = "Material"
+albedo_texture = ExtResource("2_mpp70")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oy7qd"]
+_surfaces = [{
+"aabb": AABB(-0.375, -0.3958, -0.375, 0.75, 0.7916, 0.75),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("BAAVAAAABAAGABUAAAANAAMAAAAVAA0AAwAGAAQAAwANAAYAAwAOAAAAAwAWAA4AAAAXAAUAAAAOABcABQAWAAMABQAXABYAAgAYAAAAAgAHABgAAAAZAAQAAAAYABkABAAHAAIABAAZAAcABQAIAAAABQAPAAgAAAAaAAIAAAAIABoAAgAPAAUAAgAaAA8AAQAJAAUAAQAQAAkABQAbAAIABQAJABsAAgAQAAEAAgAbABAAAQARAAIAAQAKABEAAgALAAQAAgARAAsABAAKAAEABAALAAoAAQASAAMAAQAMABIAAwAcAAUAAwASABwABQAMAAEABQAcAAwAAQAdAAQAAQATAB0ABAAUAAMABAAdABQAAwATAAEAAwAUABMAFwAgABYAGwAkABAAFgAgAA4ADAAlABIAFAAfABMAEAAkAAkAGQAhAAcAHQAfABQAHAAlAAwADgAgABcACQAkABsAGAAhABkADwAjAAgAEgAlABwABgAiABUAGgAjAA8ACwAeAAoADQAiAAYACAAjABoACgAeABEAFQAiAA0AEwAfAB0ABwAhABgAEQAeAAsA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 38,
+"vertex_data": PackedByteArray("/3////9/AAD/fwAA/38AAKLo/39cFwAAXBf/f6LoAACi6P9/ougAAFwX/39cFwAA2pSxokXMAABFzLGiJGsAAP9/NLyUSAAAJGtNXbkzAABqt8pD/38AAEXMTV3alAAAlEjKQ/9/AAAka7GiRcwAAJRINLz/fwAAJGuxorkzAAD/f8pDlEgAAEXMTV0kawAAuTNNXdqUAAD/f8pDarcAACRrTV1FzAAA/380vGq3AAC5M7Gi2pQAALkzsaIkawAAarc0vP9/AABFzLGi2pQAANqUsaK5MwAA2pRNXbkzAAC5M01dJGsAANqUTV1FzAAA///WK/9/AAD/f9Yr//8AAAAAKNT/fwAA//8o1P9/AAD/fyjU//8AAP9/KNQAAAAA/3/WKwAAAAAAANYr/38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c7nll"]
+resource_name = "mine_Cube"
+_surfaces = [{
+"aabb": AABB(-0.375, -0.3958, -0.375, 0.75, 0.7916, 0.75),
+"attribute_data": PackedByteArray("btF/fm7Rf35u0X9+btF/fuHT/v/h0/7/4dP+/+HT///Xoj6/16I+v///Qb///0G/16I+v9eiPr/+/0G//v9Bv///Qb///0G/16I+v9eiPr///0G///9Bv9eiPr/Xoj6/tNqyrauWAKDThROg/JcOoLTasq2Mhf6fbNHKoI2F/p+jl0mgk4UmoLPazdDWllGgatG03WiWXaD9hAmghpc2oCLIzNCohJWfa4Xun7iWn6Bq0bTdI8iyrR6EaZ9ZlzOgZZdfoIqE7p9s0cqgtNqyrTqY95/dhRGgatG03ReXF6AQhRKg9oTin7PazdDDlkugMpfjnx6Y/p+z2s3QatG03R6EaZ/bl0SgGZdZoCLIzNAVhhagbNHKoJmXVaCThSagoIX7n0SX35+02rKtT5ZeoLSEkp8jyLKtbNHKoNGE+J9Rl1yga4XunyPIsq2WllugI8iyramFBaBTl/6fI5g/oCLIzNBShbmf9oTin42F/p8iyMzQioTun7PazdDclVCg7I41hNWO94PVjiWEsI5NhFeP54P3jiWE944lhMaOJISdjuGD944lhO6OJoTVjiWEnY7hg+GOLIT3jiWE1Y4lhNWO94PVjiWEDY9ahJ2O4YPhjiyEnY7hgw2PPoTVjiWE"),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("EABFAAAAEAAYAEUAAAAtAAwAAABFAC0ADAAYABAADAAtABgADgAyAAMADgBKADIAAwBNABYAAwAyAE0AFgBKAA4AFgBNAEoACgBOAAIACgAcAE4AAgBSABIAAgBOAFIAEgAcAAoAEgBSABwAFAAeAAEAFAAzAB4AAQBUAAgAAQAeAFQACAAzABQACABUADMABQAiABUABQA2ACIAFQBYAAkAFQAiAFgACQA2AAUACQBYADYABgA6AAsABgAkADoACwAoABMACwA6ACgAEwAkAAYAEwAoACQABwA+AA8ABwAsAD4ADwBcABcADwA+AFwAFwAsAAcAFwBcACwABABeABEABAA/AF4AEQBDAA0AEQBeAEMADQA/AAQADQBDAD8ATABoAEkAWQBzADcASABmADAAKgB1ADwARABlAEEAOAB0ACMAUQBpABsAXQBjAEIAWgB2ACsAMQBnAEsAIQByAFcATwBqAFMANQBxACAAPQB3AFsAGgBtAEYAVQBvADQAKQBhACUALgBsABkAHwBwAFYAJgBiADsARwBuAC8AQABkAF8AHQBrAFAAOQBgACcA"),
+"material": SubResource("StandardMaterial3D_upaeb"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(1.60545, 1.88593, 0, 0),
+"vertex_count": 120,
+"vertex_data": PackedByteArray("/3////9/2Jr/f////3////9/////f0XE/3////9/RMT/fwAA/3/Ymv9/AAD/f////38AAP9/RMT/fwAA/39FxKLo/39cF///ouj/f1wX//+i6P9/XBdFxKLo/39cF0TEXBf/f6Lo2JpcF/9/oujYmlwX/3+i6ETEXBf/f6LoRcSi6P9/oujYmqLo/3+i6Niaouj/f6LoRcSi6P9/ouhExFwX/39cF///XBf/f1wX//9cF/9/XBdExFwX/39cF0XE2pSxokXM2JralLGiRczXn9qUsaJFzMjZRcyxoiRrzcVFzLGiJGtFxEXMsaIka+bu/380vJRI////fzS8lEg/u/9/NLyUSGi7JGtNXbkzL+Aka01duTP//yRrTV25Mw3yarfKQ/9/RMRqt8pD/3+V2Gq3ykP/f/PvRcxNXdqUOelFzE1d2pRExEXMTV3alJXYlEjKQ/9/eNqUSMpD/3+F8JRIykP/f0XEJGuxokXM2Joka7GiRczXnyRrsaJFzFzZlEg0vP9/Aa6USDS8/39U75RINLz/f0TEJGuxorkz//8ka7GiuTPx/yRrsaK5M2i7/3/KQ5RI////f8pDlEjM8P9/ykOUSA3yRcxNXSRrOelFzE1dJGtExEXMTV0ka/PvuTNNXdqUeNq5M01d2pQUOrkzTV3alEXE/3/KQ2q32Jr/f8pDarcq2/9/ykNqt6rZJGtNXUXM//4ka01dRczYmiRrTV1FzKrZ/380vGq32Jr/fzS8arfI2f9/NLxqt1zZuTOxotqUAa65M7Gi2pQyxrkzsaLalETEuTOxoiRrVO+5M7GiJGsyxrkzsaIka0TEarc0vP9/RcRqtzS8/38+rGq3NLz/f+buRcyxotqUzcVFzLGi2pRFxEXMsaLalD6s2pSxorkz///alLGiuTPy/9qUsaK5Mz+72pRNXbkzL+DalE1duTP//9qUTV25M8zwuTNNXSRrhfC5M01dJGsUOrkzTV0ka0XE2pRNXUXM//7alE1dRczYmtqUTV1FzCrb///WK/9/Oen//9Yr/3+V2P//1iv/f/Pv/3/WK/////7/f9Yr//8q2/9/1iv//6rZAAAo1P9/Aa4AACjU/39U7wAAKNT/fzLG//8o1P9/zcX//yjU/38+rP//KNT/f+bu/38o1P//15//fyjU///I2f9/KNT//1zZ/38o1AAA8f//fyjUAAA/u/9/KNQAAGi7/3/WKwAAL+D/f9YrAADM8P9/1isAAA3yAADWK/9/eNoAANYr/3+F8AAA1iv/fxQ6/P/1f/9/Yd/7s/wZ/5kCzAIACYD/f50g/2X8MwNMAub/f2Hf/3+dIPuz/BkAZvwz/P/1fwIAC4D/mQLMA0wC5vz/9X8CAAeA+7P8Gf9l/DP/f2Hf/3+dIP+ZAswDTALm/P/1fz4CsYcEReoQzGLWOfuz/Bn0ppnI/39h30K1G0rDypzKnP90f/9/nSBv3XTcAGb8MzNqg2zUNqlaiLVhlf9l/DMzaoNs0xPg6jcnBbkDTAHm/P/1fz4CsYepb7XFv+CpHB22JiX/mQLM/39h35Na2P/DypzK/3+dIOeipVxv3XTciLVhlQBm/DPUNqla0xPg6uOcNsYDTALmAQAFgFYOAEbMOsSQfYArpQIACYDMOsSQ/P/1fwRF6hCpb7XFv+CpHFZG1uP/mQLMHbYmJVZG1uP/mQLM+7P8GTaeSZ/0ppnIzGLWOfuz/Bk2nkmf/39h35Na2P9CtRtKnP90f/9/nSDnoqVcNycFueOcNsYDTALmfYArpQEAB4BWDgBGiLVhlTNqg2zUNqlafYArpVYOAEbMOsSQv+CpHB22JiVWRtbjzGLWOTaeSZ/0ppnIPgKxhwRF6hCpb7XFk1rY/0K1G0rDypzKnP90f+eipVxv3XTc0xPg6jcnBbnjnDbG")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_oy7qd")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_um7ap"]
+_surfaces = [{
+"aabb": AABB(-0.0239188, 0.358387, -0.0239188, 0.0478376, 0.0458134, 0.0478376),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEABwABAAMABwAFAAEA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kf0nx"]
+resource_name = "mine_Cube_003"
+_surfaces = [{
+"aabb": AABB(-0.0239188, 0.358387, -0.0239188, 0.0478376, 0.0458134, 0.0478376),
+"attribute_data": PackedByteArray("C/IPDgvyDw4A958IAPefCAD3nwgL8tgCC/LYAkb30gdG99IHRvfSBw79yA0O/cgN0/fOCNP3zgjT984IDv2RAg79kQIZ+AEIGfgBCBn4AQg="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AQAJAAQAAQAGAAkABQARAAcABQAPABEAEAAOABMAEAALAA4ACgACAAwACgAAAAIAEgADAAgAEgANAAMA"),
+"material": SubResource("StandardMaterial3D_upaeb"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAAP//AIIAAAAA//8TygAA/////1GAAAD/////hsAAAP////8ywAAAAAAAAP//AAAAAAAAK+AAAP//AAD//wAA//8AAIbAAAD//wAAcsv//wAA//85gP//AAD///rL////////dIH///////+GwP///////+bg//8AAAAA/////wAAAADe4v////8AAP///////wAAhsD/////AAD3+/9//38mxOvd/3//fw70Hmi8jyD4pP9agAHhfc++/b99DvQfaNTGlNz/f/9/5qPNR/////8O9B5o3LC5Yev8EoPQsaJjfv+AgA70HmjUval7")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_um7ap")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uiatg"]
+render_priority = 0
+shader = ExtResource("4_p862y")
+
+[sub_resource type="Animation" id="Animation_brrp1"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mine")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_ti5en"]
+resource_name = "rotate"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mine")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, -0.1, 0, 2, 1, 0, 0, 0, 3, 1, 0, 0.1, 0, 4, 1, 0, 0, 0, 5, 1, 0, -0.1, 0, 6, 1, 0, 0, 0, 7, 1, 0, 0.1, 0, 8, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 4, 1, 0, 1, 0, 0, 8, 1, 0, 0, 0, -1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvy8b"]
+_data = {
+"RESET": SubResource("Animation_brrp1"),
+"rotate": SubResource("Animation_ti5en")
+}
+
+[node name="Mine" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 8
+script = ExtResource("1_j5djv")
+durability = 25
+block_name = "Mine"
+damaged_sound = ExtResource("2_1onhd")
+destroyed_sound = ExtResource("3_2wg7x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qacsn")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_i3v7d")
+
+[node name="mine" type="MeshInstance3D" parent="."]
+material_overlay = ExtResource("2_dtwvg")
+mesh = SubResource("ArrayMesh_c7nll")
+skeleton = NodePath("")
+
+[node name="light" type="MeshInstance3D" parent="mine"]
+mesh = SubResource("ArrayMesh_kf0nx")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_uiatg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xvy8b")
+}
+autoplay = "rotate"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,11 +1,17 @@
 extends CharacterBody3D
 class_name Player
+#used to notify enemies of player's death
+
+@warning_ignore("unused_signal")
+signal died
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
 
 @onready var movement_manager:MovementManager=$MovementManager
 @onready var weapon_manager:WeaponManager=$Pivot/WeaponCamera/WeaponManager
+@onready var building_manager:BuildingManager=$Pivot/WeaponCamera/BuildingManager
+@onready var state_machine:StateMachine=$StateMachine
 #camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
@@ -53,7 +59,6 @@ var health:int=100:
 	set(value):
 		health=value
 		hud.update_health(health)
-var is_dead:bool=false
 var is_invincible:bool=false
 
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
@@ -65,38 +70,26 @@ func _ready() -> void:
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	health=starting_health
 	rng.randomize()
-	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
-	weapon_manager.ammo_count_changed.connect(update_hud_ammo)
+	weapon_manager.ammo_count_changed.connect(hud.update_ammo)
+	building_manager.block_count_changed.connect(hud.update_ammo)
+	building_manager.player_height=$CollisionShape3D.shape.height
+	building_manager.player_radius=$CollisionShape3D.shape.radius
 
 
-func _process(_delta: float) -> void:
-	if is_dead==false:
+func process_update(_delta:float):
+		#for testing
+	if Input.is_action_just_pressed("TEST_BUTTON"):
+		if state_machine.current_state.name=="Combat":
+			state_machine.transition_to_next_state(state_machine.current_state,"Build")
+		elif state_machine.current_state.name=="Build":
+			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
-		if Input.is_action_just_pressed("pause"):
-			var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
-			$CanvasLayer.add_child(pause_menu)
-		
-		#weapon selection
-		if Input.is_action_just_pressed("next_weapon"):
-			var next_weapon_index:int=(weapon_manager.current_weapon_index+1)%weapon_manager.weapons.size()
-			weapon_manager.select_weapon(next_weapon_index)
-		elif Input.is_action_just_pressed("previous_weapon"):
-			var next_weapon_index:int=(weapon_manager.current_weapon_index-1)%weapon_manager.weapons.size()
-			weapon_manager.select_weapon(next_weapon_index)
-		elif Input.is_action_just_pressed("select_weapon_1"):
-			weapon_manager.select_weapon(0)
-		elif Input.is_action_just_pressed("select_weapon_2"):
-			weapon_manager.select_weapon(1)
-		elif Input.is_action_just_pressed("select_weapon_3"):
-			weapon_manager.select_weapon(2)
-		elif Input.is_action_just_pressed("select_weapon_4"):
-			weapon_manager.select_weapon(3)
-		elif Input.is_action_just_pressed("select_weapon_5"):
-			weapon_manager.select_weapon(4)
+	if Input.is_action_just_pressed("pause"):
+		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
+		$CanvasLayer.add_child(pause_menu)
+			
 
-
-
-func _physics_process(delta: float) -> void:
+func physics_process_update(delta:float):
 	if not is_on_floor():
 	# Add the gravity.
 		if movement_manager.jump_available:
@@ -116,25 +109,21 @@ func _physics_process(delta: float) -> void:
 
 	var direction=Vector3.ZERO
 	##PHYSPROCESS INPUTS 
-	if is_dead==false:
-		if Input.is_action_just_pressed("jump"):
-			if movement_manager.jump_available:
-				jump()
-			else:
-				movement_manager.jump_buffer=true
-				movement_manager.jump_buffer_timer.start()
-			
-		if Input.is_action_pressed("sprint"):
-			movement_manager.set_sprint_speed(delta)
+	if Input.is_action_just_pressed("jump"):
+		if movement_manager.jump_available:
+			jump()
 		else:
-			movement_manager.set_walk_speed(delta)
+			movement_manager.jump_buffer=true
+			movement_manager.jump_buffer_timer.start()
 		
-		var input_dir := Input.get_vector("left", "right", "forward", "back")
-		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		
-		if Input.is_action_pressed("shoot"):
-			weapon_manager.shoot()
-		
+	if Input.is_action_pressed("sprint"):
+		movement_manager.set_sprint_speed(delta)
+	else:
+		movement_manager.set_walk_speed(delta)
+	
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	var lerp_val:float=movement_manager.movement_lerp_val
 	
 	if is_on_floor()==false:
@@ -151,20 +140,16 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and was_on_floor==false:
 		play_footstep_sound()
 	was_on_floor=is_on_floor()
-	
-	move_and_slide()
 
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	#mouselook
+func mouselook(event:InputEvent)->void:
+		#mouselook
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY*mouse_sensitivity)
 		main_camera.rotate_x(-event.relative.y * SENSITIVITY*mouse_sensitivity)
 		main_camera.rotation.x = clamp(main_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		weapon_camera.rotate_x(-event.relative.y * SENSITIVITY*mouse_sensitivity)
 		weapon_camera.rotation.x = clamp(weapon_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-
 
 func jump()->void:
 	velocity.y=movement_manager.jump_velocity
@@ -201,28 +186,25 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 
 
 func damage(damage_points:int, origin:Vector3)->void:
-	if is_dead==false:
-		if is_invincible==false:
-			health-=damage_points
-			var knockback_direction:Vector3=global_position-origin
-			knockback_direction=knockback_direction.normalized()
-			velocity+=knockback_direction*damage_points/100*knockback_modifier
-			is_invincible=true
-			var invincibility_timer=get_tree().create_timer(invincibility_time)
-			invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
-			hud.show_pain_overlay(damage_points)
-			if health<=0:
-				die()
+	state_machine.current_state.damage(damage_points,origin)
+
+func take_damage(damage_points:int, origin:Vector3)->void:
+	if is_invincible==false:
+		health-=damage_points
+		var knockback_direction:Vector3=global_position-origin
+		knockback_direction=knockback_direction.normalized()
+		velocity+=knockback_direction*damage_points/100*knockback_modifier
+		is_invincible=true
+		var invincibility_timer=get_tree().create_timer(invincibility_time)
+		invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
+		hud.show_pain_overlay(damage_points)
+		if health<=0:
+			die()
 
 func _on_invincibility_timer_timeout():
 	is_invincible=false
 
 func die()->void:
+	state_machine.transition_to_next_state(state_machine.current_state,"Dead")
 	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
 	canvas_layer.add_child(death_menu)
-	if is_dead==false:
-		is_dead=true
-
-
-func update_hud_ammo()->void:
-	hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])

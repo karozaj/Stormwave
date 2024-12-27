@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=4 uid="uid://cfnul5kue1i8j"]
+
+[ext_resource type="Script" path="res://scripts/block_building/blocks/block.gd" id="1_hrbdq"]
+[ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_hipur"]
+[ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_mre5w"]
+[ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_1raou"]
+[ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_jrqfy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3ofvc"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AwAEAAAAAwABAAQAAQACAAQAAQAFAAIABQAHAAIABQAGAAcABgAAAAcABgADAAAAAQAGAAUAAQADAAYAAgAAAAQAAgAHAAAA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD/////AAAAAAAAAAAAAP////8AAAAAAAAAAP//AAAAAP//AAAAAP//AAAAAAAA//8AAP//AAD///////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0cnul"]
+resource_local_to_scene = true
+resource_name = "buildingblock_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("JQDZ////2f///wAA///Z////AAAlANn/JQAAACUAAAAlAAAA///Z////2f///9n///8AACUA2f8lAAAAJQDZ/yUAAAD//wAA//8AACUA2f///9n/JQAAAP//AAAlANn/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("CwAOAAIACwAFAA4AAwAGAAwAAwAPAAYAEQAXAAgAEQAUABcAEgAAABUAEgAJAAAABAATABAABAAKABMABwABAA0ABwAWAAEA"),
+"material": ExtResource("3_1raou"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3ofvc")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n28mh"]
+
+[node name="ReinforcedBlock" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 13
+script = ExtResource("1_hrbdq")
+block_name = "Reinforced Block"
+damaged_sound = ExtResource("2_hipur")
+damaged_pitch = 0.7
+destroyed_sound = ExtResource("3_jrqfy")
+destroyed_pitch = 0.7
+
+[node name="block" type="MeshInstance3D" parent="."]
+material_overlay = ExtResource("2_mre5w")
+mesh = SubResource("ArrayMesh_0cnul")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n28mh")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"

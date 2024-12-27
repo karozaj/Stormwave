@@ -39,9 +39,10 @@ func explode()->void:
 	explosion_sprite.visible=true
 	var tween=get_tree().create_tween()
 	tween.tween_property(explosion_sprite,"modulate",Color.TRANSPARENT,0.25)
+	explosion_area.set_deferred("monitoring",true)
+	explosion_area.set_deferred("monitorable",true)
 	var tween_scale=get_tree().create_tween()
 	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.5,1.5,1.5),0.25)
-	explosion_area.monitoring=true
 	var tween_explosion=get_tree().create_tween()
 	tween.connect("finished",disable_explosion_area)
 	tween_explosion.tween_property(explosion_shape,"radius",explosion_radius,0.25)

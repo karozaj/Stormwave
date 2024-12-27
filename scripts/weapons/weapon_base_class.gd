@@ -4,7 +4,7 @@ class_name WeaponBaseClass
 
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 
-@export var is_being_pulled_out:bool=true
+@export var is_being_pulled_out:bool=false
 @export var default_pitch:float=1.0
 @export var pitch_variance:float=0.1
 @export var cooldown:float=0.8

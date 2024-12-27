@@ -1,0 +1,278 @@
+[gd_scene load_steps=25 format=4 uid="uid://cljumdm3fr7bs"]
+
+[ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="1_sl5kr"]
+[ext_resource type="Script" path="res://scripts/block_building/blocks/turret.gd" id="1_yvf3x"]
+[ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_cboge"]
+[ext_resource type="AudioStream" uid="uid://jt7oseu6yl3j" path="res://audio/sfx/blocks/block_destroyed1.ogg" id="3_4gad8"]
+[ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="3_ttt0k"]
+[ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_pokwv"]
+[ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="6_h5bof"]
+[ext_resource type="PackedScene" uid="uid://bukp7t8xot7b1" path="res://scenes/weapons/weapon_effects/laser_effect.tscn" id="6_q561l"]
+[ext_resource type="AudioStream" uid="uid://foku7kfpbstk" path="res://audio/sfx/enemy_detected.ogg" id="8_ohv5v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb7cm"]
+resource_name = "Material.001"
+albedo_texture = ExtResource("1_sl5kr")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kkicp"]
+_surfaces = [{
+"aabb": AABB(-0.431298, -0.269844, -0.302621, 0.862595, 0.569139, 0.605243),
+"format": 34896613377,
+"index_count": 120,
+"index_data": PackedByteArray("CwAFAAYACwAIAAUAAgAKAAMACgAIAAsACAACAAkACgACAAgAAQAEAAAABAAGAAUABgABAAcABAABAAYAAQACAAMAAQAAAAIAAQAKAAcAAQADAAoABgAKAAsABgAHAAoACAAEAAUACAAJAAQAAgAEAAkAAgAAAAQAFwARABQAFwASABEAFgAOAA8ADgAUABUAFAAWABcADgAWABQAEAANAAwADQASABMAEgAQABEADQAQABIADQAOAAwADQAPAA4ADQAWAA8ADQATABYAEgAWABMAEgAXABYAFAAQABUAFAARABAADgAQAAwADgAVABAA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAAAAAAAAAKFLAAD//wAAoUsAAAAAAAAAAMi0//8AAAAA//9EuQAAAAD//7pGAAAAAMi0AAAAAKFL//9EuQAAoUvItP//AAChS8i0AAAAAKFL//+6RgAA//8AAP//AAD//wAAAAAAAF20AAD//wAAXbQAAAAAAAD//8i0//8AAP////9EuQAA/////7pGAAD//8i0AAAAAF20//9EuQAAXbTItP//AABdtMi0AAAAAF20//+6RgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bc5qc"]
+resource_name = "turret_Cube_001"
+_surfaces = [{
+"aabb": AABB(-0.431298, -0.269844, -0.302621, 0.862595, 0.569139, 0.605243),
+"attribute_data": PackedByteArray("Q7VZ/0O1Q9DylCBxQ7VZ/3BFQ9DylEwBQ7VD0EO1Wf/ylEwBQ7VD0HBFWf/ylCBxhv9Z/9D+bZE13yBxH9NtkRahbZEa/jpSH9NtkR/TbZEa/jIghv9Z/9D+bZE130wBH9ODwBahg8Aa/jIghv9D0ND+g8A130wBhv9D0ND+g8A13yBxH9ODwB/Tg8Aa/jpSQ7VZ/0O1Q9DylCBxQ7VZ/3BFQ9DylEwBQ7VD0EO1Wf/ylEwBQ7VD0HBFWf/ylCBxhv9Z/9D+bZE13yBxH9NtkRahbZEa/jpSH9NtkR/TbZEa/jIghv9Z/9D+bZE130wBH9ODwBahg8Aa/jIghv9D0ND+g8A130wBhv9D0ND+g8A13yBxH9ODwB/Tg8Aa/jpS"),
+"format": 34896613399,
+"index_count": 120,
+"index_data": PackedByteArray("IgAQABMAIgAZABAACAAgAAsAIAAaACMAGgAIAB0AIAAIABoABQAOAAIADgAUABEAFAAFABcADgAFABQABAAHAAoABAABAAcAAwAeABUAAwAJAB4AEgAfACEAEgAWAB8AGAANAA8AGAAcAA0ABgAMABsABgAAAAwARgA0AD0ARgA3ADQARAAsAC8ALAA+AEEAPgBEAEcALABEAD4AMgApACYAKQA4ADsAOAAyADUAKQAyADgAKAArACUAKAAuACsAJwBCAC0AJwA5AEIANgBDADoANgBFAEMAPAAxAEAAPAAzADEAKgAwACQAKgA/ADAA"),
+"material": SubResource("StandardMaterial3D_mb7cm"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("AAAAAP///z8AAAAA//9U1QAAAAD//1TVAAAAAAAA//8AAAAAAABU1QAAAAAAAFTVoUsAAP///z+hSwAA//9U1aFLAAD//1TVoUsAAAAA//+hSwAAAABU1aFLAAAAAFTVAADItP///z8AAMi0//8COgAAyLT//1TVAAD//0S5AjoAAP//RLlU1QAA//9EuVTVAAD//7pGqukAAP//ukZU1QAA//+6RlTVAADItAAA//8AAMi0AACq6QAAyLQAAFTVoUv//0S5AjqhS///RLlU1aFL//9EuVTVoUvItP///z+hS8i0//8COqFLyLT//1TVoUvItAAA//+hS8i0AACq6aFLyLQAAFTVoUv//7pGqumhS///ukZU1aFL//+6RlTV//8AAP///7///wAA//+qKv//AAD//6oq//8AAAAAAAD//wAAAACqKv//AAAAAKoqXbQAAP///79dtAAA//+qKl20AAD//6oqXbQAAAAAAABdtAAAAACqKl20AAAAAKoq///ItP///7///8i0///8xf//yLT//6oq/////0S5/MX/////RLmqKv////9Euaoq/////7pGVBb/////ukaqKv////+6Rqoq///ItAAAAAD//8i0AABUFv//yLQAAKoqXbT//0S5/MVdtP//RLmqKl20//9EuaoqXbTItP///79dtMi0///8xV20yLT//6oqXbTItAAAAABdtMi0AABUFl20yLQAAKoqXbT//7pGVBZdtP//ukaqKl20//+6Rqoq/////6oqVNVU1VTV/7//v6oqVNVU1VTV/////6oqVNWqKqoq/7//v6oqVNWqKqoq//////6c/pxU1VTV/pz+nFTVqipU1VTV+soENVTVqipU1VTV/7//v/rKBDVU1VTV/pz+nFTVqiqqKqoq//////6c/pyqKqoq/7//v/rKBDWqKqoq+soENVTVqiqqKqoq/////6oqVNWqKqoq/7//v6oqVNWqKqoq/////6oqVNVU1VTV/7//v6oqVNVU1VTV//////6c/pyqKqoq/pz+nFTVqiqqKqoq+soENVTVqiqqKqoq/7//v/rKBDWqKqoq/pz+nFTVqipU1VTV//////6c/pxU1VTV/7//v/rKBDVU1VTV+soENVTVqipU1VTV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kkicp")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mu7ji"]
+_surfaces = [{
+"aabb": AABB(-0.171113, -0.334159, -0.332972, 0.343532, 0.668319, 0.665944),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("BwABAAIABwAEAAEACAAGAAMACAAJAAYAAgAGAAcAAgADAAYABAAAAAEABAAFAAAACgAAAAUACgALAAAAAwALAAgACwABAAAAAQADAAIACwADAAEABQAJAAoACQAHAAYABwAFAAQACQAFAAcAEwANABAAEwAOAA0ACAASAAkACAAPABIADgASAA8ADgATABIAEAAMABEAEAANAAwACgAMAAsACgARAAwACwAPAAgADwANAA4ADQALAAwADwALAA0ACQARAAoAEQATABAAEwAJABIAEQAJABMA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAAAS5AAD5ALpG//8AAPkARLn//wAA+QD//wS5AAAM/rpG//8AAAz+AAAEuQAADP7//wS5AAAM/kS5//8AAPkA////fwAADP7///9/AAD//wAA/38AAAAAAAD/fwAAAAAAAPpGAAD5ALpGAAAAAPkARLkAAAAA+QD///pGAAAM/rpGAAAAAAz+AAD6RgAADP7///pGAAAM/kS5AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7udpq"]
+resource_name = "turret_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.171113, -0.334159, -0.332972, 0.343532, 0.668319, 0.665944),
+"attribute_data": PackedByteArray("irdjm4q3Y5vH50L5U7f//1O3SsqiyRjYU7dKylO3SsqiyWOiU7djm1O3Y5vH5zqB4X///+F/SsqiyRjY4X9jm+F/Y5vG50L54X9jm+F/Y5vH5zqB4X9KyuF/SsqiyWOiU7fAgP//OoH//zqB4X/AgP//OoH//zqBdH/AgP//Qvn//0L5irfAgP//Qvn//0L5irdjm4q3Y5vH50L5U7f//1O3SsqiyRjYU7dKylO3SsqiyWOiU7djm1O3Y5vH5zqB4X///+F/SsqiyRjY4X9jm+F/Y5vG50L54X9jm+F/Y5vH5zqB4X9KyuF/SsqiyWOi"),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("FQADAAYAFQAMAAMAGAATAAoAGAAbABMABwASABYABwAJABIADQAAAAQADQAPAAAAHgABABAAHgAhAAEACwAiABkAIgAFAAIABQALAAgAIgALAAUAEQAcAB8AHAAXABQAFwARAA4AHAARABcAOQAnADAAOQAqACcAGAA3ABsAGAAuADcAKwA2AC0AKwA6ADYAMQAkADMAMQAoACQAHgAlACEAHgA0ACUAIwAvABoALwApACwAKQAjACYALwAjACkAHQA1ACAANQA7ADIAOwAdADgANQAdADsA"),
+"material": SubResource("StandardMaterial3D_mb7cm"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(1.16368, 1.05777, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("AAAAAAS5//8AAAAABLn//wAAAAAEuQwA+QC6Rv//AAD5ALpG//////kAukb//wwA+QBEuf//AAD5AES5//8AAPkARLn//wwA+QD//wS5AAD5AP//BLkAAPkA//8EuQwADP66Rv//AAAM/rpG/////wz+ukb//8+/DP4AAAS5//8M/gAABLn//wz+AAAEuc+/DP7//wS5AAAM/v//BLkAAAz+//8Euc+/DP5Euf//AAAM/kS5//8AAAz+RLn//8+/+QD///9////5AP///38MAPkA////fxDADP7///9///8M/v///3/Pvwz+////fwcA//8AAP9/AAD//wAA/3/Pv///AAD/fwcAAAAAAP9/AAAAAAAA/38MAAAAAAD/fxDAAAAAAPpGAAAAAAAA+kYAAAAAAAD6RhDA+QC6RgAA///5ALpGAAAAAPkAukYAABDA+QBEuQAA///5AES5AAD///kARLkAABDA+QD///pG///5AP//+kb///kA///6RhDADP66RgAA//8M/rpGAAAAAAz+ukYAAAcADP4AAPpGAAAM/gAA+kYAAAz+AAD6RgcADP7///pG//8M/v//+kb//wz+///6RgcADP5EuQAA//8M/kS5AAD//wz+RLkAAAcA/3+CWv9//z/w/+o//3//f/9/glrw/+o//3//f/9/fKXx/+o//398pf9//7/w/+o//3//f/9/gloggA8A/3+CWv9//z8ggBAA/398pf9//78ggBAA/3//f/9/fKUggBAA/3//v/H/6j8bgMf//3//vyCAEAAgwAiA/3//PyCAEAAgwAiA/3//P/H/6j8bgMf/fKX///9//z8bgMf//3///3yl//8bgMf//3////9/gdobgMf//3+B2v9//78bgMf//3///3yl//8gwAiAfKX///9//z8gwAiA/3+B2v9//78gwAiA/3////9/gdogwAeA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mu7ji")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6loa6"]
+_surfaces = [{
+"aabb": AABB(-0.0881527, -0.10179, -0.431808, 0.176305, 0.20358, 0.100468),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAFAAMAAgAEAAUABAAHAAUABAAGAAcABgAJAAcABgAIAAkACAALAAkACAAKAAsACgABAAsACgAAAAEACgACAAAAAgAGAAQABgAKAAgAAgAKAAYA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/3///wAAAAD/f/7///8AAP///78AAAAA////v/7/AAD///8/AAAAAP///z/+/wAA/38AAAAAAAD/fwAA/v8AAAAA/z8AAAAAAAD/P/7/AAAAAP+/AAAAAAAA/7/+/wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_am8de"]
+resource_name = "turret_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.0881527, -0.10179, -0.431808, 0.176305, 0.20358, 0.100468),
+"attribute_data": PackedByteArray("4AHCq6MU9ur5Afbq+QH26qMU9uq1EJjFoxTf/aMU9ur5Ad/9+QH26n8uqsWjFPbqoxTf/fkB9ur5Ad/9dT3nq6MU3/2jFPbq+QHf/fkB9uqgLhGSoxTf/fkB3/35Ad/9oxTf/dYQ/5H5Ad/9+QH26qMU3/2jFPbq"),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AQAIAAMAAQAGAAgABwAOAAkABwAMAA4ACwASAA0ACwAQABIAEQAXABMAEQAVABcAFgAdABgAFgAbAB0AGgAEABwAGgACAAQAGQAFAAAABQAPAAoADwAZABQABQAZAA8A"),
+"material": SubResource("StandardMaterial3D_mb7cm"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 30,
+"vertex_data": PackedByteArray("/3///wAA////f///AABKyv9///8AAErK/3/+////Ssr/f/7///9Kyv///78AAP//////vwAASsr///+/AAD/v////7/+/0rK////v/7//7////8/AAD//////z8AAErK////PwAA/7////8//v9Kyv///z/+//+//38AAAAA////fwAAAABKyv9/AAAAAIzi/38AAP7/Ssr/fwAA/v+M4gAA/z8AAP//AAD/PwAAjOIAAP8/AAD/vwAA/z/+/4ziAAD/P/7//78AAP+/AAD//wAA/78AAErKAAD/vwAA/78AAP+//v9KygAA/7/+//+/E0ATwJfESyJLome7l8RLIkuiZ7sTQBPAl8RLIv9/AACXxEsi/38AABNAE8CzXZdE/38AALNdl0T/fwAAE0ATwLNdl0RVTlNjs12XRFVOU2MTQBPAVU5TY/9///9VTlNj/3///xNAE8BLome7/3///0uiZ7v/f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6loa6")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2bnl0"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7y252"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_66co8"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("base")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("base/TurretPivot/turret")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_407r1"]
+resource_name = "float"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("base")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, -0.05, 0, 2, 1, 0, 0, 0, 3, 1, 0, 0.05, 0, 4, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olt10"]
+_data = {
+"RESET": SubResource("Animation_66co8"),
+"float": SubResource("Animation_407r1")
+}
+
+[sub_resource type="Animation" id="Animation_26uvh"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("base/TurretPivot/turret")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("base/TurretPivot/turret/barrel/RayCast3D/LaserEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_uny7s"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("base/TurretPivot/turret")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.0666667, 1, 0, 0, 0.1, 0.333333, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("base/TurretPivot/turret/barrel/RayCast3D/LaserEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0iqmn"]
+_data = {
+"RESET": SubResource("Animation_26uvh"),
+"shoot": SubResource("Animation_uny7s")
+}
+
+[node name="Turret" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 13
+script = ExtResource("1_yvf3x")
+durability = 40
+block_name = "Turret"
+damaged_sound = ExtResource("2_cboge")
+destroyed_sound = ExtResource("3_4gad8")
+
+[node name="base" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.991351, 0, 0, 0, 0.991351, 0, 0, 0, 0.991351, 0, 0, 0)
+material_overlay = ExtResource("3_ttt0k")
+mesh = SubResource("ArrayMesh_bc5qc")
+skeleton = NodePath("")
+
+[node name="TurretPivot" type="Node3D" parent="base"]
+
+[node name="turret" type="MeshInstance3D" parent="base/TurretPivot"]
+material_overlay = ExtResource("3_ttt0k")
+mesh = SubResource("ArrayMesh_7udpq")
+skeleton = NodePath("")
+
+[node name="barrel" type="MeshInstance3D" parent="base/TurretPivot/turret"]
+mesh = SubResource("ArrayMesh_am8de")
+skeleton = NodePath("")
+
+[node name="RayCast3D" type="RayCast3D" parent="base/TurretPivot/turret/barrel"]
+transform = Transform3D(1.00872, 0, 0, 0, 1.00872, 0, 0, 0, 1.00872, 0, 0, -0.398092)
+enabled = false
+target_position = Vector3(0, 0, -7)
+collision_mask = 55
+
+[node name="LaserEffect" parent="base/TurretPivot/turret/barrel/RayCast3D" instance=ExtResource("6_q561l")]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="base/TurretPivot/turret/barrel"]
+texture = ExtResource("6_h5bof")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_2bnl0")
+
+[node name="BulletHoleSpawner" parent="." instance=ExtResource("4_pokwv")]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_7y252")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_ohv5v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_olt10")
+}
+autoplay = "float"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0iqmn")
+}
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

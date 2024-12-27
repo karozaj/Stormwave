@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://debjjxdeoktvh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hcr32"]
+load_path = "res://.godot/imported/buildingblock_buildableblock.png-fd9196f6079ae29ccb284638322bbecf.ctex"
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Material.001"
+albedo_texture = SubResource("CompressedTexture2D_hcr32")
+texture_filter = 2

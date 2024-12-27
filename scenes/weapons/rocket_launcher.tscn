@@ -76,10 +76,10 @@ tracks/1/path = NodePath(".:is_being_pulled_out")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -146,7 +146,6 @@ _data = {
 [node name="RocketLauncher" instance=ExtResource("1_h0ptx")]
 visible = false
 script = ExtResource("2_osnhl")
-is_being_pulled_out = false
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
@@ -159,7 +158,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373328, 0.17618, 1.38695
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174928, 0)
 enabled = false
 target_position = Vector3(0, 0, -1.5)
-collision_mask = 6
+collision_mask = 54
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
 

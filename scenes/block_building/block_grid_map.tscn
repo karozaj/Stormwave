@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://clhqasfv2p8op"]
+
+[ext_resource type="MeshLibrary" uid="uid://f7eyloo5fbwx" path="res://resources/mesh_libraries/blocks_new.tres" id="1_tw30a"]
+[ext_resource type="Script" path="res://scripts/block_building/block_grid_map.gd" id="2_pqmmt"]
+
+[node name="BlockGridMap" type="GridMap"]
+mesh_library = ExtResource("1_tw30a")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 16
+collision_mask = 13
+script = ExtResource("2_pqmmt")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+exclude_parent = false
+collision_mask = 16

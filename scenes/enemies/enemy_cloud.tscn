@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=25 format=4 uid="uid://ldsvjji42wx1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_cloud.gd" id="1_suw4d"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://ncln3pm11vom" path="res://resources/materials/enemies/cloud_eye.tres" id="4_tgjtr"]
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_tqel5"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/chase.gd" id="7_05cja"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/idle.gd" id="7_x687j"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/attack.gd" id="8_fqofo"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/pain.gd" id="8_jd6px"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/die.gd" id="8_nmhom"]
@@ -271,10 +272,11 @@ _data = {
 
 [node name="EnemyCloud" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 63
 motion_mode = 1
 script = ExtResource("1_suw4d")
 base_damage = 50
+move_speed = 10.0
 attack_range = 3.0
 attack_cooldown = 2.0
 knockback_modifier = 5.0
@@ -314,7 +316,7 @@ texture = ExtResource("2_clo1p")
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
 target_position = Vector3(0, 0, -50)
-collision_mask = 3
+collision_mask = 51
 hit_from_inside = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
@@ -336,7 +338,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_tqel5")]
-initial_state = NodePath("Chase")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_x687j")
 
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("7_05cja")

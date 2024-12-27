@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dm3r1hv0l3q6h"]
+[gd_scene load_steps=29 format=4 uid="uid://dm3r1hv0l3q6h"]
 
 [ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://jgkbd46cfaao" path="res://resources/materials/enemies/ghost.tres" id="4_5y0kq"]
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_ya6yt"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/chase.gd" id="6_akg5s"]
+[ext_resource type="Script" path="res://scripts/enemies/ghost/idle.gd" id="7_drird"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/attack.gd" id="7_rd25v"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/die.gd" id="8_mvxav"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/pain.gd" id="9_pcets"]
@@ -528,7 +529,7 @@ _data = {
 
 [node name="EnemyGhost" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 14
+collision_mask = 62
 motion_mode = 1
 script = ExtResource("1_0m7cj")
 health = 30
@@ -572,6 +573,7 @@ shape = SubResource("CapsuleShape3D_5uuuw")
 
 [node name="AttackArea" type="Area3D" parent="."]
 collision_layer = 4
+collision_mask = 33
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
@@ -597,7 +599,10 @@ libraries = {
 autoplay = "idle"
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ya6yt")]
-initial_state = NodePath("Chase")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_drird")
 
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("6_akg5s")
