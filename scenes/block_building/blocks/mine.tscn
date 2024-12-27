@@ -141,7 +141,6 @@ collision_mask = 5
 shape = SubResource("BoxShape3D_i3v7d")
 
 [node name="mine" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.981506, 0, -0.191433, 0, 1, 0, 0.191433, 0, 0.981506, 0, 0, 0)
 material_overlay = ExtResource("2_dtwvg")
 mesh = SubResource("ArrayMesh_c7nll")
 skeleton = NodePath("")

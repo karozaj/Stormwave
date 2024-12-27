@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cfnul5kue1i8j" path="res://scenes/block_building/blocks/reinforced_block.tscn" id="2_foi0t"]
 [ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_tx7xy"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6loks"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_qxsr1"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 34896613377,
@@ -35,7 +35,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_6loks")
+shadow_mesh = SubResource("ArrayMesh_qxsr1")
 
 [sub_resource type="Animation" id="Animation_3owp7"]
 length = 0.001

@@ -4,4 +4,4 @@ extends State
 
 
 func enter(_transition_data:Dictionary={})->void:
-	state_owner.player_died.emit()
+	state_owner.died.emit()

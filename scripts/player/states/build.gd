@@ -26,8 +26,8 @@ func update(delta:float)->void:
 		building_manager.select_placer(2)
 	elif Input.is_action_just_pressed("select_weapon_4"):
 		building_manager.select_placer(3)
-	#elif Input.is_action_just_pressed("select_weapon_5"):
-		#building_manager.select_placer(4)
+	elif Input.is_action_just_pressed("select_weapon_5"):
+		building_manager.select_placer(4)
 		
 func physics_update(delta:float)->void:
 	state_owner.physics_process_update(delta)

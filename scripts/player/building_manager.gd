@@ -10,12 +10,13 @@ signal block_count_changed(count:int) #signal used to notify hud about block cha
 @onready var reinforced_block_placer:PlacerBaseClass=$RightPosition/ReinforcedBlockPlacer
 @onready var explosive_block_placer:PlacerBaseClass=$RightPosition/ExplosiveBlockPlacer
 @onready var mine_placer:PlacerBaseClass=$RightPosition/MinePlacer
+@onready var turret_placer:PlacerBaseClass=$RightPosition/TurretPlacer
 
-@onready var placers:Array[PlacerBaseClass]=[block_placer,reinforced_block_placer,explosive_block_placer,mine_placer]
+@onready var placers:Array[PlacerBaseClass]=[block_placer,reinforced_block_placer,explosive_block_placer,mine_placer,turret_placer]
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[100,50,25,10]
+var block_count:Array[int]=[100,50,25,10,5]
 var can_use:bool=true
 var no_blocks_sound:AudioStream=preload("res://audio/sfx/blocks/no_blocks.ogg")
 var collect_sound:AudioStream=preload("res://audio/sfx/blocks/collect_block.ogg")
@@ -59,6 +60,9 @@ func collect()->void:
 		play_sound(collect_sound)
 	elif block_name=="Mine":
 		block_count[3]+=1
+		play_sound(collect_sound)
+	elif block_name=="Turret":
+		block_count[4]+=1
 		play_sound(collect_sound)
 	block_count_changed.emit(block_count[current_placer_index])
 

@@ -1,7 +1,9 @@
 extends CharacterBody3D
 class_name Player
 #used to notify enemies of player's death
-signal player_died
+
+@warning_ignore("unused_signal")
+signal died
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
@@ -68,7 +70,6 @@ func _ready() -> void:
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	health=starting_health
 	rng.randomize()
-	#hud.update_ammo(weapon_manager.ammo[weapon_manager.current_weapon_index])
 	weapon_manager.ammo_count_changed.connect(hud.update_ammo)
 	building_manager.block_count_changed.connect(hud.update_ammo)
 	building_manager.player_height=$CollisionShape3D.shape.height
@@ -82,7 +83,6 @@ func process_update(_delta:float):
 			state_machine.transition_to_next_state(state_machine.current_state,"Build")
 		elif state_machine.current_state.name=="Build":
 			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
-	#if is_dead==false:
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause"):
 		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
@@ -109,7 +109,6 @@ func physics_process_update(delta:float):
 
 	var direction=Vector3.ZERO
 	##PHYSPROCESS INPUTS 
-	#if is_dead==false:
 	if Input.is_action_just_pressed("jump"):
 		if movement_manager.jump_available:
 			jump()
@@ -190,7 +189,6 @@ func damage(damage_points:int, origin:Vector3)->void:
 	state_machine.current_state.damage(damage_points,origin)
 
 func take_damage(damage_points:int, origin:Vector3)->void:
-	#if is_dead==false:
 	if is_invincible==false:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin
