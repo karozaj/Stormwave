@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://grr718l4iit5"]
+[gd_scene load_steps=25 format=4 uid="uid://cljumdm3fr7bs"]
 
 [ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="1_sl5kr"]
 [ext_resource type="Script" path="res://scripts/block_building/blocks/turret.gd" id="1_yvf3x"]
