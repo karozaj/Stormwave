@@ -27,4 +27,4 @@ func shoot():
 		if ray.is_colliding():
 			bullet_hole_spawner.spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal(),1.25)
 			if ray.get_collider().has_method("damage"):
-				ray.get_collider().damage(base_damage, global_position)
+				ray.get_collider().damage(base_damage, global_position,weapon_owner)

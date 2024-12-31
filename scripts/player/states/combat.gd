@@ -4,6 +4,8 @@ extends State
 var weapon_manager:WeaponManager
 
 func enter(_transition_data:Dictionary={})->void:
+	for placer in state_owner.building_manager.placers:
+		placer.visible=false
 	weapon_manager=state_owner.weapon_manager
 	weapon_manager.select_weapon(1)
 	
@@ -36,8 +38,8 @@ func physics_update(delta:float)->void:
 func handle_input(event: InputEvent) -> void:
 	state_owner.mouselook(event)
 	
-func damage(damage_points:int, origin:Vector3)->void:
-	state_owner.take_damage(damage_points,origin)
+func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+	state_owner.take_damage(damage_points,origin,damage_dealer)
 
 #executes when leaving state
 func exit()->void:

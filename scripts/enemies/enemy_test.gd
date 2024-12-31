@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func damage(damage_points:int, origin:Vector3):
+func damage(damage_points:int, origin:Vector3,damage_dealer):
 	health-=damage_points
 	print("enemy damaged ",health)
 	var knockback_direction:Vector3=global_position-origin

@@ -1,18 +1,18 @@
 extends BlockBaseClass
 
-signal died
+signal died(obj:Object)
 
-@onready var ray:RayCast3D=$base/TurretPivot/turret/barrel/RayCast3D
+@onready var ray:RayCast3D=$base/TurretPivot/turret/barrel/WeaponRaycast
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var cooldown_timer:Timer=$Timer
-@onready var laser_effect:LaserEffect=$base/TurretPivot/turret/barrel/RayCast3D/LaserEffect
+@onready var laser_effect:LaserEffect=$base/TurretPivot/turret/barrel/WeaponRaycast/LaserEffect
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
-
+@onready var aim_point:Marker3D=$AimPoint
 @onready var max_ammo:int=ammo
 
 var targets:Array[EnemyBaseClass]=[]
 
-@export var attack_cooldown:float=1.0
+@export var attack_cooldown:float=1.5
 ## How many points of damage attacks should deal
 @export var base_damage:int=10
 ## How much ammo the turret has
@@ -28,13 +28,15 @@ var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_dest
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if len(targets)>0:
-		var trg=targets[0].global_position
-		$base.look_at(Vector3(trg.x,global_position.y,trg.z))
-		$base/TurretPivot.look_at(trg)
+		var trg=targets[0].aim_point.global_position
+		if Vector2($base.global_position.x,$base.global_position.z).distance_to(Vector2(trg.x,trg.z)):
+			$base.look_at(Vector3(trg.x,global_position.y,trg.z))
+		if $base/TurretPivot.global_position.distance_to(trg):
+			$base/TurretPivot.look_at(trg)
 		if can_shoot and ammo>0:
 			shoot()
 			
-func damage(dmg:int,_pos:Vector3):
+func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
 	play_sound(damaged_sound, 0.1,damaged_pitch)
 	$base.material_overlay.albedo_color=Color(1.0,1.0,1.0,1.0-float(durability)/float(max_durability))
@@ -49,6 +51,7 @@ func destroy_block()->bool:
 		effect.pitch=destroyed_pitch
 		get_parent().add_child(effect)
 		effect.global_position=global_position
+		died.emit(self)
 		call_deferred("queue_free")
 		return true
 	return false
@@ -75,7 +78,7 @@ func shoot()->void:
 		laser_effect.show_laser_effect(ray.global_position,ray.get_collision_point())
 		bullet_hole_spawner.spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
 		if ray.get_collider().has_method("damage"):
-			ray.get_collider().damage(base_damage, global_position)
+			ray.get_collider().damage(base_damage, global_position,self)
 	$AnimationPlayer2.play("shoot")
 	play_sound(attack_sound)
 	ammo-=1
@@ -90,7 +93,7 @@ func remove_target(trg:EnemyBaseClass):
 		targets.erase(trg)
 		trg.died.disconnect(remove_target)
 
-#plays gicen sound
+#plays given sound
 func play_sound(sound:AudioStream, v:float=0.1,pitch:float=1.0):
 	if audio_player.playing==false:
 		audio_player.pitch_scale=pitch+randf_range(-v,v)

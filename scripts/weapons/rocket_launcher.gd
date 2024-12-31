@@ -2,7 +2,7 @@ extends WeaponBaseClass
 
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
 @onready var projectile_spawn_marker:Marker3D=$Cylinder/Marker3D
-@onready var rocket_direction_ray:RayCast3D=$RayCast3D
+@onready var rocket_direction_ray:RayCast3D=$WeaponRaycast
 var projectile_scene=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 var shooting_sound:AudioStream=preload("res://audio/sfx/rocket_launcher.ogg")
 

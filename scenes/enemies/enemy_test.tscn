@@ -8,7 +8,7 @@
 
 [node name="EnemyTest" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 4
+collision_layer = 132
 collision_mask = 15
 script = ExtResource("1_4sptj")
 

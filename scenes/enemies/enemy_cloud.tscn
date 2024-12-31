@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=4 uid="uid://ldsvjji42wx1"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy_cloud.gd" id="1_suw4d"]
+[ext_resource type="Script" path="res://scripts/enemies/cloud/enemy_cloud.gd" id="1_suw4d"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="2_uh8ia"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="3_uo1hx"]
@@ -270,8 +270,8 @@ _data = {
 "pain": SubResource("Animation_eejlw")
 }
 
-[node name="EnemyCloud" type="CharacterBody3D" groups=["enemies"]]
-collision_layer = 4
+[node name="EnemyCloud" type="CharacterBody3D" node_paths=PackedStringArray("aim_point") groups=["enemies"]]
+collision_layer = 132
 collision_mask = 63
 motion_mode = 1
 script = ExtResource("1_suw4d")
@@ -280,6 +280,9 @@ move_speed = 10.0
 attack_range = 3.0
 attack_cooldown = 2.0
 knockback_modifier = 5.0
+aim_point = NodePath("AimPoint")
+
+[node name="AimPoint" type="Marker3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0798005, 0)
@@ -316,7 +319,7 @@ texture = ExtResource("2_clo1p")
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
 target_position = Vector3(0, 0, -50)
-collision_mask = 51
+collision_mask = 115
 hit_from_inside = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

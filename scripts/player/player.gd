@@ -3,7 +3,7 @@ class_name Player
 #used to notify enemies of player's death
 
 @warning_ignore("unused_signal")
-signal died
+signal died(obj:Object)
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
@@ -12,6 +12,8 @@ var mouse_sensitivity:float=1.0
 @onready var weapon_manager:WeaponManager=$Pivot/WeaponCamera/WeaponManager
 @onready var building_manager:BuildingManager=$Pivot/WeaponCamera/BuildingManager
 @onready var state_machine:StateMachine=$StateMachine
+#Marker used to indicate where enemies should aim
+@onready var aim_point:Marker3D=$AimPoint
 #camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
@@ -185,10 +187,10 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 	main_camera.fov=lerp(main_camera.fov,target_fov,1-pow(lerp_val,delta))
 
 
-func damage(damage_points:int, origin:Vector3)->void:
-	state_machine.current_state.damage(damage_points,origin)
+func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+	state_machine.current_state.damage(damage_points,origin,damage_dealer)
 
-func take_damage(damage_points:int, origin:Vector3)->void:
+func take_damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	if is_invincible==false:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin

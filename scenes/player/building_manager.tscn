@@ -26,6 +26,7 @@ block = ExtResource("5_noitv")
 [node name="TurretPlacer" parent="RightPosition" instance=ExtResource("7_fpy8a")]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
 
 [node name="CooldownTimer" type="Timer" parent="."]
 

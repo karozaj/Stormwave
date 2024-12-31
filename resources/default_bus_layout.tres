@@ -1,4 +1,9 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://db7rqgj1c2dar"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://db7rqgj1c2dar"]
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_qwr4m"]
+resource_name = "Distortion"
+mode = 2
+drive = 0.5
 
 [resource]
 bus/1/name = &"SFX"
@@ -7,6 +12,8 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDistortion_qwr4m")
+bus/1/effect/0/enabled = true
 bus/2/name = &"Music"
 bus/2/solo = false
 bus/2/mute = false

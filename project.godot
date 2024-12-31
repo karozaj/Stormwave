@@ -25,6 +25,13 @@ Global="*res://scripts/globals/global.gd"
 MusicPlayer="*res://scenes/ui/music_player.tscn"
 UISoundPlayer="*res://scenes/ui/ui_sound_player.tscn"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [editor]
 
 movie_writer/movie_file="D:\\Godot\\Godot_v4.3\\movies\\movie2.avi"
@@ -173,10 +180,12 @@ TEST_BUTTON={
 3d_render/layer_20="Weapons"
 3d_physics/layer_1="player"
 3d_physics/layer_2="ground"
-3d_physics/layer_3="enemies"
+3d_physics/layer_3="enemies_collision"
 3d_physics/layer_4="projectiles"
 3d_physics/layer_5="grid_map_base"
 3d_physics/layer_6="blocks"
+3d_physics/layer_7="mines"
+3d_physics/layer_8="enemies_hitbox"
 
 [rendering]
 

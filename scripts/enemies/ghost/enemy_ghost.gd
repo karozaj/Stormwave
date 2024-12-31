@@ -21,11 +21,10 @@ var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 ## Attack state duration
 @export var attack_time:float=1.0
 ## Determines how quickly the enemy can reorient itself
-@export var agility:float=15.0
 
 
 func _ready() -> void:
-	target=Global.player
+	add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
 #
 
@@ -33,21 +32,24 @@ func attack()->void:
 	attack_area.monitoring=true
 	animation_player.play("attack")
 	var current_location=global_transform.origin
-	var next_location=target.global_position+Vector3(0,0.75,0)
+	#var next_location=target.global_position+Vector3(0,0.75,0)
+	var next_location=target_position
 	var new_velocity=(next_location-current_location).normalized()*dash_speed
 	velocity=new_velocity
 	
 
-func damage(damage_points:int, origin:Vector3)->void:
-	state_machine.current_state.damage(damage_points,origin)
+func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+	state_machine.current_state.damage(damage_points,origin,damage_dealer)
 
-func take_damage(damage_points:int, origin:Vector3)->void:
+func take_damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	health-=damage_points
 	var knockback_direction:Vector3=global_position-origin
 	knockback_direction=knockback_direction.normalized()
 	velocity=knockback_direction*damage_points/100*knockback_modifier
+	if damage_dealer!=null:
+		add_targets([damage_dealer])
 
-func play_sound_effect(sound:AudioStream, pitch_from:float=0.0,pitch_to:float=0.0, pitch_base:float=1.0)->void:
+func play_sound_effect(sound:AudioStream, pitch_from:float=-0.0,pitch_to:float=0.0, pitch_base:float=1.0)->void:
 	audio_player.stream=sound
 	audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
 	audio_player.play()
@@ -55,4 +57,4 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=0.0,pitch_to:float=0.
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		body.damage(base_damage, global_position)
+		body.damage(base_damage, global_position,self)

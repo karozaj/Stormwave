@@ -3,6 +3,9 @@ class_name WeaponManager
 
 signal ammo_count_changed(count:int) #signal used to notify hud about ammo change
 
+## The player that owns this weapon manager
+@export var weapon_manager_owner:Player
+
 @onready var audio_player=$AudioStreamPlayer3D
 var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
 var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
@@ -22,6 +25,7 @@ var can_shoot:bool=true
 func _ready() -> void:
 	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
 	for weapon in weapons:
+		weapon.weapon_owner=weapon_manager_owner
 		if weapon.has_method("set_ray_position"):
 			weapon.set_ray_position(global_position)
 	current_weapon=pistol

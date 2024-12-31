@@ -19,6 +19,9 @@ height = 1.75
 collision_mask = 58
 script = ExtResource("1_r4lc0")
 
+[node name="AimPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
 [node name="MovementManager" parent="." instance=ExtResource("2_pu5br")]
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -34,7 +37,8 @@ cull_mask = 524288
 fov = 60.0
 size = 1.906
 
-[node name="WeaponManager" parent="Pivot/WeaponCamera" instance=ExtResource("3_tefss")]
+[node name="WeaponManager" parent="Pivot/WeaponCamera" node_paths=PackedStringArray("weapon_manager_owner") instance=ExtResource("3_tefss")]
+weapon_manager_owner = NodePath("../../..")
 
 [node name="BuildingManager" parent="Pivot/WeaponCamera" instance=ExtResource("4_krkao")]
 
@@ -56,7 +60,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(640, 480)
 render_target_update_mode = 4
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("4_24bxq")]

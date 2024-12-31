@@ -11,10 +11,12 @@ radius = 0.25
 [sub_resource type="SphereShape3D" id="SphereShape3D_a503m"]
 radius = 0.001
 
-[node name="RocketProjectile" type="Area3D"]
+[node name="RocketProjectile" type="Area3D" node_paths=PackedStringArray("projectile_lifetime_timer")]
 collision_layer = 8
-collision_mask = 55
+collision_mask = 243
 script = ExtResource("1_mi6pk")
+direct_damage = 150
+projectile_lifetime_timer = NodePath("ProjectileLifetimeTimer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_sb223")
@@ -41,7 +43,8 @@ wait_time = 5.0
 
 [node name="ExplosionArea" type="Area3D" parent="."]
 collision_layer = 8
-collision_mask = 39
+collision_mask = 101
+input_ray_pickable = false
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]
@@ -50,9 +53,10 @@ shape = SubResource("SphereShape3D_a503m")
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
 target_position = Vector3(0, -2.5, 0)
-collision_mask = 55
+collision_mask = 247
 hit_from_inside = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="ProjectileLifetimeTimer" to="." method="_destroy_projectile"]
 [connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]

@@ -1,6 +1,8 @@
 extends GridMap
 class_name BlockGridMap
 
+signal map_changed
+
 ## Maximum height above base at which it's possible to place blocks
 @export var max_building_height:int=10
 #raycast is used to check if the player is building within set boundaries
@@ -9,6 +11,7 @@ var highlighted_block_coordinate:Vector3i
 
 func _ready() -> void:
 	ray.target_position=Vector3(0,-max_building_height,0)
+
 
 func destroy_block(world_coordinate:Vector3)->bool:
 	var map_coordinate=local_to_map(world_coordinate)
@@ -26,12 +29,13 @@ func place_block(world_coordinate:Vector3, block:PackedScene)->bool:
 		if ray.is_colliding():
 			var block_scene=block.instantiate()
 			block_scene.gridmap=self
-			Global.current_level.add_child(block_scene)
+			add_child(block_scene)
 			block_scene.position=map_to_local(map_coordinate)
-			#print("place")
-			#print(map_coordinate)
 			set_cell_item(map_coordinate,2)
 			print(map_coordinate)
+			#connect tree exited signal so navmesh can update when map changes
+			map_changed.emit()
+			block_scene.tree_exited.connect(map_changed.emit)
 			return true
 		else:
 			print("ray not colliding")

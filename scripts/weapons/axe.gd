@@ -15,4 +15,4 @@ func shoot():
 
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		body.damage(base_damage, global_position)
+		body.damage(base_damage, global_position,weapon_owner)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://demh0215o684x"]
+[gd_scene load_steps=8 format=3 uid="uid://demh0215o684x"]
 
 [ext_resource type="PackedScene" uid="uid://duqdgxltdqad1" path="res://3d/rocket_launcher.glb" id="1_h0ptx"]
 [ext_resource type="Script" path="res://scripts/weapons/rocket_launcher.gd" id="2_osnhl"]
+[ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="3_1bsgm"]
 
 [sub_resource type="Animation" id="Animation_wj2u5"]
 length = 0.001
@@ -154,13 +155,12 @@ layers = 524288
 [node name="Marker3D" type="Marker3D" parent="Cylinder" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373328, 0.17618, 1.38695)
 
-[node name="RayCast3D" type="RayCast3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174928, 0)
-enabled = false
+[node name="WeaponRaycast" parent="." index="1" instance=ExtResource("3_1bsgm")]
 target_position = Vector3(0, 0, -1.5)
-collision_mask = 54
+collide_with_areas = false
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
