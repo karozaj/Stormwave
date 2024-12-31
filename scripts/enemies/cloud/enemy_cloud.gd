@@ -36,6 +36,13 @@ func _ready() -> void:
 	add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
 
+func _process(_delta: float) -> void:
+	update_target_position()
+	update_navigation_target_position()
+	
+func update_navigation_target_position()->void:
+	navigation_target_position=target_position+Vector3(0.0,height_over_target,0.0)
+
 ## calls current state 'damage' method
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	state_machine.current_state.damage(damage_points,origin,damage_dealer)

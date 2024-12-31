@@ -4,9 +4,9 @@ extends State
 
 
 func update(delta:float)->void: #move towards target, enter attack state if target in range
-	var target_position:Vector3=state_owner.target.aim_point.global_position
+	var target_position:Vector3=state_owner.target_position
 	var current_location=state_owner.global_transform.origin
-	var next_location=target_position+Vector3(0,state_owner.height_over_target,0)
+	var next_location=state_owner.navigation_target_position#target_position+Vector3(0,state_owner.height_over_target,0)
 	if Vector2(current_location.x,current_location.z).distance_to(Vector2(next_location.x,next_location.z)): #make sure target isn't directly below
 		state_owner.eye.look_at(target_position)
 	if Vector2(current_location.x,current_location.z).distance_to(Vector2(next_location.x,next_location.z))>state_owner.attack_range:

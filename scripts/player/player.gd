@@ -190,7 +190,7 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	state_machine.current_state.damage(damage_points,origin,damage_dealer)
 
-func take_damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+func take_damage(damage_points:int, origin:Vector3,_damage_dealer)->void:
 	if is_invincible==false:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin

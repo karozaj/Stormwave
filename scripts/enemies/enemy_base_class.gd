@@ -28,45 +28,55 @@ signal died(enemy:EnemyBaseClass)
 @export var aim_point:Marker3D
 ## Determines if this enemy can attack other enemies
 @export var infighting_allowed:bool=false
+
 var can_attack:bool=true
 var is_dead:bool=false
 var is_in_pain:bool=false
 var target #enemy will chase and attack its target (usually the player)
 var targets:Array=[]
 var target_position:Vector3=Vector3.ZERO
+var navigation_target_position:Vector3=Vector3.ZERO
+var navigation_target_position_offset:Vector3=Vector3.ZERO
 
+#adds targets from argument array to the enemy's targets
+#if prefix is true, active target will change to the first target in trgts
+#argument array
 func add_targets(trgts:Array,prefix:bool=true):
 	if prefix==true:
 		for trg in trgts:
-			if trg not in targets:
-				if trg is EnemyBaseClass and infighting_allowed==false:
+			if targets.has(trg)==false:
+				if infighting_allowed==false and trg is EnemyBaseClass:
 					continue
 				targets.push_front(trg)
 				trg.died.connect(switch_target)
 	else:
 		for trg in trgts:
-			if trg not in targets:
-				if trg is EnemyBaseClass and infighting_allowed==false:
+			if targets.has(trg)==false:
+				if infighting_allowed==false and trg is EnemyBaseClass:
 					continue
 				targets.push_back(trg)
 				trg.died.connect(switch_target)
+	switch_target()
+	#if len(targets)>0:
+		#target=targets[0]
+
+#erases target passed as argument and switches active target
+#to first one from targets array, usually called when
+#current target dies
+func switch_target(trg=null):
+	if trg!=null:
+		if trg in targets:
+			targets.erase(trg)
 	if len(targets)>0:
 		target=targets[0]
-
-func switch_target(trg):
-	print(targets)
-	if trg in targets:
-		targets.erase(trg)
-		if len(targets)>0:
-			target=targets[0]
-		else:
-			target=null
+	else:
+		target=null
 	print(targets)
 
 
 #damage function should be overwritten to call damage function for current state
 #enemy should also enter 'pain' state upon receiving damage
-func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+func damage(damage_points:int, origin:Vector3,_damage_dealer)->void:
 	if is_dead==false:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin
@@ -76,8 +86,17 @@ func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 			die()
 			
 func _process(_delta: float) -> void:
+	update_target_position()
+	update_navigation_target_position()
+
+#updates position of the target (the entity this enemy is trying to attack)
+func update_target_position()->void:
 	if target!=null:
 		target_position=target.aim_point.global_position
+
+#updates the position where the enemy should go
+func update_navigation_target_position()->void:
+	navigation_target_position=target_position+navigation_target_position_offset
 
 #enemies should have a 'die' state instead of using this function
 func die():

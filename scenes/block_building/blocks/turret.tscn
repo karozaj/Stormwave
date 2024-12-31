@@ -209,6 +209,7 @@ _data = {
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_yvf3x")
+base_damage = 15
 durability = 40
 block_name = "Turret"
 damaged_sound = ExtResource("2_cboge")

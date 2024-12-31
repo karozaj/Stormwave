@@ -12,7 +12,7 @@ func update(delta:float)->void: #move towards target, enter attack state if targ
 		if state_owner.cooldown_timer.is_stopped():
 			finished.emit(self, "Attack")
 	var current_location=state_owner.global_transform.origin
-	var next_location=target_position
+	var next_location=state_owner.navigation_target_position
 	var new_velocity=(next_location-current_location).normalized()*state_owner.move_speed
 	state_owner.velocity=state_owner.velocity.move_toward(new_velocity,state_owner.agility*delta)
 	state_owner.look_at(state_owner.global_position+state_owner.velocity.normalized())

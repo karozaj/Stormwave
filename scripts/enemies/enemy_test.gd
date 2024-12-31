@@ -14,10 +14,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y-= gravity * delta
 	if velocity.y>0:
 		velocity.y-=2*gravity*delta
+	print(is_on_floor())
 	move_and_slide()
 
 
-func damage(damage_points:int, origin:Vector3,damage_dealer):
+func damage(damage_points:int, origin:Vector3,_damage_dealer):
 	health-=damage_points
 	print("enemy damaged ",health)
 	var knockback_direction:Vector3=global_position-origin

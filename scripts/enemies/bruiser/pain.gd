@@ -7,7 +7,7 @@ var timer:Timer
 func enter(transition_data:Dictionary={})->void:
 	#state_owner.agility
 	state_owner.take_damage(transition_data["damage_points"],transition_data["origin"],transition_data["damage_dealer"])
-	print(state_owner.health)
+	#print(state_owner.health)
 	timer=Timer.new()
 	state_owner.add_child(timer)
 	timer.start(state_owner.pain_time)

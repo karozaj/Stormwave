@@ -7,6 +7,8 @@ func enter(_transition_data:Dictionary={})->void:
 	state_owner.animation_tree.set("parameters/AttackMeleeOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)	
 	state_owner.animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	state_owner.update_target_position()
+	state_owner.update_navigation_target_position()
+	state_owner.update_navagent_target_position()
 	state_owner.target_update_timer.start()
 
 func physics_update(delta:float)->void: #move towards target, enter attack state if target in range
@@ -50,19 +52,34 @@ func update(_delta:float)->void:
 	if state_owner.target==null:
 		finished.emit(self,"Idle")
 		return
-	var enemy_position:Vector3=state_owner.target_position
-	enemy_position=Vector3(enemy_position.x,state_owner.global_position.y,enemy_position.z)
-	if state_owner.global_position.distance_to(enemy_position)<=state_owner.melee_range:
+		
+	var opponent_position:Vector3=state_owner.target_position
+	
+	opponent_position=Vector3(opponent_position.x,state_owner.global_position.y,opponent_position.z)
+	
+	if state_owner.navigation_agent.is_target_reachable()==false:
+		if state_owner.target_position.y-state_owner.global_position.y>3.5:
+			if state_owner.attack_cooldown_timer.time_left<=0.0:
+				if state_owner.are_enemies_in_projectile_path()==false:
+					finished.emit(self,"Attack")
+					return
+		elif state_owner.are_blocks_in_the_way()==true:
+			finished.emit(self,"AttackMelee")
+			return
+	
+	if state_owner.global_position.distance_to(opponent_position)<=state_owner.melee_range:
 		if state_owner.attack_melee_cooldown_timer.time_left<=0.0:
 			finished.emit(self,"AttackMelee")
 			return
-	if state_owner.global_position.distance_to(enemy_position)<=state_owner.attack_range:
+			
+	if state_owner.global_position.distance_to(opponent_position)<=state_owner.attack_range:
 		if state_owner.attack_cooldown_timer.time_left<=0.0:
-			finished.emit(self,"Attack")
-	
-	if state_owner.navigation_agent.is_target_reachable()==false:
-		if state_owner.attack_cooldown_timer.time_left<=0.0:
-			finished.emit(self,"Attack")
+			if state_owner.are_enemies_in_projectile_path()==false:
+				finished.emit(self,"Attack")
+				return
+	#
+
+		
 
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	finished.emit(self,"Pain",{"damage_points":damage_points,"origin":origin,"damage_dealer":damage_dealer})

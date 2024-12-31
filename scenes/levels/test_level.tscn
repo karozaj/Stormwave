@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=25 format=3 uid="uid://crywrnny46cu8"]
 
 [ext_resource type="Script" path="res://scripts/levels/test_level.gd" id="1_vkin7"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_m6vns"]
 [ext_resource type="PackedScene" uid="uid://dslcj101x1l0w" path="res://scenes/enemies/enemy_test.tscn" id="3_r4yha"]
 [ext_resource type="PackedScene" uid="uid://dm3r1hv0l3q6h" path="res://scenes/enemies/enemy_ghost.tscn" id="4_by2xx"]
 [ext_resource type="PackedScene" uid="uid://ldsvjji42wx1" path="res://scenes/enemies/enemy_cloud.tscn" id="5_x6rnm"]
+[ext_resource type="PackedScene" uid="uid://mp638iq6vrn4" path="res://scenes/weapons/projectiles/rocket_projectile.tscn" id="7_5mhho"]
 [ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="9_hmr7q"]
 [ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="9_jlod3"]
 [ext_resource type="Script" path="res://scripts/navtest.gd" id="9_yyoe3"]
@@ -65,6 +66,7 @@ albedo_color = Color(1, 0.305882, 0.423529, 1)
 data = PackedVector3Array(-0.5, 2.665, 0.5, 0.5, 2.665, 0.5, -0.5, -2.665, 0.5, 0.5, 2.665, 0.5, 0.5, -2.665, 0.5, -0.5, -2.665, 0.5, 0.5, 2.665, -0.5, -0.5, 2.665, -0.5, 0.5, -2.665, -0.5, -0.5, 2.665, -0.5, -0.5, -2.665, -0.5, 0.5, -2.665, -0.5, 0.5, 2.665, 0.5, 0.5, 2.665, -0.5, 0.5, -2.665, 0.5, 0.5, 2.665, -0.5, 0.5, -2.665, -0.5, 0.5, -2.665, 0.5, -0.5, 2.665, -0.5, -0.5, 2.665, 0.5, -0.5, -2.665, -0.5, -0.5, 2.665, 0.5, -0.5, -2.665, 0.5, -0.5, -2.665, -0.5, 0.5, 2.665, 0.5, -0.5, 2.665, 0.5, 0.5, 2.665, -0.5, -0.5, 2.665, 0.5, -0.5, 2.665, -0.5, 0.5, 2.665, -0.5, -0.5, -2.665, 0.5, 0.5, -2.665, 0.5, -0.5, -2.665, -0.5, 0.5, -2.665, 0.5, 0.5, -2.665, -0.5, -0.5, -2.665, -0.5)
 
 [node name="TestLevel" type="Node3D"]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.168672, -0.0775967, -0.152004)
 script = ExtResource("1_vkin7")
 
@@ -78,23 +80,9 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_m6vns")]
 knockback_modifier = 50.0
 
-[node name="enemy_test" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 0.999349, -0.0360856, 0, 0.0360856, 0.999349, 0, 1.51933, -5.261)
-
 [node name="enemy_test5" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8783, 4.10982, -4.14828)
-
-[node name="enemy_test6" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79175, 1.51933, -3.88602)
-
-[node name="enemy_test4" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19472, 1, -5.261)
-
-[node name="enemy_test2" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95083, 1, -5.261)
-
-[node name="enemy_test3" parent="." instance=ExtResource("3_r4yha")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22348, 1, -5.261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.3889, 0)
+platform_floor_layers = 0
 
 [node name="EnemyGhost7" parent="." instance=ExtResource("4_by2xx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5326, 2.16248, 23.168)
@@ -111,17 +99,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -5.03047)
 [node name="EnemyCloud3" parent="." instance=ExtResource("5_x6rnm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -9.03047)
 
-[node name="EnemyBruiser9" parent="." instance=ExtResource("9_jlod3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8715, 0, 10.2132)
-
-[node name="EnemyBruiser10" parent="." instance=ExtResource("9_jlod3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50313, -4.76837e-07, 10.2132)
-
 [node name="EnemyBruiser11" parent="." instance=ExtResource("9_jlod3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10642, -4.76837e-07, 10.2132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8332, -4.76837e-07, 5.20914)
 
 [node name="EnemyBruiser12" parent="." instance=ExtResource("9_jlod3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6123, -4.76837e-07, 10.2132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.446, 0.0436153, 0.368706)
+
+[node name="EnemyBruiser13" parent="." instance=ExtResource("9_jlod3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.446, -4.76837e-07, 2.35715)
+
+[node name="EnemyBruiser14" parent="." instance=ExtResource("9_jlod3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.446, -4.76837e-07, 4.44787)
+projectile_scene = ExtResource("7_5mhho")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_cm122")
@@ -132,7 +121,7 @@ script = ExtResource("9_yyoe3")
 data = {
 "cells": PackedInt32Array(-12, 15, 0, -12, 16, 0, -12, 17, 0, -12, 18, 0, -12, 19, 0, -12, 20, 0, -12, 21, 0, -12, 22, 0, -12, 23, 0, -12, 24, 0, -12, 25, 0, -11, 15, 0, -11, 16, 0, -11, 17, 0, -11, 18, 0, -11, 19, 0, -11, 20, 0, -11, 21, 0, -11, 22, 0, -11, 23, 0, -11, 24, 0, -11, 25, 0, -10, 15, 0, -10, 16, 0, -10, 17, 0, -10, 18, 0, -10, 19, 0, -10, 20, 0, -10, 21, 0, -10, 22, 0, -10, 23, 0, -10, 24, 0, -10, 25, 0, -9, 15, 0, -9, 16, 0, -9, 17, 0, -9, 18, 0, -9, 19, 0, -9, 20, 0, -9, 21, 0, -9, 22, 0, -9, 23, 0, -9, 24, 0, -9, 25, 0, -8, 15, 0, -8, 16, 0, -8, 17, 0, -8, 18, 0, -8, 19, 0, -8, 20, 0, -8, 21, 0, -8, 22, 0, -8, 23, 0, -8, 24, 0, -8, 25, 0, -7, 15, 0, -7, 16, 0, -7, 17, 0, -7, 18, 0, -7, 19, 0, -7, 20, 0, -7, 21, 0, -7, 22, 0, -7, 23, 0, -7, 24, 0, -7, 25, 0, -6, 15, 0, -6, 16, 0, -6, 17, 0, -6, 18, 0, -6, 19, 0, -6, 20, 0, -6, 21, 0, -6, 22, 0, -6, 23, 0, -6, 24, 0, -6, 25, 0, -5, 15, 0, -5, 16, 0, -5, 17, 0, -5, 18, 0, -5, 19, 0, -5, 20, 0, -5, 21, 0, -5, 22, 0, -5, 23, 0, -5, 24, 0, -5, 25, 0, -4, 15, 0, -4, 16, 0, -4, 17, 0, -4, 18, 0, -4, 19, 0, -4, 20, 0, -4, 21, 0, -4, 22, 0, -4, 23, 0, -4, 24, 0, -4, 25, 0, -3, 15, 0, -3, 16, 0, -3, 17, 0, -3, 18, 0, -3, 19, 0, -3, 20, 0, -3, 21, 0, -3, 22, 0, -3, 23, 0, -3, 24, 0, -3, 25, 0, -2, 15, 0, -2, 16, 0, -2, 17, 0, -2, 18, 0, -2, 19, 0, -2, 20, 0, -2, 21, 0, -2, 22, 0, -2, 23, 0, -2, 24, 0, -2, 25, 0, -1, 15, 0, -1, 16, 0, -1, 17, 0, -1, 18, 0, -1, 19, 0, -1, 20, 0, -1, 21, 0, -1, 22, 0, -1, 23, 0, -1, 24, 0, -1, 25, 0, -65536, 15, 0, -65536, 16, 0, -65536, 17, 0, -65536, 18, 0, -65536, 19, 0, -65536, 20, 0, -65536, 21, 0, -65536, 22, 0, -65536, 23, 0, -65536, 24, 0, -65536, 25, 0, -65535, 15, 0, -65535, 16, 0, -65535, 17, 0, -65535, 18, 0, -65535, 19, 0, -65535, 20, 0, -65535, 21, 0, -65535, 22, 0, -65535, 23, 0, -65535, 24, 0, -65535, 25, 0, -65534, 15, 0, -65534, 16, 0, -65534, 17, 0, -65534, 18, 0, -65534, 19, 0, -65534, 20, 0, -65534, 21, 0, -65534, 22, 0, -65534, 23, 0, -65534, 24, 0, -65534, 25, 0, -65533, 15, 0, -65533, 16, 0, -65533, 17, 0, -65533, 18, 0, -65533, 19, 0, -65533, 20, 0, -65533, 21, 0, -65533, 22, 0, -65533, 23, 0, -65533, 24, 0, -65533, 25, 0, -65532, 15, 0, -65532, 17, 0, -65532, 18, 0, -65532, 19, 0, -65532, 20, 0, -65532, 21, 0, -65532, 22, 0, -65532, 23, 0, -65532, 24, 0, -65532, 25, 0, -65532, 16, 0, -65532, 14, 0, -65533, 14, 0, -65534, 14, 0, -65535, 14, 0, -65536, 14, 0, -1, 14, 0, -2, 14, 0, -3, 14, 0, -4, 14, 0, -5, 14, 0, -6, 14, 0, -7, 14, 0, -8, 14, 0, -9, 14, 0, -10, 14, 0, -11, 14, 0, -12, 14, 0)
 }
-metadata/_editor_floor_ = Vector3(0, -1, 0)
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 11.5641, 0, -0.648216)
@@ -151,7 +140,7 @@ shape = SubResource("ConcavePolygonShape3D_dy1xs")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.66244e-07, 0, -0.648216)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
 transform = Transform3D(0.999951, 0, -0.00991331, 0, 1, 0, 0.00991331, 0, 0.999951, 0, 0, 0)

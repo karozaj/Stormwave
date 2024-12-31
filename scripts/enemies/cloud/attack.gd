@@ -16,7 +16,7 @@ func enter(_transition_data:Dictionary={})->void:
 func update(delta:float)->void:
 	var current_location=state_owner.global_transform.origin
 	var target_position:Vector3=state_owner.target_position
-	var target_location=target_position+Vector3(0,state_owner.height_over_target,0)
+	var target_location=state_owner.navigation_target_position#target_position+Vector3(0,state_owner.height_over_target,0)
 	#look at target if target is not directly underneath
 	if Vector2(current_location.x,current_location.z).distance_to(Vector2(target_location.x,target_location.z)):
 		state_owner.eye.look_at(target_position)
