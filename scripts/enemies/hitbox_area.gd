@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var hitbox_owner:EnemyBaseClass=owner
+@onready var hitbox_owner=owner
 
 ## Damage points are multiplied by this variable
 @export var damage_modifier:float=1.0

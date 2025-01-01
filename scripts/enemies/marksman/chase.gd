@@ -1,10 +1,9 @@
 extends State
 
-@onready var state_owner:EnemyBruiser=get_owner()
+@onready var state_owner:EnemyMarksman=get_owner()
 
 
 func enter(_transition_data:Dictionary={})->void:
-	state_owner.animation_tree.set("parameters/AttackMeleeOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)	
 	state_owner.animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	state_owner.update_target_position()
 	state_owner.update_navigation_target_position()
@@ -43,15 +42,11 @@ func physics_update(delta:float)->void: #move towards target, enter attack state
 		##state_owner.velocity.move_toward(Vector3.ZERO,state_owner.agility*delta)
 		#state_owner.velocity=Vector3.ZERO
 
-func update(_delta:float)->void:
+func update(_delta:float)->void:		
 	var looking_position:Vector3=state_owner.global_position+state_owner.velocity.normalized()
 	looking_position=Vector3(looking_position.x,state_owner.global_position.y,looking_position.z)
 	if state_owner.global_position.distance_to(looking_position)>0.01:
 		state_owner.look_at(looking_position)
-	#if state_owner.velocity.normalized().length()>0.0:
-		#var looking_position:Vector3=state_owner.global_position+state_owner.velocity.normalized()
-		#looking_position=Vector3(looking_position.x,state_owner.global_position.y,looking_position.z)
-		#state_owner.look_at(looking_position)
 	
 	if state_owner.target==null:
 		finished.emit(self,"Idle")
@@ -64,21 +59,18 @@ func update(_delta:float)->void:
 	if state_owner.navigation_agent.is_target_reachable()==false:
 		if state_owner.target_position.y-state_owner.global_position.y>3.5:
 			if state_owner.attack_cooldown_timer.time_left<=0.0:
-				if state_owner.are_enemies_in_projectile_path()==false:
+				if state_owner.are_enemies_in_laser_path()==false and state_owner.is_wall_blocking_gun()==false:
 					finished.emit(self,"Attack")
 					return
-		elif state_owner.are_blocks_in_the_way()==true:
-			finished.emit(self,"AttackMelee")
-			return
-	
-	if state_owner.global_position.distance_to(opponent_position)<=state_owner.melee_range:
-		if state_owner.attack_melee_cooldown_timer.time_left<=0.0:
-			finished.emit(self,"AttackMelee")
-			return
-			
+	#
+	#if state_owner.global_position.distance_to(opponent_position)<=state_owner.melee_range:
+		#if state_owner.attack_melee_cooldown_timer.time_left<=0.0:
+			#finished.emit(self,"AttackMelee")
+			#return
+			#
 	if state_owner.global_position.distance_to(opponent_position)<=state_owner.attack_range:
 		if state_owner.attack_cooldown_timer.time_left<=0.0:
-			if state_owner.are_enemies_in_projectile_path()==false:
+			if state_owner.are_enemies_in_laser_path()==false and state_owner.is_wall_blocking_gun()==false:
 				finished.emit(self,"Attack")
 				return
 	#

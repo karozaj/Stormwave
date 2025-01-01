@@ -16,7 +16,8 @@ func update(_delta:float)->void:
 	if state_owner.target!=null:
 		var looking_position:Vector3=state_owner.target_position
 		looking_position=Vector3(looking_position.x,state_owner.global_position.y,looking_position.z)
-		state_owner.look_at(looking_position)
+		if state_owner.global_position.distance_to(looking_position)>0.01:
+			state_owner.look_at(looking_position)
 	
 func physics_udpate(delta:float)->void:
 	state_owner.velocity=state_owner.velocity.move_toward(Vector3(0.0,state_owner.velocity.y,0.0),delta*state_owner.agility)

@@ -25,9 +25,9 @@ var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 		particle_alpha=value
 		$GPUParticles3D.process_material.color=Color(1,1,1,particle_alpha)
 ## How high over the target should the enemy's target position be
-@export var height_over_target:float=5.0
+@export var height_over_target:float=4.0
 ## How long the enemy needs to charge its attack before firing
-@export var attack_charging_time:float=1.5
+@export var attack_charging_time:float=1.0
 ## Sound effect pitch
 @export var base_pitch:float=0.5
 

@@ -17,6 +17,7 @@ height = 1.75
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 58
+platform_floor_layers = 50
 script = ExtResource("1_r4lc0")
 
 [node name="AimPoint" type="Marker3D" parent="."]

@@ -30,10 +30,10 @@ height = 1.8
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.731884, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_fhws7"]
+[sub_resource type="CurveTexture" id="CurveTexture_wh5gj"]
 curve = SubResource("Curve_lcaej")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5iro"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4e0cg"]
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(1, 1.25, 0.25)
 emission_shape = 1
@@ -45,9 +45,9 @@ initial_velocity_max = -0.1
 gravity = Vector3(0, 0, 0.25)
 scale_min = 0.75
 scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_fhws7")
+alpha_curve = SubResource("CurveTexture_wh5gj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng63p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vawms"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
@@ -57,8 +57,9 @@ albedo_texture = ExtResource("1_dv5ch")
 texture_filter = 0
 billboard_mode = 1
 
-[sub_resource type="QuadMesh" id="QuadMesh_x53j4"]
-material = SubResource("StandardMaterial3D_ng63p")
+[sub_resource type="QuadMesh" id="QuadMesh_ip4cd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vawms")
 size = Vector2(0.75, 1.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7xcd"]
@@ -269,19 +270,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D/head:instance_shader_parameters/alpha")
+tracks/2/path = NodePath(".:material_alpha")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:material_alpha")
+tracks/3/path = NodePath(".:particle_alpha")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -293,43 +294,43 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:particle_alpha")
+tracks/4/path = NodePath(".:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath(".:visible")
+tracks/5/path = NodePath("MeleeAttackHitbox:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector3(0, -0.785398, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MeleeAttackHitbox:rotation")
+tracks/6/path = NodePath("Armature/Skeleton3D/HeadAttachment/HitboxArea:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.785398, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Armature/Skeleton3D/HeadAttachment/HitboxArea:monitorable")
+tracks/7/path = NodePath("Armature/Skeleton3D/HeadAttachment/HitboxArea:monitoring")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -341,14 +342,14 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Armature/Skeleton3D/HeadAttachment/HitboxArea:monitoring")
+tracks/8/path = NodePath("Armature/Skeleton3D/head:instance_shader_parameters/color")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(2, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_htgj7"]
@@ -1489,31 +1490,31 @@ tracks/21/keys = {
 "update": 0,
 "values": [0.0, 0.5, 0.5, 0.0]
 }
-tracks/22/type = "value"
+tracks/22/type = "method"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("Armature/Skeleton3D/head:instance_shader_parameters/alpha")
+tracks/22/path = NodePath(".")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/23/type = "method"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath(".")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [ExtResource("19_bfax1"), -0.1, 0.1, 1.0],
 "method": &"play_sound_effect"
 }]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Armature/Skeleton3D/head:instance_shader_parameters/color")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_a2vsg"]
@@ -1703,7 +1704,7 @@ fadein_time = 0.1
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_sw1jn"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cpj4j"]
-graph_offset = Vector2(-125.44, 122.579)
+graph_offset = Vector2(-16.44, 231.579)
 nodes/AnimationAttack/node = SubResource("AnimationNodeAnimation_7n3xn")
 nodes/AnimationAttack/position = Vector2(140, 400)
 nodes/AnimationAttackMelee/node = SubResource("AnimationNodeAnimation_fjbe7")
@@ -1733,12 +1734,14 @@ nodes/PainOneShot/position = Vector2(860, 380)
 nodes/output/position = Vector2(1260, 380)
 node_connections = [&"AttackMeleeOneShot", 0, &"AttackOneShot", &"AttackMeleeOneShot", 1, &"AnimationAttackMelee", &"AttackOneShot", 0, &"FallBlend", &"AttackOneShot", 1, &"AnimationAttack", &"DeathOneShot", 0, &"PainOneShot", &"DeathOneShot", 1, &"AnimationDeath", &"FallBlend", 0, &"IdleWalkBlend", &"FallBlend", 1, &"AnimationFall", &"IdleWalkBlend", 0, &"AnimationIdle", &"IdleWalkBlend", 1, &"AnimationWalk", &"PainOneShot", 0, &"AttackMeleeOneShot", &"PainOneShot", 1, &"AnimationPain", &"output", 0, &"DeathOneShot"]
 
-[node name="EnemyBruiser" type="CharacterBody3D" node_paths=PackedStringArray("aim_point")]
+[node name="EnemyBruiser" type="CharacterBody3D" node_paths=PackedStringArray("navigation_agent", "target_update_timer", "aim_point")]
 collision_layer = 4
 collision_mask = 55
 platform_floor_layers = 50
 script = ExtResource("1_5j4iw")
 projectile_scene = ExtResource("2_r78y2")
+navigation_agent = NodePath("NavigationAgent3D")
+target_update_timer = NodePath("TargetUpdateTimer")
 health = 250
 base_damage = 20
 move_speed = 4.0
@@ -1748,7 +1751,7 @@ knockback_modifier = 10.0
 aim_point = NodePath("Armature/Skeleton3D/TorsoHitboxAttachment/AimPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_a24x8")
 
 [node name="Armature" type="Node3D" parent="."]
@@ -1759,7 +1762,7 @@ bones/0/name = "lowertorso"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986811, 0.174754)
 bones/0/enabled = true
-bones/0/position = Vector3(0, 0.988636, 0.174754)
+bones/0/position = Vector3(0, 0.986811, 0.174754)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "uppertorso"
@@ -1767,21 +1770,21 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 0.971021, 0.238995, 0, -0.238995, 0.971021, 0, 0.400065, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.400065, 0)
-bones/1/rotation = Quaternion(-0.120367, 0.00946467, 0.00114762, 0.992684)
+bones/1/rotation = Quaternion(-0.120373, 0, 0, 0.992729)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "head_2"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, -4.26326e-14, 4.76837e-07, 4.30989e-07, 0.427853, -0.903849, -2.04016e-07, 0.903849, 0.427853, 0, 0.37952, 2.23517e-08)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.37952, 2.23517e-08)
-bones/2/rotation = Quaternion(0.534846, 0.0066248, -0.00221734, 0.844921)
+bones/2/rotation = Quaternion(0.534859, 2.0145e-07, 1.2752e-07, 0.844941)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "upperarm.l"
 bones/3/parent = 1
 bones/3/rest = Transform3D(-0.965415, 0.260716, -2.12341e-07, -0.25316, -0.937439, -0.238995, -0.0623099, -0.230729, 0.971021, 0.351339, 0.280732, -0.0583086)
 bones/3/enabled = true
 bones/3/position = Vector3(0.351339, 0.280732, -0.0583086)
-bones/3/rotation = Quaternion(-0.0488602, -0.31093, 0.932697, -0.176103)
+bones/3/rotation = Quaternion(-0.0475969, -0.31424, 0.931526, -0.17677)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "lowerarm.l"
 bones/4/parent = 3
@@ -1802,14 +1805,14 @@ bones/6/parent = 1
 bones/6/rest = Transform3D(-0.965415, -0.260716, 2.12341e-07, 0.25316, -0.937439, -0.238995, 0.0623099, -0.230729, 0.971021, -0.351339, 0.280732, -0.0583086)
 bones/6/enabled = true
 bones/6/position = Vector3(-0.351339, 0.280732, -0.0583086)
-bones/6/rotation = Quaternion(0.03944, -0.316376, 0.935916, 0.149703)
+bones/6/rotation = Quaternion(0.0394176, -0.312361, 0.93725, 0.149798)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "lowerarm.r"
 bones/7/parent = 6
 bones/7/rest = Transform3D(0.994318, -0.0416013, 0.0979896, 0.0760075, 0.921915, -0.379864, -0.0745352, 0.385153, 0.919838, 5.34386e-08, 0.334196, 1.72766e-09)
 bones/7/enabled = true
 bones/7/position = Vector3(5.34386e-08, 0.334196, 1.72766e-09)
-bones/7/rotation = Quaternion(0.325096, 0.0748764, 0.028603, 0.942278)
+bones/7/rotation = Quaternion(0.325021, 0.0748659, 0.0285772, 0.942306)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "hand.r"
 bones/8/parent = 7
@@ -1823,56 +1826,56 @@ bones/9/parent = 0
 bones/9/rest = Transform3D(1.78814e-07, -1.78814e-07, -1, -0.322685, -0.946506, 1.34111e-07, -0.946506, 0.322685, -2.38419e-07, 0.250168, 0.0182402, -0.045748)
 bones/9/enabled = true
 bones/9/position = Vector3(0.250168, 0.0182402, -0.045748)
-bones/9/rotation = Quaternion(0.735754, -0.0872963, -0.650075, 0.168666)
+bones/9/rotation = Quaternion(0.735468, -0.088847, -0.649779, 0.170234)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/name = "midleg.l"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.399745, 0.916626, -9.66223e-08, -0.916626, 0.399745, 4.8439e-08, 8.30248e-08, 6.92033e-08, 1, -2.59401e-08, 0.383549, -3.90146e-09)
 bones/10/enabled = true
 bones/10/position = Vector3(-2.59401e-08, 0.383549, -3.90146e-09)
-bones/10/rotation = Quaternion(6.90688e-09, -5.338e-08, -0.527956, 0.849272)
+bones/10/rotation = Quaternion(7.3154e-09, -5.73893e-08, -0.532396, 0.846495)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "lowerleg.l"
 bones/11/parent = 10
 bones/11/rest = Transform3D(0.674143, -0.7386, 1.77029e-07, 0.7386, 0.674143, 1.36058e-07, -2.19835e-07, 3.90313e-08, 1, -2.50714e-08, 0.278946, 1.37485e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(-2.50714e-08, 0.278946, 1.37485e-08)
-bones/11/rotation = Quaternion(-2.80825e-08, 1.09081e-07, 0.392989, 0.919543)
+bones/11/rotation = Quaternion(-1.97638e-08, 1.06263e-07, 0.395376, 0.918519)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "foot.l"
 bones/12/parent = 11
 bones/12/rest = Transform3D(0, -1, -1.8421e-07, 1, 0, 7.83329e-07, -7.83329e-07, -1.8421e-07, 1, 3.00837e-10, 0.433059, -8.61033e-09)
 bones/12/enabled = true
 bones/12/position = Vector3(3.00837e-10, 0.433059, -8.61033e-09)
-bones/12/rotation = Quaternion(-0.0828821, -0.170026, 0.66659, 0.721027)
+bones/12/rotation = Quaternion(-0.0826161, -0.170049, 0.666891, 0.720773)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/name = "upperleg.r"
 bones/13/parent = 0
 bones/13/rest = Transform3D(1.78814e-07, 1.78814e-07, 1, 0.322685, -0.946506, 1.34111e-07, 0.946506, 0.322685, -2.38419e-07, -0.250168, 0.0182402, -0.045748)
 bones/13/enabled = true
 bones/13/position = Vector3(-0.250168, 0.0182402, -0.045748)
-bones/13/rotation = Quaternion(0.720824, 0.0313867, 0.688934, 0.0692611)
+bones/13/rotation = Quaternion(0.72072, 0.0328673, 0.688821, 0.0707678)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/name = "midleg.r"
 bones/14/parent = 13
 bones/14/rest = Transform3D(0.399745, -0.916626, 9.66223e-08, 0.916626, 0.399745, 4.8439e-08, -8.30248e-08, 6.92033e-08, 1, 2.59401e-08, 0.383549, -3.90146e-09)
 bones/14/enabled = true
 bones/14/position = Vector3(2.59401e-08, 0.383549, -3.90146e-09)
-bones/14/rotation = Quaternion(3.30199e-09, 5.44946e-08, 0.488734, 0.872433)
+bones/14/rotation = Quaternion(3.1697e-09, 5.42262e-08, 0.493542, 0.869722)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/name = "lowerleg.r"
 bones/15/parent = 14
 bones/15/rest = Transform3D(0.674143, 0.7386, -1.77029e-07, -0.7386, 0.674143, 1.36058e-07, 2.19835e-07, 3.90313e-08, 1, 2.50714e-08, 0.278946, 1.37485e-08)
 bones/15/enabled = true
 bones/15/position = Vector3(2.50714e-08, 0.278946, 1.37485e-08)
-bones/15/rotation = Quaternion(-2.3556e-08, -1.09121e-07, -0.371323, 0.928504)
+bones/15/rotation = Quaternion(-2.48014e-08, -1.1052e-07, -0.374085, 0.927395)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/name = "foot.r"
 bones/16/parent = 15
 bones/16/rest = Transform3D(0, 1, 1.8421e-07, -1, 0, 7.83329e-07, 7.83329e-07, -1.8421e-07, 1, -3.00837e-10, 0.433059, -8.61033e-09)
 bones/16/enabled = true
 bones/16/position = Vector3(-3.00837e-10, 0.433059, -8.61033e-09)
-bones/16/rotation = Quaternion(-0.0623956, 0.112594, -0.73928, 0.66098)
+bones/16/rotation = Quaternion(-0.0622483, 0.112625, -0.739605, 0.660625)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/name = "footik.l"
 bones/17/parent = -1
@@ -1883,7 +1886,7 @@ bones/17/rotation = Quaternion(0.431544, -0.431543, -0.560152, 0.560152)
 bones/17/scale = Vector3(1, 1, 1)
 
 [node name="HeadAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.999454, 0.0256147, 0.0208605, 3.80212e-07, 0.631468, -0.775402, -0.0330344, 0.774979, 0.631124, -0.00172944, 1.75722, 0.0840675)
+transform = Transform3D(1, 6.96332e-13, 4.76837e-07, 3.69739e-07, 0.631469, -0.775401, -3.01108e-07, 0.775401, 0.631469, 0, 1.7554, 0.0840505)
 bone_name = "head_2"
 bone_idx = 2
 
@@ -1894,8 +1897,8 @@ lifetime = 2.0
 preprocess = 15.0
 randomness = 0.5
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_c5iro")
-draw_pass_1 = SubResource("QuadMesh_x53j4")
+process_material = SubResource("ParticleProcessMaterial_4e0cg")
+draw_pass_1 = SubResource("QuadMesh_ip4cd")
 
 [node name="HitboxArea" parent="Armature/Skeleton3D/HeadAttachment" instance=ExtResource("8_5sjyo")]
 monitorable = false
@@ -1915,11 +1918,12 @@ skin = SubResource("Skin_qauct")
 [node name="head" type="MeshInstance3D" parent="Armature/Skeleton3D"]
 material_overlay = ExtResource("2_ox7ct")
 instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/color = Vector3(2, 0, 0)
 mesh = SubResource("ArrayMesh_eqdat")
 skin = SubResource("Skin_qauct")
 
 [node name="TorsoHitboxAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.999818, -0.00455691, 0.0185146, -1.62981e-08, 0.971021, 0.238994, -0.0190671, -0.238951, 0.970845, 0, 1.3887, 0.174754)
+transform = Transform3D(1, 0, 0, 0, 0.971021, 0.238995, 0, -0.238995, 0.971021, 0, 1.38688, 0.174754)
 bone_name = "uppertorso"
 bone_idx = 1
 
@@ -1931,7 +1935,7 @@ shape = SubResource("BoxShape3D_0ob2m")
 [node name="AimPoint" type="Marker3D" parent="Armature/Skeleton3D/TorsoHitboxAttachment"]
 
 [node name="LeftLegHitboxAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.105895, 0.128512, -0.986038, -0.0534409, -0.989445, -0.134695, -0.99294, 0.0669584, -0.0979098, 0.331131, 0.449472, 0.0804586)
+transform = Transform3D(0.105515, 0.128858, -0.986034, -0.0526771, -0.989452, -0.134942, -0.993021, 0.0661798, -0.0976146, 0.330979, 0.449402, 0.0808318)
 bone_name = "lowerleg.l"
 bone_idx = 11
 
@@ -1943,7 +1947,7 @@ transform = Transform3D(0.999443, 0.0331464, 0.00380909, -0.0333607, 0.99107, 0.
 shape = SubResource("BoxShape3D_kfk5d")
 
 [node name="RightLegHitboxAttachment2" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0342032, -0.0610489, 0.997549, -0.11856, -0.991332, -0.0566034, 0.992358, -0.116334, -0.0411448, -0.288328, 0.450296, -0.0304887)
+transform = Transform3D(0.0340279, -0.0611888, 0.997546, -0.1194, -0.991225, -0.0567281, 0.992263, -0.117176, -0.0410354, -0.288267, 0.45017, -0.0300887)
 bone_name = "lowerleg.r"
 bone_idx = 15
 
@@ -1955,7 +1959,7 @@ transform = Transform3D(0.999443, 0.0331463, 0.00380893, -0.0333607, 0.99107, 0.
 shape = SubResource("BoxShape3D_kfk5d")
 
 [node name="LeftArmHitboxAttachment3" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.935387, 0.351794, 0.0359326, -0.337434, -0.857547, -0.388266, -0.105776, -0.375304, 0.920846, 0.348916, 1.64736, 0.0443653)
+transform = Transform3D(-0.932974, 0.359245, 0.0224209, -0.338485, -0.854463, -0.394107, -0.122423, -0.37528, 0.918791, 0.351339, 1.64554, 0.0510415)
 bone_name = "upperarm.l"
 bone_idx = 3
 
@@ -1968,7 +1972,7 @@ transform = Transform3D(0.927062, -0.307404, -0.214613, 0.185742, 0.873849, -0.4
 shape = SubResource("BoxShape3D_m5eyt")
 
 [node name="RightArmHitboxAttachment4" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(-0.949936, -0.312425, -0.00339321, 0.288149, -0.871822, -0.396102, 0.120794, -0.377249, 0.9182, -0.353634, 1.64736, 0.0577634)
+transform = Transform3D(-0.952014, -0.305421, -0.0196938, 0.288772, -0.875073, -0.388404, 0.101393, -0.375453, 0.921279, -0.351339, 1.64554, 0.0510415)
 bone_name = "upperarm.r"
 bone_idx = 6
 
@@ -2142,6 +2146,4 @@ parameters/PainOneShot/active = false
 parameters/PainOneShot/internal_active = false
 parameters/PainOneShot/request = 0
 
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
 [connection signal="body_entered" from="MeleeAttackHitbox" to="." method="_on_melee_attack_hitbox_body_entered"]
-[connection signal="timeout" from="TargetUpdateTimer" to="." method="_on_target_update_timer_timeout"]

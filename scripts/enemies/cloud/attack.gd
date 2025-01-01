@@ -18,7 +18,7 @@ func update(delta:float)->void:
 	var target_position:Vector3=state_owner.target_position
 	var target_location=state_owner.navigation_target_position#target_position+Vector3(0,state_owner.height_over_target,0)
 	#look at target if target is not directly underneath
-	if Vector2(current_location.x,current_location.z).distance_to(Vector2(target_location.x,target_location.z)):
+	if Vector2(current_location.x,current_location.z).distance_to(Vector2(target_location.x,target_location.z))>0.01:
 		state_owner.eye.look_at(target_position)
 		#aim attack raycast at target if target in range
 		if Vector2(current_location.x,current_location.z).distance_to(Vector2(target_location.x,target_location.z))<=state_owner.attack_range:
