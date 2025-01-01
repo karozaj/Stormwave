@@ -62,6 +62,7 @@ var health:int=100:
 		health=value
 		hud.update_health(health)
 var is_invincible:bool=false
+var is_dead:bool=false
 
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 

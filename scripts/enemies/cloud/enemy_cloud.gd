@@ -35,6 +35,8 @@ var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 func _ready() -> void:
 	add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
+	if infighting_allowed:
+		allow_damaging_other_enemies()
 
 func _process(_delta: float) -> void:
 	update_target_position()
@@ -84,3 +86,6 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.0,pitch_to:float=0
 
 func _on_lightning_timer_timeout() -> void:
 	lightning.visible=false
+
+func allow_damaging_other_enemies()->void:
+	raycast.collision_mask=1|2|3|5|6|7

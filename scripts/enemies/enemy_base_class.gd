@@ -44,14 +44,14 @@ var navigation_target_position_offset:Vector3=Vector3.ZERO
 func add_targets(trgts:Array,prefix:bool=true):
 	if prefix==true:
 		for trg in trgts:
-			if targets.has(trg)==false:
+			if targets.has(trg)==false and trg.is_dead==false:
 				if infighting_allowed==false and trg is EnemyBaseClass:
 					continue
 				targets.push_front(trg)
 				trg.died.connect(switch_target)
 	else:
 		for trg in trgts:
-			if targets.has(trg)==false:
+			if targets.has(trg)==false and trg.is_dead==false:
 				if infighting_allowed==false and trg is EnemyBaseClass:
 					continue
 				targets.push_back(trg)
@@ -67,6 +67,7 @@ func switch_target(trg=null):
 	if trg!=null:
 		if trg in targets:
 			targets.erase(trg)
+			trg.died.disconnect(switch_target)
 	if len(targets)>0:
 		target=targets[0]
 	else:
@@ -103,3 +104,6 @@ func die():
 	is_dead=true
 	died.emit()
 	queue_free()
+
+func allow_damaging_other_enemies()->void:
+	pass

@@ -68,6 +68,9 @@ func _ready() -> void:
 	for ray in block_rays:
 		block_detector_rays.append(ray)
 	
+	if infighting_allowed:
+		allow_damaging_other_enemies()
+	
 	navigation_agent.max_speed=move_speed
 	add_targets([Global.player])
 
@@ -142,7 +145,8 @@ func enable_melee_hitbox():
 
 func _on_melee_attack_hitbox_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		body.damage(melee_damage, global_position,self)
+		if body!=self:
+			body.damage(melee_damage, global_position,self)
 
 #updates walk and fall animations according to current state	
 func update_animation_tree():
@@ -184,3 +188,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	new_safe_velocity=safe_velocity
 	#velocity = velocity.move_toward(safe_velocity,agility)
 	#move_and_slide()
+
+func allow_damaging_other_enemies()->void:
+	melee_hitbox.collision_mask=1|3|6|7

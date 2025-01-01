@@ -26,7 +26,8 @@ var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
 func _ready() -> void:
 	add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
-#
+	if infighting_allowed:
+		allow_damaging_other_enemies()
 
 func attack()->void:
 	attack_area.monitoring=true
@@ -57,4 +58,8 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.0,pitch_to:float=0
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		body.damage(base_damage, global_position,self)
+		if body!=self:
+			body.damage(base_damage, global_position,self)
+
+func allow_damaging_other_enemies()->void:
+	attack_area.collision_mask=1|3|6|7

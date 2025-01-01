@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y-= gravity * delta
 	if velocity.y>0:
 		velocity.y-=2*gravity*delta
-	print(is_on_floor())
 	move_and_slide()
 
 

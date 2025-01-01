@@ -4,6 +4,7 @@ extends State
 var timer:Timer
 
 func enter(_transition_data:Dictionary={})->void:
+	state_owner.is_dead=true
 	state_owner.attack_area.monitoring=false
 	timer=Timer.new()
 	state_owner.add_child(timer)

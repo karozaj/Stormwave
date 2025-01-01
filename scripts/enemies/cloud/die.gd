@@ -4,6 +4,7 @@ extends State
 var timer:Timer
 #play death animation and delete owner
 func enter(_transition_data:Dictionary={})->void:
+	state_owner.is_dead=true
 	timer=Timer.new()
 	state_owner.add_child(timer)
 	timer.start(3)

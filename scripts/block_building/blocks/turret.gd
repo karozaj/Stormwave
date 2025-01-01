@@ -22,7 +22,7 @@ var targets:Array[EnemyBaseClass]=[]
 ## Sound to be played when detecting an enemy
 @export var enemy_detected_sound:AudioStream=preload("res://audio/sfx/enemy_detected.ogg")
 var can_shoot:bool=true
-
+var is_dead:bool=false
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +51,7 @@ func destroy_block()->bool:
 		effect.pitch=destroyed_pitch
 		get_parent().add_child(effect)
 		effect.global_position=global_position
+		is_dead=true
 		died.emit(self)
 		call_deferred("queue_free")
 		return true
@@ -108,9 +109,10 @@ func play_sound(sound:AudioStream, v:float=0.1,pitch:float=1.0):
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is EnemyBaseClass:
 		var enemy:EnemyBaseClass=body as EnemyBaseClass
-		targets.append(enemy)
-		play_sound(enemy_detected_sound)
-		enemy.died.connect(remove_target)
+		if enemy.is_dead==false:
+			targets.append(enemy)
+			play_sound(enemy_detected_sound)
+			enemy.died.connect(remove_target)
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
