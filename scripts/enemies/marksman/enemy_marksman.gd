@@ -19,6 +19,9 @@ var enemy_check_raycasts:Array[RayCast3D]
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var attack_cooldown_timer:Timer=$AttackCooldownTimer
 @onready var check_wall_ray:RayCast3D=$CheckWallRay
+@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+
 
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
@@ -134,3 +137,14 @@ func calculate_navigation_target_position_offset()->Vector3:
 	vector3d=vector3d*target_offset_radius
 	navigation_target_position_offset=vector3d
 	return navigation_target_position_offset
+
+
+func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0.1, pitch_base:float=1.0)->void:
+	if audio_player.playing==false:
+		audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
+		audio_player.stream=sound
+		audio_player.play()
+	else:
+		audio_player2.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
+		audio_player2.stream=sound
+		audio_player2.play()

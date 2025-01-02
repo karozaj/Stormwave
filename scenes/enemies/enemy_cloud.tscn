@@ -1,10 +1,14 @@
-[gd_scene load_steps=25 format=4 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=29 format=4 uid="uid://ldsvjji42wx1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/cloud/enemy_cloud.gd" id="1_suw4d"]
+[ext_resource type="AudioStream" uid="uid://b8gxuwdaxjhp2" path="res://audio/sfx/thunder.ogg" id="2_3y5jy"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="2_clo1p"]
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="2_uh8ia"]
+[ext_resource type="AudioStream" uid="uid://dp7cowcexwv63" path="res://audio/sfx/charge.ogg" id="3_8b5tv"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="3_uo1hx"]
+[ext_resource type="AudioStream" uid="uid://345nc4dly5b6" path="res://audio/sfx/ghost/ghost_death.ogg" id="4_1kjau"]
 [ext_resource type="Material" uid="uid://ncln3pm11vom" path="res://resources/materials/enemies/cloud_eye.tres" id="4_tgjtr"]
+[ext_resource type="AudioStream" uid="uid://bkcfdd4neh1so" path="res://audio/sfx/ghost/ghost_damage.ogg" id="5_l7gh6"]
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_tqel5"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/chase.gd" id="7_05cja"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/idle.gd" id="7_x687j"]
@@ -275,6 +279,10 @@ collision_layer = 132
 collision_mask = 63
 motion_mode = 1
 script = ExtResource("1_suw4d")
+thunder_sound = ExtResource("2_3y5jy")
+charging_sound = ExtResource("3_8b5tv")
+death_sound = ExtResource("4_1kjau")
+pain_sound = ExtResource("5_l7gh6")
 base_damage = 50
 move_speed = 10.0
 attack_range = 3.0

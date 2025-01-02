@@ -13,6 +13,8 @@ class_name EnemyBruiser
 @onready var collision_shape:CollisionShape3D=$CollisionShape3D
 @onready var particles:GPUParticles3D=$Armature/Skeleton3D/HeadAttachment/GPUParticles3D
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+
 #@onready var navigation_agent:NavigationAgent3D=$NavigationAgent3D
 #@onready var target_update_timer:Timer=$TargetUpdateTimer
 @onready var attack_cooldown_timer:Timer=$AttackCooldownTimer
@@ -176,9 +178,14 @@ func _on_melee_attack_hitbox_body_entered(body: Node3D) -> void:
 
 
 func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0.1, pitch_base:float=1.0)->void:
-	audio_player.stream=sound
-	audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
-	audio_player.play()
+	if audio_player.playing==false:
+		audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
+		audio_player.stream=sound
+		audio_player.play()
+	else:
+		audio_player2.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
+		audio_player2.stream=sound
+		audio_player2.play()
 
 
 #

@@ -10,10 +10,10 @@ class_name EnemyCloud
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
 @onready var state_machine:StateMachine=$StateMachine
 
-var thunder_sound:AudioStream=preload("res://audio/sfx/thunder.ogg")
-var charging_sound:AudioStream=preload("res://audio/sfx/charge.ogg")
-var death_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_death.ogg")
-var pain_sound:AudioStream=preload("res://audio/sfx/enemy_ghost_pain.ogg")
+@export var thunder_sound:AudioStream
+@export var charging_sound:AudioStream
+@export var death_sound:AudioStream
+@export var pain_sound:AudioStream
 ## Determines surface material transparency. Intended to be used in animations.
 @export_range(0.0,1.0) var material_alpha:float=1.0:
 	set(value):
