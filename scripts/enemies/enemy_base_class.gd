@@ -72,7 +72,7 @@ func switch_target(trg=null):
 		target=targets[0]
 	else:
 		target=null
-	print(targets)
+	#print(targets)
 
 
 #damage function should be overwritten to call damage function for current state

@@ -6,6 +6,5 @@ extends Area3D
 @export var damage_modifier:float=1.0
 
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
-	print("hit")
 	@warning_ignore("narrowing_conversion")
 	hitbox_owner.damage(damage_points*damage_modifier,origin,damage_dealer)

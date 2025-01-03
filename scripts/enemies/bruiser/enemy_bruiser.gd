@@ -187,7 +187,9 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0
 		audio_player2.stream=sound
 		audio_player2.play()
 
-
+func play_foostep_sound():
+	$AudioStreamPlayerFootstep.pitch_scale=1.0+randf_range(-0.1,0.1)
+	$AudioStreamPlayerFootstep.play()
 #
 #func _on_target_update_timer_timeout() -> void:
 	#update_navagent_target_position()

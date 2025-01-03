@@ -12,5 +12,5 @@ func _ready() -> void:
 	audio_player.play()
 
 func _on_finished() -> void:
-	print("particle finished")
+	#print("particle finished")
 	queue_free()
