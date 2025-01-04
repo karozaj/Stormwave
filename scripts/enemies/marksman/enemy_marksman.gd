@@ -28,6 +28,8 @@ var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 
 ## How far away the navigation target position should be from the target
 @export var target_offset_radius:float=6.0
+## Sound played when the enemy is destroyed
+@export var destroyed_sound:AudioStream
 
 @export_category("Animation")
 ## Determines material transparency, intented to be used for animations
@@ -84,7 +86,7 @@ func explode()->void:
 		expl.global_position=aim_point.global_position
 		expl.explode()
 		var effect:BlockDestroyedEffect=destroyed_effect.instantiate()
-		#effect.sound=destroyed_sound
+		effect.sound=destroyed_sound
 		#effect.pitch=destroyed_pitch
 		Global.current_level.add_child(effect)
 		effect.global_position=aim_point.global_position

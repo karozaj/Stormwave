@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=24 format=3 uid="uid://crywrnny46cu8"]
 
 [ext_resource type="Script" path="res://scripts/levels/test_level.gd" id="1_vkin7"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_m6vns"]
 [ext_resource type="PackedScene" uid="uid://dslcj101x1l0w" path="res://scenes/enemies/enemy_test.tscn" id="3_r4yha"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="6_iluf4"]
 [ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="9_hmr7q"]
-[ext_resource type="Script" path="res://scripts/navtest.gd" id="9_yyoe3"]
+[ext_resource type="PackedScene" uid="uid://dcfwwhx5t6idf" path="res://scenes/level_elements/generator.tscn" id="9_ljhi4"]
 [ext_resource type="PackedScene" uid="uid://bcael1rwki1g0" path="res://scenes/level_elements/enemy_spawn_area.tscn" id="11_p6qwu"]
 [ext_resource type="PackedScene" uid="uid://b5m17kfq7jetu" path="res://scenes/level_elements/enemy_spawner.tscn" id="12_m6c4v"]
 
@@ -24,6 +24,8 @@ glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_1uaou"]
 resource_local_to_scene = true
+vertices = PackedVector3Array(6.55202, 0.408006, -6.69942, 10.052, 0.408006, -6.69942, 10.052, 0.408006, -15.9494, 4.80202, 0.408006, -6.69942, -11.448, 0.408006, -15.9494, -11.698, 0.408006, -6.69942, 11.302, 0.408006, -15.9494, 11.302, 0.408006, 14.8006, 11.802, 0.408006, -2.69942, 11.802, 0.408006, -15.9494, -11.698, 0.408006, -4.44942, 4.80202, 0.408006, -4.44942, 6.80202, 0.408006, -1.44942, 6.55202, 0.408006, 0.550575, 10.052, 0.408006, 0.550575, 6.80202, 0.408006, -4.69942, -11.698, 0.408006, -1.69942, 4.80202, 0.408006, -1.69942, -11.698, 0.408006, 0.550575, 4.80202, 0.408006, 0.550575, -11.698, 0.408006, 7.05058, -9.44798, 0.408006, 7.05058, -8.44798, 0.408006, 7.05058, 10.052, 0.408006, 7.05058, -10.698, 0.408006, 8.05058, -10.698, 0.408006, 9.80058, -11.698, 0.408006, 14.3006, 5.30202, 0.408006, 14.3006, 10.052, 0.408006, 10.8006, -7.94798, 0.408006, 10.8006, -4.44798, 0.408006, 14.3006, -9.69798, 0.408006, 10.8006, 5.55202, 0.408006, 14.8006, 10.052, 0.408006, 14.8006, -6.94798, 0.408006, 8.30058, -6.94798, 0.408006, 9.55058, -9.19798, 3.40801, 9.80058, -8.44798, 3.40801, 9.80058, -7.94798, 3.40801, 9.05058, -8.19798, 3.40801, 8.30058, -9.69798, 3.40801, 8.55058, -9.44798, 0.408006, 8.80058, -8.94798, 0.408006, 9.55058, -8.44798, 0.408006, 9.30058, -8.44798, 0.408006, 8.55058, -11.698, 0.408006, 25.5506, -4.69798, 0.408006, 25.5506, -3.69798, 2.40801, 15.3006, -3.69798, 2.40801, 25.5506, -3.44798, 2.40801, 15.8006, 4.55202, 2.40801, 15.5506, -2.44798, 0.408006, 16.5506, -2.44798, 0.408006, 25.5506, 4.55202, 0.408006, 25.5506, 4.55202, 0.408006, 16.5506)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7), PackedInt32Array(5, 3, 10), PackedInt32Array(10, 3, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(15, 0, 1), PackedInt32Array(15, 1, 12), PackedInt32Array(12, 1, 14), PackedInt32Array(17, 16, 11), PackedInt32Array(11, 16, 10), PackedInt32Array(11, 15, 17), PackedInt32Array(17, 15, 12), PackedInt32Array(16, 17, 18), PackedInt32Array(18, 17, 19), PackedInt32Array(21, 20, 18), PackedInt32Array(22, 21, 18), PackedInt32Array(13, 14, 23), PackedInt32Array(19, 13, 23), PackedInt32Array(18, 19, 22), PackedInt32Array(22, 19, 23), PackedInt32Array(20, 21, 24), PackedInt32Array(24, 25, 20), PackedInt32Array(20, 25, 26), PackedInt32Array(30, 29, 27), PackedInt32Array(27, 29, 28), PackedInt32Array(26, 25, 31), PackedInt32Array(32, 27, 33), PackedInt32Array(33, 27, 28), PackedInt32Array(31, 29, 26), PackedInt32Array(26, 29, 30), PackedInt32Array(34, 22, 23), PackedInt32Array(28, 29, 35), PackedInt32Array(35, 34, 28), PackedInt32Array(28, 34, 23), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 39), PackedInt32Array(39, 36, 40), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 41), PackedInt32Array(45, 26, 46), PackedInt32Array(46, 26, 30), PackedInt32Array(49, 48, 47), PackedInt32Array(50, 49, 47), PackedInt32Array(54, 53, 51), PackedInt32Array(51, 53, 52)]
 sample_partition_type = 1
 geometry_parsed_geometry_type = 1
 geometry_collision_mask = 50
@@ -60,16 +62,6 @@ albedo_color = Color(1, 0.305882, 0.423529, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lvode"]
 data = PackedVector3Array(-0.5, 2.665, 0.5, 0.5, 2.665, 0.5, -0.5, -2.665, 0.5, 0.5, 2.665, 0.5, 0.5, -2.665, 0.5, -0.5, -2.665, 0.5, 0.5, 2.665, -0.5, -0.5, 2.665, -0.5, 0.5, -2.665, -0.5, -0.5, 2.665, -0.5, -0.5, -2.665, -0.5, 0.5, -2.665, -0.5, 0.5, 2.665, 0.5, 0.5, 2.665, -0.5, 0.5, -2.665, 0.5, 0.5, 2.665, -0.5, 0.5, -2.665, -0.5, 0.5, -2.665, 0.5, -0.5, 2.665, -0.5, -0.5, 2.665, 0.5, -0.5, -2.665, -0.5, -0.5, 2.665, 0.5, -0.5, -2.665, 0.5, -0.5, -2.665, -0.5, 0.5, 2.665, 0.5, -0.5, 2.665, 0.5, 0.5, 2.665, -0.5, -0.5, 2.665, 0.5, -0.5, 2.665, -0.5, 0.5, 2.665, -0.5, -0.5, -2.665, 0.5, 0.5, -2.665, 0.5, -0.5, -2.665, -0.5, 0.5, -2.665, 0.5, 0.5, -2.665, -0.5, -0.5, -2.665, -0.5)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_cm122"]
-resource_local_to_scene = true
-vertices = PackedVector3Array(6.28281, 0.408006, -6.4806, 10.2828, 0.408006, -6.4806, 10.2828, 0.408006, -16.2306, 5.03281, 0.408006, -6.4806, -11.7172, 0.408006, -16.2306, -11.9672, 0.408006, -6.4806, 12.0328, 0.408006, -2.4806, 12.0328, 0.408006, -16.2306, 11.0328, 0.408006, -16.2306, 11.0328, 0.408006, 15.0194, 11.7828, 0.408006, 15.0194, -11.9672, 0.408006, -4.7306, 5.03281, 0.408006, -4.7306, 6.53281, 0.408006, -1.2306, 6.28281, 0.408006, 0.2694, 10.2828, 0.408006, 0.2694, 6.53281, 0.408006, -4.9806, -11.9672, 0.408006, -1.4806, 5.03281, 0.408006, -1.4806, 5.28281, 3.40801, -5.9806, 5.28281, 3.40801, -5.2306, 6.03281, 3.40801, -5.2306, 6.03281, 3.40801, -5.9806, -11.9672, 0.408006, 0.2694, 5.03281, 0.408006, 0.2694, 5.28281, 1.40801, -0.9806, 5.28281, 1.40801, -0.2306, 6.03281, 1.40801, -0.2306, 6.03281, 1.40801, -0.9806, 10.2828, 0.408006, 15.0194, 4.78281, 0.408006, 15.2694, -11.9672, 0.408006, 25.7694, 4.78281, 0.408006, 25.7694)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 10), PackedInt32Array(8, 10, 9), PackedInt32Array(5, 3, 11), PackedInt32Array(11, 3, 12), PackedInt32Array(15, 14, 13), PackedInt32Array(16, 0, 1), PackedInt32Array(16, 1, 13), PackedInt32Array(13, 1, 15), PackedInt32Array(18, 17, 12), PackedInt32Array(12, 17, 11), PackedInt32Array(12, 16, 18), PackedInt32Array(18, 16, 13), PackedInt32Array(22, 21, 19), PackedInt32Array(19, 21, 20), PackedInt32Array(17, 18, 23), PackedInt32Array(23, 18, 24), PackedInt32Array(28, 27, 25), PackedInt32Array(25, 27, 26), PackedInt32Array(15, 29, 14), PackedInt32Array(14, 29, 30), PackedInt32Array(24, 30, 23), PackedInt32Array(23, 30, 31), PackedInt32Array(24, 14, 30), PackedInt32Array(30, 32, 31)]
-sample_partition_type = 1
-geometry_parsed_geometry_type = 1
-geometry_collision_mask = 50
-agent_radius = 0.25
-filter_walkable_low_height_spans = true
 
 [node name="TestLevel" type="Node3D"]
 process_mode = 1
@@ -153,23 +145,24 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xm2vq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7032, 0.460458, -4.99341)
 shape = SubResource("ConcavePolygonShape3D_lvode")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_cm122")
-use_edge_connections = false
-script = ExtResource("9_yyoe3")
+[node name="Generator" parent="NavRegion" instance=ExtResource("9_ljhi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.87359, 0, 8.99528)
+
+[node name="Generator2" parent="NavRegion" instance=ExtResource("9_ljhi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43754, 0, 8.99528)
 
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("enemy_parent_node", "enemy_spawn_areas", "initial_enemy_target") instance=ExtResource("12_m6c4v")]
 enemy_parent_node = NodePath("../Enemies")
-enemy_spawn_chance = Array[int]([5, 1, 0, 0])
+enemy_spawn_chance = Array[int]([0, 0, 1, 1])
 enemy_spawn_chance_increase = Array[int]([1, 2, 3, 4])
 enemy_spawn_areas = [NodePath("EnemySpawnArea"), NodePath("EnemySpawnArea2"), NodePath("EnemySpawnArea3"), NodePath("EnemySpawnArea4"), NodePath("EnemySpawnArea5"), NodePath("EnemySpawnArea6"), NodePath("EnemySpawnArea7"), NodePath("EnemySpawnArea8"), NodePath("EnemySpawnArea11")]
 wave_size = 25
 wave_size_increase = 10
 max_wave_size = 45
 max_spawn_size = 6
-initial_enemy_target = NodePath("../Player")
+initial_enemy_target = NodePath("../NavRegion/Generator")
 
 [node name="EnemySpawnArea" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0811696, 0, -10.9703)
