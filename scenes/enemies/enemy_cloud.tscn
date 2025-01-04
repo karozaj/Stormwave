@@ -349,7 +349,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_tqel5")]
-initial_state = NodePath("Idle")
+initial_state = NodePath("Chase")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("7_x687j")

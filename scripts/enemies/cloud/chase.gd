@@ -4,6 +4,10 @@ extends State
 
 
 func update(delta:float)->void: #move towards target, enter attack state if target in range
+	if state_owner.target==null:
+		finished.emit(self,"Idle")
+		return
+		
 	var target_position:Vector3=state_owner.target_position
 	var current_location=state_owner.global_transform.origin
 	var next_location=state_owner.navigation_target_position#target_position+Vector3(0,state_owner.height_over_target,0)

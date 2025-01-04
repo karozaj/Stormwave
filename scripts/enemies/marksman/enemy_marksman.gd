@@ -56,7 +56,7 @@ func _ready() -> void:
 		enemy_check_raycasts.append(ray)
 		
 	navigation_agent.max_speed=move_speed
-	add_targets([Global.player])
+	#add_targets([Global.player])
 	
 	
 func _process(_delta: float) -> void:

@@ -30,5 +30,5 @@ func update_navmesh():
 
 
 func _on_timer_timeout() -> void:
-	print("rebaking")
+	#print("rebaking")
 	bake_navigation_mesh()

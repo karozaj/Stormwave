@@ -11,10 +11,11 @@ func _ready() -> void:
 
 func shoot():
 	animation_player.play("shoot")
-	var projectile=projectile_scene.instantiate()
+	var projectile:Projectile=projectile_scene.instantiate()
 	#this is so that the rocket doesnt collide with the player when they shoot downward
 	projectile.set_collision_mask_value(1,false)
 	projectile.transform.basis=rocket_direction_ray.global_transform.basis
+	projectile.projectile_owner=weapon_owner
 	if Global.current_level!=null:
 		Global.current_level.add_child(projectile)
 	projectile.global_position=projectile_spawn_marker.global_position

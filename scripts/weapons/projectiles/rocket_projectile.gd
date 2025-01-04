@@ -56,7 +56,7 @@ func disable_explosion_area()->void:
 	explosion_area.set_deferred("monitoring",false)
 
 func _on_explosion_area_body_entered(body: Node3D) -> void:
-	print(body.name)
+	#print(body.name)
 	if "aim_point" in body:
 		explosion_ray.target_position=to_local(body.aim_point.global_position)
 	else:
@@ -68,6 +68,6 @@ func _on_explosion_area_body_entered(body: Node3D) -> void:
 			var distance:float=global_position.distance_to(explosion_ray.get_collision_point())
 			var damage_modifier:float=(explosion_radius-distance)/explosion_radius
 			var calculated_damage:int=int(explosion_max_damage*damage_modifier)
-			print(calculated_damage)
+			#print(calculated_damage)
 			if calculated_damage>0:
 				body.damage(calculated_damage, global_position,projectile_owner)

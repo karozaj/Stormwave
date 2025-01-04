@@ -1,16 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://crywrnny46cu8"]
+[gd_scene load_steps=25 format=3 uid="uid://crywrnny46cu8"]
 
 [ext_resource type="Script" path="res://scripts/levels/test_level.gd" id="1_vkin7"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_m6vns"]
 [ext_resource type="PackedScene" uid="uid://dslcj101x1l0w" path="res://scenes/enemies/enemy_test.tscn" id="3_r4yha"]
-[ext_resource type="PackedScene" uid="uid://dm3r1hv0l3q6h" path="res://scenes/enemies/enemy_ghost.tscn" id="4_by2xx"]
-[ext_resource type="PackedScene" uid="uid://ldsvjji42wx1" path="res://scenes/enemies/enemy_cloud.tscn" id="5_x6rnm"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="6_iluf4"]
-[ext_resource type="PackedScene" uid="uid://0ox5v5aun5wc" path="res://scenes/enemies/enemy_marksman.tscn" id="9_a4pof"]
 [ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="9_hmr7q"]
-[ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="9_jlod3"]
 [ext_resource type="Script" path="res://scripts/navtest.gd" id="9_yyoe3"]
 [ext_resource type="PackedScene" uid="uid://bcael1rwki1g0" path="res://scenes/level_elements/enemy_spawn_area.tscn" id="11_p6qwu"]
+[ext_resource type="PackedScene" uid="uid://b5m17kfq7jetu" path="res://scenes/level_elements/enemy_spawner.tscn" id="12_m6c4v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5o5rn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -93,21 +90,6 @@ knockback_modifier = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.3889, 0)
 platform_floor_layers = 0
 
-[node name="EnemyGhost7" parent="." instance=ExtResource("4_by2xx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5326, 2.16248, 23.168)
-
-[node name="EnemyGhost11" parent="." instance=ExtResource("4_by2xx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06173, 2.16248, 23.168)
-
-[node name="EnemyCloud" parent="." instance=ExtResource("5_x6rnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, 0)
-
-[node name="EnemyCloud2" parent="." instance=ExtResource("5_x6rnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -5.03047)
-
-[node name="EnemyCloud3" parent="." instance=ExtResource("5_x6rnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9826, 9.29723, -9.03047)
-
 [node name="NavRegion" parent="." instance=ExtResource("6_iluf4")]
 navigation_mesh = SubResource("NavigationMesh_1uaou")
 
@@ -178,23 +160,40 @@ script = ExtResource("9_yyoe3")
 
 [node name="Enemies" type="Node3D" parent="."]
 
-[node name="EnemyMarksman20" parent="Enemies" instance=ExtResource("9_a4pof")]
-transform = Transform3D(0.998594, 0, -0.0530157, 0, 1, 0, 0.0530157, 0, 0.998594, -16.9795, 0, 12.4428)
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("enemy_parent_node", "enemy_spawn_areas", "initial_enemy_target") instance=ExtResource("12_m6c4v")]
+enemy_parent_node = NodePath("../Enemies")
+enemy_spawn_chance = Array[int]([5, 1, 0, 0])
+enemy_spawn_chance_increase = Array[int]([1, 2, 3, 4])
+enemy_spawn_areas = [NodePath("EnemySpawnArea"), NodePath("EnemySpawnArea2"), NodePath("EnemySpawnArea3"), NodePath("EnemySpawnArea4"), NodePath("EnemySpawnArea5"), NodePath("EnemySpawnArea6"), NodePath("EnemySpawnArea7"), NodePath("EnemySpawnArea8"), NodePath("EnemySpawnArea11")]
+wave_size = 25
+wave_size_increase = 10
+max_wave_size = 45
+max_spawn_size = 6
+initial_enemy_target = NodePath("../Player")
 
-[node name="EnemyBruiser" parent="Enemies" instance=ExtResource("9_jlod3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1882, 0, 7.35073)
+[node name="EnemySpawnArea" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0811696, 0, -10.9703)
 
-[node name="EnemyMarksman22" parent="Enemies" instance=ExtResource("9_a4pof")]
-transform = Transform3D(0.998594, 0, -0.0530157, 0, 1, 0, 0.0530157, 0, 0.998594, -21.3981, 0, 10.2054)
+[node name="EnemySpawnArea2" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8273, 0, -10.9703)
 
-[node name="EnemyMarksman23" parent="Enemies" instance=ExtResource("9_a4pof")]
-transform = Transform3D(0.998594, 0, -0.0530157, 0, 1, 0, 0.0530157, 0, 0.998594, -24.3255, 0, 10.05)
+[node name="EnemySpawnArea3" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60603, 0, -10.9703)
 
-[node name="EnemySpawnArea" parent="." instance=ExtResource("11_p6qwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.3748)
+[node name="EnemySpawnArea4" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51531, 0, -4.88513)
 
-[node name="EnemySpawnArea2" parent="." instance=ExtResource("11_p6qwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72706, 0, 5.3748)
+[node name="EnemySpawnArea5" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.39316, 0, -4.88513)
 
-[node name="EnemySpawnArea3" parent="." instance=ExtResource("11_p6qwu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52486, 0, 5.3748)
+[node name="EnemySpawnArea6" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0402, 0, -4.88513)
+
+[node name="EnemySpawnArea7" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3491, 0, 16.386)
+
+[node name="EnemySpawnArea8" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44062, 0, 16.386)
+
+[node name="EnemySpawnArea11" parent="EnemySpawner" instance=ExtResource("11_p6qwu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.87476, 0, 22.4712)

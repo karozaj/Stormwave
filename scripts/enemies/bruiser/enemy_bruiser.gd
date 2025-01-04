@@ -75,7 +75,7 @@ func _ready() -> void:
 		allow_damaging_other_enemies()
 	
 	navigation_agent.max_speed=move_speed
-	add_targets([Global.player])
+	#add_targets([Global.player])
 
 
 func _process(_delta: float) -> void:
@@ -102,13 +102,11 @@ func update_navigation_target_position()->void:
 		#navigation_agent.target_position=navigation_target_position
 
 func calculate_navigation_target_position_offset()->Vector3:
-	print("calling calculate from bruiser")
 	if navigation_agent.is_target_reachable()==false:
 		if target_position.y-global_position.y>3.5:
 			var vector2d:Vector2=Vector2(global_position.x,global_position.y)-Vector2(target_position.x,target_position.y)
 			vector2d=vector2d.rotated(deg_to_rad(randf_range(-30.0,30.0))).normalized()
 			var vector3d:Vector3=Vector3(vector2d.x,0.0,vector2d.y)
-			print((target_position.y-global_position.y))
 			vector3d=vector3d*(target_position.y-global_position.y)
 			navigation_target_position_offset=vector3d
 			return navigation_target_position_offset

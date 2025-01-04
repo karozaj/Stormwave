@@ -33,7 +33,7 @@ class_name EnemyCloud
 
 
 func _ready() -> void:
-	add_targets([Global.player])
+	#add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
 	if infighting_allowed:
 		allow_damaging_other_enemies()

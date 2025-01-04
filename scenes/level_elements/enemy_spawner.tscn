@@ -6,7 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="4_yxb4l"]
 [ext_resource type="PackedScene" uid="uid://0ox5v5aun5wc" path="res://scenes/enemies/enemy_marksman.tscn" id="5_nl0x4"]
 
-[node name="EnemySpawner" type="Node3D"]
+[node name="EnemySpawner" type="Node3D" node_paths=PackedStringArray("enemy_parent_node")]
 editor_description = "Handles the spawning of enemies"
 script = ExtResource("1_svcfl")
+enemy_parent_node = NodePath(".")
 enemy_scenes = Array[PackedScene]([ExtResource("2_edva8"), ExtResource("3_iefbo"), ExtResource("5_nl0x4"), ExtResource("4_yxb4l")])
+enemy_spawn_chance = Array[int]([1, 1, 1, 1])
+enemy_spawn_chance_increase = Array[int]([1, 1, 1, 1])
+wave_size = 20
+wave_size_increase = 5
+max_spawn_size = 5
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

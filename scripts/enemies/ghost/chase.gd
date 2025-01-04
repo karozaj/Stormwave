@@ -6,6 +6,10 @@ func enter(_transition_data:Dictionary={})->void:
 	state_owner.animation_player.play("idle")
 
 func update(delta:float)->void: #move towards target, enter attack state if target in range
+	if state_owner.target==null:
+		finished.emit(self,"Idle")
+		return
+	
 	var target_position:Vector3=state_owner.target_position
 	if state_owner.global_position.distance_to(target_position)<=state_owner.attack_range:
 		state_owner.velocity=state_owner.velocity.move_toward(Vector3.ZERO,state_owner.agility*delta)

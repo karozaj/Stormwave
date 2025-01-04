@@ -31,6 +31,5 @@ func on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	#move_and_slide()
 
 func calculate_navigation_target_position_offset()->Vector3:
-	print("calling calculate from base")
 	navigation_target_position_offset=Vector3.ZERO
 	return navigation_target_position_offset

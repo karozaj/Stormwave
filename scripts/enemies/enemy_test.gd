@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 
 func damage(damage_points:int, origin:Vector3,_damage_dealer):
 	health-=damage_points
-	print("enemy damaged ",health)
+	#print("enemy damaged ",health)
 	var knockback_direction:Vector3=global_position-origin
 	knockback_direction=knockback_direction.normalized()
 	velocity+=knockback_direction*damage_points/100*knockback_modifier

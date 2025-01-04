@@ -8,7 +8,7 @@ func enter(_transition_data:Dictionary={})->void:
 	state_owner.died.emit(state_owner)
 	timer=Timer.new()
 	state_owner.add_child(timer)
-	timer.start(.5)
+	timer.start(randf_range(0.25,0.75))
 	timer.timeout.connect(state_owner.explode)
 	state_owner.animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	state_owner.animation_tree.set("parameters/DeathOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

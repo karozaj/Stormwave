@@ -610,7 +610,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ya6yt")]
-initial_state = NodePath("Idle")
+initial_state = NodePath("Chase")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("7_drird")
