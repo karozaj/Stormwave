@@ -1,0 +1,147 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxkio4bbrunje"]
+
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_frea3"]
+[ext_resource type="Texture2D" uid="uid://bcjijtp2s8xcp" path="res://img/health_symbol.png" id="1_od4we"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="3_lvris"]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonStartWave" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -31.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start wave"
+script = ExtResource("1_frea3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 297.0
+offset_top = 189.0
+offset_right = 343.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "yapp"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "resa"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "gr"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxOwned" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(175, 375)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxOwned"]
+layout_mode = 2
+text = "Available"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="CenterContainer/HBoxContainer/VBoxOwned"]
+custom_minimum_size = Vector2(150, 325)
+layout_mode = 2
+item_count = 10
+fixed_icon_size = Vector2i(16, 16)
+item_0/text = "Health"
+item_0/icon = ExtResource("1_od4we")
+item_1/text = "Pistol ammo"
+item_2/text = "Shotgun ammo"
+item_3/text = "Chaingun ammo"
+item_4/text = "Rocket ammo"
+item_5/text = "Block"
+item_6/text = "Reinforced block"
+item_7/text = "Mine"
+item_8/text = "Explosive"
+item_9/text = "Turret"
+script = ExtResource("3_lvris")
+
+[node name="VBoxPurchased" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(175, 375)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxPurchased"]
+layout_mode = 2
+text = "Purchase"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="CenterContainer/HBoxContainer/VBoxPurchased"]
+custom_minimum_size = Vector2(150, 325)
+layout_mode = 2
+item_count = 10
+item_0/text = "Health"
+item_1/text = "Pistol ammo"
+item_2/text = "Shotgun ammo"
+item_3/text = "Chaingun ammo"
+item_4/text = "Rocket ammo"
+item_5/text = "Block"
+item_6/text = "Reinforced block"
+item_7/text = "Mine"
+item_8/text = "Explosive"
+item_9/text = "Turret"
+script = ExtResource("3_lvris")
+
+[node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 350)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Info"
+horizontal_alignment = 1
+
+[node name="LabelDesc" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Description"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="LabelCost" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonPurchase" type="Button" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Purchase"
+script = ExtResource("1_frea3")

@@ -80,6 +80,21 @@ shadow_mesh = SubResource("ArrayMesh_3yhek")
 height = 3.0
 radius = 1.2
 
+[sub_resource type="Animation" id="Animation_wyptx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_001:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.074152, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bd8hl"]
 resource_name = "working"
 length = 0.2
@@ -95,21 +110,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -0.025, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_wyptx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder_001:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.074152, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yd2g5"]

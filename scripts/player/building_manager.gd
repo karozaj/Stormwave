@@ -69,8 +69,10 @@ func collect()->void:
 func select_placer(index:int)->void:
 	if can_use and current_placer.is_being_pulled_out==false:
 		current_placer.visible=false
+		current_placer.ray.enabled=false
 		current_placer_index=index
 		current_placer=placers[current_placer_index]
+		current_placer.ray.enabled=true
 		current_placer.is_being_pulled_out=true
 		current_placer.animation_player.play("pullout")
 		play_sound(switch_placer_sound,0.0)

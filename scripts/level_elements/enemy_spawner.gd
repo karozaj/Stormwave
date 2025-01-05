@@ -20,21 +20,27 @@ signal enemy_count_updated(current:int, max:int)
 @export var enemy_spawn_chance:Array[int]
 ## Determines by how much the chance of each enemy type spawning should increase between waves
 @export var enemy_spawn_chance_increase:Array[int]
-## The EnemySpawnAreas where the enemies will be spawned
-@export var enemy_spawn_areas:Array[EnemySpawnArea]
 ## The number of enemies in a wave
 @export var wave_size:int
 ## How much the wave size increases with each wave
 @export var wave_size_increase:int
 ## Maximum number of enemies in one wave (0 means no limit)
 @export var max_wave_size:int
+## Number of enemies that will be spawned at the same time. Should be smaller than the number of EnemySpawnAreas
+@export var concurrent_enemies:int
+## How many more concurrent enemies will be added between waves
+@export var concurrent_enemies_increase:int
 ## Maximum number of enemies that can be spawned at the same time. Should be smaller than the number of EnemySpawnAreas
-@export var max_spawn_size:int
+@export var max_concurrent_enemies:int
+
 ## Random nubmer generator seed
 @export var rng_seed:int=randi()
 ## Enemies will target this node after spawning
-@export var initial_enemy_target:Node3D
+@export var initial_enemy_targets:Array[Node3D]
 var rng=RandomNumberGenerator.new()
+
+## The EnemySpawnAreas where the enemies will be spawned
+var enemy_spawn_areas:Array[EnemySpawnArea]
 
 var current_wave_number:int=0
 var current_wave:Array[EnemyBaseClass]
@@ -47,17 +53,15 @@ var enemies_alive:int=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	for x in get_tree().get_nodes_in_group("enemy_spawn_areas"):
+		enemy_spawn_areas.append(x as EnemySpawnArea)
+	print(enemy_spawn_areas.size())
+	
 	rng.seed=rng_seed
-	if max_spawn_size>enemy_spawn_areas.size():
-		max_spawn_size=enemy_spawn_areas.size()
-	#var wavv=generate_wave()
-	#print(wavv)
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	if concurrent_enemies>enemy_spawn_areas.size():
+		concurrent_enemies=enemy_spawn_areas.size()
+	if max_concurrent_enemies>enemy_spawn_areas.size():
+		max_concurrent_enemies=enemy_spawn_areas.size()
 
 # generates a wave of enemies
 func generate_wave()->Array[PackedScene]:
@@ -72,8 +76,11 @@ func begin_wave():
 		current_wave_size=clamp((wave_size+(current_wave_number-1)*wave_size_increase),0,max_wave_size)
 	else:
 		current_wave_size=(wave_size+(current_wave_number-1)*wave_size_increase)
-	enemies_alive=current_wave_size
+		
+	
 	if current_wave_number>1:
+		concurrent_enemies=clamp(concurrent_enemies+concurrent_enemies_increase,0,max_concurrent_enemies)
+		
 		for i in range(enemy_spawn_chance.size()):
 			if (enemy_spawn_chance[i]+enemy_spawn_chance_increase[i]>=0):
 				enemy_spawn_chance[i]+=enemy_spawn_chance_increase[i]
@@ -117,7 +124,7 @@ func spawn_enemies(scenes:Array[PackedScene])->Array[PackedScene]:
 		indices.append(i)
 	
 	for i in range(scenes.size()):
-		if i<max_spawn_size:
+		if i<concurrent_enemies:
 			enemies_to_instantiate.append(scenes[i])
 		remaining_enemies.append(scenes[i])
 	
@@ -153,9 +160,9 @@ func spawn_enemies(scenes:Array[PackedScene])->Array[PackedScene]:
 func instantiate_enemy(enemy_scene:PackedScene,spawn_area_index:int):
 	var enemy:EnemyBaseClass=enemy_scene.instantiate()
 	enemy.died.connect(_on_enemy_died)
-	enemy_spawn_areas[spawn_area_index].spawn_enemy(enemy,enemy_parent_node,initial_enemy_target)
+	enemy_spawn_areas[spawn_area_index].spawn_enemy(enemy,enemy_parent_node,initial_enemy_targets)
 
-func _on_enemy_died(enemy):
+func _on_enemy_died(_enemy):
 	#enemies_alive-=1
 	#print(remaining_wave_enemies.size())
 	enemies_alive-=1

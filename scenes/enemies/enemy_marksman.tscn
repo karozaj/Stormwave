@@ -254,7 +254,7 @@ size = Vector3(0.395, 0.36, 0.275)
 shading_mode = 0
 albedo_color = Color(0.324834, 0.795528, 0.835648, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_oxuml"]
+[sub_resource type="BoxMesh" id="BoxMesh_axt4r"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_18qkq")
 size = Vector3(0.1, 0.1, 0.1)
@@ -1826,7 +1826,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24361, 1.28927, -0.980146)
 
 [node name="LaserEffect" parent="LaserSpawnPoint" instance=ExtResource("1_cogb7")]
 visible = false
-mesh = SubResource("BoxMesh_oxuml")
+mesh = SubResource("BoxMesh_axt4r")
 skeleton = NodePath("../..")
 
 [node name="WeaponRay" type="RayCast3D" parent="LaserSpawnPoint"]

@@ -3,7 +3,11 @@ class_name Player
 #used to notify enemies of player's death
 
 @warning_ignore("unused_signal")
+## Emitted when the player dies
 signal died(obj:Object)
+@warning_ignore("unused_signal")
+## Emitted when the raycast of current placer in building mode stops collidng, used to clear block highlight
+signal building_ray_stopped_colliding
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
@@ -81,11 +85,11 @@ func _ready() -> void:
 
 func process_update(_delta:float):
 		#for testing
-	if Input.is_action_just_pressed("TEST_BUTTON"):
-		if state_machine.current_state.name=="Combat":
-			state_machine.transition_to_next_state(state_machine.current_state,"Build")
-		elif state_machine.current_state.name=="Build":
-			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+	#if Input.is_action_just_pressed("TEST_BUTTON"):
+		#if state_machine.current_state.name=="Combat":
+			#state_machine.transition_to_next_state(state_machine.current_state,"Build")
+		#elif state_machine.current_state.name=="Build":
+			#state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause"):
 		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
@@ -211,3 +215,15 @@ func die()->void:
 	state_machine.transition_to_next_state(state_machine.current_state,"Dead")
 	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
 	canvas_layer.add_child(death_menu)
+
+func update_game_status_label(current_enemies:int, enemies:int):
+	hud.update_game_status_label(current_enemies,enemies)
+
+func show_wave_label(wave_number:int):
+	hud.show_wave_label(wave_number)
+
+func enter_building_state():
+		state_machine.transition_to_next_state(state_machine.current_state,"Build")
+	
+func enter_fighting_state():
+	state_machine.transition_to_next_state(state_machine.current_state,"Combat")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhf86whg38klq"]
+
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="1_7fsom"]
+
+[node name="SoundItemList" type="ItemList"]
+script = ExtResource("1_7fsom")

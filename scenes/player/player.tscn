@@ -19,11 +19,11 @@ height = 1.75
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s5ih"]
 shader = ExtResource("6_0m7hy")
 shader_parameter/contrast = 1.0
-shader_parameter/brightness = 0.6
+shader_parameter/brightness = 0.5
 shader_parameter/uTime1 = 1.0
 shader_parameter/uTime2 = 2.0
 shader_parameter/uTime3 = 4.0
-shader_parameter/colors = 8.0
+shader_parameter/colors = 32.0
 
 [node name="Player" type="CharacterBody3D"]
 editor_description = "The character controlled by the player."
@@ -78,6 +78,7 @@ render_target_update_mode = 4
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("4_24bxq")]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource("ShaderMaterial_1s5ih")
 anchors_preset = 15
 anchor_right = 1.0

@@ -7,6 +7,7 @@ resource_local_to_scene = true
 sample_partition_type = 1
 geometry_parsed_geometry_type = 1
 geometry_collision_mask = 50
+agent_radius = 0.25
 filter_walkable_low_height_spans = true
 
 [node name="NavRegion" type="NavigationRegion3D"]

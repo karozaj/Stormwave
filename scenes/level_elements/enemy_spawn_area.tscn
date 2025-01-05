@@ -68,7 +68,7 @@ _data = {
 "spawn": SubResource("Animation_vnyv0")
 }
 
-[node name="EnemySpawnArea" type="Area3D"]
+[node name="EnemySpawnArea" type="Area3D" groups=["enemy_spawn_areas"]]
 editor_description = "Marks the point where an enemy can be spawned and stores information about if there is anything obstructing the area."
 collision_layer = 0
 collision_mask = 5

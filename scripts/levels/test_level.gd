@@ -1,11 +1,11 @@
-extends Node3D
+extends BaseLevel
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Global.current_level=self
-	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
-	#$NavRegion/BlockGridmap.map_changed.connect($NavRegion.update_navmesh)
+## Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+	#Global.current_level=self
+	#Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	##$NavRegion/BlockGridmap.map_changed.connect($NavRegion.update_navmesh)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("TEST_BUTTON"):

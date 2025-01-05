@@ -20,7 +20,7 @@ func _on_button_retry_pressed() -> void:
 	tween.kill()
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	#get_tree().paused=false
-	get_tree().change_scene_to_file("res://scenes/levels/test_level.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
 
 
 

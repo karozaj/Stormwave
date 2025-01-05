@@ -15,11 +15,10 @@ class_name EnemySpawnArea
 var is_occupied:bool=false
 var occupants:Array=[]
 
-func spawn_enemy(enemy:EnemyBaseClass, enemy_parent=get_parent(), initial_target=null):
+func spawn_enemy(enemy:EnemyBaseClass, enemy_parent=get_parent(), initial_targets:Array=[]):
 	enemy_parent.add_child(enemy)
 	enemy.global_position=spawn_point_marker.global_position
-	if initial_target!=null and is_instance_valid(initial_target):
-		enemy.add_targets([initial_target])
+	enemy.add_targets(initial_targets)
 	play_sound_effect(spawn_sound_effect)
 	animation_player.play("spawn")
 
