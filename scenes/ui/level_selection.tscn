@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://dcx1v0m8ulr3m"]
+[gd_scene load_steps=5 format=3 uid="uid://dcx1v0m8ulr3m"]
+
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="1_iepma"]
+[ext_resource type="Texture2D" uid="uid://cjudkur4m8k4f" path="res://img/icons/block.png" id="2_xclst"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="3_gw3et"]
+
+[sub_resource type="Theme" id="Theme_jumi7"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3
@@ -7,3 +13,94 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxPurchase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(275, 375)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
+layout_mode = 2
+text = "Purchase"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
+custom_minimum_size = Vector2(150, 325)
+layout_mode = 2
+fixed_icon_size = Vector2i(16, 16)
+script = ExtResource("1_iepma")
+
+[node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 350)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Info"
+horizontal_alignment = 1
+
+[node name="LabelDesc" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Description"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="LabelCost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Cost"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_jumi7")
+texture = ExtResource("2_xclst")
+expand_mode = 3
+
+[node name="Cost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+layout_mode = 2
+text = "N/A"
+
+[node name="ButtonPurchase" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+disabled = true
+text = "Purchase"
+script = ExtResource("3_gw3et")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonStartWave" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Start wave"
+script = ExtResource("3_gw3et")
+
+[node name="ButtonClose" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Close"

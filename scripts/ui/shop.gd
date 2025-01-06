@@ -13,8 +13,8 @@ signal resource_purchased(res:ShopResource, currency:ShopResource, sender:ShopMe
 @onready var start_wave_button:Button
 @onready var close_button:Button=$CenterContainer/VBoxContainer/HBoxContainer2/ButtonClose
 @onready var purchase_button:Button=$CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/ButtonPurchase
-@onready var description_label:Label
-@onready var cost_label:Label
+@onready var description_label:Label=$CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/Description
+@onready var cost_label:Label=$CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer/Cost
 @onready var item_list_owned:ItemList
 @onready var item_list_purchase:ItemList=$CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase/ItemList
 ## Resources that can be purchased in the shop
@@ -53,7 +53,9 @@ func update_item_text(idx:int):
 #check if resource can be purchased
 func on_item_list_item_selected(index: int) -> void:
 	selected_index=index
+	description_label.text=resource_types[selected_index].description
 	if resource_types[selected_index].purchasable==true:
+		cost_label.text=str(resource_types[selected_index].price)
 		var player_currency:int=0
 		
 		for res in resource_types:
@@ -65,7 +67,7 @@ func on_item_list_item_selected(index: int) -> void:
 			if resource_types[selected_index].number_owned_by_player<resource_types[selected_index].max_number:
 				purchase_button.disabled=false
 				return
-			
+	cost_label.text="N/A"
 	purchase_button.disabled=true
 
 

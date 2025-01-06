@@ -61,6 +61,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HealthContainer"]
+modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_vofai")
@@ -74,6 +75,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/AmmoContainer"]
+self_modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_q63sq")
@@ -96,6 +98,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PromptLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -104,7 +107,7 @@ anchor_right = 0.5
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 0
-text = "prompt"
+text = "Press 'E' to open shop menu."
 horizontal_alignment = 1
 vertical_alignment = 1
 

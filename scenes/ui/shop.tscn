@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxkio4bbrunje"]
+[gd_scene load_steps=17 format=3 uid="uid://dxkio4bbrunje"]
 
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_frea3"]
 [ext_resource type="Script" path="res://scripts/ui/shop.gd" id="1_sjvwh"]
@@ -14,6 +14,9 @@
 [ext_resource type="Resource" uid="uid://bku2tec1gw7g5" path="res://resources/shop_resources/blocks/explosive.tres" id="10_8uesl"]
 [ext_resource type="Resource" uid="uid://4vyvvgvtrxqv" path="res://resources/shop_resources/blocks/mine.tres" id="11_behtf"]
 [ext_resource type="Resource" uid="uid://ecwo4u34k3as" path="res://resources/shop_resources/blocks/turret.tres" id="12_r7p7l"]
+[ext_resource type="Texture2D" uid="uid://cjudkur4m8k4f" path="res://img/icons/block.png" id="14_a558w"]
+
+[sub_resource type="Theme" id="Theme_xxnkj"]
 
 [node name="Shop" type="Control"]
 process_mode = 3
@@ -42,7 +45,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="VBoxPurchase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(175, 375)
+custom_minimum_size = Vector2(275, 375)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
@@ -71,19 +74,30 @@ text = "Description"
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
+autowrap_mode = 2
 
 [node name="LabelCost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
+text = "Cost"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
+alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_xxnkj")
+texture = ExtResource("14_a558w")
+expand_mode = 3
 
 [node name="Cost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
 layout_mode = 2
+text = "N/A"
 
 [node name="ButtonPurchase" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2

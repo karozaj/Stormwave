@@ -72,6 +72,9 @@ func generate_wave()->Array[PackedScene]:
 
 func begin_wave():
 	current_wave_number+=1
+	wave_started.emit(current_wave_number)
+	await get_tree().create_timer(1).timeout
+	
 	if max_wave_size>0:
 		current_wave_size=clamp((wave_size+(current_wave_number-1)*wave_size_increase),0,max_wave_size)
 	else:
@@ -85,7 +88,7 @@ func begin_wave():
 			if (enemy_spawn_chance[i]+enemy_spawn_chance_increase[i]>=0):
 				enemy_spawn_chance[i]+=enemy_spawn_chance_increase[i]
 	enemies_alive=current_wave_size
-	wave_started.emit(current_wave_number)
+	
 	enemy_count_updated.emit(enemies_alive,current_wave_size)
 	current_wave_scenes=generate_wave()
 	remaining_wave_enemies=await spawn_enemies(current_wave_scenes)

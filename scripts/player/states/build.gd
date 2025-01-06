@@ -32,6 +32,9 @@ func update(delta:float)->void:
 	#if building_manager.current_placer.highlight()==false:
 		#state_owner.building_ray_stopped_colliding.emit()
 	
+	if Input.is_action_just_pressed("open_shop"):
+		state_owner.open_shop_menu()
+	
 	if Input.is_action_just_pressed("next_weapon"):
 		var next_placer_index:int=(building_manager.current_placer_index+1)%building_manager.placers.size()
 		building_manager.select_placer(next_placer_index)

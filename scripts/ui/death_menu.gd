@@ -27,5 +27,4 @@ func _on_button_retry_pressed() -> void:
 func _on_button_quit_pressed() -> void:
 	tween.kill()
 	#get_tree().paused=false
-	#get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

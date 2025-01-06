@@ -42,7 +42,7 @@ enemy_spawner = NodePath("EnemySpawner")
 block_gridmap = NodePath("NavRegion/BlockGridMap")
 world_environment = NodePath("WorldEnvironment")
 build_phase_timer = NodePath("BuildPhaseTimer")
-build_phase_duration = 5.0
+build_phase_duration = 5
 metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -7,6 +7,8 @@ signal died(obj:Object)
 @warning_ignore("unused_signal")
 ## Emitted when the raycast of current placer in building mode stops collidng, used to clear block highlight
 signal building_ray_stopped_colliding
+## Emitted when the start wave button in shop menu is pressed
+signal wave_start_demanded
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
@@ -93,8 +95,6 @@ func process_update(_delta:float):
 	if Input.is_action_just_pressed("pause"):
 		var pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()
 		canvas_layer.add_child(pause_menu)
-	if Input.is_action_just_pressed("open_shop"):
-		open_shop_menu()
 
 func physics_process_update(delta:float):
 	if not is_on_floor():
@@ -216,11 +216,17 @@ func die()->void:
 	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
 	canvas_layer.add_child(death_menu)
 
-func update_game_status_label(current_enemies:int, enemies:int):
-	hud.update_game_status_label(current_enemies,enemies)
+func update_enemy_count(current_enemies:int, enemies:int):
+	hud.update_enemy_count(current_enemies,enemies)
 
+func update_build_time_remaining(time:int):
+	hud.update_build_time_remaining(time)
+	
 func show_wave_label(wave_number:int):
 	hud.show_wave_label(wave_number)
+
+func show_prompt():
+	hud.show_prompt()
 
 func enter_building_state():
 		state_machine.transition_to_next_state(state_machine.current_state,"Build")
@@ -233,6 +239,7 @@ func open_shop_menu():
 	canvas_layer.add_child(shop_menu)
 	shop_menu.update_player_resource_count(get_resource_dict())
 	shop_menu.resource_purchased.connect(on_resource_purchased)
+	shop_menu.start_wave_pressed.connect(wave_start_demanded.emit)
 
 func add_health(number:int):
 	health+=number
