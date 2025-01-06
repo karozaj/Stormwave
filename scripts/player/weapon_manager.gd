@@ -19,6 +19,7 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
+var index_dict:Dictionary={"Axe":0,"Pistol":1,"Shotgun":2,"Chaingun":3,"Rocket":4}
 var ammo:Array=["∞",int(50),int(5),int(50),int(5)]
 var can_shoot:bool=true
 
@@ -62,3 +63,17 @@ func select_weapon(index:int)->void:
 		ammo_count_changed.emit(ammo[current_weapon_index])
 		audio_player.stream=sound_weapon_select
 		audio_player.play()
+
+#func remove_ammo(number:int,type:String):
+	#ammo[index_dict[type]]-=number
+#
+#func add_ammo(number:int,type:String):
+	#ammo[index_dict[type]]+=number
+
+
+
+func get_ammo_dict()->Dictionary:
+	var dict:Dictionary={}
+	for key in index_dict:
+		dict[key]=ammo[index_dict[key]]
+	return dict

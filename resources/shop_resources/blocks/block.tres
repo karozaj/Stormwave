@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://bqx3mhdwmxbcw"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_1uadc"]
+[ext_resource type="Texture2D" uid="uid://cjudkur4m8k4f" path="res://img/icons/block.png" id="1_5jpyb"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_1uadc")
+type = "Block"
+res_name = "Block"
+description = "Can be used for building."
+price = 5
+purchasable_number = 5
+max_number = 10000
+image = ExtResource("1_5jpyb")
+purchasable = false

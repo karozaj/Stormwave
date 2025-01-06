@@ -1,6 +1,5 @@
 extends CharacterBody3D
 class_name Player
-#used to notify enemies of player's death
 
 @warning_ignore("unused_signal")
 ## Emitted when the player dies
@@ -92,9 +91,10 @@ func process_update(_delta:float):
 			#state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause"):
-		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
-		$CanvasLayer.add_child(pause_menu)
-			
+		var pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()
+		canvas_layer.add_child(pause_menu)
+	if Input.is_action_just_pressed("open_shop"):
+		open_shop_menu()
 
 func physics_process_update(delta:float):
 	if not is_on_floor():
@@ -227,3 +227,46 @@ func enter_building_state():
 	
 func enter_fighting_state():
 	state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+
+func open_shop_menu():
+	var shop_menu:ShopMenu=load("res://scenes/ui/shop.tscn").instantiate()
+	canvas_layer.add_child(shop_menu)
+	shop_menu.update_player_resource_count(get_resource_dict())
+	shop_menu.resource_purchased.connect(on_resource_purchased)
+
+func add_health(number:int):
+	health+=number
+
+func get_resource_dict()->Dictionary:
+	var dict:Dictionary={"Health":health}
+	dict.merge(weapon_manager.get_ammo_dict())
+	dict.merge(building_manager.get_blocks_dict())
+	return dict
+
+func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_number):
+	if res.type=="Health":
+		health=clamp(health+number_change,0,res.max_number)
+	elif res.type=="Ammo":
+		var dict:Dictionary=weapon_manager.index_dict
+		for key in dict:
+			if res.res_name==key:
+				weapon_manager.ammo[dict[key]]=clamp(weapon_manager.ammo[dict[key]]+number_change,0,res.max_number)
+			if state_machine.current_state.name=="Combat":
+				if weapon_manager.current_weapon_index==dict[key]:
+					weapon_manager.ammo_count_changed.emit(weapon_manager.ammo[weapon_manager.current_weapon_index])
+	elif res.type=="Block":
+		var dict:Dictionary=building_manager.index_dict
+		for key in dict:
+			if res.res_name==key:
+				building_manager.block_count[dict[key]]=clamp(building_manager.block_count[dict[key]]+number_change,0,res.max_number)
+			if state_machine.current_state.name=="Build":
+				if building_manager.current_placer_index==dict[key]:
+					building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])
+
+#called when player buys something in the shop
+func on_resource_purchased(res:ShopResource,currency:ShopResource,shop:ShopMenu):
+	modify_resource_count(res)
+	modify_resource_count(currency,-res.price)
+	
+	shop.update_player_resource_count(get_resource_dict())
+	shop.on_item_list_item_selected(shop.selected_index)

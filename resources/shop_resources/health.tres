@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://dyo04371lnhv7"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_gpcnr"]
+[ext_resource type="Texture2D" uid="uid://bcjijtp2s8xcp" path="res://img/health_symbol.png" id="1_kodua"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_gpcnr")
+type = "Health"
+res_name = "Health"
+description = "The player's health points"
+price = 1
+purchasable_number = 25
+max_number = 200
+image = ExtResource("1_kodua")
+purchasable = true

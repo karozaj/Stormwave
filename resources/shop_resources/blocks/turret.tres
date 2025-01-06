@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://ecwo4u34k3as"]
+
+[ext_resource type="Texture2D" uid="uid://c7066wom6ygur" path="res://img/icons/turret.png" id="1_gyboe"]
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_kmnyg"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_kmnyg")
+type = "Block"
+res_name = "Turret"
+description = "Shoots nearby enemies."
+price = 20
+purchasable_number = 1
+max_number = 25
+image = ExtResource("1_gyboe")
+purchasable = true

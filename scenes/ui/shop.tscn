@@ -1,53 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxkio4bbrunje"]
+[gd_scene load_steps=15 format=3 uid="uid://dxkio4bbrunje"]
 
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_frea3"]
-[ext_resource type="Texture2D" uid="uid://bcjijtp2s8xcp" path="res://img/health_symbol.png" id="1_od4we"]
+[ext_resource type="Script" path="res://scripts/ui/shop.gd" id="1_sjvwh"]
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="2_qhyj6"]
+[ext_resource type="Resource" uid="uid://dyo04371lnhv7" path="res://resources/shop_resources/health.tres" id="3_hj0hd"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="3_lvris"]
+[ext_resource type="Resource" uid="uid://bidluc1rx8tiv" path="res://resources/shop_resources/ammo/pistol_ammo.tres" id="4_1ry1n"]
+[ext_resource type="Resource" uid="uid://be7jmm4h0oyiv" path="res://resources/shop_resources/ammo/shotgun_ammo.tres" id="5_cfyn5"]
+[ext_resource type="Resource" uid="uid://r05tlgtxaa2h" path="res://resources/shop_resources/ammo/chaingun_ammo.tres" id="6_blk44"]
+[ext_resource type="Resource" uid="uid://rs55kjhpvno4" path="res://resources/shop_resources/ammo/rocket_launcher_ammo.tres" id="7_q8gob"]
+[ext_resource type="Resource" uid="uid://bqx3mhdwmxbcw" path="res://resources/shop_resources/blocks/block.tres" id="8_yalth"]
+[ext_resource type="Resource" uid="uid://cs33fox2bx5mv" path="res://resources/shop_resources/blocks/reinforced_block.tres" id="9_s4pvn"]
+[ext_resource type="Resource" uid="uid://bku2tec1gw7g5" path="res://resources/shop_resources/blocks/explosive.tres" id="10_8uesl"]
+[ext_resource type="Resource" uid="uid://4vyvvgvtrxqv" path="res://resources/shop_resources/blocks/mine.tres" id="11_behtf"]
+[ext_resource type="Resource" uid="uid://ecwo4u34k3as" path="res://resources/shop_resources/blocks/turret.tres" id="12_r7p7l"]
 
 [node name="Shop" type="Control"]
+process_mode = 3
+editor_description = "Shop menu for purchasing blocks and ammo"
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ButtonStartWave" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -31.0
-offset_right = 45.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Start wave"
-script = ExtResource("1_frea3")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-offset_left = 297.0
-offset_top = 189.0
-offset_right = 343.0
-offset_bottom = 290.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "yapp"
-
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "resa"
-
-[node name="Button3" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "gr"
+script = ExtResource("1_sjvwh")
+resource_types = Array[ExtResource("2_qhyj6")]([ExtResource("3_hj0hd"), ExtResource("4_1ry1n"), ExtResource("5_cfyn5"), ExtResource("6_blk44"), ExtResource("7_q8gob"), ExtResource("8_yalth"), ExtResource("9_s4pvn"), ExtResource("10_8uesl"), ExtResource("11_behtf"), ExtResource("12_r7p7l")])
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -57,91 +35,76 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="VBoxOwned" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxPurchase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(175, 375)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxOwned"]
-layout_mode = 2
-text = "Available"
-horizontal_alignment = 1
-
-[node name="ItemList" type="ItemList" parent="CenterContainer/HBoxContainer/VBoxOwned"]
-custom_minimum_size = Vector2(150, 325)
-layout_mode = 2
-item_count = 10
-fixed_icon_size = Vector2i(16, 16)
-item_0/text = "Health"
-item_0/icon = ExtResource("1_od4we")
-item_1/text = "Pistol ammo"
-item_2/text = "Shotgun ammo"
-item_3/text = "Chaingun ammo"
-item_4/text = "Rocket ammo"
-item_5/text = "Block"
-item_6/text = "Reinforced block"
-item_7/text = "Mine"
-item_8/text = "Explosive"
-item_9/text = "Turret"
-script = ExtResource("3_lvris")
-
-[node name="VBoxPurchased" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(175, 375)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxPurchased"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
 layout_mode = 2
 text = "Purchase"
 horizontal_alignment = 1
 
-[node name="ItemList" type="ItemList" parent="CenterContainer/HBoxContainer/VBoxPurchased"]
+[node name="ItemList" type="ItemList" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
 custom_minimum_size = Vector2(150, 325)
 layout_mode = 2
-item_count = 10
-item_0/text = "Health"
-item_1/text = "Pistol ammo"
-item_2/text = "Shotgun ammo"
-item_3/text = "Chaingun ammo"
-item_4/text = "Rocket ammo"
-item_5/text = "Block"
-item_6/text = "Reinforced block"
-item_7/text = "Mine"
-item_8/text = "Explosive"
-item_9/text = "Turret"
+fixed_icon_size = Vector2i(16, 16)
 script = ExtResource("3_lvris")
 
-[node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+[node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 350)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
 text = "Info"
 horizontal_alignment = 1
 
-[node name="LabelDesc" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="LabelDesc" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
 text = "Description"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="Description" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
 
-[node name="LabelCost" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="LabelCost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
 layout_mode = 2
 
-[node name="Cost" type="Label" parent="CenterContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
+[node name="Cost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/HBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonPurchase" type="Button" parent="CenterContainer/HBoxContainer/VBoxInfo"]
+[node name="ButtonPurchase" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
+disabled = true
 text = "Purchase"
 script = ExtResource("1_frea3")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonStartWave" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Start wave"
+script = ExtResource("1_frea3")
+
+[node name="ButtonClose" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="item_selected" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase/ItemList" to="." method="on_item_list_item_selected"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/ButtonPurchase" to="." method="_on_button_purchase_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/ButtonStartWave" to="." method="_on_button_start_wave_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/ButtonClose" to="." method="_on_button_close_pressed"]

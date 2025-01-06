@@ -30,9 +30,10 @@ func update_game_status_label(current_enemies:int, enemies:int):
 	game_status_label.text=str(current_enemies)+"/"+str(enemies)
 
 func show_wave_label(wave_number:int):
-	var tween=get_tree().create_tween()
 	wave_label.text="WAVE "+str(wave_number)
+	wave_label.modulate=Color.WHITE
 	wave_label.visible=true
+	var tween=get_tree().create_tween()
 	tween.tween_property(wave_label,"modulate",Color.TRANSPARENT, 1.0)
 	tween.finished.connect(hide_wave_label)
 	

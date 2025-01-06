@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://cs33fox2bx5mv"]
+
+[ext_resource type="Texture2D" uid="uid://dbnmoc8kbyi8r" path="res://img/icons/reinforced_block.png" id="1_m3uhm"]
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_tkj5e"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_tkj5e")
+type = "Block"
+res_name = "Reinforced block"
+description = "Much more durable than the regular blocks."
+price = 25
+purchasable_number = 15
+max_number = 10000
+image = ExtResource("1_m3uhm")
+purchasable = true

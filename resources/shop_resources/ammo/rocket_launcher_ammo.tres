@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://rs55kjhpvno4"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_fnlus"]
+[ext_resource type="Texture2D" uid="uid://bl03yjd0aoap2" path="res://img/icons/rocket_launcher.png" id="1_sdm71"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_fnlus")
+type = "Ammo"
+res_name = "Rocket"
+description = "Ammo for the rocket launcher"
+price = 5
+purchasable_number = 2
+max_number = 50
+image = ExtResource("1_sdm71")
+purchasable = true
