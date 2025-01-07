@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxkio4bbrunje"]
+[gd_scene load_steps=19 format=3 uid="uid://dxkio4bbrunje"]
 
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_bbuj0"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_frea3"]
 [ext_resource type="Script" path="res://scripts/ui/shop.gd" id="1_sjvwh"]
 [ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="2_qhyj6"]
@@ -15,20 +16,32 @@
 [ext_resource type="Resource" uid="uid://4vyvvgvtrxqv" path="res://resources/shop_resources/blocks/mine.tres" id="11_behtf"]
 [ext_resource type="Resource" uid="uid://ecwo4u34k3as" path="res://resources/shop_resources/blocks/turret.tres" id="12_r7p7l"]
 [ext_resource type="Texture2D" uid="uid://cjudkur4m8k4f" path="res://img/icons/block.png" id="14_a558w"]
+[ext_resource type="AudioStream" uid="uid://b6demtiogj6kw" path="res://audio/sfx/blocks/mine_activation.ogg" id="17_2d8y5"]
 
 [sub_resource type="Theme" id="Theme_xxnkj"]
 
 [node name="Shop" type="Control"]
 process_mode = 3
 editor_description = "Shop menu for purchasing blocks and ammo"
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_bbuj0")
 script = ExtResource("1_sjvwh")
 resource_types = Array[ExtResource("2_qhyj6")]([ExtResource("3_hj0hd"), ExtResource("4_1ry1n"), ExtResource("5_cfyn5"), ExtResource("6_blk44"), ExtResource("7_q8gob"), ExtResource("8_yalth"), ExtResource("9_s4pvn"), ExtResource("10_8uesl"), ExtResource("11_behtf"), ExtResource("12_r7p7l")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -50,14 +63,21 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
 layout_mode = 2
-text = "Purchase"
+text = "Resources"
 horizontal_alignment = 1
 
 [node name="ItemList" type="ItemList" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
-custom_minimum_size = Vector2(150, 325)
+custom_minimum_size = Vector2(300, 325)
 layout_mode = 2
+focus_mode = 0
+max_columns = 0
+same_column_width = true
+fixed_column_width = 300
 fixed_icon_size = Vector2i(16, 16)
 script = ExtResource("3_lvris")
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 350)
@@ -74,9 +94,14 @@ text = "Description"
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
-custom_minimum_size = Vector2(150, 200)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 20
 autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
 
 [node name="LabelCost" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
 layout_mode = 2
@@ -100,21 +125,35 @@ layout_mode = 2
 text = "N/A"
 
 [node name="ButtonPurchase" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-disabled = true
+theme_override_colors/font_hover_pressed_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_hover_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_pressed_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_focus_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_color = Color(0.247059, 0.564706, 0.027451, 1)
 text = "Purchase"
 script = ExtResource("1_frea3")
+press_sound = ExtResource("17_2d8y5")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="ButtonStartWave" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.698039, 0.133333, 0.133333, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.133333, 0.133333, 1)
+theme_override_colors/font_pressed_color = Color(0.698039, 0.133333, 0.133333, 1)
+theme_override_colors/font_focus_color = Color(0.698039, 0.133333, 0.133333, 1)
+theme_override_colors/font_color = Color(0.698039, 0.133333, 0.133333, 1)
 text = "Start wave"
 script = ExtResource("1_frea3")
 
 [node name="ButtonClose" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 text = "Close"
 

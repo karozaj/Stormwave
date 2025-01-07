@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://co6c7ljnb8ppm"]
+
+[ext_resource type="Texture2D" uid="uid://b68d4sryfg3so" path="res://img/level_images/level_1_test.png" id="1_24x3y"]
+[ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="1_rlfle"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_rlfle")
+level_scene = "res://scenes/levels/level_1.tscn"
+level_identifier = "level_1"
+level_name = "Arena"
+level_description = "How long can you survive?"
+image = ExtResource("1_24x3y")
+playable = true

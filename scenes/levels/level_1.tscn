@@ -43,6 +43,8 @@ block_gridmap = NodePath("NavRegion/BlockGridMap")
 world_environment = NodePath("WorldEnvironment")
 build_phase_timer = NodePath("BuildPhaseTimer")
 build_phase_duration = 5
+objective = "Survival"
+level_identifier = "level_1"
 metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

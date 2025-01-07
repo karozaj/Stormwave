@@ -122,6 +122,7 @@ _data = {
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_0jnyo")
+durability = null
 damaged_sound = ExtResource("2_oi6wu")
 destroyed_sound = ExtResource("3_gdinx")
 

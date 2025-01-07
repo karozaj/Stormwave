@@ -55,7 +55,7 @@ func on_item_list_item_selected(index: int) -> void:
 	selected_index=index
 	description_label.text=resource_types[selected_index].description
 	if resource_types[selected_index].purchasable==true:
-		cost_label.text=str(resource_types[selected_index].price)
+		cost_label.text=str(resource_types[selected_index].price)+" for "+str(resource_types[selected_index].purchasable_number)
 		var player_currency:int=0
 		
 		for res in resource_types:
@@ -67,7 +67,8 @@ func on_item_list_item_selected(index: int) -> void:
 			if resource_types[selected_index].number_owned_by_player<resource_types[selected_index].max_number:
 				purchase_button.disabled=false
 				return
-	cost_label.text="N/A"
+	else:
+		cost_label.text="N/A"
 	purchase_button.disabled=true
 
 

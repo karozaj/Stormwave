@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnfrpmn2krhog"]
+[gd_scene load_steps=5 format=3 uid="uid://bnfrpmn2krhog"]
 
 [ext_resource type="Script" path="res://scripts/ui/death_menu.gd" id="1_phx3f"]
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_v5fww"]
 [ext_resource type="Theme" uid="uid://dvsx5bwl1ujf1" path="res://resources/themes/large_text_theme.tres" id="2_nr35u"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="4_3ik0x"]
 
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_v5fww")
 script = ExtResource("1_phx3f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -62,12 +64,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="ButtonRetry" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Retry"
 script = ExtResource("4_3ik0x")
 
 [node name="ButtonQuit" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit"

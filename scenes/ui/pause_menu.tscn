@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq0c66dgqf0fw"]
+[gd_scene load_steps=7 format=3 uid="uid://dq0c66dgqf0fw"]
 
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_3bfj8"]
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_skbq4"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="2_0bkky"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_h_slider.gd" id="2_ja7lg"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="2_oqkqx"]
+[ext_resource type="AudioStream" uid="uid://btaje2g4vfcje" path="res://audio/sfx/click.ogg" id="5_bk1bn"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_3bfj8")
 script = ExtResource("1_skbq4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -30,12 +33,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FullscreenButton" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(256, 32)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "TOGGLE FULLSCREEN"
+text = "Toggle fullscreen
+"
 script = ExtResource("2_oqkqx")
 
 [node name="HeadbobButton" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(256, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Headbob enabled"
@@ -51,11 +57,12 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
-text = "SFX Volume"
+text = "SFX volume"
 
 [node name="SFXSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 max_value = 1.0
 step = 0.01
 script = ExtResource("2_ja7lg")
@@ -65,14 +72,18 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Music Volume"
+text = "Music volume"
 
 [node name="MusicSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 max_value = 1.0
 step = 0.01
-script = ExtResource("2_ja7lg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/GridContainer/VBoxContainer2/MusicSlider"]
+stream = ExtResource("5_bk1bn")
+bus = &"Music"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -82,8 +93,9 @@ layout_mode = 2
 text = "FOV"
 
 [node name="FOVSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 min_value = 45.0
 max_value = 140.0
 step = 5.0
@@ -98,8 +110,9 @@ layout_mode = 2
 text = "Mouse sensitivity"
 
 [node name="SensitivitySlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer4"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 min_value = 0.01
 max_value = 3.0
 step = 0.01
@@ -107,13 +120,17 @@ value = 1.0
 script = ExtResource("2_ja7lg")
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-text = "RESUME"
+text = "Resume
+"
 script = ExtResource("2_0bkky")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
-text = "QUIT"
+text = "Quit
+"
 script = ExtResource("2_0bkky")
 
 [connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]

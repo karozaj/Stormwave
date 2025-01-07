@@ -1,12 +1,14 @@
 extends Resource
 class_name ShopResource
+## The resource used for the shop menu
+
 
 ## The type of the resource
 @export_enum("Ammo","Block","Health") var type:String
 ## What the resource is called
 @export var res_name:String
 ## The resource description
-@export var description:String
+@export_multiline var description:String
 ## How much this resource costs
 @export var price:int
 ## How many of the resource the player receives when they buy it

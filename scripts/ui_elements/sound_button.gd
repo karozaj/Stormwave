@@ -1,6 +1,6 @@
 extends Button
 class_name SoundButton
-# Button that plays a given sound when presed
+## Button that plays a given sound when presed
 
 @export_category("Press sound")
 ## Sound to be played when pressing this button

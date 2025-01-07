@@ -53,7 +53,8 @@ func show_wave_label(wave_number:int)->void:
 	tween.tween_property(wave_label,"modulate",Color.TRANSPARENT, 0.25)
 	tween.finished.connect(hide_wave_label)
 
-func show_prompt():
+func show_prompt(message:String):
+	prompt_label.text=message
 	prompt_label.modulate=Color.WHITE
 	prompt_label.visible=true
 	await get_tree().create_timer(3).timeout

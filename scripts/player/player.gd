@@ -69,6 +69,7 @@ var health:int=100:
 var is_invincible:bool=false
 var is_dead:bool=false
 
+var death_menu:DeathMenu
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -212,27 +213,19 @@ func _on_invincibility_timer_timeout():
 	is_invincible=false
 
 func die()->void:
-	state_machine.transition_to_next_state(state_machine.current_state,"Dead")
-	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
-	canvas_layer.add_child(death_menu)
+	if state_machine.current_state.name!="Dead":
+		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
+	#if death_menu==null:
+		#show_game_over_menu("","You died.")
 
-func update_enemy_count(current_enemies:int, enemies:int):
-	hud.update_enemy_count(current_enemies,enemies)
-
-func update_build_time_remaining(time:int):
-	hud.update_build_time_remaining(time)
-	
-func show_wave_label(wave_number:int):
-	hud.show_wave_label(wave_number)
-
-func show_prompt():
-	hud.show_prompt()
 
 func enter_building_state():
+	if state_machine.current_state.name!="Dead" and state_machine.current_state.name!="Build":
 		state_machine.transition_to_next_state(state_machine.current_state,"Build")
 	
 func enter_fighting_state():
-	state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+	if state_machine.current_state.name!="Dead" and state_machine.current_state.name!="Combat":
+		state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 
 func open_shop_menu():
 	var shop_menu:ShopMenu=load("res://scenes/ui/shop.tscn").instantiate()
@@ -277,3 +270,14 @@ func on_resource_purchased(res:ShopResource,currency:ShopResource,shop:ShopMenu)
 	
 	shop.update_player_resource_count(get_resource_dict())
 	shop.on_item_list_item_selected(shop.selected_index)
+
+func show_game_over_menu(score_message:String,message:String):
+	death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
+	death_menu.message=message
+	death_menu.score_message=score_message
+	canvas_layer.add_child(death_menu)
+
+func on_game_ended(score_message:String,message:String):
+	if state_machine.current_state.name!="Dead":
+		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
+	show_game_over_menu(score_message,message)

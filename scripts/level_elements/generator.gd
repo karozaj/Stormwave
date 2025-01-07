@@ -1,4 +1,5 @@
 extends StaticBody3D
+class_name Generator
 
 ## Emitted when generator is destroyed
 signal died(sender)
