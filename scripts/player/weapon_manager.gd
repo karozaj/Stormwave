@@ -20,7 +20,7 @@ var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
 var index_dict:Dictionary={"Axe":0,"Pistol":1,"Shotgun":2,"Chaingun":3,"Rocket":4}
-var ammo:Array=["∞",int(50),int(5),int(50),int(5)]
+var ammo:Array=["∞",int(100),int(0),int(0),int(0)]
 var can_shoot:bool=true
 
 func _ready() -> void:

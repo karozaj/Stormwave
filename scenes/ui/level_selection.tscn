@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcx1v0m8ulr3m"]
+[gd_scene load_steps=9 format=3 uid="uid://dcx1v0m8ulr3m"]
 
 [ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_8eqec"]
 [ext_resource type="Script" path="res://scripts/ui/level_selection.gd" id="1_587mi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="2_ksemb"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="3_gw3et"]
 [ext_resource type="Resource" uid="uid://co6c7ljnb8ppm" path="res://resources/level_info/level_1_info.tres" id="3_l7g5j"]
+[ext_resource type="Resource" uid="uid://b6fppgipnjto8" path="res://resources/level_info/level_2_info.tres" id="5_oi74t"]
 [ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="6_kxavs"]
 
 [node name="LevelSelection" type="Control"]
@@ -17,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8eqec")
 script = ExtResource("1_587mi")
-level_info_resources = Array[ExtResource("2_ksemb")]([ExtResource("3_l7g5j")])
+level_info_resources = Array[ExtResource("2_ksemb")]([ExtResource("3_l7g5j"), ExtResource("5_oi74t")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

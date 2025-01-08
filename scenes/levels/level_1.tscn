@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbiqgfgqnurpi"]
+[gd_scene load_steps=17 format=3 uid="uid://bbiqgfgqnurpi"]
 
-[ext_resource type="Script" path="res://scripts/levels/level_1.gd" id="1_6ouqa"]
+[ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_u4igx"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_mffs7"]
 [ext_resource type="Texture2D" uid="uid://dpejgx338i3a3" path="res://img/sky/panorama_moody.png" id="2_nfqyf"]
 [ext_resource type="PackedScene" uid="uid://b5m17kfq7jetu" path="res://scenes/level_elements/enemy_spawner.tscn" id="3_0ikte"]
@@ -9,17 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="5_kfhqg"]
 [ext_resource type="PackedScene" uid="uid://yswaem7jo4aw" path="res://scenes/level_elements/gridmaps/metal_floor.tscn" id="6_fnv6d"]
 [ext_resource type="PackedScene" uid="uid://cmgmsd6xjbeb7" path="res://scenes/level_elements/gridmaps/metal_wall.tscn" id="7_4o2nw"]
+[ext_resource type="PackedScene" uid="uid://dfu18rihy2hrr" path="res://3d/level_decoration/spire.glb" id="10_nfqku"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ycedt"]
 panorama = ExtResource("2_nfqyf")
 
-[sub_resource type="Sky" id="Sky_kchqp"]
+[sub_resource type="Sky" id="Sky_t5hu8"]
 sky_material = SubResource("PanoramaSkyMaterial_ycedt")
 
 [sub_resource type="Environment" id="Environment_2r06c"]
 background_mode = 2
-sky = SubResource("Sky_kchqp")
-fog_density = 0.025
+sky = SubResource("Sky_t5hu8")
+fog_enabled = true
+fog_light_color = Color(0.411765, 0.372549, 0.415686, 1)
+fog_density = 0.015
 fog_sky_affect = 0.1
 volumetric_fog_density = 1.0
 volumetric_fog_temporal_reprojection_enabled = false
@@ -34,15 +37,20 @@ geometry_collision_mask = 50
 agent_radius = 0.25
 filter_walkable_low_height_spans = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34xti"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m5hfk"]
+plane = Plane(0, -1, 0, 0)
+
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer")]
-script = ExtResource("1_6ouqa")
+script = ExtResource("1_u4igx")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")
 enemy_spawner = NodePath("EnemySpawner")
 block_gridmap = NodePath("NavRegion/BlockGridMap")
 world_environment = NodePath("WorldEnvironment")
 build_phase_timer = NodePath("BuildPhaseTimer")
-build_phase_duration = 5
+build_phase_duration = 30
 objective = "Survival"
 level_identifier = "level_1"
 metadata/_edit_lock_ = true
@@ -59,6 +67,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("enemy_parent_node", "initial_enemy_targets") instance=ExtResource("3_0ikte")]
+visible = false
 enemy_parent_node = NodePath("../Enemies")
 wave_size = 10
 max_wave_size = 35
@@ -291,9 +300,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106462, 0.0647202, -0.12284)
+metadata/_edit_lock_ = true
 
 [node name="NavRegion" parent="." instance=ExtResource("4_ymh5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106462, 0.0647202, -0.12284)
 navigation_mesh = SubResource("NavigationMesh_5dg6t")
+metadata/_edit_lock_ = true
 
 [node name="BlockGridMap" parent="NavRegion" instance=ExtResource("5_kfhqg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
@@ -311,9 +324,194 @@ cell_center_z = true
 data = {
 "cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 65535, 0, 0, 0, 65535, 0, 0, 1, 0, 65535, 1, 1441793, 1, 1, 1, 1, 65535, 1048577, 65535, 65535, 655361)
 }
+metadata/_edit_lock_ = true
 
 [node name="GridMap" parent="NavRegion" instance=ExtResource("7_4o2nw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+metadata/_edit_lock_ = true
 
 [node name="BuildPhaseTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="WorldBoundaries" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_34xti")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundaries/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_m5hfk")
+metadata/_edit_lock_ = true
+
+[node name="LevelDecoration" type="Node3D" parent="."]
+
+[node name="SpiresClusterType1_1" type="Node3D" parent="LevelDecoration"]
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType1_3" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.879227, -0.00890989, 0.47632, -0.0125815, 0.999911, -0.00451997, -0.476237, -0.00996691, -0.879261, -9.14196, 0, -5.24511)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType2_1" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.471104, 0, -0.882078, 0, 1, 0, 0.882078, 0, 0.471104, 27.5294, 0, -28.3523)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType2_2" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.0844504, 0.0730727, 0.993745, -0.0144206, 0.997293, -0.0721081, -0.996323, -0.00824082, 0.0852755, -39.6493, 0, -0.796141)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType1_2" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.858987, 0, 0.511998, 0, 1, 0, -0.511998, 0, 0.858987, -9.07098, -3.13246, 7.00082)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType1_4" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.999731, 0, 0.0231759, 0, 1, 0, -0.0231759, 0, -0.999731, 0.744678, 0, -1.41961)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType2_4" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.107518, -0.073244, -0.991502, -0.0144206, 0.997293, -0.0721081, 0.994099, 0.00654508, -0.108284, 40.3649, 0, 0.295231)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType1_6" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.870622, 0, -0.491953, 0, 1, 0, 0.491953, 0, -0.870622, 9.97548, -3.13246, -8.20832)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("10_nfqku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)

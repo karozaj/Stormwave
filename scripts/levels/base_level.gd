@@ -56,6 +56,7 @@ func _ready() -> void:
 	player.died.connect(game_over)
 	for gen in generators:
 		gen.died.connect(on_generator_destroyed)
+		gen.map_updated.connect(nav_region.update_navmesh)
 	build_phase_started.connect(player.hud.show_prompt)
 	fighting_phase_started.connect(player.hud.show_prompt)
 	build_phase_timer.timeout.connect(build_phase_timer_timeout)
@@ -107,24 +108,25 @@ func on_generator_destroyed(sender):
 		game_over(null)
 
 func game_over(sender):
-	game_has_ended=true
-	var score_message:String
-	var message:String="You died."
-	var score:int=0
-	if build_phase_timer.is_stopped():
-		score=enemy_spawner.current_wave_number-1
-		score_message="You have survived "+str(score)+" waves."
-	else:
-		score=enemy_spawner.current_wave_number
-		score_message="You have survived "+str(score)+" waves."
-	
-	if objective=="Defense" and generators.size()<=0:
-		if sender is not Player:
-			message="The generators were destroyed."
-	
-	ScoreManager.add_score(level_identifier,score)
-	ScoreManager.save_scores()
-	game_ended.emit(score_message,message)
+	if game_has_ended==false:
+		game_has_ended=true
+		var score_message:String
+		var message:String="You died."
+		var score:int=0
+		if build_phase_timer.is_stopped():
+			score=enemy_spawner.current_wave_number-1
+			score_message="You survived "+str(score)+" waves."
+		else:
+			score=enemy_spawner.current_wave_number
+			score_message="You survived "+str(score)+" waves."
+		
+		if objective=="Defense" and generators.size()<=0:
+			if sender is not Player:
+				message="The generators were destroyed."
+		
+		ScoreManager.add_score(level_identifier,score)
+		ScoreManager.save_scores()
+		game_ended.emit(score_message,message)
 	
 #func _process(delta: float) -> void:
 	#if Input.is_action_just_pressed("TEST_BUTTON"):

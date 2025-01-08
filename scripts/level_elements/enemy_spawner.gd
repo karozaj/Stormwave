@@ -56,7 +56,7 @@ func _ready() -> void:
 	for x in get_tree().get_nodes_in_group("enemy_spawn_areas"):
 		enemy_spawn_areas.append(x as EnemySpawnArea)
 	print(enemy_spawn_areas.size())
-	
+	print("Number of enemy spawn areas: "+str(enemy_spawn_areas.size()))
 	rng.seed=rng_seed
 	if concurrent_enemies>enemy_spawn_areas.size():
 		concurrent_enemies=enemy_spawn_areas.size()

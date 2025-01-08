@@ -9,7 +9,7 @@ signal map_updated
 @onready var aim_point:Marker3D=$AimPoint
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 ## The generator's durability points
-@export var durability:int=10000
+@export var durability:int=1000
 @onready var max_durability:int=durability
 ## The sound played when the generator is damaged
 @export var damaged_sound:AudioStream
