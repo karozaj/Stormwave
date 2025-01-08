@@ -3,6 +3,9 @@ class_name WeaponManager
 
 signal ammo_count_changed(count:int) #signal used to notify hud about ammo change
 
+## The player that owns this weapon manager
+@export var weapon_manager_owner:Player
+
 @onready var audio_player=$AudioStreamPlayer3D
 var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
 var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
@@ -16,12 +19,14 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
-var ammo:Array=["∞",int(50),int(5),int(50),int(5)]
+var index_dict:Dictionary={"Axe":0,"Pistol":1,"Shotgun":2,"Chaingun":3,"Rocket":4}
+var ammo:Array=["∞",int(100),int(0),int(0),int(0)]
 var can_shoot:bool=true
 
 func _ready() -> void:
 	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
 	for weapon in weapons:
+		weapon.weapon_owner=weapon_manager_owner
 		if weapon.has_method("set_ray_position"):
 			weapon.set_ray_position(global_position)
 	current_weapon=pistol
@@ -58,3 +63,17 @@ func select_weapon(index:int)->void:
 		ammo_count_changed.emit(ammo[current_weapon_index])
 		audio_player.stream=sound_weapon_select
 		audio_player.play()
+
+#func remove_ammo(number:int,type:String):
+	#ammo[index_dict[type]]-=number
+#
+#func add_ammo(number:int,type:String):
+	#ammo[index_dict[type]]+=number
+
+
+
+func get_ammo_dict()->Dictionary:
+	var dict:Dictionary={}
+	for key in index_dict:
+		dict[key]=ammo[index_dict[key]]
+	return dict

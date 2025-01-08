@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://bku2tec1gw7g5"]
+
+[ext_resource type="Texture2D" uid="uid://b8vxbxr2vvcvj" path="res://img/icons/explosive.png" id="1_dp2kj"]
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_x8biy"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_x8biy")
+type = "Block"
+res_name = "Explosive"
+description = "Explodes when damaged."
+price = 15
+purchasable_number = 5
+max_number = 50
+image = ExtResource("1_dp2kj")
+purchasable = true

@@ -1,10 +1,13 @@
-[gd_scene load_steps=29 format=4 uid="uid://dm3r1hv0l3q6h"]
+[gd_scene load_steps=32 format=4 uid="uid://dm3r1hv0l3q6h"]
 
 [ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
+[ext_resource type="AudioStream" uid="uid://345nc4dly5b6" path="res://audio/sfx/ghost/ghost_death.ogg" id="2_srden"]
 [ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="3_lmk5i"]
+[ext_resource type="AudioStream" uid="uid://kbdybgswv1u" path="res://audio/sfx/ghost/ghost_attack.ogg" id="3_u14ic"]
 [ext_resource type="AudioStream" uid="uid://bj8rxdhil5kqy" path="res://audio/sfx/enemy_ghost.ogg" id="4_0ifen"]
 [ext_resource type="Material" uid="uid://jgkbd46cfaao" path="res://resources/materials/enemies/ghost.tres" id="4_5y0kq"]
+[ext_resource type="AudioStream" uid="uid://bkcfdd4neh1so" path="res://audio/sfx/ghost/ghost_damage.ogg" id="4_8kwtc"]
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_ya6yt"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/chase.gd" id="6_akg5s"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/idle.gd" id="7_drird"]
@@ -78,7 +81,7 @@ shadow_mesh = SubResource("ArrayMesh_uhmkq")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.731884, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_fhws7"]
+[sub_resource type="CurveTexture" id="CurveTexture_feptk"]
 curve = SubResource("Curve_ari81")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alck1"]
@@ -93,9 +96,9 @@ initial_velocity_max = -0.1
 gravity = Vector3(0, 0, 0.25)
 scale_min = 0.75
 scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_fhws7")
+alpha_curve = SubResource("CurveTexture_feptk")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng63p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sl0c"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
@@ -106,7 +109,7 @@ texture_filter = 0
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_57ta5"]
-material = SubResource("StandardMaterial3D_ng63p")
+material = SubResource("StandardMaterial3D_2sl0c")
 size = Vector2(0.75, 1.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5uuuw"]
@@ -527,16 +530,24 @@ _data = {
 "pain": SubResource("Animation_yg4e3")
 }
 
-[node name="EnemyGhost" type="CharacterBody3D" groups=["enemies"]]
-collision_layer = 4
+[node name="EnemyGhost" type="CharacterBody3D" node_paths=PackedStringArray("aim_point") groups=["enemies"]]
+collision_layer = 132
 collision_mask = 62
 motion_mode = 1
 script = ExtResource("1_0m7cj")
+death_sound = ExtResource("2_srden")
+attack_sound = ExtResource("3_u14ic")
+pain_sound = ExtResource("4_8kwtc")
 health = 30
 move_speed = 8.0
+agility = 15.0
 attack_range = 8.0
 attack_cooldown = 1.0
 knockback_modifier = 25.0
+aim_point = NodePath("AimPoint")
+
+[node name="AimPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, -2.27374e-13, 0, 1, 0, 2.27374e-13, 0, 1, 0, -7.45058e-09, 0)
 
 [node name="skull" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.25, 0, -3.16898e-06, 0, 1.25, 0, 3.16898e-06, 0, -1.25, 0, 0.124965, 0)
@@ -572,8 +583,8 @@ draw_pass_1 = SubResource("QuadMesh_57ta5")
 shape = SubResource("CapsuleShape3D_5uuuw")
 
 [node name="AttackArea" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 33
+collision_layer = 0
+collision_mask = 97
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
@@ -599,7 +610,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_ya6yt")]
-initial_state = NodePath("Idle")
+initial_state = NodePath("Chase")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("7_drird")

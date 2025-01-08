@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://bidluc1rx8tiv"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_hcsuk"]
+[ext_resource type="Texture2D" uid="uid://cnjlbumfixj7b" path="res://img/icons/pistol.png" id="1_oq2ak"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_hcsuk")
+type = "Ammo"
+res_name = "Pistol"
+description = "Ammo for the pistol"
+price = 2
+purchasable_number = 50
+max_number = 1000
+image = ExtResource("1_oq2ak")
+purchasable = true

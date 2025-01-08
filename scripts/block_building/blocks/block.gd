@@ -13,7 +13,7 @@ var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_dest
 
 #function called when a block is damaged by an enemy or by the player's weapons
 #also sets transparency of damage overlay material to match the block's condition
-func damage(dmg:int,_pos:Vector3):
+func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
 	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
 	audio_player.stream=damaged_sound

@@ -1,6 +1,5 @@
 extends PlacerBaseClass
 
-@onready var ray:RayCast3D=$RayCast3D
 
 #sets ray position to align with player camera
 func set_ray_position(pos:Vector3)->void:
@@ -38,9 +37,3 @@ func can_block_be_placed(target:Vector3)->bool:
 	elif Vector2(target.x,target.z).distance_to(Vector2(ray.global_position.x,ray.global_position.z))>player_radius+1.0:
 		return true
 	return false
-
-#highlights the block when the raycast is colliding with it
-func highlight():
-	if ray.is_colliding():
-		if ray.get_collider()!=null and ray.get_collider().has_method("highlight"):
-			ray.get_collider().highlight(ray.get_collision_point()-ray.get_collision_normal()/2)

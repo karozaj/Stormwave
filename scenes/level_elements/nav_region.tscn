@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://f6crd74r3c37"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/nav_region.gd" id="1_www6m"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ibomp"]
+resource_local_to_scene = true
+sample_partition_type = 1
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 50
+agent_radius = 0.25
+filter_walkable_low_height_spans = true
+
+[node name="NavRegion" type="NavigationRegion3D"]
+editor_description = "Navigation region that updates with the block gridmap"
+navigation_mesh = SubResource("NavigationMesh_ibomp")
+use_edge_connections = false
+script = ExtResource("1_www6m")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

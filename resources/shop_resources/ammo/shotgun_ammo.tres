@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://be7jmm4h0oyiv"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_6k1f0"]
+[ext_resource type="Texture2D" uid="uid://d3tni4hgqneph" path="res://img/icons/shotgun.png" id="1_sck82"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_6k1f0")
+type = "Ammo"
+res_name = "Shotgun"
+description = "Ammo for the shotgun"
+price = 3
+purchasable_number = 10
+max_number = 300
+image = ExtResource("1_sck82")
+purchasable = true

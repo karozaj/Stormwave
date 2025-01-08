@@ -1,6 +1,6 @@
 extends WeaponBaseClass
 
-@onready var ray:RayCast3D=$RayCast3D
+@onready var ray:RayCast3D=$WeaponRaycast
 @onready var animation_player=$AnimationPlayer
 @onready var bullet_hole_spawner=$BulletHoleSpawner
 var shooting_sound:AudioStream=preload("res://audio/sfx/pistol.ogg")
@@ -20,4 +20,4 @@ func shoot():
 	if ray.is_colliding():
 		bullet_hole_spawner.spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
 		if ray.get_collider().has_method("damage"):
-			ray.get_collider().damage(base_damage, global_position)
+			ray.get_collider().damage(base_damage, global_position,weapon_owner)

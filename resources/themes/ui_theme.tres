@@ -1,0 +1,72 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://b22lwt742gddp"]
+
+[ext_resource type="FontFile" uid="uid://ggrqex1ac6uk" path="res://resources/fonts/Squarewave.ttf" id="1_7a68y"]
+[ext_resource type="Texture2D" uid="uid://bvgekfxx8kc35" path="res://img/ui/button.png" id="1_7b5m0"]
+[ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="2_jhhno"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2hfpj"]
+texture = ExtResource("1_7b5m0")
+modulate_color = Color(0.678944, 0.678944, 0.678944, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3jnf5"]
+texture = ExtResource("1_7b5m0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3r2cc"]
+texture = ExtResource("1_7b5m0")
+modulate_color = Color(0.381703, 0.381703, 0.381703, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lrjda"]
+texture = ExtResource("1_7b5m0")
+texture_margin_left = 4.0
+texture_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kcc45"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2duem"]
+texture = ExtResource("2_jhhno")
+texture_margin_left = 16.0
+texture_margin_top = 20.0
+texture_margin_right = 16.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_scw1l"]
+texture = ExtResource("2_jhhno")
+texture_margin_left = 16.0
+texture_margin_top = 20.0
+texture_margin_right = 16.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dcbk7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_usfp8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tj7c"]
+
+[resource]
+default_font = ExtResource("1_7a68y")
+default_font_size = 24
+Button/styles/focus = SubResource("StyleBoxTexture_2hfpj")
+Button/styles/hover = SubResource("StyleBoxTexture_2hfpj")
+Button/styles/normal = SubResource("StyleBoxTexture_3jnf5")
+Button/styles/pressed = SubResource("StyleBoxTexture_3r2cc")
+CheckButton/styles/disabled = SubResource("StyleBoxTexture_lrjda")
+CheckButton/styles/focus = SubResource("StyleBoxTexture_lrjda")
+CheckButton/styles/hover = SubResource("StyleBoxTexture_lrjda")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxTexture_lrjda")
+CheckButton/styles/normal = SubResource("StyleBoxTexture_lrjda")
+CheckButton/styles/pressed = SubResource("StyleBoxTexture_lrjda")
+HSeparator/constants/separation = 60
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_kcc45")
+ItemList/colors/guide_color = Color(0.65, 0.65, 0.65, 1)
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/focus = null
+ItemList/styles/hovered = null
+ItemList/styles/panel = SubResource("StyleBoxTexture_2duem")
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
+RichTextLabel/styles/background = SubResource("StyleBoxTexture_scw1l")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_dcbk7")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_usfp8")
+VSeparator/constants/separation = 16
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_0tj7c")

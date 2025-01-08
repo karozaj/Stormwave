@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cljumdm3fr7bs"]
+[gd_scene load_steps=26 format=4 uid="uid://cljumdm3fr7bs"]
 
 [ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="1_sl5kr"]
 [ext_resource type="Script" path="res://scripts/block_building/blocks/turret.gd" id="1_yvf3x"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://jt7oseu6yl3j" path="res://audio/sfx/blocks/block_destroyed1.ogg" id="3_4gad8"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="3_ttt0k"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_pokwv"]
+[ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="6_a32n6"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="6_h5bof"]
 [ext_resource type="PackedScene" uid="uid://bukp7t8xot7b1" path="res://scenes/weapons/weapon_effects/laser_effect.tscn" id="6_q561l"]
 [ext_resource type="AudioStream" uid="uid://foku7kfpbstk" path="res://audio/sfx/enemy_detected.ogg" id="8_ohv5v"]
@@ -114,7 +115,8 @@ shadow_mesh = SubResource("ArrayMesh_6loa6")
 [sub_resource type="BoxShape3D" id="BoxShape3D_2bnl0"]
 size = Vector3(0.8, 0.8, 0.8)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7y252"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c8u06"]
+height = 15.0
 radius = 5.0
 
 [sub_resource type="Animation" id="Animation_66co8"]
@@ -161,18 +163,6 @@ tracks/0/path = NodePath("base/TurretPivot/turret")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("base/TurretPivot/turret/barrel/RayCast3D/LaserEffect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_uny7s"]
 resource_name = "shoot"
@@ -184,18 +174,6 @@ tracks/0/path = NodePath("base/TurretPivot/turret")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.0666667, 1, 0, 0, 0.1, 0.333333, 1, 0, 0, 0)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("base/TurretPivot/turret/barrel/RayCast3D/LaserEffect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0iqmn"]
 _data = {
@@ -207,10 +185,13 @@ _data = {
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_yvf3x")
+base_damage = 15
 durability = 40
 block_name = "Turret"
 damaged_sound = ExtResource("2_cboge")
 destroyed_sound = ExtResource("3_4gad8")
+
+[node name="AimPoint" type="Marker3D" parent="."]
 
 [node name="base" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.991351, 0, 0, 0, 0.991351, 0, 0, 0, 0.991351, 0, 0, 0)
@@ -229,14 +210,11 @@ skeleton = NodePath("")
 mesh = SubResource("ArrayMesh_am8de")
 skeleton = NodePath("")
 
-[node name="RayCast3D" type="RayCast3D" parent="base/TurretPivot/turret/barrel"]
-transform = Transform3D(1.00872, 0, 0, 0, 1.00872, 0, 0, 0, 1.00872, 0, 0, -0.398092)
-enabled = false
+[node name="WeaponRaycast" parent="base/TurretPivot/turret/barrel" instance=ExtResource("6_a32n6")]
 target_position = Vector3(0, 0, -7)
-collision_mask = 55
+collision_mask = 243
 
-[node name="LaserEffect" parent="base/TurretPivot/turret/barrel/RayCast3D" instance=ExtResource("6_q561l")]
-visible = false
+[node name="LaserEffect" parent="base/TurretPivot/turret/barrel/WeaponRaycast" instance=ExtResource("6_q561l")]
 
 [node name="Sprite3D" type="Sprite3D" parent="base/TurretPivot/turret/barrel"]
 texture = ExtResource("6_h5bof")
@@ -251,7 +229,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_7y252")
+shape = SubResource("CylinderShape3D_c8u06")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -261,6 +239,7 @@ bus = &"SFX"
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_ohv5v")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

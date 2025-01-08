@@ -1,9 +1,14 @@
 extends CharacterBody3D
 class_name Player
-#used to notify enemies of player's death
 
 @warning_ignore("unused_signal")
-signal died
+## Emitted when the player dies
+signal died(obj:Object)
+@warning_ignore("unused_signal")
+## Emitted when the raycast of current placer in building mode stops collidng, used to clear block highlight
+signal building_ray_stopped_colliding
+## Emitted when the start wave button in shop menu is pressed
+signal wave_start_demanded
 
 const SENSITIVITY=0.004
 var mouse_sensitivity:float=1.0
@@ -12,6 +17,8 @@ var mouse_sensitivity:float=1.0
 @onready var weapon_manager:WeaponManager=$Pivot/WeaponCamera/WeaponManager
 @onready var building_manager:BuildingManager=$Pivot/WeaponCamera/BuildingManager
 @onready var state_machine:StateMachine=$StateMachine
+#Marker used to indicate where enemies should aim
+@onready var aim_point:Marker3D=$AimPoint
 #camera
 @onready var pivot:Node3D=$Pivot
 @onready var main_camera:Camera3D=$Pivot/MainCamera
@@ -60,7 +67,9 @@ var health:int=100:
 		health=value
 		hud.update_health(health)
 var is_invincible:bool=false
+var is_dead:bool=false
 
+var death_menu:DeathMenu
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -78,16 +87,15 @@ func _ready() -> void:
 
 func process_update(_delta:float):
 		#for testing
-	if Input.is_action_just_pressed("TEST_BUTTON"):
-		if state_machine.current_state.name=="Combat":
-			state_machine.transition_to_next_state(state_machine.current_state,"Build")
-		elif state_machine.current_state.name=="Build":
-			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+	#if Input.is_action_just_pressed("TEST_BUTTON"):
+		#if state_machine.current_state.name=="Combat":
+			#state_machine.transition_to_next_state(state_machine.current_state,"Build")
+		#elif state_machine.current_state.name=="Build":
+			#state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause"):
-		var pause_menu=preload("res://scenes/ui/pause_menu.tscn").instantiate()
-		$CanvasLayer.add_child(pause_menu)
-			
+		var pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()
+		canvas_layer.add_child(pause_menu)
 
 func physics_process_update(delta:float):
 	if not is_on_floor():
@@ -185,10 +193,10 @@ func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 	main_camera.fov=lerp(main_camera.fov,target_fov,1-pow(lerp_val,delta))
 
 
-func damage(damage_points:int, origin:Vector3)->void:
-	state_machine.current_state.damage(damage_points,origin)
+func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+	state_machine.current_state.damage(damage_points,origin,damage_dealer)
 
-func take_damage(damage_points:int, origin:Vector3)->void:
+func take_damage(damage_points:int, origin:Vector3,_damage_dealer)->void:
 	if is_invincible==false:
 		health-=damage_points
 		var knockback_direction:Vector3=global_position-origin
@@ -205,6 +213,71 @@ func _on_invincibility_timer_timeout():
 	is_invincible=false
 
 func die()->void:
-	state_machine.transition_to_next_state(state_machine.current_state,"Dead")
-	var death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
+	if state_machine.current_state.name!="Dead":
+		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
+	#if death_menu==null:
+		#show_game_over_menu("","You died.")
+
+
+func enter_building_state():
+	if state_machine.current_state.name!="Dead" and state_machine.current_state.name!="Build":
+		state_machine.transition_to_next_state(state_machine.current_state,"Build")
+	
+func enter_fighting_state():
+	if state_machine.current_state.name!="Dead" and state_machine.current_state.name!="Combat":
+		state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+
+func open_shop_menu():
+	var shop_menu:ShopMenu=load("res://scenes/ui/shop.tscn").instantiate()
+	canvas_layer.add_child(shop_menu)
+	shop_menu.update_player_resource_count(get_resource_dict())
+	shop_menu.resource_purchased.connect(on_resource_purchased)
+	shop_menu.start_wave_pressed.connect(wave_start_demanded.emit)
+
+func add_health(number:int):
+	health+=number
+
+func get_resource_dict()->Dictionary:
+	var dict:Dictionary={"Health":health}
+	dict.merge(weapon_manager.get_ammo_dict())
+	dict.merge(building_manager.get_blocks_dict())
+	return dict
+
+func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_number):
+	if res.type=="Health":
+		health=clamp(health+number_change,0,res.max_number)
+	elif res.type=="Ammo":
+		var dict:Dictionary=weapon_manager.index_dict
+		for key in dict:
+			if res.res_name==key:
+				weapon_manager.ammo[dict[key]]=clamp(weapon_manager.ammo[dict[key]]+number_change,0,res.max_number)
+			if state_machine.current_state.name=="Combat":
+				if weapon_manager.current_weapon_index==dict[key]:
+					weapon_manager.ammo_count_changed.emit(weapon_manager.ammo[weapon_manager.current_weapon_index])
+	elif res.type=="Block":
+		var dict:Dictionary=building_manager.index_dict
+		for key in dict:
+			if res.res_name==key:
+				building_manager.block_count[dict[key]]=clamp(building_manager.block_count[dict[key]]+number_change,0,res.max_number)
+			if state_machine.current_state.name=="Build":
+				if building_manager.current_placer_index==dict[key]:
+					building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])
+
+#called when player buys something in the shop
+func on_resource_purchased(res:ShopResource,currency:ShopResource,shop:ShopMenu):
+	modify_resource_count(res)
+	modify_resource_count(currency,-res.price)
+	
+	shop.update_player_resource_count(get_resource_dict())
+	shop.on_item_list_item_selected(shop.selected_index)
+
+func show_game_over_menu(score_message:String,message:String):
+	death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
+	death_menu.message=message
+	death_menu.score_message=score_message
 	canvas_layer.add_child(death_menu)
+
+func on_game_ended(score_message:String,message:String):
+	if state_machine.current_state.name!="Dead":
+		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
+	show_game_over_menu(score_message,message)

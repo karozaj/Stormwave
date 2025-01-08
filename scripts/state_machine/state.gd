@@ -16,7 +16,7 @@ func physics_update(_delta:float)->void:
 func handle_input(_event: InputEvent) -> void:
 	pass
 #executes when taking damage
-func damage(_damage_points:int, _origin:Vector3)->void:
+func damage(_damage_points:int, _origin:Vector3,_damage_dealer)->void:
 	pass
 #executes when leaving state
 func exit()->void:

@@ -168,11 +168,13 @@ _data = {
 "use": SubResource("Animation_y5ki6")
 }
 
-[node name="ExplosiveBlockPlacer" type="Node3D"]
+[node name="ExplosiveBlockPlacer" type="Node3D" node_paths=PackedStringArray("ray")]
 visible = false
 script = ExtResource("1_gs56r")
 place_sound = ExtResource("2_sbbi0")
 block = ExtResource("2_gk12n")
+cooldown = 0.2
+ray = NodePath("RayCast3D")
 
 [node name="block_editable" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
@@ -181,8 +183,9 @@ mesh = SubResource("ArrayMesh_7475r")
 skeleton = NodePath("")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
 target_position = Vector3(0, 0, -3)
-collision_mask = 50
+collision_mask = 114
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 bus = &"SFX"

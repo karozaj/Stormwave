@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://yswaem7jo4aw"]
+
+[ext_resource type="MeshLibrary" uid="uid://c65hu6f2sot36" path="res://resources/mesh_libraries/metal_floor.tres" id="1_fk7nr"]
+
+[node name="Floor" type="GridMap"]
+mesh_library = ExtResource("1_fk7nr")
+cell_size = Vector3(1, 1, 1)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_layer = 2
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(0, 0, 0)
+}

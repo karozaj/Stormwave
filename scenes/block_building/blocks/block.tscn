@@ -45,7 +45,7 @@ shadow_mesh = SubResource("ArrayMesh_3ofvc")
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_mxs8r")
-durability = 50
+durability = 25
 damaged_sound = ExtResource("2_a0frq")
 destroyed_sound = ExtResource("2_3htt5")
 

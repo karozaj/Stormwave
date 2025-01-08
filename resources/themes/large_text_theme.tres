@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dvsx5bwl1ujf1"]
+
+[ext_resource type="FontFile" uid="uid://i75lucfthmx2" path="res://resources/fonts/Cyberphont 2.0.ttf" id="1_mvcsv"]
+
+[resource]
+default_font = ExtResource("1_mvcsv")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/shadow_offset_x = 5
+Label/constants/shadow_offset_y = 5
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_mvcsv")

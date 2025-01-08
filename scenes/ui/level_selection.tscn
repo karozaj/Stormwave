@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcx1v0m8ulr3m"]
+
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_8eqec"]
+[ext_resource type="Script" path="res://scripts/ui/level_selection.gd" id="1_587mi"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="1_iepma"]
+[ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="2_ksemb"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="3_gw3et"]
+[ext_resource type="Resource" uid="uid://co6c7ljnb8ppm" path="res://resources/level_info/level_1_info.tres" id="3_l7g5j"]
+[ext_resource type="Resource" uid="uid://b6fppgipnjto8" path="res://resources/level_info/level_2_info.tres" id="5_oi74t"]
+[ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="6_kxavs"]
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8eqec")
+script = ExtResource("1_587mi")
+level_info_resources = Array[ExtResource("2_ksemb")]([ExtResource("3_l7g5j"), ExtResource("5_oi74t")])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_kxavs")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxPurchase" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(275, 375)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
+layout_mode = 2
+text = "Levels"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase"]
+custom_minimum_size = Vector2(150, 325)
+layout_mode = 2
+focus_mode = 0
+max_columns = 0
+same_column_width = true
+fixed_column_width = 300
+fixed_icon_size = Vector2i(16, 16)
+script = ExtResource("1_iepma")
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxInfo" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 350)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Info"
+horizontal_alignment = 1
+
+[node name="LabelDesc" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "Description"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(150, 110)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 2
+
+[node name="Score" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+layout_mode = 2
+text = "High score: 0"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(125, 125)
+layout_mode = 2
+expand_mode = 1
+
+[node name="ButtonPlay" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_hover_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_pressed_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_focus_color = Color(0.247059, 0.564706, 0.027451, 1)
+theme_override_colors/font_color = Color(0.247059, 0.564706, 0.027451, 1)
+disabled = true
+text = "Play"
+script = ExtResource("3_gw3et")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ButtonBack" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Back"
+script = ExtResource("3_gw3et")
+
+[connection signal="item_selected" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/ButtonBack" to="." method="_on_button_back_pressed"]

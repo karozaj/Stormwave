@@ -1,4 +1,4 @@
-extends Area3D
+extends Projectile
 
 @onready var timer:Timer=$ProjectileLifetimeTimer
 @onready var projectile_sprite:Sprite3D=$Sprite3D
@@ -7,11 +7,8 @@ extends Area3D
 @onready var explosion_area:Area3D=$ExplosionArea
 @onready var explosion_shape:Shape3D=$ExplosionArea/CollisionShape3D.shape
 @onready var explosion_ray:RayCast3D=$RayCast3D
-@export var direct_damage:int=150
 @export var explosion_max_damage:int=100
-@export var projectile_speed:float=15.0
 @export var explosion_radius:float=2.5
-var is_flying:bool=true
 
 func _ready() -> void:
 	explosion_shape.radius=0.25*explosion_radius
@@ -25,10 +22,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):
-		body.damage(direct_damage, global_position)
+		body.damage(direct_damage, global_position,projectile_owner)
 	explode()
 
-
+func _on_area_entered(area: Area3D) -> void:
+	if area.has_method("damage"):
+		area.damage(direct_damage, global_position,projectile_owner)
+	explode()
+	
+	
 func explode()->void:
 	timer.stop()
 	timer.start(1.0)
@@ -54,11 +56,18 @@ func disable_explosion_area()->void:
 	explosion_area.set_deferred("monitoring",false)
 
 func _on_explosion_area_body_entered(body: Node3D) -> void:
-	explosion_ray.target_position=to_local(body.global_position)
+	#print(body.name)
+	if "aim_point" in body:
+		explosion_ray.target_position=to_local(body.aim_point.global_position)
+	else:
+		explosion_ray.target_position=to_local(body.global_position)
 	explosion_ray.force_raycast_update()
 	if explosion_ray.is_colliding() and explosion_ray.get_collider()==body:
 		if body.has_method("damage"):
 			explosion_ray.add_exception(body)
 			var distance:float=global_position.distance_to(explosion_ray.get_collision_point())
 			var damage_modifier:float=(explosion_radius-distance)/explosion_radius
-			body.damage(explosion_max_damage*damage_modifier, global_position)
+			var calculated_damage:int=int(explosion_max_damage*damage_modifier)
+			#print(calculated_damage)
+			if calculated_damage>0:
+				body.damage(calculated_damage, global_position,projectile_owner)

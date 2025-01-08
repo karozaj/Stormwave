@@ -3,7 +3,7 @@ extends ExplosiveBlock
 var activation_sound:AudioStream=preload("res://audio/sfx/blocks/mine_activation.ogg")
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 
-func damage(dmg:int,_pos:Vector3):
+func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
 	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
 	audio_player.stream=damaged_sound

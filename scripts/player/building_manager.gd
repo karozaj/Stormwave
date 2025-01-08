@@ -16,13 +16,15 @@ signal block_count_changed(count:int) #signal used to notify hud about block cha
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[100,50,25,10,5]
+var block_count:Array[int]=[250,0,0,0,0]
 var can_use:bool=true
 var no_blocks_sound:AudioStream=preload("res://audio/sfx/blocks/no_blocks.ogg")
 var collect_sound:AudioStream=preload("res://audio/sfx/blocks/collect_block.ogg")
 var switch_placer_sound:AudioStream=preload("res://audio/sfx/blocks/select_placer.ogg")
 var player_height:float=1.75
 var player_radius:float=0.35
+
+var index_dict:Dictionary={"Block":0,"Reinforced block":1,"Explosive":2,"Mine":3,"Turret":4}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -69,14 +71,14 @@ func collect()->void:
 func select_placer(index:int)->void:
 	if can_use and current_placer.is_being_pulled_out==false:
 		current_placer.visible=false
+		current_placer.ray.enabled=false
 		current_placer_index=index
 		current_placer=placers[current_placer_index]
+		current_placer.ray.enabled=true
 		current_placer.is_being_pulled_out=true
 		current_placer.animation_player.play("pullout")
 		play_sound(switch_placer_sound,0.0)
 		block_count_changed.emit(block_count[current_placer_index])
-		#audio_player.stream=sound_weapon_select
-		#audio_player.play()
 
 #plays sound when collecting block
 func play_sound(sound:AudioStream,v:float=0.1)->void:
@@ -86,3 +88,19 @@ func play_sound(sound:AudioStream,v:float=0.1)->void:
 
 func _on_cooldown_timer_timeout() -> void:
 	can_use=true
+
+#func remove_blocks(number:int,type:String):
+	#block_count[index_dict[type]]-=number
+	#if current_placer_index==index_dict[type]:
+		#block_count_changed.emit(block_count[current_placer_index])
+#
+#func add_blocks(number:int,type:String):
+	#block_count[index_dict[type]]+=number
+	#if current_placer_index==index_dict[type]:
+		#block_count_changed.emit(block_count[current_placer_index])
+	
+func get_blocks_dict()->Dictionary:
+	var dict:Dictionary={}
+	for key in index_dict:
+		dict[key]=block_count[index_dict[key]]
+	return dict

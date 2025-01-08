@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Stormwave"
-run/main_scene="res://scenes/levels/test_level.tscn"
+run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
@@ -24,10 +24,20 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 Global="*res://scripts/globals/global.gd"
 MusicPlayer="*res://scenes/ui/music_player.tscn"
 UISoundPlayer="*res://scenes/ui/ui_sound_player.tscn"
+ScoreManager="*res://scripts/globals/score_manager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [editor]
 
-movie_writer/movie_file="D:\\Godot\\Godot_v4.3\\movies\\movie2.avi"
+movie_writer/movie_file="D:/Godot/Godot_v4.3/movies/movie5.avi"
 movie_writer/fps=30
 
 [file_customization]
@@ -45,6 +55,7 @@ folder_colors={
 [global_group]
 
 enemies=""
+enemy_spawn_areas="The group containing all EnemySpawnAreas"
 
 [importer_defaults]
 
@@ -166,6 +177,11 @@ TEST_BUTTON={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+open_shop={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -173,10 +189,12 @@ TEST_BUTTON={
 3d_render/layer_20="Weapons"
 3d_physics/layer_1="player"
 3d_physics/layer_2="ground"
-3d_physics/layer_3="enemies"
+3d_physics/layer_3="enemies_collision"
 3d_physics/layer_4="projectiles"
 3d_physics/layer_5="grid_map_base"
 3d_physics/layer_6="blocks"
+3d_physics/layer_7="mines"
+3d_physics/layer_8="enemies_hitbox"
 
 [rendering]
 

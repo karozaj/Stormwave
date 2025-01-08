@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_1on7r"]
 [ext_resource type="AudioStream" uid="uid://crs86jlvk8ahk" path="res://audio/sfx/blocks/mine_place.ogg" id="2_i64wv"]
-[ext_resource type="PackedScene" uid="uid://grr718l4iit5" path="res://scenes/block_building/blocks/turret.tscn" id="3_cvcfg"]
+[ext_resource type="PackedScene" uid="uid://cljumdm3fr7bs" path="res://scenes/block_building/blocks/turret.tscn" id="3_cvcfg"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="4_1s5sa"]
 [ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="5_tp37p"]
 
@@ -233,12 +233,13 @@ _data = {
 "use": SubResource("Animation_y5ki6")
 }
 
-[node name="TurretPlacer" type="Node3D"]
+[node name="TurretPlacer" type="Node3D" node_paths=PackedStringArray("ray")]
 visible = false
 script = ExtResource("1_1on7r")
 place_sound = ExtResource("2_i64wv")
 block = ExtResource("3_cvcfg")
-cooldown = 0.5
+cooldown = 0.2
+ray = NodePath("RayCast3D")
 
 [node name="block_editable" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
@@ -259,8 +260,9 @@ mesh = SubResource("ArrayMesh_gt2lx")
 skeleton = NodePath("")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
 target_position = Vector3(0, 0, -5)
-collision_mask = 50
+collision_mask = 114
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 bus = &"SFX"

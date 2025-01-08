@@ -122,7 +122,7 @@ _data = {
 }
 
 [node name="Mine" type="StaticBody3D"]
-collision_layer = 32
+collision_layer = 64
 collision_mask = 8
 script = ExtResource("1_j5djv")
 durability = 25

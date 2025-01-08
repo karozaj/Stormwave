@@ -25,8 +25,7 @@ func _on_resume_button_pressed():
 ## TODO: change scene to main menu when pressing quit
 func _on_quit_button_pressed():
 	get_tree().paused=false
-	#get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _on_fullscreen_button_toggled(toggled_on: bool) -> void:
 	if toggled_on==true:
@@ -41,6 +40,7 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_music_slider_value_changed(value: float) -> void:
 	Global.update_bus_volume("Music",value)
+	$VBoxContainer/GridContainer/VBoxContainer2/MusicSlider/AudioStreamPlayer.play()
 
 
 func _on_fov_slider_value_changed(value: int) -> void:

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmgmsd6xjbeb7"]
+
+[ext_resource type="MeshLibrary" uid="uid://ck3f4dw8v60rv" path="res://resources/mesh_libraries/metal_walls.tres" id="1_cucpu"]
+
+[node name="GridMap" type="GridMap"]
+mesh_library = ExtResource("1_cucpu")
+cell_size = Vector3(16, 1, 16)
+cell_center_y = false
+collision_layer = 2
+collision_mask = 0
+data = {
+"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 65535, 65535, 1, 0, 1, 655360, 65535, 0, 1048576, 0, 65535, 0, 1, 0, 1441792)
+}

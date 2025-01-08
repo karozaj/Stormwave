@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5m17kfq7jetu"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/enemy_spawner.gd" id="1_svcfl"]
+[ext_resource type="PackedScene" uid="uid://dm3r1hv0l3q6h" path="res://scenes/enemies/enemy_ghost.tscn" id="2_edva8"]
+[ext_resource type="PackedScene" uid="uid://ldsvjji42wx1" path="res://scenes/enemies/enemy_cloud.tscn" id="3_iefbo"]
+[ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="4_yxb4l"]
+[ext_resource type="PackedScene" uid="uid://0ox5v5aun5wc" path="res://scenes/enemies/enemy_marksman.tscn" id="5_nl0x4"]
+
+[node name="EnemySpawner" type="Node3D" node_paths=PackedStringArray("enemy_parent_node")]
+editor_description = "Handles the spawning of enemies"
+script = ExtResource("1_svcfl")
+enemy_parent_node = NodePath(".")
+enemy_scenes = Array[PackedScene]([ExtResource("2_edva8"), ExtResource("3_iefbo"), ExtResource("5_nl0x4"), ExtResource("4_yxb4l")])
+enemy_spawn_chance = Array[int]([100, 0, 0, 0])
+enemy_spawn_chance_increase = Array[int]([0, 15, 10, 5])
+wave_size = 20
+wave_size_increase = 5
+max_wave_size = 50
+concurrent_enemies = 5
+concurrent_enemies_increase = 2
+max_concurrent_enemies = 25
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

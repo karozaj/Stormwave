@@ -1,6 +1,7 @@
 extends Node3D
 class_name PlacerBaseClass
 
+
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
 
@@ -17,6 +18,8 @@ class_name PlacerBaseClass
 @export var block:PackedScene
 ## Cooldown between placing blocks
 @export var cooldown:float=0.8
+## Raycast used for building and destroying blocks
+@export var ray:RayCast3D
 ## Is the currently selected placer being pulled out, used in animations to make sure player can't place blocks while the animation is playing
 @export var is_being_pulled_out:bool=false
 #used to check if block can be placed
@@ -52,4 +55,12 @@ func play_place_sound()->void:
 
 #checks if the block can be placed
 func can_block_be_placed(_target:Vector3)->bool:
+	return false
+
+#highlights the block when the raycast is colliding with it
+func highlight()->bool:
+	if ray.is_colliding():
+		if ray.get_collider()!=null and ray.get_collider().has_method("highlight"):
+			ray.get_collider().highlight(ray.get_collision_point()-ray.get_collision_normal()/2)
+		return true
 	return false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://b6fppgipnjto8"]
+
+[ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="1_h7k6m"]
+[ext_resource type="Texture2D" uid="uid://dey2v4a4tjj5a" path="res://img/level_images/level_2_image.png" id="1_yf30v"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_h7k6m")
+level_scene = "res://scenes/levels/level_2.tscn"
+level_identifier = "level_2"
+level_name = "City"
+level_description = "Protect your generator from the enemies."
+image = ExtResource("1_yf30v")
+playable = true

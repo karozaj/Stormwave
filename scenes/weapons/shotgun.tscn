@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://sjytiuvopdi3"]
+[gd_scene load_steps=11 format=3 uid="uid://sjytiuvopdi3"]
 
 [ext_resource type="PackedScene" uid="uid://boskapx73ubko" path="res://3d/shotgun.glb" id="1_thjip"]
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="2_fgjlh"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_0qii5"]
 [ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="4_akkgf"]
+[ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="4_r81t4"]
 [ext_resource type="AudioStream" uid="uid://uiis2klf7t5h" path="res://audio/sfx/shotgun.ogg" id="4_y1po6"]
 
 [sub_resource type="Animation" id="Animation_2qrny"]
@@ -201,40 +202,19 @@ visible = false
 
 [node name="Rays" type="Node3D" parent="." index="1"]
 
-[node name="RayCast3D" type="RayCast3D" parent="Rays" index="0"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast" parent="Rays" index="0" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D2" type="RayCast3D" parent="Rays" index="1"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast2" parent="Rays" index="1" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D3" type="RayCast3D" parent="Rays" index="2"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast3" parent="Rays" index="2" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D4" type="RayCast3D" parent="Rays" index="3"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast4" parent="Rays" index="3" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D5" type="RayCast3D" parent="Rays" index="4"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast5" parent="Rays" index="4" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D6" type="RayCast3D" parent="Rays" index="5"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast6" parent="Rays" index="5" instance=ExtResource("4_r81t4")]
 
-[node name="RayCast3D7" type="RayCast3D" parent="Rays" index="6"]
-enabled = false
-target_position = Vector3(0, 0, -100)
-collision_mask = 54
+[node name="WeaponRaycast7" parent="Rays" index="6" instance=ExtResource("4_r81t4")]
 
 [node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_0qii5")]
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://r05tlgtxaa2h"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_h3gwg"]
+[ext_resource type="Texture2D" uid="uid://dpfjfa7pktuc3" path="res://img/icons/chaingun.png" id="1_ok3p2"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_h3gwg")
+type = "Ammo"
+res_name = "Chaingun"
+description = "Ammo for the chaingun"
+price = 3
+purchasable_number = 50
+max_number = 1000
+image = ExtResource("1_ok3p2")
+purchasable = true

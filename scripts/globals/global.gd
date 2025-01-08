@@ -1,7 +1,8 @@
 extends Node
 
-var current_level=null
-var player=null
+var current_level:BaseLevel=null
+var scene_to_load:String
+var player:Player=null
 var player_fov:int=90:
 	get:
 		return player_fov

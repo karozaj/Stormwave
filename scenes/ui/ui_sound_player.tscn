@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://scripts/ui/ui_sound_player.gd" id="1_oiatx"]
 
 [node name="UISoundPlayer" type="AudioStreamPlayer"]
+editor_description = "audio player for ui button press sounds etc"
+bus = &"SFX"
 script = ExtResource("1_oiatx")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://4vyvvgvtrxqv"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="1_4m751"]
+[ext_resource type="Texture2D" uid="uid://balxmon50scv2" path="res://img/icons/mine.png" id="1_fb4u4"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_4m751")
+type = "Block"
+res_name = "Mine"
+description = "Explodes when touched."
+price = 20
+purchasable_number = 3
+max_number = 50
+image = ExtResource("1_fb4u4")
+purchasable = true

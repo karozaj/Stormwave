@@ -17,8 +17,8 @@ func update(delta:float)->void:
 
 func exit()->void:
 	state_owner.cooldown_timer.start()
-	state_owner.attack_area.monitoring=false
+	state_owner.attack_area.set_deferred("monitoring",false)
 	timer.queue_free()
 
-func damage(damage_points:int, origin:Vector3)->void:
-	finished.emit(self,"Pain",{"damage_points":damage_points,"origin":origin})
+func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
+	finished.emit(self,"Pain",{"damage_points":damage_points,"origin":origin,"damage_dealer":damage_dealer})

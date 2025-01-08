@@ -6,7 +6,7 @@ var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 var has_exploded:bool=false
 
 
-func damage(dmg:int,_pos:Vector3):
+func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
 	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
 	audio_player.stream=damaged_sound
