@@ -29,6 +29,10 @@ signal game_ended(score_message:String,message:String)
 @export var build_phase_duration:int=60
 ## How many blocks should player be rewarded after each wave
 @export var block_reward:int=100
+## How much of each type of ammo the player starts with (not including the axe)
+@export var initial_ammo:Array[int]=[int(250),int(0),int(0),int(0)]
+## How many of each block the player starts with
+@export var initial_blocks:Array[int]=[250,0,0,0,0]
 ## [Generator]s in this level. Necessary if the objective is set to "Defense".
 @export var generators:Array[Generator]
 ## Determines the player objective in this map[br]
@@ -61,6 +65,9 @@ func _ready() -> void:
 	fighting_phase_started.connect(player.hud.show_prompt)
 	build_phase_timer.timeout.connect(build_phase_timer_timeout)
 	build_phase_timer.one_shot=true
+	
+	player.set_ammo(initial_ammo)
+	player.set_blocks(initial_blocks)
 	
 	start_building_phase()
 

@@ -16,7 +16,7 @@ signal block_count_changed(count:int) #signal used to notify hud about block cha
 var current_placer:PlacerBaseClass
 var current_placer_index:int
 
-var block_count:Array[int]=[250,0,0,0,0]
+var block_count:Array[int]=[0,0,0,0,0]
 var can_use:bool=true
 var no_blocks_sound:AudioStream=preload("res://audio/sfx/blocks/no_blocks.ogg")
 var collect_sound:AudioStream=preload("res://audio/sfx/blocks/collect_block.ogg")

@@ -29,7 +29,7 @@ volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5dg6t"]
 resource_local_to_scene = true
-vertices = PackedVector3Array(-23.25, 0.3, 8, -7.75, 0.3, 23.5, 7.75, 0.3, 23.5, 23.5, 0.3, 7.75, 23.5, 0.3, -7.75, 8, 0.3, -23.25, -8, 0.3, -23.25, -23.25, 0.3, -8)
+vertices = PackedVector3Array(-23.5, 0.3, 8.25, -8, 0.3, 23.75, 8, 0.3, 23.75, 23.75, 0.3, 8, 23.75, 0.3, -8, 8.25, 0.3, -23.5, -8.25, 0.3, -23.5, -23.5, 0.3, -8.25)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 0), PackedInt32Array(0, 5, 3), PackedInt32Array(0, 3, 2)]
 sample_partition_type = 1
 geometry_parsed_geometry_type = 1

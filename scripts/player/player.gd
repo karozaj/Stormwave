@@ -215,8 +215,7 @@ func _on_invincibility_timer_timeout():
 func die()->void:
 	if state_machine.current_state.name!="Dead":
 		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
-	#if death_menu==null:
-		#show_game_over_menu("","You died.")
+
 
 
 func enter_building_state():
@@ -281,3 +280,16 @@ func on_game_ended(score_message:String,message:String):
 	if state_machine.current_state.name!="Dead":
 		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
 	show_game_over_menu(score_message,message)
+
+func set_ammo(new_ammo:Array[int]):
+	if new_ammo.size()==(weapon_manager.ammo.size()-1):
+		for i in new_ammo.size():
+			weapon_manager.ammo[i+1]=new_ammo[i]
+	if state_machine.current_state.name=="Combat":
+		weapon_manager.ammo_count_changed.emit(weapon_manager.ammo[weapon_manager.current_weapon_index])
+
+func set_blocks(new_blocks:Array[int]):
+	if new_blocks.size()==building_manager.block_count.size():
+		building_manager.block_count=new_blocks
+	if state_machine.current_state.name=="Build":
+		building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])

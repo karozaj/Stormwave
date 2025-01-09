@@ -1,4 +1,5 @@
 extends Projectile
+class_name RocketProjectile
 
 @onready var timer:Timer=$ProjectileLifetimeTimer
 @onready var projectile_sprite:Sprite3D=$Sprite3D
