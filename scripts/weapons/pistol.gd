@@ -3,7 +3,6 @@ extends WeaponBaseClass
 @onready var ray:RayCast3D=$WeaponRaycast
 @onready var animation_player=$AnimationPlayer
 @onready var bullet_hole_spawner=$BulletHoleSpawner
-var shooting_sound:AudioStream=preload("res://audio/sfx/pistol.ogg")
 
 
 func _ready() -> void:

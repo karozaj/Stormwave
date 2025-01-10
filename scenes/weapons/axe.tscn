@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://beui6n2v6ebbo"]
+[gd_scene load_steps=10 format=3 uid="uid://beui6n2v6ebbo"]
 
 [ext_resource type="PackedScene" uid="uid://v86qd1kxjmk4" path="res://3d/axe.glb" id="1_xe2hc"]
 [ext_resource type="Script" path="res://scripts/weapons/axe.gd" id="2_p3gx8"]
 [ext_resource type="AudioStream" uid="uid://bf0ewty2ftyya" path="res://audio/sfx/swing.ogg" id="3_57nbd"]
+[ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="4_6jy83"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqy3d"]
 size = Vector3(0.25, 1.8, 1)
@@ -222,6 +223,7 @@ _data = {
 [node name="Axe" instance=ExtResource("1_xe2hc")]
 visible = false
 script = ExtResource("2_p3gx8")
+shooting_sound = ExtResource("3_57nbd")
 pitch_variance = 0.05
 cooldown = 0.6
 base_damage = 35
@@ -233,7 +235,7 @@ layers = 524288
 [node name="Hitbox" type="Area3D" parent="." index="1"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, -0.25, 0, -0.00318643)
 collision_layer = 0
-collision_mask = 100
+collision_mask = 108
 monitoring = false
 monitorable = false
 
@@ -250,4 +252,8 @@ libraries = {
 "": SubResource("AnimationLibrary_guh1y")
 }
 
+[node name="WeaponRaycast" parent="." index="4" instance=ExtResource("4_6jy83")]
+target_position = Vector3(0, 0, -1)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -5,8 +5,8 @@ extends WeaponBaseClass
 @onready var animation_player=$AnimationPlayer
 @onready var bullet_hole_spawner=$BulletHoleSpawner
 var rays_array:Array
-@export var bullet_spread:float=20.0
-var shooting_sound:AudioStream=preload("res://audio/sfx/shotgun.ogg")
+## The bullet spread of this weapon in degrees
+@export var bullet_spread:float=15.0
 
 func _ready() -> void:
 	audio_player.stream=shooting_sound

@@ -1,10 +1,7 @@
-extends WeaponBaseClass
+extends ProjectileWeapon
 
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
-@onready var projectile_spawn_marker:Marker3D=$Cylinder/Marker3D
-@onready var rocket_direction_ray:RayCast3D=$WeaponRaycast
-var projectile_scene=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
-var shooting_sound:AudioStream=preload("res://audio/sfx/rocket_launcher.ogg")
+## The projectile shot by this weapon
 
 func _ready() -> void:
 	audio_player.stream=shooting_sound
@@ -14,11 +11,11 @@ func shoot():
 	var projectile:Projectile=projectile_scene.instantiate()
 	#this is so that the rocket doesnt collide with the player when they shoot downward
 	projectile.set_collision_mask_value(1,false)
-	projectile.transform.basis=rocket_direction_ray.global_transform.basis
+	projectile.transform.basis=projectile_direction_ray.global_transform.basis
 	projectile.projectile_owner=weapon_owner
 	if Global.current_level!=null:
 		Global.current_level.add_child(projectile)
 	projectile.global_position=projectile_spawn_marker.global_position
-	rocket_direction_ray.force_raycast_update()
-	if rocket_direction_ray.is_colliding():
+	projectile_direction_ray.force_raycast_update()
+	if projectile_direction_ray.is_colliding():
 		projectile.explode()

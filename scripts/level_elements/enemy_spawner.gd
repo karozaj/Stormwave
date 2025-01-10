@@ -12,7 +12,9 @@ signal enemy_count_updated(current:int, max:int)
 
 @onready var timer:Timer=$Timer
 
-## The node that should be the parent of the spawned enemies
+## The node that should be the parent of the spawned enemies.
+## This node should be placed outside the map to prevent the enemies from being damaged
+## before they can properly spawn
 @export var enemy_parent_node:Node3D
 ## The scenes of the enemies that can be spawned
 @export var enemy_scenes:Array[PackedScene]

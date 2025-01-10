@@ -18,7 +18,7 @@ class_name EnemyGhost
 		$skull.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
 		$skull/jaw.get_surface_override_material(0).albedo_color=Color(1,1,1,material_alpha)
 ## How quickly the enemy moves when beginning the attack
-@export var dash_speed:float=20.0
+@export var dash_speed:float=17.0
 ## Attack state duration
 @export var attack_time:float=1.0
 ## Determines how quickly the enemy can reorient itself

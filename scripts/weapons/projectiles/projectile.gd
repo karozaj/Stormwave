@@ -7,6 +7,9 @@ class_name Projectile
 @export var projectile_speed:float=15.0
 ## Timer that deletes the projectile on timeout
 @export var projectile_lifetime_timer:Timer
+## Determines if this projectile can be deflected
+@export var can_be_deflected:bool=true
+
 #the entity that shot the projectile
 var projectile_owner:Object
 var is_flying:bool=true
@@ -17,6 +20,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_flying:
 		position-=transform.basis*Vector3(0,0,projectile_speed)*delta
+
+func deflect(new_owner:Node3D, new_basis:Basis):
+	if can_be_deflected:
+		projectile_owner=new_owner
+		transform.basis=new_basis
+		projectile_lifetime_timer.stop()
+		projectile_lifetime_timer.start()
+
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("damage"):

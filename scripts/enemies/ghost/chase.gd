@@ -22,7 +22,10 @@ func update(delta:float)->void: #move towards target, enter attack state if targ
 	var looking_position:Vector3=state_owner.global_position+state_owner.velocity.normalized()
 	if state_owner.global_position.distance_to(looking_position)>0.01:
 		state_owner.look_at(looking_position)
-	state_owner.move_and_slide()
+	## check if the ghost is colliding with a wall, if so the ghost will try to break through it
+	if state_owner.move_and_slide():
+		if state_owner.cooldown_timer.is_stopped():
+			finished.emit(self, "Attack")
 
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	finished.emit(self,"Pain",{"damage_points":damage_points,"origin":origin,"damage_dealer":damage_dealer})

@@ -3,8 +3,8 @@ extends WeaponBaseClass
 @onready var ray:RayCast3D=$WeaponRaycast
 @onready var animation_player=$AnimationPlayer
 @onready var bullet_hole_spawner=$BulletHoleSpawner
-@export var bullet_spread:float=10.0
-var shooting_sound:AudioStream=preload("res://audio/sfx/pistol.ogg")
+## The bullet spread of this weapon in degrees
+@export var bullet_spread:float=5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -21,7 +21,10 @@ func update(delta:float)->void: #move towards target, enter attack state if targ
 		if state_owner.cooldown_timer.is_stopped(): #if attack isn't on cooldown, begin attack
 			finished.emit(self,"Attack")
 		
-	state_owner.move_and_slide()
+	## check if the enemy is colliding with a wall, if so it will try to break through it
+	if state_owner.move_and_slide():
+		if state_owner.cooldown_timer.is_stopped():
+			finished.emit(self, "Attack")
 
 func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	finished.emit(self,"Pain",{"damage_points":damage_points,"origin":origin,"damage_dealer":damage_dealer})

@@ -21,6 +21,7 @@ func spawn_enemy(enemy:EnemyBaseClass, enemy_parent=get_parent(), initial_target
 	enemy.add_targets(initial_targets)
 	play_sound_effect(spawn_sound_effect)
 	animation_player.play("spawn")
+	#print("spawn")
 
 func _on_body_entered(body: Node3D) -> void:
 	is_occupied=true

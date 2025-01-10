@@ -61,7 +61,7 @@ var headbob_enabled:bool=true
 ## Player health points on start
 @export var starting_health:int=100
 ## How long the player is invincible after being hit
-@export var invincibility_time:float=0.25
+@export var invincibility_time:float=0.4
 var health:int=100:
 	set(value):
 		health=value
@@ -87,11 +87,11 @@ func _ready() -> void:
 
 func process_update(_delta:float):
 		#for testing
-	#if Input.is_action_just_pressed("TEST_BUTTON"):
-		#if state_machine.current_state.name=="Combat":
-			#state_machine.transition_to_next_state(state_machine.current_state,"Build")
-		#elif state_machine.current_state.name=="Build":
-			#state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+	if Input.is_action_just_pressed("TEST_BUTTON"):
+		if state_machine.current_state.name=="Combat":
+			state_machine.transition_to_next_state(state_machine.current_state,"Build")
+		elif state_machine.current_state.name=="Build":
+			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause"):
 		var pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()

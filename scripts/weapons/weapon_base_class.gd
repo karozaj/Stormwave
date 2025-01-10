@@ -5,6 +5,8 @@ class_name WeaponBaseClass
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 ## Used to ensure pull out animations aren't interrupted
 @export var is_being_pulled_out:bool=false
+## The sound played when using the weapon
+@export var shooting_sound:AudioStream
 ## Default pitch of audio effects
 @export var default_pitch:float=1.0
 ## How much pitch of audio effects can change
