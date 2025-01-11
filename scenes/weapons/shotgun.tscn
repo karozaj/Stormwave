@@ -191,7 +191,7 @@ script = ExtResource("2_fgjlh")
 shooting_sound = ExtResource("4_y1po6")
 pitch_variance = 0.15
 cooldown = 0.75
-base_damage = 25
+base_damage = 30
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)

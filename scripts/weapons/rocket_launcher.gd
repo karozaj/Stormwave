@@ -13,6 +13,7 @@ func shoot():
 	projectile.set_collision_mask_value(1,false)
 	projectile.transform.basis=projectile_direction_ray.global_transform.basis
 	projectile.projectile_owner=weapon_owner
+	projectile.projectile_speed=projectile_speed
 	if Global.current_level!=null:
 		Global.current_level.add_child(projectile)
 	projectile.global_position=projectile_spawn_marker.global_position
