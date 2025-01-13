@@ -122,6 +122,7 @@ script = ExtResource("2_ja7lg")
 [node name="ResumeButton" type="Button" parent="VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 text = "Resume
 "
 script = ExtResource("2_0bkky")
@@ -129,6 +130,7 @@ script = ExtResource("2_0bkky")
 [node name="QuitButton" type="Button" parent="VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
+focus_mode = 0
 text = "Quit
 "
 script = ExtResource("2_0bkky")

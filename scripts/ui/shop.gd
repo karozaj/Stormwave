@@ -36,6 +36,10 @@ func _ready() -> void:
 		if resource_types[i].res_name==currency_name:
 			currency_index=i
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("open_shop") or Input.is_action_just_pressed("escape"):
+		_on_button_close_pressed()
+
 # updates resource numbers visible in the itemlist
 func update_player_resource_count(resource_dict:Dictionary):
 	for key in resource_dict:

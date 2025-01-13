@@ -1,5 +1,5 @@
 extends Control
-
+class_name PauseMenu
 
 ## Load settings values
 func _ready() -> void:

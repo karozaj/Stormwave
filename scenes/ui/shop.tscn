@@ -133,6 +133,7 @@ theme_override_colors/font_hover_color = Color(0.247059, 0.564706, 0.027451, 1)
 theme_override_colors/font_pressed_color = Color(0.247059, 0.564706, 0.027451, 1)
 theme_override_colors/font_focus_color = Color(0.247059, 0.564706, 0.027451, 1)
 theme_override_colors/font_color = Color(0.247059, 0.564706, 0.027451, 1)
+disabled = true
 text = "Purchase"
 script = ExtResource("1_frea3")
 press_sound = ExtResource("17_2d8y5")

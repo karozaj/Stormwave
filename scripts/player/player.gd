@@ -69,6 +69,8 @@ var health:int=100:
 var is_invincible:bool=false
 var is_dead:bool=false
 
+var pause_menu:PauseMenu
+var shop_menu:ShopMenu
 var death_menu:DeathMenu
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
@@ -93,8 +95,8 @@ func process_update(_delta:float):
 		elif state_machine.current_state.name=="Build":
 			state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
-	if Input.is_action_just_pressed("pause"):
-		var pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()
+	if Input.is_action_just_pressed("pause") and is_instance_valid(pause_menu)==false:
+		pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()
 		canvas_layer.add_child(pause_menu)
 
 func physics_process_update(delta:float):
@@ -227,11 +229,12 @@ func enter_fighting_state():
 		state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 
 func open_shop_menu():
-	var shop_menu:ShopMenu=load("res://scenes/ui/shop.tscn").instantiate()
-	canvas_layer.add_child(shop_menu)
-	shop_menu.update_player_resource_count(get_resource_dict())
-	shop_menu.resource_purchased.connect(on_resource_purchased)
-	shop_menu.start_wave_pressed.connect(wave_start_demanded.emit)
+	if is_instance_valid(shop_menu)==false:
+		shop_menu=load("res://scenes/ui/shop.tscn").instantiate()
+		canvas_layer.add_child(shop_menu)
+		shop_menu.update_player_resource_count(get_resource_dict())
+		shop_menu.resource_purchased.connect(on_resource_purchased)
+		shop_menu.start_wave_pressed.connect(wave_start_demanded.emit)
 
 func add_health(number:int):
 	health+=number
@@ -247,19 +250,25 @@ func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_n
 		health=clamp(health+number_change,0,res.max_number)
 	elif res.type=="Ammo":
 		var dict:Dictionary=weapon_manager.index_dict
-		for key in dict:
-			if res.res_name==key:
-				weapon_manager.ammo[dict[key]]=clamp(weapon_manager.ammo[dict[key]]+number_change,0,res.max_number)
+		if dict.has(res.res_name):
+			var index:int=dict[res.res_name]
+			weapon_manager.ammo[index]=clamp(weapon_manager.ammo[index]+number_change,0,res.max_number)
+		#for key in dict:
+			#if res.res_name==key:
+				#weapon_manager.ammo[dict[key]]=clamp(weapon_manager.ammo[dict[key]]+number_change,0,res.max_number)
 			if state_machine.current_state.name=="Combat":
-				if weapon_manager.current_weapon_index==dict[key]:
+				if weapon_manager.current_weapon_index==dict[res.res_name]:
 					weapon_manager.ammo_count_changed.emit(weapon_manager.ammo[weapon_manager.current_weapon_index])
 	elif res.type=="Block":
 		var dict:Dictionary=building_manager.index_dict
-		for key in dict:
-			if res.res_name==key:
-				building_manager.block_count[dict[key]]=clamp(building_manager.block_count[dict[key]]+number_change,0,res.max_number)
+		if dict.has(res.res_name):
+			var index:int=dict[res.res_name]
+			building_manager.block_count[index]=clamp(building_manager.block_count[index]+number_change,0,res.max_number)
+		#for key in dict:
+			#if res.res_name==key:
+				#building_manager.block_count[dict[key]]=clamp(building_manager.block_count[dict[key]]+number_change,0,res.max_number)
 			if state_machine.current_state.name=="Build":
-				if building_manager.current_placer_index==dict[key]:
+				if building_manager.current_placer_index==dict[res.res_name]:
 					building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])
 
 #called when player buys something in the shop
