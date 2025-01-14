@@ -19,6 +19,7 @@ var enemy_check_raycasts:Array[RayCast3D]
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var attack_cooldown_timer:Timer=$AttackCooldownTimer
 @onready var check_wall_ray:RayCast3D=$CheckWallRay
+@onready var wall_check_raycast:RayCast3D=$WallCheckRaycast
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
 
@@ -98,6 +99,11 @@ func update_animation_tree():
 	animation_tree.set("parameters/FallBlend/blend_amount",float(!is_on_floor()))
 
 func shoot_laser()->void:
+	check_wall_ray.force_raycast_update()
+	if check_wall_ray.is_colliding():
+		if check_wall_ray.get_collider().has_method("damage"):
+			check_wall_ray.get_collider().damage(base_damage,global_position,self)
+			return
 	weapon_raycast.force_raycast_update()
 	if weapon_raycast.is_colliding():
 		laser_effect.show_laser_effect(laser_spawn_point.global_position,weapon_raycast.get_collision_point())
@@ -115,6 +121,10 @@ func are_enemies_in_laser_path()->bool:
 			if ray.is_colliding()==true:
 				#print("ray colliding")
 				return true
+	wall_check_raycast.target_position=wall_check_raycast.to_local(target_position)
+	wall_check_raycast.force_raycast_update()
+	if wall_check_raycast.is_colliding():
+		return true
 	return false
 
 func is_wall_blocking_gun()->bool:

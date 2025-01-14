@@ -57,9 +57,9 @@ func update(_delta:float)->void:
 	opponent_position=Vector3(opponent_position.x,state_owner.global_position.y,opponent_position.z)
 	
 	if state_owner.navigation_agent.is_target_reachable()==false:
-		if state_owner.target_position.y-state_owner.global_position.y>3.5:
+		#if state_owner.target_position.y-state_owner.global_position.y>3.5:
 			if state_owner.attack_cooldown_timer.time_left<=0.0:
-				if state_owner.are_enemies_in_laser_path()==false and state_owner.is_wall_blocking_gun()==false:
+				if state_owner.are_enemies_in_laser_path()==false:# and state_owner.is_wall_blocking_gun()==false:
 					finished.emit(self,"Attack")
 					return
 	#
@@ -70,7 +70,7 @@ func update(_delta:float)->void:
 			#
 	if state_owner.global_position.distance_to(opponent_position)<=state_owner.attack_range:
 		if state_owner.attack_cooldown_timer.time_left<=0.0:
-			if state_owner.are_enemies_in_laser_path()==false and state_owner.is_wall_blocking_gun()==false:
+			if state_owner.are_enemies_in_laser_path()==false:# and state_owner.is_wall_blocking_gun()==false:
 				finished.emit(self,"Attack")
 				return
 	#

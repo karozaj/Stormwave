@@ -39,6 +39,9 @@ signal enemy_count_updated(current:int, max:int)
 @export var rng_seed:int=randi()
 ## Enemies will target this node after spawning
 @export var initial_enemy_targets:Array[Node3D]
+## Should the target array be shuffled before spawning an enemy
+@export var shuffle_targets:bool
+
 var rng=RandomNumberGenerator.new()
 
 ## The EnemySpawnAreas where the enemies will be spawned
@@ -165,6 +168,8 @@ func spawn_enemies(scenes:Array[PackedScene])->Array[PackedScene]:
 func instantiate_enemy(enemy_scene:PackedScene,spawn_area_index:int):
 	var enemy:EnemyBaseClass=enemy_scene.instantiate()
 	enemy.died.connect(_on_enemy_died)
+	if shuffle_targets:
+		initial_enemy_targets.shuffle()
 	enemy_spawn_areas[spawn_area_index].spawn_enemy(enemy,enemy_parent_node,initial_enemy_targets)
 
 func _on_enemy_died(_enemy):
