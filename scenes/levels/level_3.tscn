@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://bydpm8lq4wqr0"]
+[gd_scene load_steps=55 format=4 uid="uid://bydpm8lq4wqr0"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_oqq1j"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="1_vp0re"]
@@ -20,10 +20,13 @@
 [ext_resource type="Texture2D" uid="uid://c18j73lcwf2ne" path="res://img/planets/planet1.png" id="18_p8ntw"]
 [ext_resource type="Script" path="res://scripts/level_elements/planets.gd" id="18_rb0ha"]
 [ext_resource type="Texture2D" uid="uid://btb610gglochj" path="res://img/planets/planet2.png" id="19_4qdbk"]
+[ext_resource type="AudioStream" uid="uid://dm60vum6a7uae" path="res://audio/sfx/zap.ogg" id="19_b2qtw"]
 [ext_resource type="PackedScene" uid="uid://c33d7j373xl02" path="res://scenes/level_elements/lightning_effect.tscn" id="19_hd7pf"]
 [ext_resource type="Texture2D" uid="uid://tuljo3830onv" path="res://img/planets/sun.png" id="20_6cv7d"]
+[ext_resource type="Script" path="res://scenes/levels/variable_pitch_audio_player.gd" id="20_cirfk"]
 [ext_resource type="Texture2D" uid="uid://b6hpe82pfx7hu" path="res://img/planets/planet3.png" id="21_5liwf"]
 [ext_resource type="Texture2D" uid="uid://feyk7thfpcx1" path="res://img/planets/planet4.png" id="22_aoi8x"]
+[ext_resource type="AudioStream" uid="uid://dq5pvgcra5mjj" path="res://audio/sfx/ambience/space_ambience.ogg" id="25_8spdd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d0yd0"]
 panorama = ExtResource("2_n48bl")
@@ -197,15 +200,17 @@ plane = Plane(1, 0, 0, 0)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5skvc"]
 
-[node name="level_3" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "build_phase_timer", "generators")]
+[node name="level_3" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer", "generators")]
 script = ExtResource("1_oqq1j")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")
 enemy_spawner = NodePath("EnemySpawner")
 block_gridmap = NodePath("NavRegion/BlockGridMap2")
+world_environment = NodePath("WorldEnvironment")
 build_phase_timer = NodePath("BuildPhaseTimer")
-build_phase_duration = 90
+build_phase_duration = 120
 block_reward = 250
+initial_blocks = Array[int]([500, 0, 0, 0, 0])
 generators = [NodePath("NavRegion/Generator")]
 objective = "Defense"
 level_identifier = "level_3"
@@ -295,15 +300,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.69969, 0.916159, 0)
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("initial_enemy_targets") instance=ExtResource("5_o5qfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, -200, -200)
 enemy_scenes = Array[PackedScene]([ExtResource("13_m7yjn"), ExtResource("11_jmaiy"), ExtResource("12_7oesd"), ExtResource("12_w16nf"), ExtResource("14_7c5ju")])
-enemy_spawn_chance = Array[int]([5, 2, 5000000, 0, 0])
-enemy_spawn_chance_increase = Array[int]([5, 2, 5, 5, 1])
+enemy_spawn_chance = Array[int]([5, 2, 5, 0, 0])
+enemy_spawn_chance_increase = Array[int]([4, 2, 4, 3, 1])
+wave_size = 15
 initial_enemy_targets = [NodePath("../Player"), NodePath("../NavRegion/Generator")]
 shuffle_targets = true
-metadata/_edit_lock_ = true
 
 [node name="SpawnAreas" type="Node3D" parent="EnemySpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 253.358, 192.438, 200.281)
 
 [node name="EnemySpawnArea" parent="EnemySpawner/SpawnAreas" instance=ExtResource("15_irmdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67083, 0, 0)
@@ -366,7 +372,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -6)
 
 [node name="SpawnAreas2" type="Node3D" parent="EnemySpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, -8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 147.358, 192.438, 200.281)
 
 [node name="EnemySpawnArea" parent="EnemySpawner/SpawnAreas2" instance=ExtResource("15_irmdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67083, 0, 0)
@@ -429,7 +435,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -6)
 
 [node name="SpawnAreas3" type="Node3D" parent="EnemySpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 53)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200.358, 192.438, 253.281)
 
 [node name="EnemySpawnArea" parent="EnemySpawner/SpawnAreas3" instance=ExtResource("15_irmdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67083, 0, 0)
@@ -492,7 +498,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -6)
 
 [node name="SpawnAreas4" type="Node3D" parent="EnemySpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -53)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200.358, 192.438, 147.281)
 
 [node name="EnemySpawnArea" parent="EnemySpawner/SpawnAreas4" instance=ExtResource("15_irmdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67083, 0, 0)
@@ -554,6 +560,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -3)
 [node name="EnemySpawnArea10" parent="EnemySpawner/SpawnAreas4" instance=ExtResource("15_irmdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45096, 0, -6)
 
+[node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, -200, -200)
+metadata/_edit_lock_ = true
+
 [node name="BuildPhaseTimer" type="Timer" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -596,19 +606,25 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 modulate = Color(0.917647, 0.419608, 0.0313726, 0.745098)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="MeshInstance3D"]
-transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 0, -75.5062, 0)
+transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, -0.249622, -75.5062, 0.108551)
 stream = ExtResource("18_0bi2l")
-volume_db = -5.0
+volume_db = -10.0
 autoplay = true
 bus = &"SFX"
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="MeshInstance3D"]
 transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 0, -62.8242, 0)
 stream = ExtResource("18_0bi2l")
-volume_db = -5.0
+volume_db = -10.0
 pitch_scale = 0.9
 autoplay = true
 bus = &"SFX"
+
+[node name="DamageAudioPlayer" type="AudioStreamPlayer3D" parent="MeshInstance3D"]
+transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, -0.249622, -75.5062, 0.108551)
+stream = ExtResource("19_b2qtw")
+bus = &"SFX"
+script = ExtResource("20_cirfk")
 
 [node name="LightningEffect" parent="MeshInstance3D" instance=ExtResource("19_hd7pf")]
 transform = Transform3D(5, 0, 0, 0, 100, 0, 0, 0, 5, 0, -42, 0)
@@ -621,10 +637,6 @@ modulate = Color(0.917647, 0.419608, 0.0313726, 0.745098)
 [node name="LightningEffect3" parent="MeshInstance3D" instance=ExtResource("19_hd7pf")]
 transform = Transform3D(-2.5, 0, -4.33013, 0, 100, 0, 4.33013, 0, -2.5, 0.0278113, -42.0674, -0.0173798)
 modulate = Color(0.917647, 0.419608, 0.0313726, 0.745098)
-
-[node name="Enemies" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.6538, 46.5307, -34.6911)
-metadata/_edit_lock_ = true
 
 [node name="KillArea" parent="." instance=ExtResource("16_hdvrq")]
 damage_interval = 0.5
@@ -770,3 +782,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 modulate = Color(0.92549, 0.184314, 0.309804, 1)
 pixel_size = 3.5
 texture = ExtResource("21_5liwf")
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_8spdd")
+volume_db = -15.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="body_damaged" from="MeshInstance3D/MeshInstance3D2/KillArea" to="MeshInstance3D/DamageAudioPlayer" method="play_current_sound"]
