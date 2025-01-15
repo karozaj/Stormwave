@@ -1,5 +1,6 @@
 extends AudioStreamPlayer3D
-
+class_name RandomizedPitchAudioPlayer3D
+## Audio player with randomized pitch
 
 ## The base pitch
 @export var base_pitch:float=1.0

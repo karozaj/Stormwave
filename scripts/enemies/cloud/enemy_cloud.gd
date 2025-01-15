@@ -77,6 +77,8 @@ func shoot_lightning()->void:
 		play_sound_effect(thunder_sound,0.15,0.15,1.0)
 		if raycast.get_collider().has_method("damage"):
 			raycast.get_collider().damage(base_damage,global_position,self)
+		elif raycast.get_collider().has_method("electrify"):
+			raycast.get_collider().electrify()
 		lightning_timer.start(0.1)
 
 func play_sound_effect(sound:AudioStream, pitch_from:float=-0.0,pitch_to:float=0.0, pitch_base:float=1.0)->void:

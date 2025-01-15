@@ -14,6 +14,7 @@ class_name EnemyBruiser
 @onready var particles:GPUParticles3D=$Armature/Skeleton3D/HeadAttachment/GPUParticles3D
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+@onready var footstep_audio_player:AudioStreamPlayer3D=$AudioStreamPlayerFootstep
 
 #@onready var navigation_agent:NavigationAgent3D=$NavigationAgent3D
 #@onready var target_update_timer:Timer=$TargetUpdateTimer
@@ -76,6 +77,9 @@ func _ready() -> void:
 		allow_damaging_other_enemies()
 	
 	navigation_agent.max_speed=move_speed
+	
+	footstep_audio_player.stream=footstep_sound
+	
 	#add_targets([Global.player])
 
 
@@ -191,8 +195,8 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0
 		audio_player2.play()
 
 func play_foostep_sound():
-	$AudioStreamPlayerFootstep.pitch_scale=1.0+randf_range(-0.1,0.1)
-	$AudioStreamPlayerFootstep.play()
+	footstep_audio_player.pitch_scale=1.0+randf_range(-0.1,0.1)
+	footstep_audio_player.play()
 #
 #func _on_target_update_timer_timeout() -> void:
 	#update_navagent_target_position()
@@ -207,3 +211,6 @@ func play_foostep_sound():
 func allow_damaging_other_enemies()->void:
 	melee_hitbox.collision_mask=1|3|6|7
 	navigation_agent.avoidance_enabled=false
+
+func set_footstep_sound(new_sound:AudioStream=footstep_sound)->void:
+	footstep_audio_player.stream=new_sound

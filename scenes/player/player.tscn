@@ -20,6 +20,7 @@ editor_description = "The character controlled by the player."
 collision_mask = 58
 platform_floor_layers = 50
 script = ExtResource("1_r4lc0")
+footstep_sound = ExtResource("4_2h2ys")
 
 [node name="AimPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)

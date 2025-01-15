@@ -22,7 +22,7 @@ var enemy_check_raycasts:Array[RayCast3D]
 @onready var wall_check_raycast:RayCast3D=$WallCheckRaycast
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
-
+@onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioStreamPlayer3D
 
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
@@ -31,6 +31,8 @@ var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 @export var target_offset_radius:float=6.0
 ## Sound played when the enemy is destroyed
 @export var destroyed_sound:AudioStream
+## Footstep sound
+@export var footstep_sound:AudioStream
 
 @export_category("Animation")
 ## Determines material transparency, intented to be used for animations
@@ -160,3 +162,10 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0
 		audio_player2.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
 		audio_player2.stream=sound
 		audio_player2.play()
+
+func play_footstep_sound():
+	footstep_audio_player.pitch_scale=1.0+randf_range(-0.1,0.1)
+	footstep_audio_player.play()
+
+func set_footstep_sound(new_sound:AudioStream=footstep_sound)->void:
+	footstep_audio_player.stream=new_sound

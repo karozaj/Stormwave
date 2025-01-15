@@ -34,6 +34,8 @@ var mouse_sensitivity:float=1.0
 @export var footstep_default_pitch:float=1.0
 ## How much footstep pitch can change
 @export var footstep_pitch_variance:float=.15
+## Footstep sound
+@export var footstep_sound:AudioStream
 
 var has_played_footstep_sound:bool=false
 var was_on_floor:bool=true
@@ -85,6 +87,8 @@ func _ready() -> void:
 	building_manager.block_count_changed.connect(hud.update_ammo)
 	building_manager.player_height=$CollisionShape3D.shape.height
 	building_manager.player_radius=$CollisionShape3D.shape.radius
+	
+	footstep_audio_player.stream=footstep_sound
 
 
 func process_update(_delta:float):
@@ -245,7 +249,7 @@ func get_resource_dict()->Dictionary:
 	dict.merge(building_manager.get_blocks_dict())
 	return dict
 
-func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_number):
+func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_number)->void:
 	if res.type=="Health":
 		health=clamp(health+number_change,0,res.max_number)
 	elif res.type=="Ammo":
@@ -272,33 +276,36 @@ func modify_resource_count(res:ShopResource, number_change:int=res.purchasable_n
 					building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])
 
 #called when player buys something in the shop
-func on_resource_purchased(res:ShopResource,currency:ShopResource,shop:ShopMenu):
+func on_resource_purchased(res:ShopResource,currency:ShopResource,shop:ShopMenu)->void:
 	modify_resource_count(res)
 	modify_resource_count(currency,-res.price)
 	
 	shop.update_player_resource_count(get_resource_dict())
 	shop.on_item_list_item_selected(shop.selected_index)
 
-func show_game_over_menu(score_message:String,message:String):
+func show_game_over_menu(score_message:String,message:String)->void:
 	death_menu=load("res://scenes/ui/death_menu.tscn").instantiate()
 	death_menu.message=message
 	death_menu.score_message=score_message
 	canvas_layer.add_child(death_menu)
 
-func on_game_ended(score_message:String,message:String):
+func on_game_ended(score_message:String,message:String)->void:
 	if state_machine.current_state.name!="Dead":
 		state_machine.transition_to_next_state(state_machine.current_state,"Dead")
 	show_game_over_menu(score_message,message)
 
-func set_ammo(new_ammo:Array[int]):
+func set_ammo(new_ammo:Array[int])->void:
 	if new_ammo.size()==(weapon_manager.ammo.size()-1):
 		for i in new_ammo.size():
 			weapon_manager.ammo[i+1]=new_ammo[i]
 	if state_machine.current_state.name=="Combat":
 		weapon_manager.ammo_count_changed.emit(weapon_manager.ammo[weapon_manager.current_weapon_index])
 
-func set_blocks(new_blocks:Array[int]):
+func set_blocks(new_blocks:Array[int])->void:
 	if new_blocks.size()==building_manager.block_count.size():
 		building_manager.block_count=new_blocks
 	if state_machine.current_state.name=="Build":
 		building_manager.block_count_changed.emit(building_manager.block_count[building_manager.current_placer_index])
+
+func set_footstep_sound(new_sound:AudioStream=footstep_sound)->void:
+	footstep_audio_player.stream=new_sound

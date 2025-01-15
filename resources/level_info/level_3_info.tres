@@ -7,7 +7,7 @@
 script = ExtResource("1_v5whr")
 level_scene = "res://scenes/levels/level_3.tscn"
 level_identifier = "level_3"
-level_name = "Space Castle"
+level_name = "Space"
 level_description = "space :)"
 image = ExtResource("1_lqkdx")
 playable = true

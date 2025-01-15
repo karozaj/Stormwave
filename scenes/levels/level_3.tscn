@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://bydpm8lq4wqr0"]
+[gd_scene load_steps=57 format=4 uid="uid://bydpm8lq4wqr0"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_oqq1j"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="1_vp0re"]
@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://dm60vum6a7uae" path="res://audio/sfx/zap.ogg" id="19_b2qtw"]
 [ext_resource type="PackedScene" uid="uid://c33d7j373xl02" path="res://scenes/level_elements/lightning_effect.tscn" id="19_hd7pf"]
 [ext_resource type="Texture2D" uid="uid://tuljo3830onv" path="res://img/planets/sun.png" id="20_6cv7d"]
-[ext_resource type="Script" path="res://scenes/levels/variable_pitch_audio_player.gd" id="20_cirfk"]
+[ext_resource type="Script" path="res://scripts/level_elements/randomized_pitch_audio_player_3d.gd" id="20_cirfk"]
 [ext_resource type="Texture2D" uid="uid://b6hpe82pfx7hu" path="res://img/planets/planet3.png" id="21_5liwf"]
 [ext_resource type="Texture2D" uid="uid://feyk7thfpcx1" path="res://img/planets/planet4.png" id="22_aoi8x"]
 [ext_resource type="AudioStream" uid="uid://dq5pvgcra5mjj" path="res://audio/sfx/ambience/space_ambience.ogg" id="25_8spdd"]
@@ -176,7 +176,13 @@ height = 9.8
 size = Vector3(0.5, 165, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dx8jm"]
-size = Vector3(250, 250, 250)
+size = Vector3(250, 315, 250)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x3nuv"]
+size = Vector3(32, 10, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dt6wv"]
+size = Vector3(26.5847, 5.64856, 14.8028)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0c2hx"]
 resource_local_to_scene = true
@@ -231,10 +237,12 @@ metadata/_edit_lock_ = true
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_rrc2m")
 skeleton = NodePath("")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavRegion/towers"]
 collision_layer = 2
 collision_mask = 0
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavRegion/towers/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_sxf8k")
@@ -644,6 +652,26 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -166.248, 0)
 shape = SubResource("BoxShape3D_dx8jm")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.69289, 0)
+shape = SubResource("BoxShape3D_x3nuv")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(-0.949972, -0.312335, -8.74228e-08, -0.312335, 0.949972, 0, 8.30492e-08, 2.73052e-08, -1, -25.878, -7.957, -0.131)
+shape = SubResource("BoxShape3D_dt6wv")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(-4.15246e-08, -1.36526e-08, 1, -0.312335, 0.949972, 0, -0.949972, -0.312335, -4.37114e-08, -0.131, -7.957, -25.878)
+shape = SubResource("BoxShape3D_dt6wv")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(1.13283e-08, 3.72456e-09, -1, -0.312335, 0.949972, 0, 0.949972, 0.312335, 1.19249e-08, -0.131, -7.957, 25.878)
+shape = SubResource("BoxShape3D_dt6wv")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(0.949715, 0.313114, 0, -0.313114, 0.949715, 0, 0, 0, 1, 25.8776, -7.95692, -0.131159)
+shape = SubResource("BoxShape3D_dt6wv")
+
 [node name="WorldBoundaries" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
 
@@ -714,6 +742,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 pixel_size = 3.0
 texture = ExtResource("18_p8ntw")
+metadata/_edit_lock_ = true
 
 [node name="Planet2" type="Node3D" parent="Planets"]
 transform = Transform3D(-0.793049, -0.57726, 0.194535, -0.456172, 0.774427, 0.438371, -0.403707, 0.258909, -0.877489, 14.4666, 9.47873, -3.37415)
@@ -725,6 +754,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 pixel_size = 1.5
 texture = ExtResource("19_4qdbk")
+metadata/_edit_lock_ = true
 
 [node name="Planet3" type="Node3D" parent="Planets"]
 transform = Transform3D(0.990268, 0.138411, -0.0145475, 0, 0.104528, 0.994522, 0.139173, -0.984843, 0.103511, 0, 0, 0)
@@ -734,6 +764,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2500)
 pixel_size = 3.0
 texture = ExtResource("20_6cv7d")
+metadata/_edit_lock_ = true
 
 [node name="Planet4" type="Node3D" parent="Planets"]
 transform = Transform3D(0.200072, 0.430201, 0.880283, -0.485361, 0.82398, -0.292372, -0.851114, -0.36876, 0.373658, 14.6991, 11.88, -3.14148)
@@ -745,6 +776,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 pixel_size = 1.5
 texture = ExtResource("21_5liwf")
+metadata/_edit_lock_ = true
 
 [node name="Planet5" type="Node3D" parent="Planets"]
 transform = Transform3D(0.532315, 0.84398, -0.0658587, 0.0723896, -0.122893, -0.989776, -0.843445, 0.522105, -0.126513, 14.6991, 11.88, -3.14148)
@@ -756,6 +788,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 pixel_size = 5.0
 texture = ExtResource("22_aoi8x")
+metadata/_edit_lock_ = true
 
 [node name="Planet6" type="Node3D" parent="Planets"]
 transform = Transform3D(-0.906754, -0.407776, 0.107311, -0.392293, 0.722515, -0.56928, 0.154604, -0.558295, -0.815111, -1.02756, 0, 0.117096)
@@ -768,6 +801,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1000)
 modulate = Color(0.803922, 0.0941176, 0.176471, 1)
 pixel_size = 1.0
 texture = ExtResource("18_p8ntw")
+metadata/_edit_lock_ = true
 
 [node name="Planet7" type="Node3D" parent="Planets"]
 transform = Transform3D(-0.288221, -0.343381, -0.893878, -0.500578, 0.849812, -0.165048, 0.816303, 0.399885, -0.416822, 14.6991, 11.88, -3.14148)
@@ -783,7 +817,7 @@ texture = ExtResource("21_5liwf")
 
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_8spdd")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 bus = &"SFX"
 
