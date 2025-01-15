@@ -50,6 +50,11 @@ var game_has_ended:bool=false
 func _ready() -> void:
 	Global.current_level=self
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	
+	fighting_phase_started.connect(MusicPlayer.play_battle_music.unbind(1))
+	build_phase_started.connect(MusicPlayer.fade_out.unbind(1))
+	game_ended.connect(MusicPlayer.fade_out.unbind(2))
+	
 	enemy_spawner.connect("wave_started",player.hud.show_wave_label)
 	enemy_spawner.connect("enemy_count_updated",player.hud.update_enemy_count)
 	build_time_remaining_updated.connect(player.hud.update_build_time_remaining)

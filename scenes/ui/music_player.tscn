@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5xmh03ct2wsd"]
+[gd_scene load_steps=7 format=3 uid="uid://c5xmh03ct2wsd"]
 
 [ext_resource type="Script" path="res://scripts/globals/music_player.gd" id="1_81mwu"]
+[ext_resource type="AudioStream" uid="uid://btcbo14snlkx8" path="res://audio/music/once_more_metal.ogg" id="2_utush"]
+[ext_resource type="AudioStream" uid="uid://cbas6cofv8qg1" path="res://audio/music/fight_for_better_future.ogg" id="3_ics5w"]
+[ext_resource type="AudioStream" uid="uid://b7hdalf00k5eo" path="res://audio/music/unchained_destiny_loop.ogg" id="4_3csf7"]
+[ext_resource type="AudioStream" uid="uid://ctxj0wwiiyo0v" path="res://audio/music/boss_battle_10_metal.ogg" id="5_ec2nx"]
+[ext_resource type="AudioStream" uid="uid://cyhgruw43s2xc" path="res://audio/music/boss_battle_8_metal_loop.ogg" id="6_ikb3y"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+bus = &"Music"
 script = ExtResource("1_81mwu")
+battle_music = Array[AudioStream]([ExtResource("2_utush"), ExtResource("3_ics5w"), ExtResource("4_3csf7"), ExtResource("5_ec2nx"), ExtResource("6_ikb3y")])
+base_volume = 0.5

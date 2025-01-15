@@ -205,7 +205,7 @@ script = ExtResource("1_oqq1j")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")
 enemy_spawner = NodePath("EnemySpawner")
-block_gridmap = NodePath("NavRegion/BlockGridMap2")
+block_gridmap = NodePath("NavRegion/BlockGridMap")
 world_environment = NodePath("WorldEnvironment")
 build_phase_timer = NodePath("BuildPhaseTimer")
 build_phase_duration = 120
@@ -292,8 +292,6 @@ data = {
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Generator" parent="NavRegion" instance=ExtResource("7_bdbb8")]
-
-[node name="BlockGridMap2" parent="NavRegion" instance=ExtResource("6_q1d5t")]
 
 [node name="Player" parent="." instance=ExtResource("2_yl36j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.69969, 0.916159, 0)
