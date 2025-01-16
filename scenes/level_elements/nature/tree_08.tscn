@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwjxtqovul1c6"]
+
+[ext_resource type="PackedScene" uid="uid://cs52fjrbgtdqk" path="res://3d/nature/tree08.fbx" id="1_kdnds"]
+[ext_resource type="Material" uid="uid://devbn3bk8jft4" path="res://resources/materials/tree08.tres" id="2_ueic8"]
+
+[node name="tree08" instance=ExtResource("1_kdnds")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="tree08" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_ueic8")
+
+[node name="tree08_top" parent="tree08" index="0"]
+surface_material_override/0 = ExtResource("2_ueic8")

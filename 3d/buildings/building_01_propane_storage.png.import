@@ -1,0 +1,37 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dvf1efrt7yy3o"
+path="res://.godot/imported/building_01_propane_storage.png-e850e73974364d6380a02207c07da574.ctex"
+metadata={
+"vram_texture": false
+}
+generator_parameters={
+"md5": "06434142f60d229a61744d3c4210a46b"
+}
+
+[deps]
+
+source_file="res://3d/buildings/building_01_propane_storage.png"
+dest_files=["res://.godot/imported/building_01_propane_storage.png-e850e73974364d6380a02207c07da574.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

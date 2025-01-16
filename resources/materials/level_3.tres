@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dco5ma3jluumb"]
+
+[ext_resource type="Shader" path="res://resources/shaders/water_electric.gdshader" id="1_xtm5n"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xtm5n")
+shader_parameter/alpha = 1.0
+shader_parameter/light_color = Vector4(1, 0.15, 0, 0.5)
+shader_parameter/arc_color = Vector4(0, 1.075, 0.015, 1)
+shader_parameter/seed = Vector2(0, 0)
+shader_parameter/speed = 3.5
+shader_parameter/random_scale = 4.6
+shader_parameter/electro_scale = 11.459

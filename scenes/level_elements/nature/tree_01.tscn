@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dapi1qowf2lh1"]
+
+[ext_resource type="PackedScene" uid="uid://bs0q2012b42wn" path="res://3d/nature/tree01.fbx" id="1_xsqfa"]
+[ext_resource type="Material" uid="uid://dphoc5w6qf5t8" path="res://resources/materials/tree01.tres" id="2_lbc57"]
+
+[node name="tree01" instance=ExtResource("1_xsqfa")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="tree01" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_lbc57")
+
+[node name="tree01_top" parent="tree01" index="0"]
+surface_material_override/0 = ExtResource("2_lbc57")

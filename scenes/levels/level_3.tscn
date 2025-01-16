@@ -1,9 +1,10 @@
-[gd_scene load_steps=57 format=4 uid="uid://bydpm8lq4wqr0"]
+[gd_scene load_steps=58 format=4 uid="uid://bydpm8lq4wqr0"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_oqq1j"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="1_vp0re"]
 [ext_resource type="Texture2D" uid="uid://c08u5u1lhya5w" path="res://img/sky/space_sky.png" id="2_n48bl"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_yl36j"]
+[ext_resource type="Material" uid="uid://dco5ma3jluumb" path="res://resources/materials/level_3.tres" id="4_ikc06"]
 [ext_resource type="Texture2D" uid="uid://5fr5g0hc87df" path="res://3d/space_castle_wirewallbig.png" id="4_sesga"]
 [ext_resource type="Texture2D" uid="uid://dljopngfgjbkg" path="res://3d/space_castle_tile1022.png" id="5_8o4mt"]
 [ext_resource type="PackedScene" uid="uid://b5m17kfq7jetu" path="res://scenes/level_elements/enemy_spawner.tscn" id="5_o5qfj"]
@@ -143,9 +144,7 @@ size = Vector3(15, 1, 15.4082)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqpjy"]
 resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_uh5jb")
-transparency = 3
-alpha_hash_scale = 1.0
-alpha_antialiasing_mode = 0
+transparency = 1
 shading_mode = 0
 albedo_color = Color(0.152941, 0.419608, 0.0313726, 0.270588)
 texture_filter = 0
@@ -574,6 +573,7 @@ metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 85, 0)
+material_overlay = ExtResource("4_ikc06")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_307ty")
 metadata/_edit_lock_ = true

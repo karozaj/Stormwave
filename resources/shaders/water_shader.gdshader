@@ -28,7 +28,7 @@ void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
 	VERTEX.y+ wave_height*sin(wave_speed*TIME+wave_length*VERTEX.x);
 	VERTEX.y += wave_height*sin(wave_speed*TIME + wave_length*VERTEX.z);
-	
+
 }
 
 void fragment() {

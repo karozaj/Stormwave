@@ -18,7 +18,7 @@ uniform float random_scale = 4.6;
 uniform float electro_scale = 11.459;
 
 vec2 random( vec2 pos )
-{ 
+{
 	return fract(
 		sin(
 			vec2(
