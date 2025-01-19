@@ -14,11 +14,13 @@ class_name EnemyBruiser
 @onready var particles:GPUParticles3D=$Armature/Skeleton3D/HeadAttachment/GPUParticles3D
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+@onready var footstep_audio_player:AudioStreamPlayer3D=$AudioStreamPlayerFootstep
 
 #@onready var navigation_agent:NavigationAgent3D=$NavigationAgent3D
 #@onready var target_update_timer:Timer=$TargetUpdateTimer
 @onready var attack_cooldown_timer:Timer=$AttackCooldownTimer
 @onready var projectile_direction_ray:RayCast3D=$ProjectileSpawnPoint/RayCast3D
+@onready var wall_check_raycast:RayCast3D=$WallCheckRaycast
 var projectile_rays:Array[RayCast3D]
 var block_detector_rays:Array[RayCast3D]
 @onready var melee_hitbox:Area3D=$MeleeAttackHitbox
@@ -75,6 +77,9 @@ func _ready() -> void:
 		allow_damaging_other_enemies()
 	
 	navigation_agent.max_speed=move_speed
+	
+	footstep_audio_player.stream=footstep_sound
+	
 	#add_targets([Global.player])
 
 
@@ -153,7 +158,7 @@ func shoot_projectile():
 		Global.current_level.add_child(projectile)
 	projectile.global_position=projectile_direction_ray.global_position
 
-#checks if there are other enemies in the path of the projectile
+#checks if there are other enemies or indestructible walls in the path of the projectile
 func are_enemies_in_projectile_path()->bool:
 	if infighting_allowed==false:
 		for ray in projectile_rays:
@@ -162,6 +167,10 @@ func are_enemies_in_projectile_path()->bool:
 			if ray.is_colliding():
 				#print("ray is colliding")
 				return true
+	wall_check_raycast.target_position=wall_check_raycast.to_local(target_position)
+	wall_check_raycast.force_raycast_update()
+	if wall_check_raycast.is_colliding():
+		return true
 	return false
 
 #to be used during melee attack animation
@@ -186,8 +195,8 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0
 		audio_player2.play()
 
 func play_foostep_sound():
-	$AudioStreamPlayerFootstep.pitch_scale=1.0+randf_range(-0.1,0.1)
-	$AudioStreamPlayerFootstep.play()
+	footstep_audio_player.pitch_scale=1.0+randf_range(-0.1,0.1)
+	footstep_audio_player.play()
 #
 #func _on_target_update_timer_timeout() -> void:
 	#update_navagent_target_position()
@@ -202,3 +211,6 @@ func play_foostep_sound():
 func allow_damaging_other_enemies()->void:
 	melee_hitbox.collision_mask=1|3|6|7
 	navigation_agent.avoidance_enabled=false
+
+func set_footstep_sound(new_sound:AudioStream=footstep_sound)->void:
+	footstep_audio_player.stream=new_sound

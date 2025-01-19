@@ -19,9 +19,10 @@ var enemy_check_raycasts:Array[RayCast3D]
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var attack_cooldown_timer:Timer=$AttackCooldownTimer
 @onready var check_wall_ray:RayCast3D=$CheckWallRay
+@onready var wall_check_raycast:RayCast3D=$WallCheckRaycast
 @onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
 @onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
-
+@onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioStreamPlayer3D
 
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
@@ -30,6 +31,8 @@ var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 @export var target_offset_radius:float=6.0
 ## Sound played when the enemy is destroyed
 @export var destroyed_sound:AudioStream
+## Footstep sound
+@export var footstep_sound:AudioStream
 
 @export_category("Animation")
 ## Determines material transparency, intented to be used for animations
@@ -98,6 +101,11 @@ func update_animation_tree():
 	animation_tree.set("parameters/FallBlend/blend_amount",float(!is_on_floor()))
 
 func shoot_laser()->void:
+	check_wall_ray.force_raycast_update()
+	if check_wall_ray.is_colliding():
+		if check_wall_ray.get_collider().has_method("damage"):
+			check_wall_ray.get_collider().damage(base_damage,global_position,self)
+			return
 	weapon_raycast.force_raycast_update()
 	if weapon_raycast.is_colliding():
 		laser_effect.show_laser_effect(laser_spawn_point.global_position,weapon_raycast.get_collision_point())
@@ -115,6 +123,10 @@ func are_enemies_in_laser_path()->bool:
 			if ray.is_colliding()==true:
 				#print("ray colliding")
 				return true
+	wall_check_raycast.target_position=wall_check_raycast.to_local(target_position)
+	wall_check_raycast.force_raycast_update()
+	if wall_check_raycast.is_colliding():
+		return true
 	return false
 
 func is_wall_blocking_gun()->bool:
@@ -150,3 +162,10 @@ func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0
 		audio_player2.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
 		audio_player2.stream=sound
 		audio_player2.play()
+
+func play_footstep_sound():
+	footstep_audio_player.pitch_scale=1.0+randf_range(-0.1,0.1)
+	footstep_audio_player.play()
+
+func set_footstep_sound(new_sound:AudioStream=footstep_sound)->void:
+	footstep_audio_player.stream=new_sound

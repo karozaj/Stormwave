@@ -1,5 +1,5 @@
 extends Control
-
+class_name PauseMenu
 
 ## Load settings values
 func _ready() -> void:
@@ -24,6 +24,7 @@ func _on_resume_button_pressed():
 	queue_free()
 ## TODO: change scene to main menu when pressing quit
 func _on_quit_button_pressed():
+	MusicPlayer.fade_out()
 	get_tree().paused=false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 

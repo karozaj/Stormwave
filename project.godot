@@ -195,6 +195,7 @@ open_shop={
 3d_physics/layer_6="blocks"
 3d_physics/layer_7="mines"
 3d_physics/layer_8="enemies_hitbox"
+3d_physics/layer_9="water"
 
 [rendering]
 

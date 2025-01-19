@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhl7qu7mxntug"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/randomized_pitch_audio_player_3d.gd" id="1_1sudq"]
+
+[node name="RandomizedPitchAudioPlayer3d" type="AudioStreamPlayer3D"]
+bus = &"SFX"
+script = ExtResource("1_1sudq")

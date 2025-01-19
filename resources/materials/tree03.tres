@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dcwagul0mrxmy"]
+
+[ext_resource type="Texture2D" uid="uid://bovdxab7xmjpk" path="res://3d/nature/tree03_summer.png" id="1_o4rei"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_o4rei")
+texture_filter = 0

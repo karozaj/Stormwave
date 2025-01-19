@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://qewbkl7kthos"]
+
+[ext_resource type="Script" path="res://scripts/level_elements/water_area.gd" id="1_a0vox"]
+[ext_resource type="AudioStream" uid="uid://wvlj72335j5" path="res://audio/sfx/water1.ogg" id="2_7nxg7"]
+
+[node name="WaterArea" type="Area3D"]
+collision_layer = 256
+collision_mask = 5
+script = ExtResource("1_a0vox")
+water_footstep_sound = ExtResource("2_7nxg7")
+
+[node name="ElectrifyTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="ElectrifyTimer" to="." method="_on_electrify_timer_timeout"]

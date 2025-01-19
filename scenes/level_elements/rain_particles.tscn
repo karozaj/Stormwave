@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3cq725aeo456"]
+
+[ext_resource type="AudioStream" uid="uid://rar216ily0ao" path="res://audio/sfx/ambience/rain_ambience.ogg" id="1_u4e8e"]
+[ext_resource type="Script" path="res://scripts/level_elements/rain_particles.gd" id="1_w20ao"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3cuno"]
+emission_shape_scale = Vector3(25, 0.5, 25)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cx1u0"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.490196, 0.490196, 0.490196, 0.341176)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ldqx"]
+material = SubResource("StandardMaterial3D_cx1u0")
+size = Vector2(0.05, 1)
+
+[node name="RainParticles" type="GPUParticles3D"]
+amount = 128
+lifetime = 1.25
+preprocess = 1.5
+visibility_aabb = AABB(-15, -50, -15, 30, 50, 30)
+process_material = SubResource("ParticleProcessMaterial_3cuno")
+draw_pass_1 = SubResource("QuadMesh_2ldqx")
+script = ExtResource("1_w20ao")
+rain_ambience = ExtResource("1_u4e8e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"SFX"

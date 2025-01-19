@@ -152,6 +152,7 @@ script = ExtResource("2_osnhl")
 projectile_scene = ExtResource("3_owpan")
 projectile_direction_ray = NodePath("WeaponRaycast")
 projectile_spawn_marker = NodePath("Cylinder/Marker3D")
+projectile_speed = 15.0
 shooting_sound = ExtResource("3_wpgjc")
 
 [node name="Cylinder" parent="." index="0"]

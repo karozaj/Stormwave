@@ -85,6 +85,7 @@ point_count = 4
 curve = SubResource("Curve_ari81")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alck1"]
+resource_local_to_scene = true
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(1, 1.25, 0.25)
 emission_shape = 1
@@ -99,6 +100,7 @@ scale_max = 1.25
 alpha_curve = SubResource("CurveTexture_feptk")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sl0c"]
+resource_local_to_scene = true
 transparency = 1
 cull_mode = 2
 shading_mode = 0
@@ -109,6 +111,7 @@ texture_filter = 0
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_57ta5"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_2sl0c")
 size = Vector2(0.75, 1.25)
 
