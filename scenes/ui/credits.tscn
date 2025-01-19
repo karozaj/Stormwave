@@ -36,9 +36,68 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(400, 350)
+custom_minimum_size = Vector2(500, 350)
 layout_mode = 2
 theme = ExtResource("1_5l5me")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[center]Assets used in this game:
+
+Fonts:
+[url=https://fontenddev.com/fonts/squarewave/]Squarewave[/url] by Font End Dev
+[url=https://finnmercury.itch.io/pixel-cyberphont-20]Cyberphont 2.0[/url] by Finnmercury
+
+2D art:
+[url=https://opengameart.org/content/water-texture-pack]Water texture pack[/url] by Proxy Games
+[url=https://opengameart.org/content/circuit-tileset]Circuit tileset[/url] by eugeneloza
+[url=https://opengameart.org/content/retro-skyboxes-pack]Retro Skyboxes Pack[/url] by vladislavzh
+[url=https://opengameart.org/content/cosmic-time-magic-effect]Cosmic Time - Magic Effect[/url] by Cethiel
+[url=https://opengameart.org/content/clouds-with-transparency]Clouds with Transparency[/url] by WickedInsignia
+[url=https://mutantleg.itch.io/2d-asset-dump/devlog/713646/zortch-world-textures-cc0]Zortch World Textures - CC0[/url] by mutantleg
+[url=https://opengameart.org/content/planet-modified]Planet, modified[/url] by cemkalyoncu
+[url=https://opengameart.org/content/planets-satellites-4x3000x3000-2]Planets-satellites (4x3000x3000) 2[/url] by cogitollc
+
+3D art:
+[url=https://elbolilloduro.itch.io/buildings]Buildings[/url] by Elbolillo
+[url=https://elegantcrow.itch.io/retro-skyscraper-pack]Retro Skyscraper Pack[/url] by Elegant Crow
+[url=https://ggbot.itch.io/psx-style-cars]PSX Style Cars[/url] by GGBotNet
+[url=https://craigsnedeker.itch.io/classic64-asset-library]Classic64 asset library[/url] by craigsnedeker
+[url=https://elegantcrow.itch.io/psx-retro-style-tree-pack]Retro PSX Style Tree Pack[/url] by Elegant Crow
+[url=https://valsekamerplant.itch.io/psx-style-fences]PSX style modular fences[/url] by valsekamerplant
+
+Shaders:
+[url=https://godotshaders.com/shader/procedural-electric-current-shader/]Procedural Electric Current Shader[/url] by arlez80
+
+Music:
+[url=https://opengameart.org/content/once-more-metal]Once More [Metal][/url] by nene
+[url=https://opengameart.org/content/boss-battle-8-metal]Boss Battle #8 Metal[/url] by nene
+[url=https://opengameart.org/content/fight-for-better-future-rockmetal]Fight for Better Future[Rock/Metal][/url] by nene
+[url=https://opengameart.org/content/boss-battle-10-metal]Boss Battle 10 [Metal][/url] by nene
+[url=https://opengameart.org/content/unchained-destiny-rock]Unchained Destiny [Rock][/url] by nene
+
+Sound effects:
+[url=https://f8studios.itch.io/snakes-second-authentic-gun-sounds-pack]Snake's SECOND Authentic Gun Sounds Pack[/url] by SnakeF8
+[url=https://f8studios.itch.io/snakes-authentic-gun-sounds]Snake's Authentic Gun Sounds Pack[/url] by SnakeF8
+[url=https://lmglolo.itch.io/free-fps-sfx]FREE FPS SFX[/url] by LMGLolo
+[url=https://pixabay.com/sound-effects/thunder-for-anime-161022/]Thunder For Anime[/url] by LordSonny
+[url=https://freesound.org/people/Ali_6868/sounds/384876/]Right Gravel Footstep 2[/url] by Ali_6868
+[url=https://freesound.org/people/Sheyvan/sounds/369547/]Rain and Thunder Ambience Tübingen[/url] by Sheyvan
+[url=https://opengameart.org/content/ui-sound-effects-library]UI Sound Effects Library[/url] by Little Robot Sound Factory
+[url=https://freesound.org/people/SnowFightStudios/sounds/643741/]Ghostly Moan.mp3[/url] by SnowFightStudios
+[url=https://freesound.org/people/felix.blume/sounds/644827/]Power generator from street light motor, recorded 2m away[/url] by felix.blume
+[url=https://freesound.org/people/brettrader/sounds/683044/]Stomp Soft[/url] by brettrader
+[url=https://freesound.org/people/be_a_hero_not_a_patriot/sounds/332783/]city ambience, pedestrian subway, outside, night, distant traffic, trains and railway station announcements[/url] by be_a_hero_not_a_patriot
+[url=https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx]75 CC0 breaking / falling / hit sfx[/url] by rubberduck
+[url=https://opengameart.org/content/33-metal-clang-sounds-cast-iron-pans]33 metal clang sounds from cast iron pans[/url] by bart
+[url=https://freesound.org/people/julianmateo_/sounds/522701/]Weapon, Sword, Metal sword, Swing, fast, impact[/url] by julianmateo_
+[url=https://opengameart.org/content/3-melee-sounds]3 Melee sounds[/url] by remaxim
+[url=https://opengameart.org/content/monster-sound-effects-pack]Monster Sound Effects Pack[/url] by Ogrebane
+[url=https://freesound.org/people/Wakerone/sounds/393066/]Electric Zap - Electricity 2[/url] by Wakerone
+[url=https://opengameart.org/content/reversing-time-stuck-in-time]Reversing Time / Stuck in Time[/url] by isaiah658
+[url=https://freesound.org/people/JoelAudio/sounds/136542/]ELECTRIC_ZAP_001.wav[/url] by JoelAudio
+
+[/center]"
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -49,4 +108,5 @@ layout_mode = 2
 text = "Back"
 script = ExtResource("4_ift7e")
 
+[connection signal="meta_clicked" from="CenterContainer/VBoxContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer/Button" to="." method="_on_button_pressed"]
