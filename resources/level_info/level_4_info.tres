@@ -8,6 +8,6 @@ script = ExtResource("1_qbi3r")
 level_scene = "res://scenes/levels/level_4.tscn"
 level_identifier = "level_4"
 level_name = "Forest"
-level_description = ""
+level_description = "Try to survive in this large flooded arena!"
 image = ExtResource("1_plogi")
 playable = true

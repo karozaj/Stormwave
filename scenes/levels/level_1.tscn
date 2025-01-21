@@ -72,6 +72,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("enemy_parent_node", "initial_enemy_targets") instance=ExtResource("3_0ikte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.4397, 62.8043)
 enemy_parent_node = NodePath("../Enemies")
 enemy_scenes = Array[PackedScene]([ExtResource("5_h8f4p"), ExtResource("6_xwts7"), ExtResource("7_dxqfb"), ExtResource("8_2fuq5"), ExtResource("9_bsp4t")])
 enemy_spawn_chance = Array[int]([20, 0, 0, 0, 0])
@@ -84,6 +85,7 @@ initial_enemy_targets = [NodePath("../Player")]
 metadata/_edit_lock_ = true
 
 [node name="Spawners1" type="Node3D" parent="EnemySpawner"]
+top_level = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawnArea" parent="EnemySpawner/Spawners1" instance=ExtResource("5_1ga5k")]
@@ -140,6 +142,7 @@ metadata/_edit_lock_ = true
 
 [node name="Spawners2" type="Node3D" parent="EnemySpawner"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+top_level = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawnArea" parent="EnemySpawner/Spawners2" instance=ExtResource("5_1ga5k")]
@@ -196,6 +199,7 @@ metadata/_edit_lock_ = true
 
 [node name="Spawners3" type="Node3D" parent="EnemySpawner"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+top_level = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawnArea" parent="EnemySpawner/Spawners3" instance=ExtResource("5_1ga5k")]
@@ -252,6 +256,7 @@ metadata/_edit_lock_ = true
 
 [node name="Spawners4" type="Node3D" parent="EnemySpawner"]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+top_level = true
 metadata/_edit_lock_ = true
 
 [node name="EnemySpawnArea" parent="EnemySpawner/Spawners4" instance=ExtResource("5_1ga5k")]
@@ -308,6 +313,7 @@ metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 100, 100)
+metadata/_edit_lock_ = true
 
 [node name="NavRegion" parent="." instance=ExtResource("4_ymh5q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106462, 0.0647202, -0.12284)
