@@ -1,13 +1,29 @@
-[gd_scene load_steps=17 format=4 uid="uid://dlhokq5oy352l"]
+[gd_scene load_steps=19 format=4 uid="uid://dlhokq5oy352l"]
 
 [ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="1_dcu8y"]
 [ext_resource type="PackedScene" uid="uid://mp638iq6vrn4" path="res://scenes/weapons/projectiles/rocket_projectile.tscn" id="2_x6du3"]
+[ext_resource type="Texture2D" uid="uid://c1tngxnerg4kp" path="res://resources/particles/enemy_particle_alpha_curve.tres" id="3_5hamt"]
 [ext_resource type="Shader" path="res://resources/shaders/color_shader.gdshader" id="3_utjb4"]
 [ext_resource type="QuadMesh" uid="uid://ddmla6nvumita" path="res://resources/particles/cloud_particles_destroyer.tres" id="3_v0vwl"]
 [ext_resource type="Texture2D" uid="uid://b21pwxvt0wjmx" path="res://3d/enemy_destroyer/destroyer_enemy_texture.png" id="5_07a7f"]
 [ext_resource type="Texture2D" uid="uid://8x81qjcvf013" path="res://3d/enemy_destroyer/weapon.png" id="6_4t8lw"]
 [ext_resource type="Texture2D" uid="uid://dp5ud1bhhte86" path="res://3d/enemy_destroyer/destroyer_skull.png" id="7_nrjiv"]
 [ext_resource type="Texture2D" uid="uid://3rtyiv2mnl7c" path="res://3d/enemy_destroyer/destroyer_eye.png" id="8_km0ho"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ucdu0"]
+resource_local_to_scene = true
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(1, 1.25, 0.25)
+emission_shape = 1
+emission_sphere_radius = 0.15
+velocity_pivot = Vector3(0, 0, 1)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = -0.1
+initial_velocity_max = -0.1
+gravity = Vector3(0, 0, 0.25)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = ExtResource("3_5hamt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bxt4i"]
 resource_local_to_scene = true
@@ -157,6 +173,7 @@ transform = Transform3D(0.974503, -0.173982, -0.141686, 5.96046e-07, 0.63147, -0
 
 [node name="GPUParticles3D" parent="Armature/Skeleton3D/HeadAttachment" index="0"]
 preprocess = 0.0
+process_material = SubResource("ParticleProcessMaterial_ucdu0")
 draw_pass_1 = ExtResource("3_v0vwl")
 
 [node name="body" parent="Armature/Skeleton3D" index="1"]
@@ -181,6 +198,9 @@ transform = Transform3D(-0.921584, 0.384753, -0.051469, -0.336999, -0.858815, -0
 
 [node name="RightArmHitboxAttachment4" parent="Armature/Skeleton3D" index="7"]
 transform = Transform3D(-0.947748, -0.298885, -0.111544, 0.316096, -0.832551, -0.454908, 0.0430986, -0.466397, 0.883525, -0.341245, 1.63129, 0.025437)
+
+[node name="MeleeAttackHitbox" parent="." index="11"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0.9, 0)
 
 [node name="CollisionShape3D" parent="MeleeAttackHitbox" index="0"]
 shape = SubResource("BoxShape3D_qw8qh")
