@@ -1,0 +1,18 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=2 format=3 uid="uid://bw4835bcd0cv6"]
+
+[ext_resource type="Texture2D" uid="uid://c1tngxnerg4kp" path="res://resources/particles/enemy_particle_alpha_curve.tres" id="1_6sek1"]
+
+[resource]
+resource_local_to_scene = true
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(1, 1.25, 0.25)
+emission_shape = 1
+emission_sphere_radius = 0.15
+velocity_pivot = Vector3(0, 0, 1)
+direction = Vector3(0, 0, 1)
+initial_velocity_min = -0.1
+initial_velocity_max = -0.1
+gravity = Vector3(0, 0, 0.25)
+scale_min = 0.75
+scale_max = 1.25
+alpha_curve = ExtResource("1_6sek1")

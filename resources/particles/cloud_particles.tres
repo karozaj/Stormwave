@@ -1,0 +1,19 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://dw3iv6q8845nn"]
+
+[ext_resource type="Texture2D" uid="uid://fdfrm3kaw8ew" path="res://img/cloud.png" id="1_ns5uy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng63p"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.501961)
+albedo_texture = ExtResource("1_ns5uy")
+texture_filter = 0
+billboard_mode = 1
+
+[resource]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ng63p")
+size = Vector2(0.75, 1.25)

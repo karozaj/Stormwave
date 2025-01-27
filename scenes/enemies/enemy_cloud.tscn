@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=28 format=4 uid="uid://ldsvjji42wx1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/cloud/enemy_cloud.gd" id="1_suw4d"]
 [ext_resource type="AudioStream" uid="uid://b8gxuwdaxjhp2" path="res://audio/sfx/thunder.ogg" id="2_3y5jy"]
@@ -10,31 +10,20 @@
 [ext_resource type="Material" uid="uid://ncln3pm11vom" path="res://resources/materials/enemies/cloud_eye.tres" id="4_tgjtr"]
 [ext_resource type="AudioStream" uid="uid://bkcfdd4neh1so" path="res://audio/sfx/ghost/ghost_damage.ogg" id="5_l7gh6"]
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_tqel5"]
+[ext_resource type="Texture2D" uid="uid://c1tngxnerg4kp" path="res://resources/particles/enemy_particle_alpha_curve.tres" id="6_dq747"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/chase.gd" id="7_05cja"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/idle.gd" id="7_x687j"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/attack.gd" id="8_fqofo"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/pain.gd" id="8_jd6px"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/die.gd" id="8_nmhom"]
 
-[sub_resource type="Curve" id="Curve_kwunk"]
-max_value = 0.8
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.202899, 0.835165), 0.0, 0.0, 0, 0, Vector2(0.833333, 0.824176), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_uvv04"]
-width = 64
-curve = SubResource("Curve_kwunk")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62pa0"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_650k0"]
 resource_local_to_scene = true
-lifetime_randomness = 0.5
 emission_shape_scale = Vector3(1, 0.25, 1)
 emission_shape = 1
-emission_sphere_radius = 1.5
+emission_sphere_radius = 0.5
 gravity = Vector3(0, 0, 0)
-scale_min = 0.75
-scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_uvv04")
+alpha_curve = ExtResource("6_dq747")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1gjh"]
 transparency = 1
@@ -300,7 +289,7 @@ preprocess = 15.0
 explosiveness = 0.5
 randomness = 0.5
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_62pa0")
+process_material = SubResource("ParticleProcessMaterial_650k0")
 draw_pass_1 = SubResource("QuadMesh_y807p")
 
 [node name="eye" type="MeshInstance3D" parent="."]

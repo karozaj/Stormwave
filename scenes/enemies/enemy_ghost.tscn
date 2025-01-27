@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dm3r1hv0l3q6h"]
+[gd_scene load_steps=30 format=4 uid="uid://dm3r1hv0l3q6h"]
 
 [ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://brkkjwdov6dww" path="res://scenes/state_machine/state_machine.tscn" id="5_ya6yt"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/chase.gd" id="6_akg5s"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/idle.gd" id="7_drird"]
+[ext_resource type="Material" uid="uid://bw4835bcd0cv6" path="res://resources/particles/enemy_particle_material.tres" id="7_hn4kd"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/attack.gd" id="7_rd25v"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/die.gd" id="8_mvxav"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/pain.gd" id="9_pcets"]
@@ -76,28 +77,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uhmkq")
-
-[sub_resource type="Curve" id="Curve_ari81"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210145, 1), 0.0, 0.0, 0, 0, Vector2(0.731884, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_feptk"]
-curve = SubResource("Curve_ari81")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alck1"]
-resource_local_to_scene = true
-lifetime_randomness = 0.5
-emission_shape_scale = Vector3(1, 1.25, 0.25)
-emission_shape = 1
-emission_sphere_radius = 0.15
-velocity_pivot = Vector3(0, 0, 1)
-direction = Vector3(0, 0, 1)
-initial_velocity_min = -0.1
-initial_velocity_max = -0.1
-gravity = Vector3(0, 0, 0.25)
-scale_min = 0.75
-scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_feptk")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sl0c"]
 resource_local_to_scene = true
@@ -579,7 +558,7 @@ lifetime = 2.0
 preprocess = 15.0
 randomness = 0.5
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_alck1")
+process_material = ExtResource("7_hn4kd")
 draw_pass_1 = SubResource("QuadMesh_57ta5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
