@@ -11,6 +11,6 @@ script = ExtResource("1_rlfle")
 level_scene = "res://scenes/levels/level_1.tscn"
 level_identifier = "level_1"
 level_name = "Arena"
-level_description = "How long can you survive?"
+level_description = "How long can you survive in this small arena?"
 image = SubResource("CompressedTexture2D_373yb")
 playable = true

@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjxbcwyuu6vd5"]
+
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_il5bs"]
+[ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="2_8udp1"]
+[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="2_nkp8k"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="3_tkcj1"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_h_slider.gd" id="4_7pspb"]
+[ext_resource type="AudioStream" uid="uid://btaje2g4vfcje" path="res://audio/sfx/click.ogg" id="5_ng5hs"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="6_1onal"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_il5bs")
+script = ExtResource("2_nkp8k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8udp1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -64.5
+offset_right = 130.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FullscreenButton" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Toggle fullscreen
+"
+script = ExtResource("3_tkcj1")
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+script = ExtResource("4_7pspb")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/GridContainer/VBoxContainer2/MusicSlider"]
+stream = ExtResource("5_ng5hs")
+bus = &"Music"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+text = "Back"
+script = ExtResource("6_1onal")
+
+[connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

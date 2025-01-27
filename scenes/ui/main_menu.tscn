@@ -58,6 +58,12 @@ layout_mode = 2
 text = "Play"
 script = ExtResource("1_eu5b2")
 
+[node name="ButtonOptions" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Options"
+script = ExtResource("1_eu5b2")
+
 [node name="ButtonCredits" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
@@ -71,5 +77,6 @@ text = "Exit"
 script = ExtResource("1_eu5b2")
 
 [connection signal="pressed" from="VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonOptions" to="." method="_on_button_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonCredits" to="." method="_on_button_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]
