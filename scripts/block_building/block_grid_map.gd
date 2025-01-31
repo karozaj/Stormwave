@@ -22,13 +22,14 @@ func destroy_block(world_coordinate:Vector3)->bool:
 	return false
 
 #creates a given block at the given position in the grid
-func place_block(world_coordinate:Vector3, block:PackedScene)->bool:
+func place_block(world_coordinate:Vector3, block:PackedScene, preplaced:bool=false)->bool:
 	var map_coordinate=local_to_map(world_coordinate)
 	if get_cell_item_orientation(map_coordinate)==-1:
 		ray.position=map_to_local(map_coordinate)
 		ray.force_raycast_update()
 		#check if position where player is trying to build is above base block
-		if ray.is_colliding():
+		#"preplaced" is used for creating blocks from [BuildingBlockGridMap]
+		if ray.is_colliding() or preplaced==true:
 			var block_scene=block.instantiate()
 			block_scene.gridmap=self
 			add_child(block_scene)

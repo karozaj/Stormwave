@@ -99,7 +99,6 @@ func start_wave():
 func end_wave():
 	await get_tree().create_timer(1).timeout
 	start_building_phase()
-	#player.building_manager.block_count[0]+=block_reward
 	var block_res:ShopResource=load("res://resources/shop_resources/blocks/block.tres")
 	player.modify_resource_count(block_res,block_reward)
 

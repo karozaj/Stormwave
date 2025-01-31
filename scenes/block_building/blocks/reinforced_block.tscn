@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_jrqfy"]
 [ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_r4wxl"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3ofvc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xi00a"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 34896613377,
@@ -38,7 +38,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_3ofvc")
+shadow_mesh = SubResource("ArrayMesh_xi00a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n28mh"]
 
