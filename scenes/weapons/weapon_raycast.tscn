@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ehf8wr5pfr6x"]
 
 [node name="WeaponRaycast" type="RayCast3D"]
+editor_description = "Raycast used for weapons"
 enabled = false
 target_position = Vector3(0, 0, -100)
 collision_mask = 242

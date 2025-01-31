@@ -12,6 +12,7 @@ material = SubResource("StandardMaterial3D_huml8")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="LaserEffect" type="MeshInstance3D"]
+editor_description = "Laser effect used for turrets and enemy weapons"
 cast_shadow = 0
 mesh = SubResource("BoxMesh_51gwc")
 script = ExtResource("1_hy8jr")

@@ -307,6 +307,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fqj57")
 
 [node name="Level2" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer", "generators")]
+editor_description = "City level"
 script = ExtResource("1_pkhio")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")

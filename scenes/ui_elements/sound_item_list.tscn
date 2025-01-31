@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="1_7fsom"]
 
 [node name="SoundItemList" type="ItemList"]
+editor_description = "Itemlist that plays a given sound when an item is selected"
 script = ExtResource("1_7fsom")

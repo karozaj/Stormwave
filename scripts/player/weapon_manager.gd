@@ -1,12 +1,13 @@
 extends Node3D
 class_name WeaponManager
+## Contains player's weapons, manages ammo
 
 signal ammo_count_changed(count:int) #signal used to notify hud about ammo change
 
 ## The player that owns this weapon manager
 @export var weapon_manager_owner:Player
 
-@onready var audio_player=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 var sound_no_ammo:AudioStream=preload("res://audio/sfx/no_ammo.ogg")
 var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var cooldown_timer:Timer=$CooldownTimer
@@ -45,8 +46,7 @@ func shoot()->void:
 					ammo[current_weapon_index]-=1
 					ammo_count_changed.emit(ammo[current_weapon_index])
 			else:
-				audio_player.stream=sound_no_ammo
-				audio_player.play()
+				audio_player.play_sound(sound_no_ammo)
 
 
 func _on_cooldown_timer_timeout() -> void:
@@ -61,15 +61,7 @@ func select_weapon(index:int)->void:
 		current_weapon.is_being_pulled_out=true
 		current_weapon.animation_player.play("pullout")
 		ammo_count_changed.emit(ammo[current_weapon_index])
-		audio_player.stream=sound_weapon_select
-		audio_player.play()
-
-#func remove_ammo(number:int,type:String):
-	#ammo[index_dict[type]]-=number
-#
-#func add_ammo(number:int,type:String):
-	#ammo[index_dict[type]]+=number
-
+		audio_player.play_sound(sound_weapon_select)
 
 
 func get_ammo_dict()->Dictionary:

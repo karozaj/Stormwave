@@ -1,6 +1,6 @@
 extends CheckButton
 class_name SoundCheckButton
-# Button that plays a given sound when toggled
+## Button that plays a given sound when toggled
 
 @export_category("Press sound")
 ## Sound to be played when pressing this button

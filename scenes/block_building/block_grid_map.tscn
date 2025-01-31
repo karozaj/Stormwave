@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/block_building/block_grid_map.gd" id="2_pqmmt"]
 
 [node name="BlockGridMap" type="GridMap"]
+editor_description = "Gridmap used for areas where block can be placed"
 mesh_library = ExtResource("1_tw30a")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 16

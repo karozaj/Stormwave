@@ -260,6 +260,7 @@ resource_local_to_scene = true
 plane = Plane(1, 0, 0, 0)
 
 [node name="level_4" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer")]
+editor_description = "Forest level"
 script = ExtResource("1_y1hob")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")

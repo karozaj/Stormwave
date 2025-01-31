@@ -1,5 +1,6 @@
 extends MeshInstance3D
 class_name LaserEffect
+## Laser effect used for turrets and enemy weapons
 
 @onready var timer:Timer=$Timer
 ## How long the laser is visible

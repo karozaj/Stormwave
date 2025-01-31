@@ -1,5 +1,5 @@
 extends PlacerBaseClass
-
+## Placer for blocks
 
 #sets ray position to align with player camera
 func set_ray_position(pos:Vector3)->void:
@@ -7,7 +7,6 @@ func set_ray_position(pos:Vector3)->void:
 
 #destroys the block, returns true if block was destroyed succesfullt
 func collect()->String:
-	print("collect")
 	var block_name:String="None"
 	if ray.is_colliding():
 		if ray.get_collider().has_method("collect_block"):

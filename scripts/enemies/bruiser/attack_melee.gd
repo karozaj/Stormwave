@@ -10,7 +10,6 @@ func enter(_transition_data:Dictionary={})->void:
 	timer.timeout.connect(finished.emit.bind(self,"Chase"))
 	state_owner.animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	state_owner.animation_tree.set("parameters/AttackMeleeOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	#state_owner.play_sound_effect(state_owner.pain_sound,0,0.3, state_owner.base_pitch)
 
 func update(_delta:float)->void:
 	if state_owner.target!=null:

@@ -24,7 +24,7 @@ var mouse_sensitivity:float=1.0
 @onready var main_camera:Camera3D=$Pivot/MainCamera
 @onready var weapon_camera:Camera3D=$Pivot/WeaponCamera
 #audio players
-@onready var footstep_audio_player:AudioStreamPlayer3D=$FootstepAudioPlayer
+@onready var footstep_audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 #ui
 @onready var hud=$CanvasLayer/Hud
 @onready var canvas_layer=$CanvasLayer
@@ -88,7 +88,7 @@ func _ready() -> void:
 	building_manager.player_height=$CollisionShape3D.shape.height
 	building_manager.player_radius=$CollisionShape3D.shape.radius
 	
-	footstep_audio_player.stream=footstep_sound
+	set_footstep_sound(footstep_sound)
 
 
 func process_update(_delta:float):
@@ -189,9 +189,7 @@ func headbob(delta:float)->void:
 
 
 func play_footstep_sound()->void:
-	footstep_audio_player.pitch_scale=footstep_default_pitch+rng.randf_range(-footstep_pitch_variance,footstep_pitch_variance)
-	footstep_audio_player.play()
-
+	footstep_audio_player.play_current_sound(footstep_default_pitch,footstep_pitch_variance)
 
 func increase_fov_when_moving(delta:float,lerp_val:float)->void:
 	var velocity_clamped:float=clamp(Vector2(velocity.x,velocity.z).length(),0.0,movement_manager.sprint_speed)

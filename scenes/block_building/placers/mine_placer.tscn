@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://b30v3x1dn2ltf"]
+[gd_scene load_steps=13 format=4 uid="uid://b30v3x1dn2ltf"]
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_vc2ms"]
 [ext_resource type="AudioStream" uid="uid://crs86jlvk8ahk" path="res://audio/sfx/blocks/mine_place.ogg" id="2_gj41l"]
 [ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_qy6lx"]
 [ext_resource type="PackedScene" uid="uid://da11f182s0yks" path="res://scenes/block_building/blocks/mine.tscn" id="3_51fi0"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="5_1yomf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upaeb"]
 resource_name = "Material"
@@ -169,6 +170,7 @@ _data = {
 }
 
 [node name="MinePlacer" type="Node3D" node_paths=PackedStringArray("ray")]
+editor_description = "Placer for the mines"
 visible = false
 script = ExtResource("1_vc2ms")
 place_sound = ExtResource("2_gj41l")
@@ -187,8 +189,7 @@ enabled = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 114
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("5_1yomf")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

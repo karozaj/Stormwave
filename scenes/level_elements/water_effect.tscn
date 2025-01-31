@@ -81,6 +81,7 @@ _data = {
 }
 
 [node name="WaterEffect" type="MeshInstance3D"]
+editor_description = "Visual representation of water"
 material_overlay = SubResource("ShaderMaterial_8ga3x")
 mesh = SubResource("QuadMesh_431ud")
 surface_material_override/0 = SubResource("ShaderMaterial_l5bnd")

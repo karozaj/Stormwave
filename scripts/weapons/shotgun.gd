@@ -1,4 +1,5 @@
 extends WeaponBaseClass
+## Shotgun weapon used by the player
 
 @onready var rays:Node3D=$Rays
 @onready var muzzle_flash=$Cylinder/MuzzleFlash

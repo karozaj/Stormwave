@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://dcfwwhx5t6idf"]
+[gd_scene load_steps=17 format=4 uid="uid://dcfwwhx5t6idf"]
 
 [ext_resource type="Script" path="res://scripts/level_elements/generator.gd" id="1_0jnyo"]
 [ext_resource type="Texture2D" uid="uid://cc7ek272xjpla" path="res://3d/generator_generator_texture.png" id="1_clru7"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://uqes7u6m20rs" path="res://audio/sfx/generator.ogg" id="3_2ix52"]
 [ext_resource type="AudioStream" uid="uid://jt7oseu6yl3j" path="res://audio/sfx/blocks/block_destroyed1.ogg" id="3_gdinx"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="4_rhcmf"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_wc614"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5fnk"]
 resource_name = "Material.002"
@@ -119,6 +120,7 @@ _data = {
 }
 
 [node name="Generator" type="StaticBody3D"]
+editor_description = "A generator which can be used as an objective for the enemies to destroy"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_0jnyo")
@@ -143,15 +145,13 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_lidxw")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("6_wc614")]
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_2ix52")
 volume_db = -10.0
 pitch_scale = 0.5
 autoplay = true
-stream_paused = true
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

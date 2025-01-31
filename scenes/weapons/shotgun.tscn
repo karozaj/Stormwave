@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://sjytiuvopdi3"]
+[gd_scene load_steps=12 format=3 uid="uid://sjytiuvopdi3"]
 
 [ext_resource type="PackedScene" uid="uid://boskapx73ubko" path="res://3d/shotgun.glb" id="1_thjip"]
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="2_fgjlh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="4_akkgf"]
 [ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="4_r81t4"]
 [ext_resource type="AudioStream" uid="uid://uiis2klf7t5h" path="res://audio/sfx/shotgun.ogg" id="4_y1po6"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_vwofo"]
 
 [sub_resource type="Animation" id="Animation_2qrny"]
 length = 0.001
@@ -186,6 +187,7 @@ _data = {
 }
 
 [node name="Shotgun" instance=ExtResource("1_thjip")]
+editor_description = "Shotgun weapon used by the player"
 visible = false
 script = ExtResource("2_fgjlh")
 shooting_sound = ExtResource("4_y1po6")
@@ -219,10 +221,7 @@ visible = false
 
 [node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_0qii5")]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
-stream = ExtResource("4_y1po6")
-volume_db = -30.0
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." index="3" instance=ExtResource("7_vwofo")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {

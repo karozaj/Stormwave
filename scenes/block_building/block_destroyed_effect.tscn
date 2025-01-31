@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://5dkvewjiv1a0"]
+[gd_scene load_steps=6 format=3 uid="uid://5dkvewjiv1a0"]
 
 [ext_resource type="Script" path="res://scripts/block_building/block_destroyed_effect.gd" id="1_ihjmq"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="2_rk5ja"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kxhvs"]
 emission_shape = 3
@@ -24,6 +25,7 @@ material = SubResource("StandardMaterial3D_3ktfq")
 size = Vector2(0.1, 0.1)
 
 [node name="BlockDestroyedEffect" type="GPUParticles3D"]
+editor_description = "Particle effect used when blocks are destroyed."
 emitting = false
 amount = 16
 lifetime = 0.75
@@ -34,8 +36,6 @@ process_material = SubResource("ParticleProcessMaterial_kxhvs")
 draw_pass_1 = SubResource("QuadMesh_ypcvg")
 script = ExtResource("1_ihjmq")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-volume_db = -10.0
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("2_rk5ja")]
 
 [connection signal="finished" from="." to="." method="_on_finished"]

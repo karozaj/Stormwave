@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuh2x6gk3mlgn"]
+[gd_scene load_steps=8 format=3 uid="uid://cuh2x6gk3mlgn"]
 
 [ext_resource type="Script" path="res://scripts/player/building_manager.gd" id="1_gdwe6"]
 [ext_resource type="PackedScene" uid="uid://dbjlp23yoipod" path="res://scenes/block_building/placers/block_placer.tscn" id="2_r8cq1"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b30v3x1dn2ltf" path="res://scenes/block_building/placers/mine_placer.tscn" id="4_lhqbb"]
 [ext_resource type="PackedScene" uid="uid://bmdgopa2w8bo7" path="res://scenes/block_building/placers/explosive_block_placer.tscn" id="6_tj3m1"]
 [ext_resource type="PackedScene" uid="uid://cil5dsc2jopt2" path="res://scenes/block_building/placers/turret_placer.tscn" id="7_fpy8a"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_x7ixr"]
 
 [node name="BuildingManager" type="Node3D"]
+editor_description = "Contains placers the player can use to build with blocks"
 script = ExtResource("1_gdwe6")
 
 [node name="RightPosition" type="Marker3D" parent="."]
@@ -23,8 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.35)
 
 [node name="TurretPlacer" parent="RightPosition" instance=ExtResource("7_fpy8a")]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("7_x7ixr")]
 
 [node name="CooldownTimer" type="Timer" parent="."]
 

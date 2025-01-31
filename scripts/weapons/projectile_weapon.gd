@@ -1,6 +1,6 @@
 extends WeaponBaseClass
 class_name ProjectileWeapon
-
+## Base class for weapons which shoot projectiles
 
 
 ## The projectile shot by this weapon

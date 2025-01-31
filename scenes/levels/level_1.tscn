@@ -48,6 +48,7 @@ filter_walkable_low_height_spans = true
 plane = Plane(0, -1, 0, 0)
 
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer")]
+editor_description = "Arena level"
 script = ExtResource("1_u4igx")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")

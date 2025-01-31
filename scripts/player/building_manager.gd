@@ -1,10 +1,11 @@
 extends Node3D
 class_name BuildingManager
+## Contains placers the player can use to build with blocks
 
 signal block_count_changed(count:int) #signal used to notify hud about block change
 
 @onready var cooldown_timer=$CooldownTimer
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 #placers
 @onready var block_placer:PlacerBaseClass=$RightPosition/BlockPlacer
 @onready var reinforced_block_placer:PlacerBaseClass=$RightPosition/ReinforcedBlockPlacer
@@ -46,26 +47,26 @@ func place()->void:
 					block_count[current_placer_index]-=1
 					block_count_changed.emit(block_count[current_placer_index])
 			else:
-				play_sound(no_blocks_sound,0.0)
+				audio_player.play_sound(no_blocks_sound,1.0,0.0)
 
 
 func collect()->void:
 	var block_name:String=current_placer.collect()
 	if block_name=="Block":
 		block_count[0]+=1
-		play_sound(collect_sound)
+		audio_player.play_sound(collect_sound)
 	elif block_name=="Reinforced Block":
 		block_count[1]+=1
-		play_sound(collect_sound)
+		audio_player.play_sound(collect_sound)
 	elif block_name=="Explosive Block":
 		block_count[2]+=1
-		play_sound(collect_sound)
+		audio_player.play_sound(collect_sound)
 	elif block_name=="Mine":
 		block_count[3]+=1
-		play_sound(collect_sound)
+		audio_player.play_sound(collect_sound)
 	elif block_name=="Turret":
 		block_count[4]+=1
-		play_sound(collect_sound)
+		audio_player.play_sound(collect_sound)
 	block_count_changed.emit(block_count[current_placer_index])
 
 func select_placer(index:int)->void:
@@ -77,27 +78,13 @@ func select_placer(index:int)->void:
 		current_placer.ray.enabled=true
 		current_placer.is_being_pulled_out=true
 		current_placer.animation_player.play("pullout")
-		play_sound(switch_placer_sound,0.0)
+		audio_player.play_sound(switch_placer_sound,1.0,0.0)
 		block_count_changed.emit(block_count[current_placer_index])
 
-#plays sound when collecting block
-func play_sound(sound:AudioStream,v:float=0.1)->void:
-	audio_player.stream=sound
-	audio_player.pitch_scale=1.0+randf_range(-v,v)
-	audio_player.play()
 
 func _on_cooldown_timer_timeout() -> void:
 	can_use=true
 
-#func remove_blocks(number:int,type:String):
-	#block_count[index_dict[type]]-=number
-	#if current_placer_index==index_dict[type]:
-		#block_count_changed.emit(block_count[current_placer_index])
-#
-#func add_blocks(number:int,type:String):
-	#block_count[index_dict[type]]+=number
-	#if current_placer_index==index_dict[type]:
-		#block_count_changed.emit(block_count[current_placer_index])
 	
 func get_blocks_dict()->Dictionary:
 	var dict:Dictionary={}

@@ -206,6 +206,7 @@ plane = Plane(1, 0, 0, 0)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5skvc"]
 
 [node name="level_3" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer", "generators")]
+editor_description = "Space level"
 script = ExtResource("1_oqq1j")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")

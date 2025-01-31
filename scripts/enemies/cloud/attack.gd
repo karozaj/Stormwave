@@ -10,7 +10,7 @@ func enter(_transition_data:Dictionary={})->void:
 	timer.start(state_owner.attack_charging_time)
 	timer.timeout.connect(finished.emit.bind(self,"Chase"))
 	timer.timeout.connect(state_owner.shoot_lightning)
-	state_owner.play_sound_effect(state_owner.charging_sound,0.0,0.0,state_owner.base_pitch)
+	state_owner.audio_player.play_sound(state_owner.charging_sound,state_owner.base_pitch,0.0)
 	state_owner.animation_player.play("attack")
 
 func update(delta:float)->void:

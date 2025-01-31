@@ -10,6 +10,7 @@
 
 [node name="Hud" type="Control"]
 process_mode = 3
+editor_description = "The player's HUD"
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15

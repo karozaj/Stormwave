@@ -1,8 +1,8 @@
 extends Node3D
 class_name PlacerBaseClass
+## Base class for all placers (tools the player uses to place blocks)
 
-
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
 
 @export_category("Audio")
@@ -48,9 +48,7 @@ func collect()->String:
 #plays sound when placing a block
 func play_place_sound()->void:
 	if place_sound!=null:
-		audio_player.stream=place_sound
-		audio_player.pitch_scale=place_pitch+rng.randf_range(-pitch_variance,pitch_variance)
-		audio_player.play()
+		audio_player.play_sound(place_sound,place_pitch,pitch_variance)
 
 
 #checks if the block can be placed

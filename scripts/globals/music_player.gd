@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 
 ## Music played in the menu or during sections without combat
 @export var calm_music:Array[AudioStream]
-#Music played during combat
+## Music played during combat
 @export var battle_music:Array[AudioStream]
 ## Base volume
 @export var base_volume:float

@@ -1,13 +1,10 @@
 extends WeaponBaseClass
+## Axe weapon used by the player
 
 @onready var animation_player=$AnimationPlayer
 @onready var hitbox:Area3D=$Hitbox
 #used when deflecting projectiles
 @onready var ray:RayCast3D=$WeaponRaycast
-
-func _ready() -> void:
-	audio_player.stream=shooting_sound
-
 
 func shoot():
 	animation_player.play("swing")

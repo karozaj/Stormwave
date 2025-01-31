@@ -1,5 +1,6 @@
 extends Node3D
 class_name MovementManager
+## Contains functions and parameters related to player movement
 
 @onready var coyote_timer:Timer=$CoyoteTimer
 @onready var jump_buffer_timer:Timer=$BufferTimer

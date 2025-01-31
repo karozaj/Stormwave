@@ -1,8 +1,9 @@
 extends StaticBody3D
 class_name BlockBaseClass
-#base class for all blocks used for building
+## Base class for all blocks used for building
 
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+## Audio player for playing block sounds
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 
 ## The block's durability points
 @export var durability:int=100
@@ -50,9 +51,7 @@ func collect_block()->String:
 #this function should be overwritten to include visual indication of the block's condition
 func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
-	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
-	audio_player.stream=damaged_sound
-	audio_player.play()
+	audio_player.play_sound(damaged_sound,damaged_pitch)
 	if durability<0:
 		destroy_block()
 

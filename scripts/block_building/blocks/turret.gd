@@ -1,4 +1,5 @@
 extends BlockBaseClass
+## Targets and attacks enemies that enter its range
 
 signal died(obj:Object)
 
@@ -6,12 +7,13 @@ signal died(obj:Object)
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var cooldown_timer:Timer=$Timer
 @onready var laser_effect:LaserEffect=$base/TurretPivot/turret/barrel/WeaponRaycast/LaserEffect
-@onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+@onready var audio_player2:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d2
 @onready var aim_point:Marker3D=$AimPoint
 @onready var max_ammo:int=ammo
-
+## Stores the available targets
 var targets:Array[EnemyBaseClass]=[]
 
+## The cooldown between attacks
 @export var attack_cooldown:float=1.5
 ## How many points of damage attacks should deal
 @export var base_damage:int=10
@@ -46,9 +48,7 @@ func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 
 func destroy_block()->bool:
 	if gridmap.destroy_block(global_position)==true:
-		var effect:BlockDestroyedEffect=destroyed_effect.instantiate()
-		effect.sound=destroyed_sound
-		effect.pitch=destroyed_pitch
+		var effect:BlockDestroyedEffect=BlockDestroyedEffect.create_effect(destroyed_sound,destroyed_pitch)
 		get_parent().add_child(effect)
 		effect.global_position=global_position
 		is_dead=true
@@ -97,13 +97,9 @@ func remove_target(trg:EnemyBaseClass):
 #plays given sound
 func play_sound(sound:AudioStream, v:float=0.1,pitch:float=1.0):
 	if audio_player.playing==false:
-		audio_player.pitch_scale=pitch+randf_range(-v,v)
-		audio_player.stream=sound
-		audio_player.play()
+		audio_player.play_sound(sound,pitch,v)
 	else:
-		audio_player2.pitch_scale=pitch+randf_range(-v,v)
-		audio_player2.stream=sound
-		audio_player2.play()
+		audio_player2.play_sound(sound,pitch,v)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

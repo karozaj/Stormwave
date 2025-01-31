@@ -1,6 +1,6 @@
 extends HSlider
 class_name SoundHSlider
-# HSlider that plays a given sound when an item is selected
+## HSlider that plays a given sound when an item is selected
 
 @export_category("Drag started sound")
 ## Sound to be played when slider dragging is started

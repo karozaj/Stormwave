@@ -1,8 +1,8 @@
 extends CharacterBody3D
 class_name EnemyBaseClass
-#All enemies should inherit from this class
+## All enemies should inherit from this class
 
-#signal to notify about death (for example to prevent turrets from attacking while death animation plays)
+## signal to notify about death (for example to prevent turrets from attacking while death animation plays)
 @warning_ignore("unused_signal")
 signal died(enemy:EnemyBaseClass)
 

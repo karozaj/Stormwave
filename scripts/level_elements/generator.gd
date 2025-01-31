@@ -1,5 +1,6 @@
 extends StaticBody3D
 class_name Generator
+## A generator which can be used as an objective for the enemies to destroy
 
 ## Emitted when generator is destroyed
 signal died(sender)
@@ -7,7 +8,7 @@ signal died(sender)
 signal map_updated
 
 @onready var aim_point:Marker3D=$AimPoint
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 ## The generator's durability points
 @export var durability:int=1000
 @onready var max_durability:int=durability
@@ -23,7 +24,7 @@ var is_dead:bool=false
 
 func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
-	play_sound(damaged_sound)
+	audio_player.play_sound(damaged_sound,1.0,0.1)
 	$Cylinder_001.material_overlay.albedo_color=Color(1.0,1.0,1.0,1.0-float(durability)/float(max_durability))
 	$Cube.material_overlay.albedo_color=Color(1.0,1.0,1.0,1.0-float(durability)/float(max_durability))
 	if durability<0:
@@ -42,10 +43,3 @@ func destroy():
 	Global.current_level.add_child(effect)
 	effect.global_position=aim_point.global_position
 	queue_free()
-
-#plays given sound
-func play_sound(sound:AudioStream, v:float=0.1,pitch:float=1.0):
-	if audio_player.playing==false:
-		audio_player.pitch_scale=pitch+randf_range(-v,v)
-		audio_player.stream=sound
-		audio_player.play()

@@ -1,12 +1,9 @@
 extends WeaponBaseClass
+## Pistol weapon used by the player
 
 @onready var ray:RayCast3D=$WeaponRaycast
 @onready var animation_player=$AnimationPlayer
 @onready var bullet_hole_spawner=$BulletHoleSpawner
-
-
-func _ready() -> void:
-	audio_player.stream=shooting_sound
 
 
 func set_ray_position(pos:Vector3)->void:

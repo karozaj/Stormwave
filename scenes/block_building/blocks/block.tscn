@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://c2gwyqvxani64"]
+[gd_scene load_steps=10 format=4 uid="uid://c2gwyqvxani64"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/block.gd" id="1_mxs8r"]
 [ext_resource type="AudioStream" uid="uid://dltw388a2twne" path="res://audio/sfx/blocks/block_destroyed.ogg" id="2_3htt5"]
 [ext_resource type="AudioStream" uid="uid://47g48nr187ie" path="res://audio/sfx/blocks/block_damage2.ogg" id="2_a0frq"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_idbku"]
 [ext_resource type="Material" uid="uid://debjjxdeoktvh" path="res://resources/materials/block_material.tres" id="3_8c6hs"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_xl7jf"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3ofvc"]
 _surfaces = [{
@@ -42,6 +43,7 @@ shadow_mesh = SubResource("ArrayMesh_3ofvc")
 [sub_resource type="BoxShape3D" id="BoxShape3D_sja5d"]
 
 [node name="Block" type="StaticBody3D"]
+editor_description = "Basic block which can be used for building or buying other resources"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_mxs8r")
@@ -57,5 +59,4 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sja5d")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("6_xl7jf")]

@@ -17,18 +17,14 @@ func _ready() -> void:
 	for child in get_children():
 		if child is BlockGridMap:
 			child.map_changed.connect(update_navmesh)
-	#$BlockGridmap.map_changed.connect(update_navmesh)
-	##var rid=NavigationServer3D.get_maps()[0]
+
 
 func update_navmesh():
 	if rebaking_enabled==true:
-		#if timer.is_stopped()==true:
 		if is_inside_tree():
 			if is_baking()==false:
-				#bake_navigation_mesh()
 				timer.start(rebaking_wait_time)
 
 
 func _on_timer_timeout() -> void:
-	#print("rebaking")
 	bake_navigation_mesh()

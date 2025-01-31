@@ -1,6 +1,6 @@
 extends ItemList
 class_name SoundItemList
-# Itemlist that plays a given sound when an item is selected
+## Itemlist that plays a given sound when an item is selected
 
 @export_category("Selection sound")
 ## Sound to be played when selecting an item

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://ldsvjji42wx1"]
+[gd_scene load_steps=30 format=4 uid="uid://ldsvjji42wx1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/cloud/enemy_cloud.gd" id="1_suw4d"]
 [ext_resource type="AudioStream" uid="uid://b8gxuwdaxjhp2" path="res://audio/sfx/thunder.ogg" id="2_3y5jy"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" path="res://scripts/enemies/cloud/attack.gd" id="8_fqofo"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/pain.gd" id="8_jd6px"]
 [ext_resource type="Script" path="res://scripts/enemies/cloud/die.gd" id="8_nmhom"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="11_boiu8"]
+[ext_resource type="AudioStream" uid="uid://bj8rxdhil5kqy" path="res://audio/sfx/enemy_ghost.ogg" id="12_qp7xs"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_650k0"]
 resource_local_to_scene = true
@@ -264,6 +266,7 @@ _data = {
 }
 
 [node name="EnemyCloud" type="CharacterBody3D" node_paths=PackedStringArray("aim_point") groups=["enemies"]]
+editor_description = "Cloud enemy type, flies and shoots lightning"
 collision_layer = 132
 collision_mask = 63
 motion_mode = 1
@@ -320,8 +323,13 @@ collision_mask = 371
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("11_boiu8")]
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+stream = ExtResource("12_qp7xs")
+volume_db = -25.0
+pitch_scale = 0.2
+autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb2rwntd2s065"]
+[gd_scene load_steps=8 format=3 uid="uid://cb2rwntd2s065"]
 
 [ext_resource type="Script" path="res://scripts/player/weapon_manager.gd" id="1_1tytp"]
 [ext_resource type="PackedScene" uid="uid://lyyc6u3slkca" path="res://scenes/weapons/pistol.tscn" id="1_qsn5i"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://j0p8llsbpo0o" path="res://scenes/weapons/chaingun.tscn" id="4_5okys"]
 [ext_resource type="PackedScene" uid="uid://beui6n2v6ebbo" path="res://scenes/weapons/axe.tscn" id="4_wc26d"]
 [ext_resource type="PackedScene" uid="uid://demh0215o684x" path="res://scenes/weapons/rocket_launcher.tscn" id="5_aqioh"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_5hp4a"]
 
 [node name="WeaponManager" type="Node3D"]
+editor_description = "Contains player's weapons, manages ammo"
 script = ExtResource("1_1tytp")
 
 [node name="RightPosition" type="Marker3D" parent="."]
@@ -29,8 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.325, 0)
 [node name="RocketLauncher" parent="CenterPosition" instance=ExtResource("5_aqioh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.15)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("7_5hp4a")]
 
 [node name="CooldownTimer" type="Timer" parent="."]
 process_callback = 0

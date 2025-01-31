@@ -12,6 +12,7 @@ radius = 0.25
 radius = 0.001
 
 [node name="RocketProjectile" type="Area3D" node_paths=PackedStringArray("projectile_lifetime_timer")]
+editor_description = "Rocket Projectile that can be shot by wepaons or enemies"
 collision_layer = 8
 collision_mask = 243
 script = ExtResource("1_mi6pk")

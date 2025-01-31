@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_wpl8q"]
 
 [node name="SoundButton" type="Button"]
+editor_description = "Button that plays a given sound when presed"
 custom_minimum_size = Vector2(100, 25)
 script = ExtResource("1_wpl8q")

@@ -1,5 +1,6 @@
 extends Projectile
 class_name RocketProjectile
+## Rocket Projectile that can be shot by wepaons or enemies
 
 @onready var timer:Timer=$ProjectileLifetimeTimer
 @onready var projectile_sprite:Sprite3D=$Sprite3D

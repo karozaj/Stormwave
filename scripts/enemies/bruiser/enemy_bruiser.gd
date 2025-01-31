@@ -1,5 +1,6 @@
 extends EnemyNavigation
 class_name EnemyBruiser
+## Bruiser enemy type. Can shoot projectiles and perform melee attacks
 
 @onready var state_machine:StateMachine=$StateMachine
 @onready var animation_tree:AnimationTree=$AnimationTree
@@ -12,9 +13,9 @@ class_name EnemyBruiser
 	$Armature/Skeleton3D/RightArmHitboxAttachment4/HitboxArea/CollisionShape3D]
 @onready var collision_shape:CollisionShape3D=$CollisionShape3D
 @onready var particles:GPUParticles3D=$Armature/Skeleton3D/HeadAttachment/GPUParticles3D
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
-@onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
-@onready var footstep_audio_player:AudioStreamPlayer3D=$AudioStreamPlayerFootstep
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
+@onready var audio_player2:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d2
+@onready var footstep_audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d3
 
 #@onready var navigation_agent:NavigationAgent3D=$NavigationAgent3D
 #@onready var target_update_timer:Timer=$TargetUpdateTimer
@@ -79,14 +80,11 @@ func _ready() -> void:
 	navigation_agent.max_speed=move_speed
 	
 	set_footstep_sound(footstep_sound)
-	
-	#add_targets([Global.player])
+
 
 
 func _process(_delta: float) -> void:
 	update_target_position()
-	#calculate_navigation_target_position_offset()
-	#update_navigation_target_position()
 	update_animation_tree()
 
 #updates walk and fall animations according to current state	
@@ -97,14 +95,7 @@ func update_animation_tree():
 
 func update_navigation_target_position()->void:
 	navigation_target_position=target_position+navigation_target_position_offset
-	#print("nav: "+str(navigation_target_position))
-	#print("target: "+str(target_position))
-
-#updates navigation agent target position
-# this is DIFFERENT FROM update_navigation_target_position
-#func update_navagent_target_position():
-	#if navigation_agent.target_position.distance_to(navigation_target_position)>1.0:
-		#navigation_agent.target_position=navigation_target_position
+	
 
 func calculate_navigation_target_position_offset()->Vector3:
 	if navigation_agent.is_target_reachable()==false:
@@ -138,13 +129,7 @@ func take_damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 	knockback_direction=knockback_direction.normalized()
 	velocity+=knockback_direction*damage_points/100*knockback_modifier
 	if damage_dealer!=null:
-		#if damage_dealer is EnemyBaseClass and infighting_allowed==false:
-			#return
-		#elif damage_dealer not in targets:
 		add_targets([damage_dealer])
-			#targets.push_front(damage_dealer)
-			#target=damage_dealer
-			#damage_dealer.died.connect(switch_target)
 
 #spawns projectile
 func shoot_projectile():
@@ -165,7 +150,6 @@ func are_enemies_in_projectile_path()->bool:
 			ray.target_position=ray.to_local(target_position)+ray.position
 			ray.force_raycast_update()
 			if ray.is_colliding():
-				#print("ray is colliding")
 				return true
 	wall_check_raycast.target_position=wall_check_raycast.to_local(target_position)
 	wall_check_raycast.force_raycast_update()
@@ -184,29 +168,16 @@ func _on_melee_attack_hitbox_body_entered(body: Node3D) -> void:
 			body.damage(melee_damage, global_position,self)
 
 
-func play_sound_effect(sound:AudioStream, pitch_from:float=-0.1,pitch_to:float=0.1, pitch_base:float=1.0)->void:
+func play_sound_effect(sound:AudioStream, pitch_base:float=1.0, pitch_var:float=-0.1)->void:
 	if audio_player.playing==false:
-		audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
-		audio_player.stream=sound
-		audio_player.play()
+		audio_player.play_sound(sound,pitch_base,pitch_var)
 	else:
-		audio_player2.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
-		audio_player2.stream=sound
-		audio_player2.play()
+		audio_player2.play_sound(sound,pitch_base,pitch_var)
+		
 
 func play_foostep_sound():
-	footstep_audio_player.pitch_scale=1.0+randf_range(-0.1,0.1)
-	footstep_audio_player.play()
-#
-#func _on_target_update_timer_timeout() -> void:
-	#update_navagent_target_position()
-	#target_update_timer.start()
+	footstep_audio_player.play_current_sound()
 
-
-#func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	#new_safe_velocity=safe_velocity
-	##velocity = velocity.move_toward(safe_velocity,agility)
-	##move_and_slide()
 
 func allow_damaging_other_enemies()->void:
 	melee_hitbox.collision_mask=1|3|6|7

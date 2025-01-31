@@ -1,5 +1,6 @@
 extends Area3D
 class_name Projectile
+## Projectile that can be shot by wepaons or enemies
 
 ## How much damage the projectile deals when directly hitting a target
 @export var direct_damage:int=50

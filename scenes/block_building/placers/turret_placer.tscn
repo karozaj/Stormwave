@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://cil5dsc2jopt2"]
+[gd_scene load_steps=18 format=4 uid="uid://cil5dsc2jopt2"]
 
 [ext_resource type="Script" path="res://scripts/block_building/placers/block_placer.gd" id="1_1on7r"]
 [ext_resource type="AudioStream" uid="uid://crs86jlvk8ahk" path="res://audio/sfx/blocks/mine_place.ogg" id="2_i64wv"]
 [ext_resource type="PackedScene" uid="uid://cljumdm3fr7bs" path="res://scenes/block_building/blocks/turret.tscn" id="3_cvcfg"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="4_1s5sa"]
 [ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="5_tp37p"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_clvsm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb7cm"]
 resource_name = "Material.001"
@@ -234,6 +235,7 @@ _data = {
 }
 
 [node name="TurretPlacer" type="Node3D" node_paths=PackedStringArray("ray")]
+editor_description = "Placer for the turrets"
 visible = false
 script = ExtResource("1_1on7r")
 place_sound = ExtResource("2_i64wv")
@@ -264,8 +266,7 @@ enabled = false
 target_position = Vector3(0, 0, -5)
 collision_mask = 114
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("6_clvsm")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

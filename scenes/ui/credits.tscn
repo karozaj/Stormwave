@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="4_ift7e"]
 
 [node name="Credits" type="Control"]
+editor_description = "Credits screen"
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

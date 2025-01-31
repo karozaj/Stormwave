@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="6_a32n6"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="6_h5bof"]
 [ext_resource type="PackedScene" uid="uid://bukp7t8xot7b1" path="res://scenes/weapons/weapon_effects/laser_effect.tscn" id="6_q561l"]
-[ext_resource type="AudioStream" uid="uid://foku7kfpbstk" path="res://audio/sfx/enemy_detected.ogg" id="8_ohv5v"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="10_tgm13"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb7cm"]
 resource_name = "Material.001"
@@ -182,6 +182,7 @@ _data = {
 }
 
 [node name="Turret" type="StaticBody3D"]
+editor_description = "Targets and attacks enemies that enter its range"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_yvf3x")
@@ -233,13 +234,9 @@ shape = SubResource("CylinderShape3D_c8u06")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-max_polyphony = 2
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("10_tgm13")]
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("8_ohv5v")
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d2" parent="." instance=ExtResource("10_tgm13")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
