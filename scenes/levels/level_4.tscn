@@ -328,7 +328,7 @@ metadata/_edit_lock_ = true
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("initial_enemy_targets") instance=ExtResource("5_s8jm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.08, 26.9152, -37.6651)
 enemy_scenes = Array[PackedScene]([ExtResource("10_4jdvs"), ExtResource("12_vb15d"), ExtResource("12_kgvd4"), ExtResource("13_vgywf"), ExtResource("14_bvdc5")])
-enemy_spawn_chance = Array[int]([15, 10, 0, 1, 0])
+enemy_spawn_chance = Array[int]([15, 10, 0, 0, 0])
 enemy_spawn_chance_increase = Array[int]([2, 2, 1, 2, 2])
 wave_size = 10
 wave_size_increase = 3

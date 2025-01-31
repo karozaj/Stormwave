@@ -61,6 +61,7 @@ func _ready() -> void:
 		enemy_check_raycasts.append(ray)
 		
 	navigation_agent.max_speed=move_speed
+	set_footstep_sound(footstep_sound)
 	#add_targets([Global.player])
 	
 	

@@ -78,7 +78,7 @@ func _ready() -> void:
 	
 	navigation_agent.max_speed=move_speed
 	
-	footstep_audio_player.stream=footstep_sound
+	set_footstep_sound(footstep_sound)
 	
 	#add_targets([Global.player])
 
