@@ -26,6 +26,7 @@ Asset list: https://polslpl-my.sharepoint.com/:x:/g/personal/karozaj462_student_
 |Mouse|Look around|
 |LMB|Shoot/pick up blocks|
 |RMB|Build (building phase)|
+|Scroll wheel/1-5|Select weapon/block|
 |E|Open shop menu (building phase)|
 |Esc|Pause|
 
