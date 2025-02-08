@@ -17,6 +17,19 @@ Download the newest version for your operating system, unzip and run the executa
 
 Asset list: https://polslpl-my.sharepoint.com/:x:/g/personal/karozaj462_student_polsl_pl/EUXRvRdfQNRBjKCTLlYuOG8BzdniIEixIzWizaybXEA7dA?e=2P1yMY
 
+## Controls
+|Input|Action|
+|-----|------|
+|WASD|Move|
+|Shift (hold)|Sprint|
+|Space|Jump|
+|Mouse|Look around|
+|LMB|Shoot/pick up blocks|
+|RMB|Build (building phase)|
+|E|Open shop menu (building phase)|
+|Esc|Pause|
+
+
 ## Screenshots
 <p align="center">
   <img src="https://github.com/karozaj/Stormwave/blob/main/.github/build1.png">
