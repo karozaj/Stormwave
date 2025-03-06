@@ -17,6 +17,9 @@ class_name WeaponBaseClass
 @export var base_damage:int=10
 ## The player that owns the weapon
 @export var weapon_owner:Player
+## Material to be used for bullet tracer effects
+@export var bullet_tracer_material:StandardMaterial3D
+
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
