@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://benkfev67hms1"
-path="res://.godot/imported/wall_tileset.glb-e9139cc968742c642716bf1782007eba.scn"
+uid="uid://dj43dno4pcj8c"
+path="res://.godot/imported/arena_wall_tileset.glb-f5400892172118a937931ea8a8f585db.scn"
 
 [deps]
 
-source_file="res://3d/tilesets/wall_tileset.glb"
-dest_files=["res://.godot/imported/wall_tileset.glb-e9139cc968742c642716bf1782007eba.scn"]
+source_file="res://3d/tilesets/arena_wall_tileset.glb"
+dest_files=["res://.godot/imported/arena_wall_tileset.glb-f5400892172118a937931ea8a8f585db.scn"]
 
 [params]
 

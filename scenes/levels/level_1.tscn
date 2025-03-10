@@ -341,6 +341,9 @@ metadata/_edit_lock_ = true
 
 [node name="GridMap" parent="NavRegion" instance=ExtResource("7_4o2nw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+data = {
+"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 0, 1, 655360, 1, 0, 1441792, 0, 65535, 0, 65535, 65535, 1, 65535, 0, 1048576)
+}
 metadata/_edit_lock_ = true
 
 [node name="BuildPhaseTimer" type="Timer" parent="."]

@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://na5tvihyvv8h"
-path="res://.godot/imported/arena_tileset_tile.png-f5b94a9ccf796d1660de17d448d4ce5b.ctex"
+uid="uid://biqrtc56r1q6o"
+path="res://.godot/imported/tile_metal_wall.png-e29d988984f0dace82b5846f16538f69.ctex"
 metadata={
 "vram_texture": false
-}
-generator_parameters={
-"md5": "06ca6ec7ce4fd5e7bb13b0d533f388a4"
 }
 
 [deps]
 
-source_file="res://3d/tilesets/arena_tileset_tile.png"
-dest_files=["res://.godot/imported/arena_tileset_tile.png-f5b94a9ccf796d1660de17d448d4ce5b.ctex"]
+source_file="res://img/textures/tile_metal_wall.png"
+dest_files=["res://.godot/imported/tile_metal_wall.png-e29d988984f0dace82b5846f16538f69.ctex"]
 
 [params]
 
