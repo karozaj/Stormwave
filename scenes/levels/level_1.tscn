@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbiqgfgqnurpi"]
+[gd_scene load_steps=25 format=3 uid="uid://bbiqgfgqnurpi"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_u4igx"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_mffs7"]
@@ -41,6 +41,19 @@ geometry_parsed_geometry_type = 1
 geometry_collision_mask = 50
 agent_radius = 0.25
 filter_walkable_low_height_spans = true
+
+[sub_resource type="Gradient" id="Gradient_gpy28"]
+offsets = PackedFloat32Array(0.367089, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hq7hk"]
+noise_type = 5
+seed = 935
+frequency = 0.25
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3wea"]
+color_ramp = SubResource("Gradient_gpy28")
+noise = SubResource("FastNoiseLite_hq7hk")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34xti"]
 
@@ -338,6 +351,12 @@ data = {
 "cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 65535, 0, 0, 0, 65535, 0, 0, 1, 0, 65535, 1, 1441793, 1, 1, 1, 1, 65535, 1048577, 65535, 65535, 655361)
 }
 metadata/_edit_lock_ = true
+
+[node name="Decal" type="Decal" parent="NavRegion/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+size = Vector3(48, 0.001, 48)
+texture_albedo = SubResource("NoiseTexture2D_t3wea")
+emission_energy = 0.0
 
 [node name="GridMap" parent="NavRegion" instance=ExtResource("7_4o2nw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
