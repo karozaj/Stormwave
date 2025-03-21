@@ -42,18 +42,18 @@ geometry_collision_mask = 50
 agent_radius = 0.25
 filter_walkable_low_height_spans = true
 
-[sub_resource type="Gradient" id="Gradient_gpy28"]
+[sub_resource type="Gradient" id="Gradient_rjnaq"]
 offsets = PackedFloat32Array(0.367089, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hq7hk"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pk571"]
 noise_type = 5
 seed = 935
 frequency = 0.25
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3wea"]
-color_ramp = SubResource("Gradient_gpy28")
-noise = SubResource("FastNoiseLite_hq7hk")
+color_ramp = SubResource("Gradient_rjnaq")
+noise = SubResource("FastNoiseLite_pk571")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34xti"]
 

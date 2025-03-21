@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://bydpm8lq4wqr0"]
+[gd_scene load_steps=69 format=4 uid="uid://bydpm8lq4wqr0"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_oqq1j"]
 [ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="1_vp0re"]
@@ -137,6 +137,19 @@ size = Vector3(15.5, 1, 31.0785)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m3sbq"]
 size = Vector3(15, 1, 15.4082)
+
+[sub_resource type="Gradient" id="Gradient_gpy28"]
+offsets = PackedFloat32Array(0.367089, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hq7hk"]
+noise_type = 5
+seed = 935
+frequency = 0.25
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mrege"]
+color_ramp = SubResource("Gradient_gpy28")
+noise = SubResource("FastNoiseLite_hq7hk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uh5jb"]
 
@@ -350,6 +363,35 @@ shape = SubResource("BoxShape3D_mcsos")
 [node name="Platform4CollisionShape3D" type="CollisionShape3D" parent="NavRegion/platform2/StaticBody3D"]
 transform = Transform3D(-0.999997, -0.000189416, 0.00221324, -0.000187661, 1, 0.000785524, -0.00221339, 0.000785103, -0.999997, 0.000459375, -8.56484, 53.2659)
 shape = SubResource("BoxShape3D_m3sbq")
+
+[node name="Decal" type="Decal" parent="NavRegion/platform2"]
+size = Vector3(25, 0.001, 25)
+texture_albedo = SubResource("NoiseTexture2D_mrege")
+modulate = Color(1, 1, 0.960784, 0.501961)
+
+[node name="Decal2" type="Decal" parent="NavRegion/platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.5)
+size = Vector3(15, 25, 47)
+texture_albedo = SubResource("NoiseTexture2D_mrege")
+modulate = Color(1, 1, 1, 0.501961)
+
+[node name="Decal3" type="Decal" parent="NavRegion/platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.5)
+size = Vector3(15, 25, 47)
+texture_albedo = SubResource("NoiseTexture2D_mrege")
+modulate = Color(1, 1, 0.960784, 0.501961)
+
+[node name="Decal4" type="Decal" parent="NavRegion/platform2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -38.5, 0, 0)
+size = Vector3(15, 25, 47)
+texture_albedo = SubResource("NoiseTexture2D_mrege")
+modulate = Color(1, 1, 1, 0.501961)
+
+[node name="Decal5" type="Decal" parent="NavRegion/platform2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 38.5, 0, 0)
+size = Vector3(15, 25, 47)
+texture_albedo = SubResource("NoiseTexture2D_mrege")
+modulate = Color(1, 1, 0.960784, 0.501961)
 
 [node name="BlockGridMap" parent="NavRegion" instance=ExtResource("6_q1d5t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
