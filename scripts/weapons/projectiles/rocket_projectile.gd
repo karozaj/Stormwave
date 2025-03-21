@@ -9,7 +9,10 @@ class_name RocketProjectile
 @onready var explosion_area:Area3D=$ExplosionArea
 @onready var explosion_shape:Shape3D=$ExplosionArea/CollisionShape3D.shape
 @onready var explosion_ray:RayCast3D=$RayCast3D
+@onready var omni_light:OmniLight3D=$OmniLight3D
+## Maximum damage dealt by the explosion
 @export var explosion_max_damage:int=100
+## Radius of the explosion
 @export var explosion_radius:float=2.5
 
 func _ready() -> void:
@@ -47,6 +50,16 @@ func explode()->void:
 	explosion_area.set_deferred("monitorable",true)
 	var tween_scale=get_tree().create_tween()
 	tween_scale.tween_property(explosion_sprite,"scale",Vector3(1.5,1.5,1.5),0.25)
+	
+	var light_energy:float=7.5
+	var explosion_light_radius:float=15.0
+	omni_light.light_energy=light_energy
+	omni_light.omni_range=explosion_light_radius
+	
+	var tween_light=get_tree().create_tween()
+	tween_light.tween_property(omni_light,"omni_range",0.0,0.25)
+	tween_light.tween_property(omni_light,"light_energy",0.0,0.25)
+	
 	var tween_explosion=get_tree().create_tween()
 	tween.connect("finished",disable_explosion_area)
 	tween_explosion.tween_property(explosion_shape,"radius",explosion_radius,0.25)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb2rwntd2s065"]
+[gd_scene load_steps=13 format=3 uid="uid://cb2rwntd2s065"]
 
 [ext_resource type="Script" path="res://scripts/player/weapon_manager.gd" id="1_1tytp"]
 [ext_resource type="PackedScene" uid="uid://lyyc6u3slkca" path="res://scenes/weapons/pistol.tscn" id="1_qsn5i"]
@@ -7,6 +7,36 @@
 [ext_resource type="PackedScene" uid="uid://beui6n2v6ebbo" path="res://scenes/weapons/axe.tscn" id="4_wc26d"]
 [ext_resource type="PackedScene" uid="uid://demh0215o684x" path="res://scenes/weapons/rocket_launcher.tscn" id="5_aqioh"]
 [ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_5hp4a"]
+
+[sub_resource type="Gradient" id="Gradient_y6l15"]
+offsets = PackedFloat32Array(0, 0.00746269, 0.992537, 1)
+colors = PackedColorArray(1, 0.607843, 0.301961, 0, 0.996078, 0.639216, 0.152941, 1, 1, 0.85098, 0.741176, 1, 1, 1, 0.658824, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0vxif"]
+gradient = SubResource("Gradient_y6l15")
+height = 128
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywuik"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = SubResource("GradientTexture2D_0vxif")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axxs4"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = SubResource("GradientTexture2D_0vxif")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pomw"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = SubResource("GradientTexture2D_0vxif")
 
 [node name="WeaponManager" type="Node3D"]
 editor_description = "Contains player's weapons, manages ammo"
@@ -17,8 +47,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.2, -0.2)
 
 [node name="Pistol" parent="RightPosition" instance=ExtResource("1_qsn5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488067, -0.00371122, 0.000459611)
+bullet_tracer_material = SubResource("StandardMaterial3D_ywuik")
 
 [node name="Shotgun" parent="RightPosition" instance=ExtResource("2_frp63")]
+bullet_tracer_material = SubResource("StandardMaterial3D_axxs4")
 
 [node name="Axe" parent="RightPosition" instance=ExtResource("4_wc26d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.1, -0.1)
@@ -27,6 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, -0.1, -0.1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.325, 0)
 
 [node name="Chaingun" parent="CenterPosition" instance=ExtResource("4_5okys")]
+bullet_tracer_material = SubResource("StandardMaterial3D_4pomw")
 
 [node name="RocketLauncher" parent="CenterPosition" instance=ExtResource("5_aqioh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.15)

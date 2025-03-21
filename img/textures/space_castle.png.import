@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5fr5g0hc87df"
-path="res://.godot/imported/space_castle_wirewallbig.png-197a853e07920b24f77c07f5e5041a74.ctex"
+uid="uid://c7w7bmmwkp73v"
+path="res://.godot/imported/space_castle.png-782113661049b14fdaf4b20b713d7bc3.ctex"
 metadata={
 "vram_texture": false
-}
-generator_parameters={
-"md5": "0f09f0f3d7c06bfb9fb5fcb115adfbba"
 }
 
 [deps]
 
-source_file="res://3d/space_castle_wirewallbig.png"
-dest_files=["res://.godot/imported/space_castle_wirewallbig.png-197a853e07920b24f77c07f5e5041a74.ctex"]
+source_file="res://img/textures/space_castle.png"
+dest_files=["res://.godot/imported/space_castle.png-782113661049b14fdaf4b20b713d7bc3.ctex"]
 
 [params]
 

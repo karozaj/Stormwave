@@ -213,6 +213,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06581e-13, 0.169885, -1.11
 visible = false
 
 [node name="OmniLight3D" parent="MuzzleFlash" index="0" instance=ExtResource("6_ey853")]
+light_energy = 1.5
 
 [node name="WeaponRaycast" parent="." index="2" instance=ExtResource("4_5f5bl")]
 
