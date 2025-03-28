@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw7oe1acfcpop"]
+
+[ext_resource type="MeshLibrary" uid="uid://cgbuofy4xenwu" path="res://resources/mesh_libraries/building_blocks.tres" id="1_f2jaj"]
+[ext_resource type="Script" path="res://scripts/block_building/building_block_gridmap.gd" id="2_hy6g1"]
+
+[node name="BuildingBlockGridmap" type="GridMap"]
+mesh_library = ExtResource("1_f2jaj")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_hy6g1")

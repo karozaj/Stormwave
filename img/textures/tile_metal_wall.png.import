@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk62oabwdteg8"
-path="res://.godot/imported/wall_tileset_wall_tile.png-2cab88fb215bec9c24f685baa2726314.ctex"
+uid="uid://biqrtc56r1q6o"
+path="res://.godot/imported/tile_metal_wall.png-e29d988984f0dace82b5846f16538f69.ctex"
 metadata={
 "vram_texture": false
-}
-generator_parameters={
-"md5": "a36713532bb37b162bf8e2f1099addba"
 }
 
 [deps]
 
-source_file="res://3d/tilesets/wall_tileset_wall_tile.png"
-dest_files=["res://.godot/imported/wall_tileset_wall_tile.png-2cab88fb215bec9c24f685baa2726314.ctex"]
+source_file="res://img/textures/tile_metal_wall.png"
+dest_files=["res://.godot/imported/tile_metal_wall.png-e29d988984f0dace82b5846f16538f69.ctex"]
 
 [params]
 

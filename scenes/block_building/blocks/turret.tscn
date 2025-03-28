@@ -3,13 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://b62tkh25jajmn" path="res://3d/turret_turret_texture.png" id="1_sl5kr"]
 [ext_resource type="Script" path="res://scripts/block_building/blocks/turret.gd" id="1_yvf3x"]
 [ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_cboge"]
+[ext_resource type="Material" uid="uid://dxqdaa1iysaq8" path="res://resources/materials/laser_tracer_material_1.tres" id="2_xtc70"]
 [ext_resource type="AudioStream" uid="uid://jt7oseu6yl3j" path="res://audio/sfx/blocks/block_destroyed1.ogg" id="3_4gad8"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="3_ttt0k"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_pokwv"]
 [ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="6_a32n6"]
 [ext_resource type="Texture2D" uid="uid://b52ckl80sub50" path="res://img/lightning.png" id="6_h5bof"]
-[ext_resource type="PackedScene" uid="uid://bukp7t8xot7b1" path="res://scenes/weapons/weapon_effects/laser_effect.tscn" id="6_q561l"]
-[ext_resource type="AudioStream" uid="uid://foku7kfpbstk" path="res://audio/sfx/enemy_detected.ogg" id="8_ohv5v"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="10_tgm13"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb7cm"]
 resource_name = "Material.001"
@@ -182,10 +182,12 @@ _data = {
 }
 
 [node name="Turret" type="StaticBody3D"]
+editor_description = "Targets and attacks enemies that enter its range"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_yvf3x")
 base_damage = 15
+laser_tracer_material = ExtResource("2_xtc70")
 durability = 40
 block_name = "Turret"
 damaged_sound = ExtResource("2_cboge")
@@ -214,8 +216,6 @@ skeleton = NodePath("")
 target_position = Vector3(0, 0, -7)
 collision_mask = 243
 
-[node name="LaserEffect" parent="base/TurretPivot/turret/barrel/WeaponRaycast" instance=ExtResource("6_q561l")]
-
 [node name="Sprite3D" type="Sprite3D" parent="base/TurretPivot/turret/barrel"]
 texture = ExtResource("6_h5bof")
 
@@ -233,13 +233,9 @@ shape = SubResource("CylinderShape3D_c8u06")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-max_polyphony = 2
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("10_tgm13")]
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("8_ohv5v")
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d2" parent="." instance=ExtResource("10_tgm13")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

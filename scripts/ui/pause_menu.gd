@@ -22,7 +22,7 @@ func _on_resume_button_pressed():
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	get_tree().paused=false
 	queue_free()
-## TODO: change scene to main menu when pressing quit
+	
 func _on_quit_button_pressed():
 	MusicPlayer.fade_out()
 	get_tree().paused=false

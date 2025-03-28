@@ -7,6 +7,7 @@
 
 [node name="DeathMenu" type="Control"]
 process_mode = 3
+editor_description = "The death menu displayed when the player dies or loses"
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15

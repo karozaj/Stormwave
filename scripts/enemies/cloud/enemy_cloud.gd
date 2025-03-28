@@ -1,9 +1,10 @@
 extends EnemyBaseClass
 class_name EnemyCloud
+## Cloud enemy type, flies and shoots lightning
 
 @onready var lightning:Node3D=$Lightning
 @onready var raycast:RayCast3D=$RayCast3D
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 @onready var cooldown_timer:Timer=$CooldownTimer
 @onready var lightning_timer:Timer=$LightningTimer
 @onready var eye:MeshInstance3D=$eye
@@ -33,7 +34,6 @@ class_name EnemyCloud
 
 
 func _ready() -> void:
-	#add_targets([Global.player])
 	cooldown_timer.wait_time=attack_cooldown
 	if infighting_allowed:
 		allow_damaging_other_enemies()
@@ -74,17 +74,13 @@ func shoot_lightning()->void:
 	if raycast.is_colliding():
 		calculate_lightning_size(raycast.get_collision_point())
 		lightning.visible=true
-		play_sound_effect(thunder_sound,0.15,0.15,1.0)
+		audio_player.play_sound(thunder_sound,1.0,0.15)
 		if raycast.get_collider().has_method("damage"):
 			raycast.get_collider().damage(base_damage,global_position,self)
 		elif raycast.get_collider().has_method("electrify"):
 			raycast.get_collider().electrify()
 		lightning_timer.start(0.1)
 
-func play_sound_effect(sound:AudioStream, pitch_from:float=-0.0,pitch_to:float=0.0, pitch_base:float=1.0)->void:
-	audio_player.stream=sound
-	audio_player.pitch_scale=pitch_base+randf_range(pitch_from,pitch_to)
-	audio_player.play()
 
 func _on_lightning_timer_timeout() -> void:
 	lightning.visible=false

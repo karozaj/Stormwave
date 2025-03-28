@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dljopngfgjbkg"
-path="res://.godot/imported/space_castle_tile1022.png-05698ab46ff6a45a7291208ebe743cb6.ctex"
+uid="uid://db8k12hrvdmv5"
+path="res://.godot/imported/spire_tile_metal_wall.png-0ea08b7247ec227483bcf0d2ae4d1789.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "b449eb6d03506f7d3d055d53cb43e4c6"
+"md5": "b2ce1be03e6c157fc6a688006af363c7"
 }
 
 [deps]
 
-source_file="res://3d/space_castle_tile1022.png"
-dest_files=["res://.godot/imported/space_castle_tile1022.png-05698ab46ff6a45a7291208ebe743cb6.ctex"]
+source_file="res://3d/level_decoration/spire_tile_metal_wall.png"
+dest_files=["res://.godot/imported/spire_tile_metal_wall.png-0ea08b7247ec227483bcf0d2ae4d1789.ctex"]
 
 [params]
 

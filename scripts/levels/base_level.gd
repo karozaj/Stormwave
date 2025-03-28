@@ -57,20 +57,23 @@ func _ready() -> void:
 	
 	enemy_spawner.connect("wave_started",player.hud.show_wave_label)
 	enemy_spawner.connect("enemy_count_updated",player.hud.update_enemy_count)
+	enemy_spawner.connect("wave_ended",end_wave)
+	
 	build_time_remaining_updated.connect(player.hud.update_build_time_remaining)
 	game_ended.connect(player.show_game_over_menu)
-	enemy_spawner.connect("wave_ended",end_wave)
-	player.connect("building_ray_stopped_colliding",block_gridmap.reset_block_highlight)
-	player.wave_start_demanded.connect(start_wave)
-	player.died.connect(game_over)
+	
 	for gen in generators:
 		gen.died.connect(on_generator_destroyed)
 		gen.map_updated.connect(nav_region.update_navmesh)
+		
 	build_phase_started.connect(player.hud.show_prompt)
 	fighting_phase_started.connect(player.hud.show_prompt)
 	build_phase_timer.timeout.connect(build_phase_timer_timeout)
 	build_phase_timer.one_shot=true
 	
+	player.connect("building_ray_stopped_colliding",block_gridmap.reset_block_highlight)
+	player.wave_start_demanded.connect(start_wave)
+	player.died.connect(game_over)
 	player.set_ammo(initial_ammo)
 	player.set_blocks(initial_blocks)
 	
@@ -96,7 +99,6 @@ func start_wave():
 func end_wave():
 	await get_tree().create_timer(1).timeout
 	start_building_phase()
-	#player.building_manager.block_count[0]+=block_reward
 	var block_res:ShopResource=load("res://resources/shop_resources/blocks/block.tres")
 	player.modify_resource_count(block_res,block_reward)
 
@@ -139,14 +141,3 @@ func game_over(sender):
 		ScoreManager.add_score(level_identifier,score)
 		ScoreManager.save_scores()
 		game_ended.emit(score_message,message)
-	
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("TEST_BUTTON"):
-		##print($EnemySpawner/EnemySpawnArea.is_occupied)
-		##print($EnemySpawner/EnemySpawnArea2.is_occupied)
-		##print($EnemySpawner/EnemySpawnArea3.is_occupied)
-		##print($EnemySpawner/EnemySpawnArea4.is_occupied)
-		##print($EnemySpawner/EnemySpawnArea5.is_occupied)
-		##print($EnemySpawner/EnemySpawnArea6.is_occupied)
-		##print($EnemySpawner.enemy_spawn_areas)
-		#$EnemySpawner.begin_wave()

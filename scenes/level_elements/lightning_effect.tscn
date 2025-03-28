@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/level_elements/lightning_effect.gd" id="2_uvqnk"]
 
 [node name="LightningEffect" type="Sprite3D"]
+editor_description = "A [Sprite3D] used for lightning effects"
 cast_shadow = 0
 pixel_size = 0.013
 texture_filter = 0

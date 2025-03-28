@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://wvlj72335j5" path="res://audio/sfx/water1.ogg" id="2_7nxg7"]
 
 [node name="WaterArea" type="Area3D"]
+editor_description = "An area representing water, can be electrified by electric attacks"
 collision_layer = 256
 collision_mask = 5
 script = ExtResource("1_a0vox")

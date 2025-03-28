@@ -1,5 +1,6 @@
 extends BlockBaseClass
 class_name ExplosiveBlock
+## A block which explodes when damaged
 
 var explosion=preload("res://scenes/weapons/projectiles/rocket_projectile.tscn")
 #variable used to prevent block from exploding multiple times
@@ -11,9 +12,7 @@ var has_exploded:bool=false
 
 func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 	durability-=dmg
-	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
-	audio_player.stream=damaged_sound
-	audio_player.play()
+	audio_player.play_sound(damaged_sound,damaged_pitch)
 	if $AnimationPlayer.is_playing()==true:
 		explode()
 	if durability<-50:

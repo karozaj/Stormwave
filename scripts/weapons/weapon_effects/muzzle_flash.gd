@@ -1,4 +1,5 @@
 extends Sprite3D
+## Muzzle flash effect used for player weapons
 
 var is_flipped:bool=false
 

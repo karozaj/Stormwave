@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://b63bq6m3wcbc"]
+
+[ext_resource type="Script" path="res://scripts/weapons/weapon_effects/bullet_tracer.gd" id="1_eqjln"]
+[ext_resource type="Material" uid="uid://bplrjsgp8qaft" path="res://resources/materials/bullet_tracer_material_1.tres" id="2_o5sb1"]
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_1q7uh"]
+resource_local_to_scene = true
+size = 0.05
+sections = 2
+section_length = 1.0
+
+[node name="BulletTracer" type="Node3D"]
+script = ExtResource("1_eqjln")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1)
+cast_shadow = 0
+mesh = SubResource("RibbonTrailMesh_1q7uh")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_o5sb1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-1, -8.74228e-08, -4.37114e-08, 4.37114e-08, 1.91069e-15, -1, 8.74228e-08, -1, 1.91069e-15, 0, 0, -1)
+cast_shadow = 0
+mesh = SubResource("RibbonTrailMesh_1q7uh")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_o5sb1")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,7 +2,7 @@ extends Node3D
 class_name WeaponBaseClass
 #All player weapons should inherit from this class
 
-@onready var audio_player:AudioStreamPlayer3D=$AudioStreamPlayer3D
+@onready var audio_player:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d
 ## Used to ensure pull out animations aren't interrupted
 @export var is_being_pulled_out:bool=false
 ## The sound played when using the weapon
@@ -17,14 +17,16 @@ class_name WeaponBaseClass
 @export var base_damage:int=10
 ## The player that owns the weapon
 @export var weapon_owner:Player
+## Material to be used for bullet tracer effects
+@export var bullet_tracer_material:StandardMaterial3D
+
 var rng:RandomNumberGenerator=RandomNumberGenerator.new()
 
 func _ready() -> void:
-	rng.randomize()
+	audio_player.stream=shooting_sound
 
 func shoot():
 	pass
 
 func play_shooting_sound():
-	audio_player.pitch_scale=default_pitch+rng.randf_range(-pitch_variance,pitch_variance)
-	audio_player.play()
+	audio_player.play_current_sound(default_pitch,pitch_variance)

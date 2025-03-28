@@ -2,9 +2,6 @@ extends State
 
 @onready var state_owner:EnemyBruiser=get_owner()
 
-#func enter(_transition_data:Dictionary={})->void:
-	##state_owner.animation_tree.set("parameters/IdleWalkBlend/blend_amount",0.0)
-	##state_owner.animation_tree.set("parameters/FallBlend/blend_amount",0.0)
 	
 func update(delta:float)->void:
 	state_owner.velocity=state_owner.velocity.move_toward(Vector3(0.0,state_owner.velocity.y,0.0),delta*state_owner.agility)

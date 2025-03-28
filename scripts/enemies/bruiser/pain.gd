@@ -5,9 +5,7 @@ extends State
 var timer:Timer
 
 func enter(transition_data:Dictionary={})->void:
-	#state_owner.agility
 	state_owner.take_damage(transition_data["damage_points"],transition_data["origin"],transition_data["damage_dealer"])
-	#print(state_owner.health)
 	timer=Timer.new()
 	state_owner.add_child(timer)
 	timer.start(state_owner.pain_time)
@@ -15,7 +13,6 @@ func enter(transition_data:Dictionary={})->void:
 	state_owner.animation_tree.set("parameters/AttackMeleeOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)	
 	state_owner.animation_tree.set("parameters/AttackOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	state_owner.animation_tree.set("parameters/PainOneShot/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	#state_owner.play_sound_effect(state_owner.pain_sound,0,0.3, state_owner.base_pitch)
 
 #when in pain state, owner will stop moving and performing any actions/attacks
 func update(_delta:float)->void:
@@ -33,4 +30,3 @@ func damage(damage_points:int, origin:Vector3,damage_dealer)->void:
 
 func exit()->void:
 	timer.queue_free()
-	#state_owner.animation_player.play("RESET")

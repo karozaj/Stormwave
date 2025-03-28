@@ -7,6 +7,7 @@
 radius = 0.25
 
 [node name="Projectile" type="Area3D" node_paths=PackedStringArray("projectile_lifetime_timer")]
+editor_description = "Projectile that can be shot by wepaons or enemies"
 collision_layer = 8
 collision_mask = 243
 script = ExtResource("1_csafm")

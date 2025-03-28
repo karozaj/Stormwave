@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player/movement_manager.gd" id="1_657pr"]
 
 [node name="MovementManager" type="Node3D"]
+editor_description = "Contains functions and parameters related to player movement"
 script = ExtResource("1_657pr")
 
 [node name="CoyoteTimer" type="Timer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://da11f182s0yks"]
+[gd_scene load_steps=19 format=4 uid="uid://da11f182s0yks"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/mine.gd" id="1_j5djv"]
 [ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_1onhd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://nggsml3hful4" path="res://3d/mine_mine_texture.png" id="2_mpp70"]
 [ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_2wg7x"]
 [ext_resource type="Shader" path="res://resources/shaders/blinking_light.gdshader" id="4_p862y"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_ed43c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qacsn"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -122,6 +123,7 @@ _data = {
 }
 
 [node name="Mine" type="StaticBody3D"]
+editor_description = "A block which explodes when touched"
 collision_layer = 64
 collision_mask = 8
 script = ExtResource("1_j5djv")
@@ -152,9 +154,6 @@ mesh = SubResource("ArrayMesh_kf0nx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_uiatg")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -164,6 +163,8 @@ libraries = {
 "": SubResource("AnimationLibrary_xvy8b")
 }
 autoplay = "rotate"
+
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("7_ed43c")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

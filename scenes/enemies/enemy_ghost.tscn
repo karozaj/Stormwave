@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dm3r1hv0l3q6h"]
+[gd_scene load_steps=31 format=4 uid="uid://dm3r1hv0l3q6h"]
 
 [ext_resource type="Script" path="res://scripts/enemies/ghost/enemy_ghost.gd" id="1_0m7cj"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_ob1le"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/ghost/attack.gd" id="7_rd25v"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/die.gd" id="8_mvxav"]
 [ext_resource type="Script" path="res://scripts/enemies/ghost/pain.gd" id="9_pcets"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="9_vc85k"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_buvxq"]
 _surfaces = [{
@@ -513,6 +514,7 @@ _data = {
 }
 
 [node name="EnemyGhost" type="CharacterBody3D" node_paths=PackedStringArray("aim_point") groups=["enemies"]]
+editor_description = "Ghost enemy type. Flies, dashes at the player to deal damage"
 collision_layer = 132
 collision_mask = 62
 motion_mode = 1
@@ -572,8 +574,7 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 shape = SubResource("SphereShape3D_fmqw2")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("9_vc85k")]
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_0ifen")

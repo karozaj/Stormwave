@@ -1,10 +1,8 @@
 extends ProjectileWeapon
+## Rocket launcher used by the player
 
 @onready var animation_player:AnimationPlayer=$AnimationPlayer
-## The projectile shot by this weapon
 
-func _ready() -> void:
-	audio_player.stream=shooting_sound
 
 func shoot():
 	animation_player.play("shoot")

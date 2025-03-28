@@ -1,5 +1,6 @@
 extends EnemyBaseClass
 class_name EnemyNavigation
+## Enemy that uses a [NavigationAgent3D] for navigation
 
 ## The enemy's navigation agent node
 @export var navigation_agent:NavigationAgent3D
@@ -27,8 +28,7 @@ func on_target_update_timer_timeout() -> void:
 
 func on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	new_safe_velocity=safe_velocity
-	#velocity = velocity.move_toward(safe_velocity,agility)
-	#move_and_slide()
+
 
 func calculate_navigation_target_position_offset()->Vector3:
 	navigation_target_position_offset=Vector3.ZERO

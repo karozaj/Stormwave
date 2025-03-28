@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbiqgfgqnurpi"]
+[gd_scene load_steps=25 format=3 uid="uid://bbiqgfgqnurpi"]
 
 [ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_u4igx"]
 [ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="2_mffs7"]
@@ -42,12 +42,26 @@ geometry_collision_mask = 50
 agent_radius = 0.25
 filter_walkable_low_height_spans = true
 
+[sub_resource type="Gradient" id="Gradient_rjnaq"]
+offsets = PackedFloat32Array(0.367089, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pk571"]
+noise_type = 5
+seed = 935
+frequency = 0.25
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3wea"]
+color_ramp = SubResource("Gradient_rjnaq")
+noise = SubResource("FastNoiseLite_pk571")
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34xti"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m5hfk"]
 plane = Plane(0, -1, 0, 0)
 
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer")]
+editor_description = "Arena level"
 script = ExtResource("1_u4igx")
 player = NodePath("Player")
 nav_region = NodePath("NavRegion")
@@ -338,8 +352,17 @@ data = {
 }
 metadata/_edit_lock_ = true
 
+[node name="Decal" type="Decal" parent="NavRegion/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+size = Vector3(48, 0.001, 48)
+texture_albedo = SubResource("NoiseTexture2D_t3wea")
+emission_energy = 0.0
+
 [node name="GridMap" parent="NavRegion" instance=ExtResource("7_4o2nw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+data = {
+"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 0, 1, 655360, 1, 0, 1441792, 0, 65535, 0, 65535, 65535, 1, 65535, 0, 1048576)
+}
 metadata/_edit_lock_ = true
 
 [node name="BuildPhaseTimer" type="Timer" parent="."]

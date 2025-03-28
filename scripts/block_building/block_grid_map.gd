@@ -1,11 +1,12 @@
 extends GridMap
 class_name BlockGridMap
+## Gridmap used for areas where block can be placed. Blocks can only be placed over the block_base items from the mesh library
 
 signal map_changed
 
 ## Maximum height above base at which it's possible to place blocks
 @export var max_building_height:int=10
-#raycast is used to check if the player is building within set boundaries
+## raycast is used to check if the player is building within set boundaries
 @onready var ray:RayCast3D=$RayCast3D
 var highlighted_block_coordinate:Vector3i
 
@@ -21,19 +22,19 @@ func destroy_block(world_coordinate:Vector3)->bool:
 	return false
 
 #creates a given block at the given position in the grid
-func place_block(world_coordinate:Vector3, block:PackedScene)->bool:
+func place_block(world_coordinate:Vector3, block:PackedScene, preplaced:bool=false)->bool:
 	var map_coordinate=local_to_map(world_coordinate)
 	if get_cell_item_orientation(map_coordinate)==-1:
 		ray.position=map_to_local(map_coordinate)
 		ray.force_raycast_update()
 		#check if position where player is trying to build is above base block
-		if ray.is_colliding():
+		#"preplaced" is used for creating blocks from [BuildingBlockGridMap]
+		if ray.is_colliding() or preplaced==true:
 			var block_scene=block.instantiate()
 			block_scene.gridmap=self
 			add_child(block_scene)
 			block_scene.position=map_to_local(map_coordinate)
 			set_cell_item(map_coordinate,2)
-			print(map_coordinate)
 			#connect tree exited signal so navmesh can update when map changes
 			map_changed.emit()
 			block_scene.tree_exited.connect(map_changed.emit)

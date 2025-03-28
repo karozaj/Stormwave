@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://lyyc6u3slkca"]
+[gd_scene load_steps=14 format=3 uid="uid://lyyc6u3slkca"]
 
 [ext_resource type="PackedScene" uid="uid://cgdcnnhbd435r" path="res://3d/pistol.glb" id="1_85tub"]
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="2_j2di2"]
+[ext_resource type="Material" uid="uid://bplrjsgp8qaft" path="res://resources/materials/bullet_tracer_material_1.tres" id="3_boopn"]
 [ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="3_occg2"]
 [ext_resource type="AudioStream" uid="uid://bgoo3kph628b5" path="res://audio/sfx/pistol.ogg" id="3_wuwc0"]
 [ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="4_faakg"]
 [ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="4_hdfw4"]
+[ext_resource type="PackedScene" uid="uid://ckof4g4prra5v" path="res://scenes/weapons/weapon_effects/weapon_light.tscn" id="6_nuwkf"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="7_lnp2l"]
 
 [sub_resource type="Animation" id="Animation_m4o65"]
 length = 0.001
@@ -186,12 +189,15 @@ _data = {
 }
 
 [node name="Pistol" instance=ExtResource("1_85tub")]
+editor_description = "Pistol weapon used by the player"
 visible = false
 script = ExtResource("2_j2di2")
 shooting_sound = ExtResource("3_wuwc0")
+default_pitch = null
 pitch_variance = 0.05
 cooldown = 0.25
 base_damage = 20
+bullet_tracer_material = ExtResource("3_boopn")
 
 [node name="Cube_001" parent="." index="0"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, -0.1)
@@ -202,15 +208,16 @@ transform = Transform3D(-1, 0, 8.74229e-08, 0, 1, 0, -8.74229e-08, 0, -1, -5.598
 visible = false
 pixel_size = 0.002
 
+[node name="WeaponLight" parent="Cube_001/MuzzleFlash" index="0" instance=ExtResource("6_nuwkf")]
+omni_range = 2.5
+
 [node name="WeaponRaycast" parent="." index="1" instance=ExtResource("4_hdfw4")]
 
 [node name="BulletHoleSpawner" parent="." index="2" instance=ExtResource("4_faakg")]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="3"]
-stream = ExtResource("3_wuwc0")
-bus = &"SFX"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_t0g1v")
 }
+
+[node name="RandomizedPitchAudioPlayer3d" parent="." index="4" instance=ExtResource("7_lnp2l")]

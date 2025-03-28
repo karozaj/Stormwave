@@ -11,7 +11,7 @@ func enter(_transition_data:Dictionary={})->void:
 	timer.start(2)
 	timer.timeout.connect(die)
 	state_owner.animation_player.play("die")
-	state_owner.play_sound_effect(state_owner.death_sound)
+	state_owner.audio_player.play_sound(state_owner.death_sound)
 	state_owner.died.emit(state_owner)
 
 

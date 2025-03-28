@@ -9,7 +9,7 @@ func enter(_transition_data:Dictionary={})->void:
 	timer.start(state_owner.attack_time)
 	timer.timeout.connect(finished.emit.bind(self,"Chase"))
 	state_owner.attack()
-	state_owner.play_sound_effect(state_owner.attack_sound,-0.15,0.15)
+	state_owner.audio_player.play_sound(state_owner.attack_sound,1.0,0.15)
 
 func update(delta:float)->void:
 	state_owner.velocity=state_owner.velocity.move_toward(Vector3.ZERO,delta*state_owner.agility)

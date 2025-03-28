@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://2o0iye2ys0tl" path="res://resources/level_info/level_4_info.tres" id="7_4mn1w"]
 
 [node name="LevelSelection" type="Control"]
+editor_description = "Menu where levels can be selected"
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

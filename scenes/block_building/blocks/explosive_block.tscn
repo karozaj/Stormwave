@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://cpkxoixjsugbb"]
+[gd_scene load_steps=13 format=4 uid="uid://cpkxoixjsugbb"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/explosive_block.gd" id="1_terj0"]
 [ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_df7k1"]
 [ext_resource type="Material" uid="uid://cuyghc2qtqjes" path="res://resources/materials/pain_shader_material.tres" id="2_g3gll"]
 [ext_resource type="Texture2D" uid="uid://vphqd52xu1jr" path="res://3d/explosive_explosive_texture.png" id="2_k23k0"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="5_4mqem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jwrg"]
 resource_name = "Material"
@@ -96,6 +97,7 @@ _data = {
 }
 
 [node name="ExplosiveBlock" type="StaticBody3D"]
+editor_description = "A block which explodes when damaged"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_terj0")
@@ -120,5 +122,4 @@ libraries = {
 "": SubResource("AnimationLibrary_erjni")
 }
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("5_4mqem")]

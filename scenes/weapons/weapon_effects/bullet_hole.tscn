@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/weapons/weapon_effects/bullet_hole.gd" id="2_mf26r"]
 
 [node name="BulletHole" type="Decal"]
+editor_description = "Bulelt hole decal"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002491, -5.96046e-08, -0.000604987)
 top_level = true
 size = Vector3(0.2, 0.2, 0.2)

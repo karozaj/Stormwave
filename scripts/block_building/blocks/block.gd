@@ -1,4 +1,5 @@
 extends BlockBaseClass
+## Basic block which can be used for building or buying other resources
 
 #PLAN JEST TAKI:
 #W gridmap ustawiamy tylko bloki których nie da sie zniszczyc
@@ -9,24 +10,22 @@ extends BlockBaseClass
 #Kładzenie bloków będzie zarządzane przez gridmapę, natomiast niszczenie
 #przez bloki, które będą notyfikować gridmapę o znisczeniu, a wtedy gridmapa usunie
 #informacje o istnieniu obiektu w danej komórce
+
+## Particle effect used when the block is destroyed
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
 
 #function called when a block is damaged by an enemy or by the player's weapons
 #also sets transparency of damage overlay material to match the block's condition
-func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
+func damage(dmg:int,_pos:Vector3,_dmg_dealer=null)->void:
 	durability-=dmg
-	audio_player.pitch_scale=damaged_pitch+randf_range(-0.1,0.1)
-	audio_player.stream=damaged_sound
-	audio_player.play()
+	audio_player.play_sound(damaged_sound,damaged_pitch)
 	$block.material_overlay.albedo_color=Color(1.0,1.0,1.0,1.0-float(durability)/float(max_durability))
 	if durability<0:
 		destroy_block()
 
 func destroy_block()->bool:
 	if gridmap.destroy_block(global_position)==true:
-		var effect:BlockDestroyedEffect=destroyed_effect.instantiate()
-		effect.sound=destroyed_sound
-		effect.pitch=destroyed_pitch
+		var effect:BlockDestroyedEffect=BlockDestroyedEffect.create_effect(destroyed_sound,destroyed_pitch)
 		get_parent().add_child(effect)
 		effect.global_position=global_position
 		call_deferred("queue_free")
@@ -41,9 +40,7 @@ func collect_block()->String:
 			call_deferred("queue_free")
 			return block_name
 		else:
-			var effect:BlockDestroyedEffect=destroyed_effect.instantiate()
-			effect.sound=destroyed_sound
-			effect.pitch=destroyed_pitch
+			var effect:BlockDestroyedEffect=BlockDestroyedEffect.create_effect(destroyed_sound,destroyed_pitch)
 			get_parent().add_child(effect)
 			effect.global_position=global_position
 			call_deferred("queue_free")

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cyb152ug074fo"
-path="res://.godot/imported/space_castle.glb-03639fe341674c08281d1c2208196cb5.scn"
+uid="uid://cctipjqi7sxa8"
+path="res://.godot/imported/wire.glb-51d5d0bae0402afe6e56f801d945a525.scn"
 
 [deps]
 
-source_file="res://3d/space_castle.glb"
-dest_files=["res://.godot/imported/space_castle.glb-03639fe341674c08281d1c2208196cb5.scn"]
+source_file="res://3d/wire.glb"
+dest_files=["res://.godot/imported/wire.glb-51d5d0bae0402afe6e56f801d945a525.scn"]
 
 [params]
 

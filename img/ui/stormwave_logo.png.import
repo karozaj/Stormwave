@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5fr5g0hc87df"
-path="res://.godot/imported/space_castle_wirewallbig.png-197a853e07920b24f77c07f5e5041a74.ctex"
+uid="uid://h0431mm4gcik"
+path="res://.godot/imported/stormwave_logo.png-306572db97bdf6be1b6b3bdc12b815ce.ctex"
 metadata={
 "vram_texture": false
-}
-generator_parameters={
-"md5": "0f09f0f3d7c06bfb9fb5fcb115adfbba"
 }
 
 [deps]
 
-source_file="res://3d/space_castle_wirewallbig.png"
-dest_files=["res://.godot/imported/space_castle_wirewallbig.png-197a853e07920b24f77c07f5e5041a74.ctex"]
+source_file="res://img/ui/stormwave_logo.png"
+dest_files=["res://.godot/imported/stormwave_logo.png-306572db97bdf6be1b6b3bdc12b815ce.ctex"]
 
 [params]
 

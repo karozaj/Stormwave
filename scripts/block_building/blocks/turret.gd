@@ -1,17 +1,18 @@
 extends BlockBaseClass
+## Targets and attacks enemies that enter its range
 
 signal died(obj:Object)
 
 @onready var ray:RayCast3D=$base/TurretPivot/turret/barrel/WeaponRaycast
 @onready var bullet_hole_spawner:BulletHoleSpawner=$BulletHoleSpawner
 @onready var cooldown_timer:Timer=$Timer
-@onready var laser_effect:LaserEffect=$base/TurretPivot/turret/barrel/WeaponRaycast/LaserEffect
-@onready var audio_player2:AudioStreamPlayer3D=$AudioStreamPlayer3D2
+@onready var audio_player2:RandomizedPitchAudioPlayer3D=$RandomizedPitchAudioPlayer3d2
 @onready var aim_point:Marker3D=$AimPoint
 @onready var max_ammo:int=ammo
-
+## Stores the available targets
 var targets:Array[EnemyBaseClass]=[]
 
+## The cooldown between attacks
 @export var attack_cooldown:float=1.5
 ## How many points of damage attacks should deal
 @export var base_damage:int=10
@@ -21,6 +22,9 @@ var targets:Array[EnemyBaseClass]=[]
 @export var attack_sound:AudioStream=preload("res://audio/sfx/shot.ogg")
 ## Sound to be played when detecting an enemy
 @export var enemy_detected_sound:AudioStream=preload("res://audio/sfx/enemy_detected.ogg")
+## Material for the laser effect
+@export var laser_tracer_material:StandardMaterial3D
+
 var can_shoot:bool=true
 var is_dead:bool=false
 var destroyed_effect:PackedScene=preload("res://scenes/block_building/block_destroyed_effect.tscn")
@@ -46,9 +50,7 @@ func damage(dmg:int,_pos:Vector3,_dmg_dealer=null):
 
 func destroy_block()->bool:
 	if gridmap.destroy_block(global_position)==true:
-		var effect:BlockDestroyedEffect=destroyed_effect.instantiate()
-		effect.sound=destroyed_sound
-		effect.pitch=destroyed_pitch
+		var effect:BlockDestroyedEffect=BlockDestroyedEffect.create_effect(destroyed_sound,destroyed_pitch)
 		get_parent().add_child(effect)
 		effect.global_position=global_position
 		is_dead=true
@@ -75,11 +77,15 @@ func collect_block()->String:
 #tries to shoot target
 func shoot()->void:
 	ray.force_raycast_update()
+	var bullet_tracer
 	if ray.is_colliding():
-		laser_effect.show_laser_effect(ray.global_position,ray.get_collision_point())
+		bullet_tracer=BulletTracer.create_effect(ray.global_position,ray.get_collision_point(),laser_tracer_material,false,0.1,1.5)
 		bullet_hole_spawner.spawn_bullet_hole(ray.get_collision_point(),ray.get_collision_normal())
 		if ray.get_collider().has_method("damage"):
 			ray.get_collider().damage(base_damage, global_position,self)
+	else:
+		bullet_tracer=BulletTracer.create_effect(ray.global_position,to_global(ray.target_position),laser_tracer_material,false,0.1,1.5)
+	Global.current_level.add_child(bullet_tracer)
 	$AnimationPlayer2.play("shoot")
 	play_sound(attack_sound)
 	ammo-=1
@@ -97,13 +103,9 @@ func remove_target(trg:EnemyBaseClass):
 #plays given sound
 func play_sound(sound:AudioStream, v:float=0.1,pitch:float=1.0):
 	if audio_player.playing==false:
-		audio_player.pitch_scale=pitch+randf_range(-v,v)
-		audio_player.stream=sound
-		audio_player.play()
+		audio_player.play_sound(sound,pitch,v)
 	else:
-		audio_player2.pitch_scale=pitch+randf_range(-v,v)
-		audio_player2.stream=sound
-		audio_player2.play()
+		audio_player2.play_sound(sound,pitch,v)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

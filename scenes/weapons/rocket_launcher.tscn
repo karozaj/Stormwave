@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://demh0215o684x"]
+[gd_scene load_steps=11 format=3 uid="uid://demh0215o684x"]
 
 [ext_resource type="PackedScene" uid="uid://duqdgxltdqad1" path="res://3d/rocket_launcher.glb" id="1_h0ptx"]
 [ext_resource type="Script" path="res://scripts/weapons/rocket_launcher.gd" id="2_osnhl"]
 [ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="3_1bsgm"]
 [ext_resource type="PackedScene" uid="uid://mp638iq6vrn4" path="res://scenes/weapons/projectiles/rocket_projectile.tscn" id="3_owpan"]
 [ext_resource type="AudioStream" uid="uid://dqu34qo10d5fl" path="res://audio/sfx/rocket_launcher.ogg" id="3_wpgjc"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_wdxrx"]
 
 [sub_resource type="Animation" id="Animation_wj2u5"]
 length = 0.001
@@ -147,6 +148,7 @@ _data = {
 }
 
 [node name="RocketLauncher" node_paths=PackedStringArray("projectile_direction_ray", "projectile_spawn_marker") instance=ExtResource("1_h0ptx")]
+editor_description = "Rocket launcher used by the player"
 visible = false
 script = ExtResource("2_osnhl")
 projectile_scene = ExtResource("3_owpan")
@@ -166,10 +168,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00373328, 0.17618, 1.38695
 target_position = Vector3(0, 0, -1.5)
 collide_with_areas = false
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
-bus = &"SFX"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_riaxv")
 }
+
+[node name="RandomizedPitchAudioPlayer3d" parent="." index="3" instance=ExtResource("6_wdxrx")]

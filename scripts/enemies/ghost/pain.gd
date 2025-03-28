@@ -10,7 +10,7 @@ func enter(transition_data:Dictionary={})->void:
 	timer.timeout.connect(finished.emit.bind(self,"Chase"))
 	state_owner.take_damage(transition_data["damage_points"],transition_data["origin"],transition_data["damage_dealer"])
 	state_owner.animation_player.play("pain")
-	state_owner.play_sound_effect(state_owner.pain_sound,-0.15,0.15)
+	state_owner.audio_player.play_sound(state_owner.pain_sound,0.15)
 
 
 func update(delta:float)->void:

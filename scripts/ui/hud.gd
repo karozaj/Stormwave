@@ -1,5 +1,6 @@
 extends Control
 class_name Hud
+## The player's HUD
 
 @onready var health_label:Label=$VBoxContainer/HealthContainer/Label
 @onready var ammo_label:Label=$VBoxContainer/AmmoContainer/Label
@@ -33,7 +34,6 @@ func update_enemy_count(current:int, max_enemies:int)->void:
 
 func update_build_time_remaining(time:int)->void:
 	var time_string:String=str(time)
-	#if time>=60:
 	@warning_ignore("integer_division")
 	var minutes:String=("%02d"%(floor(time/60)))
 	var seconds:String=("%02d"%(time%60))
@@ -42,7 +42,6 @@ func update_build_time_remaining(time:int)->void:
 
 func update_game_status_label(s:String)->void:
 	game_status_label.text=s
-	#game_status_label.text=str(current_enemies)+"/"+str(enemies)
 
 func show_wave_label(wave_number:int)->void:
 	wave_label.text="WAVE "+str(wave_number)

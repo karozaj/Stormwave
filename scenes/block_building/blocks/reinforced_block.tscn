@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://cfnul5kue1i8j"]
+[gd_scene load_steps=10 format=4 uid="uid://cfnul5kue1i8j"]
 
 [ext_resource type="Script" path="res://scripts/block_building/blocks/block.gd" id="1_hrbdq"]
 [ext_resource type="AudioStream" uid="uid://na6g4ao4tuqu" path="res://audio/sfx/blocks/block_damage1.ogg" id="2_hipur"]
 [ext_resource type="Material" uid="uid://bhhn2wouah245" path="res://resources/materials/block_damage_material.tres" id="2_mre5w"]
 [ext_resource type="Material" uid="uid://kpmy2b10gdni" path="res://resources/materials/reinforced_block_material.tres" id="3_1raou"]
 [ext_resource type="AudioStream" uid="uid://ce0rxngv2n4qv" path="res://audio/sfx/blocks/block_destroyed2.ogg" id="3_jrqfy"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="6_r4wxl"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3ofvc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xi00a"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
 "format": 34896613377,
@@ -37,11 +38,12 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA//////+/AAAAAAAA//8AAAAAAAD//wAAAAAAAP+//////wAA////////AABU1f////8AAFTVAAAAAP///78AAAAA/////wAAAAD///+/AAD//wAA//8AAP//AABU1QAA//8AAP+///8AAAAA/////wAAAAD/////AAAAAFTV//8AAP///7///wAA////////AAD//1TV/////////7////////9U1f///////1TV/3//f6qqqqr/f////3////9//z//f////3///6qqqqqqqlRV/3//f/9//z//f////3///6qqqqr/f////3////9//z+qqlRV/3//f/9//z+qqlRV/3//f6qqqqqqqlRV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_3ofvc")
+shadow_mesh = SubResource("ArrayMesh_xi00a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n28mh"]
 
 [node name="ReinforcedBlock" type="StaticBody3D"]
+editor_description = "Block which can be used for building, more durable than the regular block"
 collision_layer = 32
 collision_mask = 13
 script = ExtResource("1_hrbdq")
@@ -59,5 +61,4 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n28mh")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-bus = &"SFX"
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("6_r4wxl")]

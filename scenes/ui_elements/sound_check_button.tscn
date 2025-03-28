@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="1_vctud"]
 
 [node name="SoundCheckButton" type="CheckButton"]
+editor_description = "Button that plays a given sound when toggled"
 script = ExtResource("1_vctud")
