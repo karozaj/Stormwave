@@ -28,6 +28,8 @@ func update(delta:float)->void:
 		weapon_manager.select_weapon(3)
 	elif Input.is_action_just_pressed("select_weapon_5"):
 		weapon_manager.select_weapon(4)
+	elif Input.is_action_just_pressed("select_weapon_6"):
+		weapon_manager.select_weapon(5)
 		
 func physics_update(delta:float)->void:
 	state_owner.physics_process_update(delta)

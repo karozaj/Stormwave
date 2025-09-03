@@ -79,6 +79,7 @@ func _ready() -> void:
 	
 	start_building_phase()
 
+
 func start_building_phase():
 	build_phase_time_remaining=build_phase_duration
 	#if player.state_machine.current_state.name!="Build":

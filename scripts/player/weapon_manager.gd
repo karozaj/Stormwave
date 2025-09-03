@@ -17,15 +17,17 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var shotgun:WeaponBaseClass=$RightPosition/Shotgun
 @onready var chaingun:WeaponBaseClass=$CenterPosition/Chaingun
 @onready var rocket_launcher:WeaponBaseClass=$CenterPosition/RocketLauncher
+@onready var plasma_rifle:WeaponBaseClass=$CenterPosition/PlasmaRifle
+
 var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass
 var current_weapon_index:int=0
-var index_dict:Dictionary={"Axe":0,"Pistol":1,"Shotgun":2,"Chaingun":3,"Rocket":4}
-var ammo:Array=["∞",int(0),int(0),int(0),int(0)]
+var index_dict:Dictionary={"Axe":0,"Pistol":1,"Shotgun":2,"Chaingun":3,"Rocket":4,"Plasma":5}
+var ammo:Array=["∞",int(0),int(0),int(0),int(0),int(0)]
 var can_shoot:bool=true
 
 func _ready() -> void:
-	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher]
+	weapons=[axe,pistol,shotgun,chaingun,rocket_launcher,plasma_rifle]
 	for weapon in weapons:
 		weapon.weapon_owner=weapon_manager_owner
 		if weapon.has_method("set_ray_position"):
