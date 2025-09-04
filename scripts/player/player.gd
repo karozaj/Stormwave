@@ -90,14 +90,15 @@ func _ready() -> void:
 	
 	set_footstep_sound(footstep_sound)
 
-
+@export var is_testing:bool=false
 func process_update(_delta:float):
-		#for testing
-	#if Input.is_action_just_pressed("TEST_BUTTON"):
-		#if state_machine.current_state.name=="Combat":
-			#state_machine.transition_to_next_state(state_machine.current_state,"Build")
-		#elif state_machine.current_state.name=="Build":
-			#state_machine.transition_to_next_state(state_machine.current_state,"Combat")
+	#for testing
+	if is_testing:
+		if Input.is_action_just_pressed("TEST_BUTTON"):
+			if state_machine.current_state.name=="Combat":
+				state_machine.transition_to_next_state(state_machine.current_state,"Build")
+			elif state_machine.current_state.name=="Build":
+				state_machine.transition_to_next_state(state_machine.current_state,"Combat")
 		#PROCESS INPUTS
 	if Input.is_action_just_pressed("pause") and is_instance_valid(pause_menu)==false:
 		pause_menu=load("res://scenes/ui/pause_menu.tscn").instantiate()

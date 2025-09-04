@@ -17,7 +17,7 @@ var sound_weapon_select:AudioStream=preload("res://audio/sfx/change_weapon.ogg")
 @onready var shotgun:WeaponBaseClass=$RightPosition/Shotgun
 @onready var chaingun:WeaponBaseClass=$CenterPosition/Chaingun
 @onready var rocket_launcher:WeaponBaseClass=$CenterPosition/RocketLauncher
-@onready var plasma_rifle:WeaponBaseClass=$CenterPosition/PlasmaRifle
+@onready var plasma_rifle:WeaponBaseClass=$RightPosition/PlasmaRifle
 
 var weapons:Array[WeaponBaseClass]
 var current_weapon:WeaponBaseClass

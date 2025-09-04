@@ -1,0 +1,573 @@
+[gd_scene load_steps=26 format=3 uid="uid://5a86bn0d4cu0"]
+
+[ext_resource type="Script" path="res://scripts/levels/base_level.gd" id="1_h4rse"]
+[ext_resource type="Texture2D" uid="uid://dpejgx338i3a3" path="res://img/sky/panorama_moody.png" id="2_tvlcv"]
+[ext_resource type="PackedScene" uid="uid://b2ype4ks6wd5x" path="res://scenes/player/player.tscn" id="3_ma6j3"]
+[ext_resource type="PackedScene" uid="uid://b5m17kfq7jetu" path="res://scenes/level_elements/enemy_spawner.tscn" id="4_i01f8"]
+[ext_resource type="PackedScene" uid="uid://dm3r1hv0l3q6h" path="res://scenes/enemies/enemy_ghost.tscn" id="5_tpe7f"]
+[ext_resource type="PackedScene" uid="uid://ldsvjji42wx1" path="res://scenes/enemies/enemy_cloud.tscn" id="6_drtgl"]
+[ext_resource type="PackedScene" uid="uid://0ox5v5aun5wc" path="res://scenes/enemies/enemy_marksman.tscn" id="7_su8mx"]
+[ext_resource type="PackedScene" uid="uid://bjxk5j6g43loy" path="res://scenes/enemies/enemy_bruiser.tscn" id="8_18qae"]
+[ext_resource type="PackedScene" uid="uid://dlhokq5oy352l" path="res://scenes/enemies/enemy_destroyer.tscn" id="9_m1gwn"]
+[ext_resource type="PackedScene" uid="uid://bcael1rwki1g0" path="res://scenes/level_elements/enemy_spawn_area.tscn" id="10_aiap6"]
+[ext_resource type="PackedScene" uid="uid://f6crd74r3c37" path="res://scenes/level_elements/nav_region.tscn" id="11_vvxev"]
+[ext_resource type="PackedScene" uid="uid://clhqasfv2p8op" path="res://scenes/block_building/block_grid_map.tscn" id="12_o0gkk"]
+[ext_resource type="PackedScene" uid="uid://yswaem7jo4aw" path="res://scenes/level_elements/gridmaps/metal_floor.tscn" id="13_1fhyp"]
+[ext_resource type="PackedScene" uid="uid://cmgmsd6xjbeb7" path="res://scenes/level_elements/gridmaps/metal_wall.tscn" id="14_awnys"]
+[ext_resource type="PackedScene" uid="uid://dfu18rihy2hrr" path="res://3d/level_decoration/spire.glb" id="15_s3edx"]
+[ext_resource type="PackedScene" uid="uid://bw7oe1acfcpop" path="res://scenes/block_building/building_block_gridmap.tscn" id="16_miqpb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ycedt"]
+panorama = ExtResource("2_tvlcv")
+
+[sub_resource type="Sky" id="Sky_t5hu8"]
+sky_material = SubResource("PanoramaSkyMaterial_ycedt")
+
+[sub_resource type="Environment" id="Environment_2r06c"]
+background_mode = 2
+sky = SubResource("Sky_t5hu8")
+fog_enabled = true
+fog_light_color = Color(0.411765, 0.372549, 0.415686, 1)
+fog_density = 0.015
+fog_sky_affect = 0.1
+volumetric_fog_density = 1.0
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_5dg6t"]
+resource_local_to_scene = true
+vertices = PackedVector3Array(-23.5, 0.3, 8.25, -8, 0.3, 23.75, 8, 0.3, 23.75, 23.75, 0.3, 8, 23.75, 0.3, -8, 8.25, 0.3, -23.5, -8.25, 0.3, -23.5, -23.5, 0.3, -8.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 0), PackedInt32Array(0, 5, 3), PackedInt32Array(0, 3, 2)]
+sample_partition_type = 1
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 50
+agent_radius = 0.25
+filter_walkable_low_height_spans = true
+
+[sub_resource type="Gradient" id="Gradient_rjnaq"]
+offsets = PackedFloat32Array(0.367089, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pk571"]
+noise_type = 5
+seed = 935
+frequency = 0.25
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t3wea"]
+color_ramp = SubResource("Gradient_rjnaq")
+noise = SubResource("FastNoiseLite_pk571")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34xti"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m5hfk"]
+plane = Plane(0, -1, 0, 0)
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("player", "nav_region", "enemy_spawner", "block_gridmap", "world_environment", "build_phase_timer")]
+editor_description = "Arena level"
+script = ExtResource("1_h4rse")
+player = NodePath("Player")
+nav_region = NodePath("NavRegion")
+enemy_spawner = NodePath("EnemySpawner")
+block_gridmap = NodePath("NavRegion/BlockGridMap")
+world_environment = NodePath("WorldEnvironment")
+build_phase_timer = NodePath("BuildPhaseTimer")
+build_phase_duration = 327600
+objective = "Survival"
+level_identifier = "level_1"
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2r06c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.939693, -0.296198, 0.17101, 0, 0.5, 0.866025, -0.34202, 0.813798, -0.469846, 0, 0, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_ma6j3")]
+is_testing = true
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("enemy_parent_node", "initial_enemy_targets") instance=ExtResource("4_i01f8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.4397, 62.8043)
+enemy_parent_node = NodePath("../Enemies")
+enemy_scenes = Array[PackedScene]([ExtResource("5_tpe7f"), ExtResource("6_drtgl"), ExtResource("7_su8mx"), ExtResource("8_18qae"), ExtResource("9_m1gwn")])
+enemy_spawn_chance = Array[int]([20, 0, 0, 0, 0])
+enemy_spawn_chance_increase = Array[int]([1, 6, 7, 3, 2])
+wave_size = 10
+max_wave_size = 35
+concurrent_enemies = 20
+max_concurrent_enemies = 15
+initial_enemy_targets = [NodePath("../Player")]
+metadata/_edit_lock_ = true
+
+[node name="Spawners1" type="Node3D" parent="EnemySpawner"]
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea2" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea3" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea4" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea5" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea6" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea7" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea8" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea9" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea10" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea11" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea12" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea13" parent="EnemySpawner/Spawners1" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="Spawners2" type="Node3D" parent="EnemySpawner"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea2" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea3" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea4" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea5" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea6" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea7" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea8" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea9" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea10" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea11" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea12" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea13" parent="EnemySpawner/Spawners2" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="Spawners3" type="Node3D" parent="EnemySpawner"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea2" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea3" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea4" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea5" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea6" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea7" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea8" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea9" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea10" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea11" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea12" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea13" parent="EnemySpawner/Spawners3" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="Spawners4" type="Node3D" parent="EnemySpawner"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea2" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea3" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea4" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea5" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea6" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea7" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea8" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea9" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea10" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea11" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea12" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="EnemySpawnArea13" parent="EnemySpawner/Spawners4" instance=ExtResource("10_aiap6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
+metadata/_edit_lock_ = true
+
+[node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 100, 100)
+metadata/_edit_lock_ = true
+
+[node name="NavRegion" parent="." instance=ExtResource("11_vvxev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106462, 0.0647202, -0.12284)
+navigation_mesh = SubResource("NavigationMesh_5dg6t")
+metadata/_edit_lock_ = true
+
+[node name="BlockGridMap" parent="NavRegion" instance=ExtResource("12_o0gkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+data = {
+"cells": PackedInt32Array(-3, 65533, 1441792, -3, 65534, 1441792, -3, 65535, 1441792, -3, 0, 1441792, -3, 1, 1441792, -3, 2, 1441792, -2, 65533, 1441792, -2, 65534, 1441792, -2, 65535, 1441792, -2, 0, 1441792, -2, 1, 1441792, -2, 2, 1441792, -1, 65533, 1441792, -1, 65534, 1441792, -1, 65535, 1441792, -1, 0, 1441792, -1, 1, 1441792, -1, 2, 1441792, -65536, 65533, 1441792, -65536, 65534, 1441792, -65536, 65535, 1441792, -65536, 0, 1441792, -65536, 1, 1441792, -65536, 2, 1441792, -65535, 65533, 1441792, -65535, 65534, 1441792, -65535, 65535, 1441792, -65535, 0, 1441792, -65535, 1, 1441792, -65535, 2, 1441792, -65534, 65533, 1441792, -65534, 65534, 1441792, -65534, 65535, 1441792, -65534, 0, 1441792, -65534, 1, 1441792, -65534, 2, 1441792, -65535, 3, 1441792, -65536, 3, 1441792, -1, 3, 1441792, -2, 3, 1441792, -65533, 65534, 1441792, -65533, 65535, 1441792, -65533, 0, 1441792, -65533, 1, 1441792, -4, 65534, 1441792, -4, 65535, 1441792, -4, 0, 1441792, -4, 1, 1441792, -65535, 65532, 1441792, -65536, 65532, 1441792, -1, 65532, 1441792, -2, 65532, 1441792, -5, 65530, 1441792, -5, 65531, 1441792, -5, 65532, 1441792, -5, 65533, 1441792, -5, 65534, 1441792, -5, 65535, 1441792, -5, 0, 1441792, -5, 1, 1441792, -5, 2, 1441792, -5, 3, 1441792, -5, 4, 1441792, -4, 65530, 1441792, -4, 65531, 1441792, -4, 65532, 1441792, -4, 65533, 1441792, -4, 2, 1441792, -4, 3, 1441792, -4, 4, 1441792, -3, 65530, 1441792, -3, 65531, 1441792, -3, 65532, 1441792, -3, 3, 1441792, -3, 4, 1441792, -2, 65530, 1441792, -2, 65531, 1441792, -2, 4, 1441792, -1, 65530, 1441792, -1, 65531, 1441792, -1, 4, 1441792, -65536, 65530, 1441792, -65536, 65531, 1441792, -65536, 4, 1441792, -65535, 65530, 1441792, -65535, 65531, 1441792, -65535, 4, 1441792, -65534, 65530, 1441792, -65534, 65531, 1441792, -65534, 65532, 1441792, -65534, 3, 1441792, -65534, 4, 1441792, -65533, 65530, 1441792, -65533, 65531, 1441792, -65533, 65532, 1441792, -65533, 65533, 1441792, -65533, 2, 1441792, -65533, 3, 1441792, -65533, 4, 1441792, -65532, 65530, 1441792, -65532, 65531, 1441792, -65532, 65532, 1441792, -65532, 65533, 1441792, -65532, 65534, 1441792, -65532, 65535, 1441792, -65532, 0, 1441792, -65532, 1, 1441792, -65532, 2, 1441792, -65532, 3, 1441792, -65532, 4, 1441792, -65531, 65531, 1441792, -65531, 65532, 1441792, -65531, 65533, 1441792, -65531, 65534, 1441792, -65531, 65535, 1441792, -65531, 0, 1441792, -65531, 1, 1441792, -65531, 2, 1441792, -65531, 3, 1441792, -65531, 4, 1441792, -6, 65531, 1441792, -6, 65532, 1441792, -6, 65533, 1441792, -6, 65534, 1441792, -6, 65535, 1441792, -6, 0, 1441792, -6, 1, 1441792, -6, 2, 1441792, -6, 3, 1441792, -6, 4, 1441792, -65532, 5, 1441792, -65533, 5, 1441792, -65534, 5, 1441792, -65535, 5, 1441792, -65536, 5, 1441792, -1, 5, 1441792, -2, 5, 1441792, -3, 5, 1441792, -4, 5, 1441792, -5, 5, 1441792, -4, 6, 1441792, -3, 6, 1441792, -2, 6, 1441792, -1, 6, 1441792, -65536, 6, 1441792, -65535, 6, 1441792, -65534, 6, 1441792, -65533, 6, 1441792, -7, 65532, 1441792, -7, 65533, 1441792, -7, 65534, 1441792, -7, 65535, 1441792, -7, 0, 1441792, -7, 1, 1441792, -7, 2, 1441792, -7, 3, 1441792, -4, 65529, 1441792, -3, 65529, 1441792, -2, 65529, 1441792, -1, 65529, 1441792, -65536, 65529, 1441792, -65535, 65529, 1441792, -65534, 65529, 1441792, -65533, 65529, 1441792, -65530, 65532, 1441792, -65530, 65533, 1441792, -65530, 65534, 1441792, -65530, 65535, 1441792, -65530, 0, 1441792, -65530, 1, 1441792, -65530, 2, 1441792, -65530, 3, 1441792)
+}
+metadata/_edit_lock_ = true
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="Floor" parent="NavRegion" instance=ExtResource("13_1fhyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+cell_size = Vector3(16, 1, 16)
+cell_center_x = true
+cell_center_z = true
+data = {
+"cells": PackedInt32Array(0, 0, 0, 1, 0, 0, 65535, 0, 0, 0, 65535, 0, 0, 1, 0, 65535, 1, 1441793, 1, 1, 1, 1, 65535, 1048577, 65535, 65535, 655361)
+}
+metadata/_edit_lock_ = true
+
+[node name="Decal" type="Decal" parent="NavRegion/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+size = Vector3(48, 0.001, 48)
+texture_albedo = SubResource("NoiseTexture2D_t3wea")
+emission_energy = 0.0
+
+[node name="GridMap" parent="NavRegion" instance=ExtResource("14_awnys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+data = {
+"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 0, 1, 655360, 1, 0, 1441792, 0, 65535, 0, 65535, 65535, 1, 65535, 0, 1048576)
+}
+metadata/_edit_lock_ = true
+
+[node name="BuildPhaseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WorldBoundaries" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
+collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_34xti")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundaries/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_m5hfk")
+metadata/_edit_lock_ = true
+
+[node name="LevelDecoration" type="Node3D" parent="."]
+
+[node name="SpiresClusterType1_1" type="Node3D" parent="LevelDecoration"]
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType1_3" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.879227, -0.00890989, 0.47632, -0.0125815, 0.999911, -0.00451997, -0.476237, -0.00996691, -0.879261, -9.14196, 0, -5.24511)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_3" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType2_1" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.471104, 0, -0.882078, 0, 1, 0, 0.882078, 0, 0.471104, 27.5294, 0, -28.3523)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_1" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType2_2" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.0844504, 0.0730727, 0.993745, -0.0144206, 0.997293, -0.0721081, -0.996323, -0.00824082, 0.0852755, -39.6493, 0, -0.796141)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType1_2" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(0.858987, 0, 0.511998, 0, 1, 0, -0.511998, 0, 0.858987, -9.07098, -3.13246, 7.00082)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_2" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType1_4" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.999731, 0, 0.0231759, 0, 1, 0, -0.0231759, 0, -0.999731, 0.744678, 0, -1.41961)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="SpiresClusterType2_4" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.107518, -0.073244, -0.991502, -0.0144206, 0.997293, -0.0721081, 0.994099, 0.00654508, -0.108284, 40.3649, 0, 0.295231)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.998083, -0.0618847, 0, 0.0618501, 0.997526, -0.0334168, 0.00206799, 0.0333528, 0.999442, 0, 0, -2.76443)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.68363, -20.0547, 3.27713)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.507, -3.86828, 0.0545368)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6194, -20.01, 5.6018)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(0.996227, 0.0867906, 0, -0.0867906, 0.996227, 0, 0, 0, 1, 7.55031, -11.3195, -16.895)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType2_4" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, -12.3801, -11.3195, -16.7683)
+
+[node name="SpiresClusterType1_6" type="Node3D" parent="LevelDecoration"]
+transform = Transform3D(-0.870622, 0, -0.491953, 0, 1, 0, 0.491953, 0, -0.870622, 9.97548, -3.13246, -8.20832)
+
+[node name="spire" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
+
+[node name="spire2" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7297, -16.373, -42.4513)
+
+[node name="spire3" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.60609, -11.3195, -31.7011)
+
+[node name="spire4" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
+
+[node name="spire5" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+
+[node name="spire6" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
+
+[node name="BuildingBlockGridmap" parent="." node_paths=PackedStringArray("block_grid_map") instance=ExtResource("16_miqpb")]
+data = {
+"cells": PackedInt32Array(131068, 6, 1, 131069, 6, 1, 131070, 6, 1, 131071, 6, 1, 65536, 6, 1, 65537, 6, 1, 65538, 6, 1, 65539, 6, 1, 131069, 65532, 0, 131070, 65532, 0, 131071, 65532, 0, 65536, 65532, 0, 65537, 65532, 0, 65538, 65532, 0, 65538, 65533, 0, 65539, 65533, 0, 65540, 65533, 0, 65540, 65532, 0, 65539, 65532, 0, 65537, 65533, 0, 65536, 65533, 0, 131071, 65533, 0, 131070, 65533, 0, 131068, 65532, 0, 131068, 65533, 0, 131069, 65533, 0)
+}
+block_grid_map = NodePath("../NavRegion/BlockGridMap")
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="EnemyBruiser" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43672, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser2" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3469, 0.0647202, 9.85358)
+
+[node name="GridMap" parent="." instance=ExtResource("14_awnys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26178, 0.0647164, 12.2369)
+data = {
+"cells": PackedInt32Array(1, 1, 655361, 1, 0, 0, 0, 65535, 0)
+}
