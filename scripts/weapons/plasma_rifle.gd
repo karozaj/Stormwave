@@ -20,7 +20,7 @@ func shoot():
 func scan_and_damage_targets():
 	var areas=area3d.get_overlapping_areas()
 	var bodies=area3d.get_overlapping_bodies()
-	var tracer_target=ray.target_position
+	var tracer_target=ray.to_global(ray.target_position)
 	var max_range=50
 	
 	ray.force_raycast_update()
@@ -40,13 +40,15 @@ func scan_and_damage_targets():
 			area.damage(base_damage, global_position,weapon_owner)
 
 	_draw_bullet_tracer(tracer_target)
+	
+	
 func scan_and_damage_targets_raycast():
 	var current_damage=base_damage
 	var next_target_damage_modifier=0.8
 	var ray_exceptions=[]
 	var max_targets=16
 	var hit_targets=0
-	var tracer_target=ray.target_position
+	var tracer_target=ray.to_global(ray.target_position)
 	
 	while(hit_targets<max_targets):#we can only hit as many targets as max_targets
 		ray.force_raycast_update()

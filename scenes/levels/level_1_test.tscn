@@ -363,7 +363,7 @@ emission_energy = 0.0
 [node name="GridMap" parent="NavRegion" instance=ExtResource("14_awnys")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
 data = {
-"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 0, 1, 655360, 1, 0, 1441792, 0, 65535, 0, 65535, 65535, 1, 65535, 0, 1048576)
+"cells": PackedInt32Array(65535, 1, 1048577, 1, 1, 655361, 1, 65535, 1441793, 65535, 65535, 1, 0, 65535, 0, 0, 1, 655360, 1, 0, 1441792, 65535, 0, 1048576)
 }
 metadata/_edit_lock_ = true
 
@@ -534,6 +534,7 @@ transform = Transform3D(1, 0, 0, 0, 0.989034, -0.147689, 0, 0.147689, 0.989034, 
 
 [node name="SpiresClusterType1_6" type="Node3D" parent="LevelDecoration"]
 transform = Transform3D(-0.870622, 0, -0.491953, 0, 1, 0, 0.491953, 0, -0.870622, 9.97548, -3.13246, -8.20832)
+metadata/_edit_lock_ = true
 
 [node name="spire" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.5201)
@@ -549,6 +550,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.03078, -11.3195, -48.4511)
 
 [node name="spire5" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42117, -11.3195, -58.42)
+metadata/_edit_lock_ = true
 
 [node name="spire6" parent="LevelDecoration/SpiresClusterType1_6" instance=ExtResource("15_s3edx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1965, -11.3195, -52.4737)
@@ -566,8 +568,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43672, 0.0647202, 9.85358)
 [node name="EnemyBruiser2" parent="." instance=ExtResource("8_18qae")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3469, 0.0647202, 9.85358)
 
-[node name="GridMap" parent="." instance=ExtResource("14_awnys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26178, 0.0647164, 12.2369)
-data = {
-"cells": PackedInt32Array(1, 1, 655361, 1, 0, 0, 0, 65535, 0)
-}
+[node name="EnemyBruiser3" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75747, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser4" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.66765, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser5" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.968, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser6" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05782, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser7" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0845, 0.0647202, 9.85358)
+
+[node name="EnemyBruiser8" parent="." instance=ExtResource("8_18qae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9947, 0.0647202, 9.85358)

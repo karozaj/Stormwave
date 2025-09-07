@@ -269,11 +269,14 @@ skeleton = NodePath("")
 [node name="MuzzleFlash" parent="plasma_gun" instance=ExtResource("3_6i48q")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.0039e-07, 0.0700974, 1.14833)
 visible = false
+modulate = Color(0.505882, 0.792157, 0.843137, 0.8)
+pixel_size = 0.004
 texture = ExtResource("6_unceg")
 
 [node name="OmniLight3D" parent="plasma_gun/MuzzleFlash" instance=ExtResource("4_h4hbh")]
 transform = Transform3D(-1, 0, 2.36034e-06, 0, 1, 0, -2.36034e-06, 0, -1, 0, 0, 0)
 light_color = Color(0.505882, 0.792157, 0.843137, 1)
+light_energy = 2.5
 
 [node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("5_3gkls")]
 stream = ExtResource("2_fqpk3")
