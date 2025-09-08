@@ -14,7 +14,7 @@ const DEFAULT_HEADBOB:bool=true
 const DEFAULT_SENSITIVITY:float=1.0
 const DEFAULT_SFX:float=1.0
 const DEFAULT_MUSIC:float=0.5
-const DEFAULT_FOV:float=90.0
+const DEFAULT_FOV:int=90
 
 
 func _ready() -> void:
