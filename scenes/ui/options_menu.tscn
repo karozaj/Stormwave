@@ -147,6 +147,8 @@ focus_mode = 0
 text = "Back"
 script = ExtResource("6_1onal")
 
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="toggled" from="VBoxContainer/HeadbobButton" to="." method="_on_headbob_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

@@ -26,6 +26,7 @@ Global="*res://scripts/globals/global.gd"
 MusicPlayer="*res://scenes/ui/music_player.tscn"
 UISoundPlayer="*res://scenes/ui/ui_sound_player.tscn"
 ScoreManager="*res://scripts/globals/score_manager.gd"
+OptionsSaving="*res://scripts/globals/options_saving.gd"
 
 [display]
 

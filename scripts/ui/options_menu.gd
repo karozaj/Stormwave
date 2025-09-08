@@ -76,3 +76,11 @@ func update_all_controls_state():
 	sensitivity_sldier.value=Global.player_sensitivity
 	fullscreen_button.button_pressed=Global.is_fullscreen()
 	headbob_button.button_pressed=Global.player_headbob_enabled
+
+
+func _on_visibility_changed() -> void:
+	if(visible==true):
+		update_all_controls_state()
+
+func _on_hidden() -> void:
+	OptionsSaving.save_settings()

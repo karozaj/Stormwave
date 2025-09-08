@@ -12,12 +12,12 @@ class_name MenuWithNavigation
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:## when inheriting from this class always remember to use super._ready()
+	
 	for button_index in len(navigation_buttons):
 		navigation_buttons[button_index].pressed.connect(navigate_to_menu.bind(button_index))
 
 func navigate_to_menu(index:int):
 	if(index<len(other_menus)):
-		print("navigating")
 		disable_this_menu()
 		other_menus[index].enable_this_menu()
 
