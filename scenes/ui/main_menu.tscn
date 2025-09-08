@@ -1,10 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvyccl4g0283q"]
+[gd_scene load_steps=16 format=3 uid="uid://cvyccl4g0283q"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_7ttjy"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_eu5b2"]
 [ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_xwc2h"]
 [ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="3_r8hme"]
 [ext_resource type="Texture2D" uid="uid://h0431mm4gcik" path="res://img/ui/stormwave_logo.png" id="4_jw1vi"]
+[ext_resource type="PackedScene" uid="uid://ccsyssdtkrepv" path="res://scenes/ui/credits.tscn" id="6_dadjo"]
+[ext_resource type="PackedScene" uid="uid://dcx1v0m8ulr3m" path="res://scenes/ui/level_selection.tscn" id="6_tls6v"]
+[ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="7_hetgr"]
+[ext_resource type="Texture2D" uid="uid://dey2v4a4tjj5a" path="res://img/level_images/level_2_image.png" id="8_pnov3"]
+[ext_resource type="Resource" uid="uid://bxydyy47f0dk6" path="res://resources/level_info/level_3_info.tres" id="9_8qj80"]
+[ext_resource type="Resource" uid="uid://2o0iye2ys0tl" path="res://resources/level_info/level_4_info.tres" id="10_j0ogc"]
+[ext_resource type="PackedScene" uid="uid://bjxbcwyuu6vd5" path="res://scenes/ui/options_menu.tscn" id="12_qk08t"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_373yb"]
+load_path = "res://.godot/imported/level_1_image.png-70ff4ec51e572948afb84786b7a63b2d.ctex"
+
+[sub_resource type="Resource" id="Resource_b6wt5"]
+resource_local_to_scene = true
+script = ExtResource("7_hetgr")
+level_scene = "res://scenes/levels/level_1.tscn"
+level_identifier = "level_1"
+level_name = "Arena"
+level_description = "How long can you survive in this small arena?"
+image = SubResource("CompressedTexture2D_373yb")
+playable = true
+
+[sub_resource type="Resource" id="Resource_jp8xv"]
+resource_local_to_scene = true
+script = ExtResource("7_hetgr")
+level_scene = "res://scenes/levels/level_2.tscn"
+level_identifier = "level_2"
+level_name = "City"
+level_description = "Protect your generator from the enemies."
+image = ExtResource("8_pnov3")
+playable = true
 
 [node name="MainMenu" type="Control"]
 editor_description = "The main menu"
@@ -15,7 +45,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xwc2h")
-script = ExtResource("1_7ttjy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -26,7 +55,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_r8hme")
 
-[node name="TextureRectLogo" type="TextureRect" parent="."]
+[node name="Main" type="Control" parent="." node_paths=PackedStringArray("this_menu", "other_menus", "navigation_buttons")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ttjy")
+this_menu = NodePath(".")
+other_menus = [NodePath("../LevelSelection"), NodePath("../OptionsMenu"), NodePath("../Credits")]
+navigation_buttons = [NodePath("VBoxContainer/ButtonPlay"), NodePath("VBoxContainer/ButtonOptions"), NodePath("VBoxContainer/ButtonCredits")]
+
+[node name="TextureRectLogo" type="TextureRect" parent="Main"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -39,45 +80,58 @@ grow_horizontal = 2
 texture = ExtResource("4_jw1vi")
 expand_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.6
 anchor_right = 0.5
 anchor_bottom = 0.6
-offset_left = -31.5
-offset_top = -50.5
-offset_right = 31.5
-offset_bottom = 50.5
+offset_left = -64.0
+offset_top = -70.0
+offset_right = 64.0
+offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonPlay" type="Button" parent="VBoxContainer"]
+[node name="ButtonPlay" type="Button" parent="Main/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 text = "Play"
 script = ExtResource("1_eu5b2")
 
-[node name="ButtonOptions" type="Button" parent="VBoxContainer"]
+[node name="ButtonOptions" type="Button" parent="Main/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 text = "Options"
 script = ExtResource("1_eu5b2")
 
-[node name="ButtonCredits" type="Button" parent="VBoxContainer"]
+[node name="ButtonCredits" type="Button" parent="Main/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 text = "Credits"
 script = ExtResource("1_eu5b2")
 
-[node name="ButtonExit" type="Button" parent="VBoxContainer"]
+[node name="ButtonExit" type="Button" parent="Main/VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 text = "Exit"
 script = ExtResource("1_eu5b2")
 
-[connection signal="pressed" from="VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonOptions" to="." method="_on_button_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonCredits" to="." method="_on_button_credits_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]
+[node name="LevelSelection" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("6_tls6v")]
+visible = false
+layout_mode = 1
+level_info_resources = Array[ExtResource("7_hetgr")]([SubResource("Resource_b6wt5"), SubResource("Resource_jp8xv"), ExtResource("9_8qj80"), ExtResource("10_j0ogc")])
+other_menus = [NodePath("../Main")]
+
+[node name="Credits" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("6_dadjo")]
+visible = false
+layout_mode = 1
+other_menus = [NodePath("../Main")]
+
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("12_qk08t")]
+visible = false
+layout_mode = 1
+other_menus = [NodePath("../Main")]
+
+[connection signal="pressed" from="Main/VBoxContainer/ButtonExit" to="Main" method="_on_button_exit_pressed"]

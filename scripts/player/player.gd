@@ -80,6 +80,7 @@ func _ready() -> void:
 	Global.player=self
 	base_fov=Global.player_fov
 	mouse_sensitivity=Global.player_sensitivity
+	headbob_enabled=Global.player_headbob_enabled
 	RenderingServer.viewport_attach_camera($CanvasLayer/SubViewportContainer/SubViewport.get_viewport_rid(),weapon_camera.get_camera_rid())
 	health=starting_health
 	rng.randomize()
