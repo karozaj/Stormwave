@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv0603oss7jxs"]
+
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_16uus"]
+[ext_resource type="Script" path="res://scripts/ui_elements/rebinding_button.gd" id="1_jkrmy"]
+[ext_resource type="PackedScene" uid="uid://vwxaqkw4eu08" path="res://scenes/ui_elements/sound_button.tscn" id="2_3ff2y"]
+
+[node name="RebindingButton" type="VBoxContainer" node_paths=PackedStringArray("binding_name_label", "binding_button")]
+alignment = 1
+script = ExtResource("1_jkrmy")
+binding_name_label = NodePath("HBoxContainer/Label")
+binding_button = NodePath("HBoxContainer/SoundButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_16uus")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "binding_name"
+horizontal_alignment = 1
+
+[node name="SoundButton" parent="HBoxContainer" instance=ExtResource("2_3ff2y")]
+custom_minimum_size = Vector2(225, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "None"
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

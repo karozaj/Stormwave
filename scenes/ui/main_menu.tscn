@@ -16,7 +16,7 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_373yb"]
 load_path = "res://.godot/imported/level_1_image.png-70ff4ec51e572948afb84786b7a63b2d.ctex"
 
-[sub_resource type="Resource" id="Resource_17vk0"]
+[sub_resource type="Resource" id="Resource_jo5oq"]
 resource_local_to_scene = true
 script = ExtResource("7_hetgr")
 level_scene = "res://scenes/levels/level_1.tscn"
@@ -26,7 +26,7 @@ level_description = "How long can you survive in this small arena?"
 image = SubResource("CompressedTexture2D_373yb")
 playable = true
 
-[sub_resource type="Resource" id="Resource_w63kl"]
+[sub_resource type="Resource" id="Resource_2v6e4"]
 resource_local_to_scene = true
 script = ExtResource("7_hetgr")
 level_scene = "res://scenes/levels/level_2.tscn"
@@ -121,7 +121,7 @@ script = ExtResource("1_eu5b2")
 [node name="LevelSelection" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("6_tls6v")]
 visible = false
 layout_mode = 1
-level_info_resources = Array[ExtResource("7_hetgr")]([SubResource("Resource_17vk0"), SubResource("Resource_w63kl"), ExtResource("9_8qj80"), ExtResource("10_j0ogc")])
+level_info_resources = Array[ExtResource("7_hetgr")]([SubResource("Resource_jo5oq"), SubResource("Resource_2v6e4"), ExtResource("9_8qj80"), ExtResource("10_j0ogc")])
 other_menus = [NodePath("../Main")]
 
 [node name="Credits" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("6_dadjo")]
