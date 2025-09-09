@@ -21,10 +21,6 @@ func _ready() -> void:
 	super._ready()
 	setup_rebinding_buttons()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func setup_rebinding_buttons():
 	rebinding_button=[]
 	for child in rebinding_buttons_parent.get_children():
@@ -33,9 +29,9 @@ func setup_rebinding_buttons():
 	for action in actions:
 		var button_instance=rebinding_button_scene.instantiate()
 		rebinding_buttons_parent.add_child(button_instance)
-		var rebinding_button:RebindingButton=button_instance as RebindingButton
-		rebinding_button.setup_rebinding_button(action,on_rebinding_button_pressed)
-		rebinding_buttons.append(rebinding_button)
+		var rebinding_button_instance:RebindingButton=button_instance as RebindingButton
+		rebinding_button_instance.setup_rebinding_button(action,on_rebinding_button_pressed)
+		rebinding_buttons.append(rebinding_button_instance)
 
 static func get_actions_array()->Array[String]:
 	var actions_to_ignore:Array[String]=[
