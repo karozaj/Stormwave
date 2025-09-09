@@ -1,17 +1,38 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcx1v0m8ulr3m"]
+[gd_scene load_steps=12 format=3 uid="uid://dcx1v0m8ulr3m"]
 
 [ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_8eqec"]
 [ext_resource type="Script" path="res://scripts/ui/level_selection.gd" id="1_587mi"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_item_list.gd" id="1_iepma"]
 [ext_resource type="Script" path="res://scripts/ui/level_info/level_info.gd" id="2_ksemb"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="3_gw3et"]
-[ext_resource type="Resource" uid="uid://co6c7ljnb8ppm" path="res://resources/level_info/level_1_info.tres" id="3_l7g5j"]
-[ext_resource type="Resource" uid="uid://b6fppgipnjto8" path="res://resources/level_info/level_2_info.tres" id="5_oi74t"]
-[ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="6_kxavs"]
+[ext_resource type="Texture2D" uid="uid://dey2v4a4tjj5a" path="res://img/level_images/level_2_image.png" id="4_4lvpw"]
 [ext_resource type="Resource" uid="uid://bxydyy47f0dk6" path="res://resources/level_info/level_3_info.tres" id="6_w5hbd"]
 [ext_resource type="Resource" uid="uid://2o0iye2ys0tl" path="res://resources/level_info/level_4_info.tres" id="7_4mn1w"]
 
-[node name="LevelSelection" type="Control"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_373yb"]
+load_path = "res://.godot/imported/level_1_image.png-70ff4ec51e572948afb84786b7a63b2d.ctex"
+
+[sub_resource type="Resource" id="Resource_41pdu"]
+resource_local_to_scene = true
+script = ExtResource("2_ksemb")
+level_scene = "res://scenes/levels/level_1.tscn"
+level_identifier = "level_1"
+level_name = "Arena"
+level_description = "How long can you survive in this small arena?"
+image = SubResource("CompressedTexture2D_373yb")
+playable = true
+
+[sub_resource type="Resource" id="Resource_rndpm"]
+resource_local_to_scene = true
+script = ExtResource("2_ksemb")
+level_scene = "res://scenes/levels/level_2.tscn"
+level_identifier = "level_2"
+level_name = "City"
+level_description = "Protect your generator from the enemies."
+image = ExtResource("4_4lvpw")
+playable = true
+
+[node name="LevelSelection" type="Control" node_paths=PackedStringArray("this_menu", "navigation_buttons")]
 editor_description = "Menu where levels can be selected"
 layout_mode = 3
 anchors_preset = 15
@@ -21,16 +42,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8eqec")
 script = ExtResource("1_587mi")
-level_info_resources = Array[ExtResource("2_ksemb")]([ExtResource("3_l7g5j"), ExtResource("5_oi74t"), ExtResource("6_w5hbd"), ExtResource("7_4mn1w")])
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_kxavs")
+level_info_resources = Array[ExtResource("2_ksemb")]([SubResource("Resource_41pdu"), SubResource("Resource_rndpm"), ExtResource("6_w5hbd"), ExtResource("7_4mn1w")])
+this_menu = NodePath(".")
+navigation_buttons = [NodePath("CenterContainer/VBoxContainer/HBoxContainer2/ButtonBack")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -123,4 +137,3 @@ script = ExtResource("3_gw3et")
 
 [connection signal="item_selected" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase/ItemList" to="." method="_on_item_list_item_selected"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/VBoxInfo/ButtonPlay" to="." method="_on_button_play_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/ButtonBack" to="." method="_on_button_back_pressed"]

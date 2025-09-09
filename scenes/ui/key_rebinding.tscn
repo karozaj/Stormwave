@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://vnduos2u427l"]
+
+[ext_resource type="Script" path="res://scripts/ui/key_rebinding.gd" id="1_aq8mc"]
+[ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="2_avvln"]
+[ext_resource type="PackedScene" uid="uid://dv0603oss7jxs" path="res://scenes/ui_elements/rebinding_button.tscn" id="3_1giac"]
+[ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="3_jskd0"]
+
+[node name="KeyRebinding" type="Control" node_paths=PackedStringArray("rebinding_buttons_parent", "rebinding_overlay", "this_menu", "navigation_buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aq8mc")
+rebinding_button_scene = ExtResource("3_1giac")
+rebinding_buttons_parent = NodePath("CenterContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+rebinding_overlay = NodePath("ColorRect")
+this_menu = NodePath(".")
+navigation_buttons = [NodePath("CenterContainer/VBoxContainer/CenterContainer/MainMenuButton")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_avvln")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="RebindingButton" parent="CenterContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_1giac")]
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResetToDefaultButton" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme = ExtResource("2_avvln")
+theme_override_font_sizes/font_size = 22
+text = "Reset to default"
+script = ExtResource("3_jskd0")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme = ExtResource("2_avvln")
+text = "Back"
+script = ExtResource("3_jskd0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_avvln")
+text = "Press any key to rebind"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer2/ResetToDefaultButton" to="." method="reset_to_default"]

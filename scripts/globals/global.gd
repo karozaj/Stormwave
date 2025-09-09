@@ -8,20 +8,23 @@ var player_fov:int=90:
 		return player_fov
 	set(value):
 		player_fov=value
-		player.base_fov=player_fov
+		if(player!=null):
+			player.base_fov=player_fov
 var player_sensitivity:float=1.0:
 	get:
 		return player_sensitivity
 	set(value):
 		player_sensitivity=value
-		player.mouse_sensitivity=player_sensitivity
+		if(player!=null):
+			player.mouse_sensitivity=player_sensitivity
 var player_headbob_enabled:bool=true:
 	get:
 		return player_headbob_enabled
 	set(value):
 		player_headbob_enabled=value
-		player.headbob_enabled=player_headbob_enabled
-
+		if(player!=null):
+			player.headbob_enabled=player_headbob_enabled
+			
 func get_volume(bus_name:String)->float:
 	var bus_index= AudioServer.get_bus_index(bus_name)
 	var volume_db:float=AudioServer.get_bus_volume_db(bus_index)

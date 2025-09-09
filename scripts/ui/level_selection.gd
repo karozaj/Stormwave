@@ -1,4 +1,4 @@
-extends Control
+extends MenuWithNavigation
 ## Menu where levels can be selected
 
 @onready var item_list:ItemList=$CenterContainer/VBoxContainer/HBoxContainer/VBoxPurchase/ItemList
@@ -13,6 +13,7 @@ var selected_index:int=-1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	for i in level_info_resources.size():
 		level_info_resources[i].high_score=ScoreManager.get_score(level_info_resources[i].level_identifier)
 		item_list.add_item(level_info_resources[i].level_name,level_info_resources[i].image)
@@ -31,9 +32,6 @@ func _on_item_list_item_selected(index: int) -> void:
 	level_score.text="High score: "+str(level_info_resources[selected_index].high_score)
 	level_image.texture=level_info_resources[selected_index].image
 	
-
-func _on_button_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 
 func _on_button_play_pressed() -> void:

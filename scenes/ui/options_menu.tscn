@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjxbcwyuu6vd5"]
+[gd_scene load_steps=9 format=3 uid="uid://bjxbcwyuu6vd5"]
 
 [ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_il5bs"]
-[ext_resource type="Texture2D" uid="uid://y48w2ddumydf" path="res://img/ui/frame.png" id="2_8udp1"]
 [ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="2_nkp8k"]
+[ext_resource type="Script" path="res://scripts/ui_elements/menu_with_navigation.gd" id="3_lwwiw"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_check_button.gd" id="3_tkcj1"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_h_slider.gd" id="4_7pspb"]
 [ext_resource type="AudioStream" uid="uid://btaje2g4vfcje" path="res://audio/sfx/click.ogg" id="5_ng5hs"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="6_1onal"]
+[ext_resource type="PackedScene" uid="uid://vnduos2u427l" path="res://scenes/ui/key_rebinding.tscn" id="7_mpopv"]
 
-[node name="OptionsMenu" type="Control"]
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("sfx_slider", "music_slider", "fov_slider", "sensitivity_sldier", "fullscreen_button", "headbob_button", "this_menu", "navigation_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,29 +18,32 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_il5bs")
 script = ExtResource("2_nkp8k")
+sfx_slider = NodePath("VBoxContainer/GridContainer/VBoxContainer/SFXSlider")
+music_slider = NodePath("VBoxContainer/GridContainer/VBoxContainer2/MusicSlider")
+fov_slider = NodePath("VBoxContainer/GridContainer/VBoxContainer3/FOVSlider")
+sensitivity_sldier = NodePath("VBoxContainer/GridContainer/VBoxContainer4/SensitivitySlider")
+fullscreen_button = NodePath("VBoxContainer/FullscreenButton")
+headbob_button = NodePath("VBoxContainer/HeadbobButton")
+this_menu = NodePath(".")
+navigation_buttons = [NodePath("VBoxContainer/QuitButton")]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_8udp1")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("this_menu", "other_menus", "navigation_buttons")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -64.5
-offset_right = 130.0
-offset_bottom = 64.5
+offset_left = -61.5
+offset_top = -53.0
+offset_right = 61.5
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_lwwiw")
+this_menu = NodePath(".")
+other_menus = [NodePath("../KeyRebinding")]
+navigation_buttons = [NodePath("ControlsButton")]
 
 [node name="FullscreenButton" type="CheckButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(256, 32)
@@ -47,6 +51,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Toggle fullscreen
 "
+script = ExtResource("3_tkcj1")
+
+[node name="HeadbobButton" type="CheckButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Headbob enabled"
 script = ExtResource("3_tkcj1")
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
@@ -87,6 +98,54 @@ step = 0.01
 stream = ExtResource("5_ng5hs")
 bus = &"Music"
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "FOV"
+
+[node name="FOVSlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+min_value = 45.0
+max_value = 140.0
+step = 5.0
+value = 45.0
+script = ExtResource("4_7pspb")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Camera sensitivity"
+
+[node name="SensitivitySlider" type="HSlider" parent="VBoxContainer/GridContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+min_value = 0.01
+max_value = 3.0
+step = 0.01
+value = 1.0
+script = ExtResource("4_7pspb")
+
+[node name="DefaultButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+text = "Reset to default"
+script = ExtResource("6_1onal")
+
+[node name="ControlsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+text = "Controls"
+script = ExtResource("6_1onal")
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
@@ -94,7 +153,17 @@ focus_mode = 0
 text = "Back"
 script = ExtResource("6_1onal")
 
+[node name="KeyRebinding" parent="." node_paths=PackedStringArray("other_menus") instance=ExtResource("7_mpopv")]
+visible = false
+layout_mode = 1
+other_menus = [NodePath("../VBoxContainer")]
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/HeadbobButton" to="." method="_on_headbob_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer3/FOVSlider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/VBoxContainer4/SensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/DefaultButton" to="." method="reset_to_defaults"]

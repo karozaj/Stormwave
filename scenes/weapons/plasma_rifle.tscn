@@ -1,0 +1,302 @@
+[gd_scene load_steps=19 format=4 uid="uid://cpqlewmnifw67"]
+
+[ext_resource type="Script" path="res://scripts/weapons/plasma_rifle.gd" id="1_rtvbb"]
+[ext_resource type="Texture2D" uid="uid://nct77l3ts8wq" path="res://3d/laser_enemy_plasma_gun_texture.png" id="2_1dnys"]
+[ext_resource type="AudioStream" uid="uid://bnkas0076kjps" path="res://audio/sfx/laser_beam_2.ogg" id="2_fqpk3"]
+[ext_resource type="Material" uid="uid://d250kh0jr2fpm" path="res://resources/materials/laser_tracer_material_2.tres" id="3_0s388"]
+[ext_resource type="PackedScene" uid="uid://dp38ui8f2nol6" path="res://scenes/weapons/weapon_effects/muzzle_flash.tscn" id="3_6i48q"]
+[ext_resource type="PackedScene" uid="uid://ckof4g4prra5v" path="res://scenes/weapons/weapon_effects/weapon_light.tscn" id="4_h4hbh"]
+[ext_resource type="PackedScene" uid="uid://dhl7qu7mxntug" path="res://scenes/level_elements/randomized_pitch_audio_player_3d.tscn" id="5_3gkls"]
+[ext_resource type="Texture2D" uid="uid://dyinpxajpgs83" path="res://img/projectile_blue.png" id="6_unceg"]
+[ext_resource type="PackedScene" uid="uid://ekw6gsijdvqe" path="res://scenes/weapons/weapon_effects/bullet_hole_spawner.tscn" id="7_0hisq"]
+[ext_resource type="PackedScene" uid="uid://ehf8wr5pfr6x" path="res://scenes/weapons/weapon_raycast.tscn" id="8_vc6p8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j74un"]
+resource_name = "Material.004"
+albedo_texture = ExtResource("2_1dnys")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_esw7s"]
+_surfaces = [{
+"aabb": AABB(-0.0705896, -0.0518821, -0.0603105, 0.141179, 0.188472, 1.18265),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AAAGAAQAAAACAAYACgAGAAIACgAJAAYACQAEAAYACQALAAQABQADAAEABQAHAAMACAACAAAACAAKAAIAAQAKAAgAAQADAAoABwALAAkABwAFAAsAAwAJAAoAAwAHAAkADAAPAA0ADAAOAA8ADgATAA8ADgASABMAEgARABMAEgAQABEAEAANABEAEAAMAA0ADgAQABIADgAMABAAEwANAA8AEwARAA0A"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("4dEM+zRUAADh0VYHNFQAAOHRDPv//wAA4dFWB///AAAdLgz7NFQAAB0uVgc0VAAAHS4M+///AAAdLlYH//8AAGrpN5s0VAAAlBY3m///AABq6Teb//8AAJQWN5s0VAAAoREAACxVAAAAAP//LFUAANtL3akAAAAA20sQ7AAAAABd7gAALFUAAP////8sVQAAI7TdqQAAAAAjtBDsAAAAAA==")
+}, {
+"aabb": AABB(-0.0184214, -0.0597164, -0.0511069, 0.0368443, 0.119433, 0.15527),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("AAAHAAMAAAAGAAcAAgAEAAEAAgAFAAQAAwAFAAIAAwAHAAUAAQAGAAAAAQAEAAYABQAIAAQABwAIAAUABgAIAAcABAAIAAYACwANAA8ACwAJAA0ACwAQAAwACwAPABAADQAKAA4ADQAJAAoACQAMAAoACQALAAwADwAOABAADwANAA4A"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("AADU6+DLAAABAFrX+v8AAP//Wtf//wAA/f/U6+XLAAB8KT6KYNwAAH/WPopj3AAAfClEjELEAAB+1kOMRcQAAP5/QTnH2AAAUiUAAG5WAABSJf//hagAAFIlAAAAAAAAUiX//xZSAACp2gAAblYAAKna//+FqAAAqdoAAAAAAACp2v//FlIAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ppw2p"]
+resource_name = "laser_enemy_Cube"
+_surfaces = [{
+"aabb": AABB(-0.0705896, -0.0518821, -0.0603105, 0.141179, 0.188472, 1.18265),
+"attribute_data": PackedByteArray("HgAQAB4AvBgeAPJiHgBHSkn2RBnl2BAA5di8GEn2R0rl2PJi5dhHSh4AvBgeALwYHgBHSh4AR0qe3UQZ5di8GOXYvBie3UdK5dhHSuXYR0oeAFQsHgBULBLaiizl2FQs5dhULNT5iizl2FQs5dhULB4AVCweAFQsZB/Gp3t1M4jXeanuixyDcBZ7WYXXeVO3vzmEcInunZHD7YbKdSuEcInunZHW7Ty8FkPGp3t15KvXeanu8EWDcBZ7vq7XeVO3vzlhgYnueqLD7YbKdSthgYnueqLW7Ty8"),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("AAAPAAoAAAAFAA8AGQAOAAQAGQAWAA4AFwALABAAFwAcAAsADAAIAAIADAASAAgAFAAGAAEAFAAaAAYAAwAbABUAAwAJABsAEwAdABgAEwANAB0ABwAWABkABwARABYAIAApACMAIAAmACkAJAAzACcAJAAwADMAMgAvADUAMgAsAC8AKgAhAC0AKgAeACEAJQArADEAJQAfACsANAAiACgANAAuACIA"),
+"material": SubResource("StandardMaterial3D_j74un"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 54,
+"vertex_data": PackedByteArray("4dEM+zRUVNXh0Qz7NFQ8BeHRVgc0VFTV4dFWBzRUawPh0Qz7//8AgOHRDPv//1TV4dEM+///PAXh0VYH//8AgOHRVgf//1TV4dFWB///awMdLgz7NFRU1R0uDPs0VFXAHS5WBzRUVNUdLlYHNFQjwB0uDPv//wCAHS4M+///VNUdLgz7//9VwB0uVgf//wCAHS5WB///VNUdLlYH//8jwGrpN5s0VDwFauk3mzRUawOUFjeb//8AgJQWN5v//1XAlBY3m///I8Bq6Teb//8AgGrpN5v//zwFauk3m///awOUFjebNFRVwJQWN5s0VCPAoREAACxVAIChEQAALFUXI6ERAAAsVRgBAAD//yxVAIAAAP//LFU21gAA//8sVRgB20vdqQAA///bS92pAAAXI9tL3akAABYB20sQ7AAA///bSxDsAAA21ttLEOwAABYBXe4AACxVAIBd7gAALFUXI13uAAAsVQ7E/////yxVAID/////LFU21v////8sVQ7EI7TdqQAA//8jtN2pAAAXIyO03akAAA7EI7QQ7AAA//8jtBDsAAA21iO0EOwAAA7EqqqqqjS9lIWqKlTVsQPXwf9///+qqqqqNL2Uhf9///+qKlTVsQPXwaqqqqreiUDsqipU1WdyM/n/f///qqqqqt6JQOz/f///qipU1WdyM/k0vZSFsQPXwf9////eiUDsZ3Iz+f9///80vZSFsQPXwd6JQOxncjP5/3///yNRI1GNPZp+/3///83UMSuNPZp+/z//vyNRI1GOPZd+/z//v83UMSuOPZh+/3///yNRI1FofdEE/3///83UMStofdEE/z//vyNRI1FqfdEE/z//v83UMStqfdEE")
+}, {
+"aabb": AABB(-0.0184214, -0.0597164, -0.0511069, 0.0368443, 0.119433, 0.15527),
+"attribute_data": PackedByteArray("QCx10fYqfNBzIUzScyFM0nMhTNJBLEzScyF10fYqfdAzI5reMyOa3qkmvN2qJpTdqSa83aomlN2AKpregCp/3qQqt92AKpre9iq/3fYqvt1XI7ndMyOa3vUqv932Kr/dAiel6ZAma+kCJ6XpkCZr6ZokPfiaJN7oahZT8pokTNJqFmLMQSw9+JokPfiaJD34QSxM0pokTNJBLD34QSze6GoWU/JBLEzSahZizJokPfhBLD34miQ9+JokTNKaJEzS"),
+"format": 34896613399,
+"index_count": 66,
+"index_data": PackedByteArray("AAAVAAYAAAARABUABQAIAAIABQAOAAgABwANAAQABwAXAA0AAwATAAEAAwALABMADwAaAAkAFgAZAAwAEAAYABQACgAbABIAIgAnACwAIgAdACcAIQAuACQAIQArAC4AJgAfACkAJgAcAB8AHgAlACAAHgAjACUALQAqAC8ALQAoACoA"),
+"material": SubResource("StandardMaterial3D_j74un"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AADU6+DL+/8AANTr4Mv9AAEAWtf6/waWAQBa1/r//QD//1rX//9Gwf//Wtf//waW/f/U6+XL+//9/9Tr5ctGwXwpPopg3AaWfCk+imDca4J8KT6KYNw6B3wpPopg3P0Af9Y+imPcdMF/1j6KY9xGwX/WPopj3AaWf9Y+imPca4J8KUSMQsT//3wpRIxCxPv/fClEjELEOgd8KUSMQsT9AH7WQ4xFxP//ftZDjEXE+/9+1kOMRcR0wX7WQ4xFxEbB/n9BOcfY///+f0E5x9h0wf5/QTnH2GuC/n9BOcfYOgdSJQAAblYXkFIlAABuVv+/UiUAAG5WVwtSJf//hagXkFIl//+FqFcLUiUAAAAA//9SJQAAAAD/v1IlAAAAAFcLUiX//xZS//9SJf//FlJXC6naAABuVheQqdoAAG5W/7+p2gAAblaQwana//+FqBeQqdr//4WokMGp2gAAAAD//6naAAAAAP+/qdoAAAAAkMGp2v//FlL//6na//8WUpDBSoYAAPJCp3gOABOA8kKneHNydQ8OABOASoYAAHNydQ8OABOAWRnOf1tFs3TzQqZ4TG3zHnNydQ8OABOAWRnOf5hu7P9KhgAAW0WzdPJCpniYbuz/SoYAAExt8x5zcnUPmG7s/0xt8x5ZGc5/W0WzdAAA/38AAP9/WvTRxQAA/39a9NHF/3+n6gAA/39a9NHF/3+n6lr00cUAAP9/AAD/f2pbShIAAP9/altKEv9/p+oAAP9/altKEv9/p+pqW0oS")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_esw7s")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_55i60"]
+height = 50.0
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_f25ew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:is_being_pulled_out")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("plasma_gun:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("plasma_gun:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("plasma_gun/MuzzleFlash:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wwdak"]
+resource_name = "pullout"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:is_being_pulled_out")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("plasma_gun:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.3, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b333y"]
+resource_name = "shoot"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("plasma_gun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.122173, -3.14159, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("plasma_gun:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.15), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_shooting_sound"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("plasma_gun/MuzzleFlash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("plasma_gun/MuzzleFlash")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"muzzle_flash_flip"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q2pga"]
+_data = {
+"RESET": SubResource("Animation_f25ew"),
+"pullout": SubResource("Animation_wwdak"),
+"shoot": SubResource("Animation_b333y")
+}
+
+[node name="PlasmaRifle" type="Node3D"]
+visible = false
+script = ExtResource("1_rtvbb")
+shooting_sound = ExtResource("2_fqpk3")
+cooldown = 1.0
+base_damage = 100
+bullet_tracer_material = ExtResource("3_0s388")
+
+[node name="plasma_gun" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
+layers = 524288
+mesh = SubResource("ArrayMesh_ppw2p")
+skeleton = NodePath("")
+
+[node name="MuzzleFlash" parent="plasma_gun" instance=ExtResource("3_6i48q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.0039e-07, 0.0700974, 1.14833)
+visible = false
+modulate = Color(0.505882, 0.792157, 0.843137, 0.8)
+pixel_size = 0.004
+texture = ExtResource("6_unceg")
+
+[node name="OmniLight3D" parent="plasma_gun/MuzzleFlash" instance=ExtResource("4_h4hbh")]
+transform = Transform3D(-1, 0, 2.36034e-06, 0, 1, 0, -2.36034e-06, 0, -1, 0, 0, 0)
+light_color = Color(0.505882, 0.792157, 0.843137, 1)
+light_energy = 2.5
+
+[node name="RandomizedPitchAudioPlayer3d" parent="." instance=ExtResource("5_3gkls")]
+stream = ExtResource("2_fqpk3")
+volume_db = 30.0
+
+[node name="BulletHoleSpawner" parent="." instance=ExtResource("7_0hisq")]
+
+[node name="WeaponRaycast" parent="." instance=ExtResource("8_vc6p8")]
+target_position = Vector3(0, 0, -50)
+collision_mask = 18
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 242
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -25)
+shape = SubResource("CylinderShape3D_55i60")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q2pga")
+}

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShopResource" load_steps=3 format=3 uid="uid://cgoq35t0qyh37"]
+
+[ext_resource type="Texture2D" uid="uid://bihpya886xmky" path="res://img/icons/plasma_gun.png" id="1_0kthq"]
+[ext_resource type="Script" path="res://scripts/ui/shop_resources/shop_resource.gd" id="2_13euo"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_13euo")
+type = "Ammo"
+res_name = "Plasma"
+description = "Ammo for the plasma rifle"
+price = 10
+purchasable_number = 5
+max_number = 50
+image = ExtResource("1_0kthq")
+purchasable = true

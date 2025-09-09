@@ -67,6 +67,15 @@ func _ready() -> void:
 		concurrent_enemies=enemy_spawn_areas.size()
 	if max_concurrent_enemies>enemy_spawn_areas.size():
 		max_concurrent_enemies=enemy_spawn_areas.size()
+	
+	load_enemies_on_ready()
+
+#spawn enemies on ready to prevent lag later due to shaders
+func load_enemies_on_ready()->void:
+	for enemy in enemy_scenes:
+		var enemy_instance=enemy.instantiate()
+		add_child(enemy_instance)
+		enemy_instance.queue_free()
 
 # generates a wave of enemies
 func generate_wave()->Array[PackedScene]:

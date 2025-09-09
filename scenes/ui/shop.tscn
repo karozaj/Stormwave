@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxkio4bbrunje"]
+[gd_scene load_steps=20 format=3 uid="uid://dxkio4bbrunje"]
 
 [ext_resource type="Theme" uid="uid://b22lwt742gddp" path="res://resources/themes/ui_theme.tres" id="1_bbuj0"]
 [ext_resource type="Script" path="res://scripts/ui_elements/sound_button.gd" id="1_frea3"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://r05tlgtxaa2h" path="res://resources/shop_resources/ammo/chaingun_ammo.tres" id="6_blk44"]
 [ext_resource type="Resource" uid="uid://rs55kjhpvno4" path="res://resources/shop_resources/ammo/rocket_launcher_ammo.tres" id="7_q8gob"]
 [ext_resource type="Resource" uid="uid://bqx3mhdwmxbcw" path="res://resources/shop_resources/blocks/block.tres" id="8_yalth"]
+[ext_resource type="Resource" uid="uid://cgoq35t0qyh37" path="res://resources/shop_resources/ammo/plasma_rifle_ammo.tres" id="9_rcp6t"]
 [ext_resource type="Resource" uid="uid://cs33fox2bx5mv" path="res://resources/shop_resources/blocks/reinforced_block.tres" id="9_s4pvn"]
 [ext_resource type="Resource" uid="uid://bku2tec1gw7g5" path="res://resources/shop_resources/blocks/explosive.tres" id="10_8uesl"]
 [ext_resource type="Resource" uid="uid://4vyvvgvtrxqv" path="res://resources/shop_resources/blocks/mine.tres" id="11_behtf"]
@@ -32,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bbuj0")
 script = ExtResource("1_sjvwh")
-resource_types = Array[ExtResource("2_qhyj6")]([ExtResource("3_hj0hd"), ExtResource("4_1ry1n"), ExtResource("5_cfyn5"), ExtResource("6_blk44"), ExtResource("7_q8gob"), ExtResource("8_yalth"), ExtResource("9_s4pvn"), ExtResource("10_8uesl"), ExtResource("11_behtf"), ExtResource("12_r7p7l")])
+resource_types = Array[ExtResource("2_qhyj6")]([ExtResource("3_hj0hd"), ExtResource("4_1ry1n"), ExtResource("5_cfyn5"), ExtResource("6_blk44"), ExtResource("7_q8gob"), ExtResource("9_rcp6t"), ExtResource("8_yalth"), ExtResource("9_s4pvn"), ExtResource("10_8uesl"), ExtResource("11_behtf"), ExtResource("12_r7p7l")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
